@@ -1,0 +1,74 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: ¦ÌVision V5.18.0.0
+Copyright (C) 2016 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: wdsa Microsoft, Microsoft, LIC=HN0WF-624T2-NAUDU-STMQV-7PG1C-0FZJP
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Standard  Version: 5.18
+Toolchain Path:  C:\Keil_v5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.06 update 1 (build 61)
+Assembler:       Armasm.exe V5.06 update 1 (build 61)
+Linker/Locator:  ArmLink.exe V5.06 update 1 (build 61)
+Library Manager: ArmAr.exe V5.06 update 1 (build 61)
+Hex Converter:   FromElf.exe V5.06 update 1 (build 61)
+CPU DLL:         SARMCM3.DLL V5.18
+Dialog DLL:      DARMSTM.DLL V1.65.0.0
+Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V2.0.18.0
+Dialog DLL:        TARMSTM.DLL   
+ 
+<h2>Project:</h2>
+E:\ÃÅ½û1\USER\FreeRTOS.uvprojx
+Project File Date:  05/04/2018
+
+<h2>Output:</h2>
+*** Using Compiler 'V5.06 update 1 (build 61)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
+Build target 'FreeRTOS'
+compiling app.c...
+compiling mp_cmdp_hostif.c...
+..\TASK\mp_cmdp_hostif.c(21): warning:  #940-D: missing return statement at end of non-void function "tls_hostif_init"
+  }
+..\TASK\mp_cmdp_hostif.c(47): warning:  #940-D: missing return statement at end of non-void function "tls_hostif_recv_data"
+  }
+..\TASK\mp_cmdp_hostif.c: 2 warnings, 0 errors
+compiling mp_uart_task.c...
+..\TASK\mp_uart_task.c(73): warning:  #177-D: variable "uart_cfg" was declared but never referenced
+      struct tls_param_uart uart_cfg;
+..\TASK\mp_uart_task.c(99): warning:  #177-D: variable "stk" was declared but never referenced
+      char *stk;
+..\TASK\mp_uart_task.c(338): warning:  #223-D: function "TwoAscTOHex" declared implicitly
+                        Version = TwoAscTOHex(recv->buf[recv->tail+1],recv->buf[recv->tail+2]);
+..\TASK\mp_uart_task.c(326): warning:  #550-D: variable "Version" was set but never used
+        u8 Version,CID1,CID2;
+..\TASK\mp_uart_task.c(326): warning:  #177-D: variable "CID2" was declared but never referenced
+        u8 Version,CID1,CID2;
+..\TASK\mp_uart_task.c(328): warning:  #550-D: variable "hostif_uart_type" was set but never used
+        u8 hostif_uart_type;
+..\TASK\mp_uart_task.c(390): warning:  #177-D: variable "write_cnt" was declared but never referenced
+        int write_cnt; 
+..\TASK\mp_uart_task.c(258): warning:  #177-D: function "tls_uart_1_tx_task" was declared but never referenced
+  static void tls_uart_1_tx_task(void *data)
+..\TASK\mp_uart_task.c(94): warning:  #177-D: variable "temp" was declared but never referenced
+  static xSemaphoreHandle temp; 
+..\TASK\mp_uart_task.c: 9 warnings, 0 errors
+compiling mp_uart.c...
+..\USERLIB\mp_uart.c(206): warning:  #177-D: variable "ret" was declared but never referenced
+        int ret;
+..\USERLIB\mp_uart.c: 1 warning, 0 errors
+linking...
+Program Size: Code=22540 RO-data=612 RW-data=544 ZI-data=28944  
+FromELF: creating hex file...
+"..\OBJ\LED.axf" - 0 Error(s), 12 Warning(s).
+
+<h2>Collection of Component include folders:</h2>
+  E:\ÃÅ½û1\USER\RTE
+  C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.0.0\Device\Include
+
+<h2>Collection of Component Files used:</h2>
+Build Time Elapsed:  00:00:09
+</pre>
+</body>
+</html>
