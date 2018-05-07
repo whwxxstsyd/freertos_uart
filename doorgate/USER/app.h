@@ -43,6 +43,12 @@ typedef enum
 #define BUSY_QUEUE_SIZE			4		
 
 
+#define CARD_TASK_NAME 			"CARD_TASK"	
+#define CARD_TASK_PRIO				3						
+#define CARD_TASK_STACKSIZE 		MINIMAL_STACK_SIZE
+#define CARD_QUEUE_SIZE			4	
+	
+
 
 #define UART0_TX_TASK_NAME 		"UART1_TX"
 #define UART0_TX_TASK_PRIO			8
@@ -65,6 +71,9 @@ typedef enum
 #define UART1_RX_TASK_PRIO			5
 #define UART1_RX_TASK_STACKSIZE 	MINIMAL_STACK_SIZE
 #define UART1_RX_QUEUE_SIZE		4
+
+
+
 
 void app_init(void);
 

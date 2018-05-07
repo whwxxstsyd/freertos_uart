@@ -14,6 +14,8 @@
 #define DateManager_OPEN		CFG_ON
 
 #define Memory_OPEN         	CFG_ON
+#define ReadCard_Open       	CFG_ON
+#define LED_Open       			CFG_ON
 
 
 int platformInit(void);  

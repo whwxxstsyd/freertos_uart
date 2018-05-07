@@ -71,7 +71,7 @@ void tls_uart_init(void)
     struct tls_uart *uart;	
     struct tls_hostif *hif = tls_get_hostif();
     struct tls_param_uart uart_cfg;
-	
+		
     memset(uart_st, 0, 2 * sizeof(struct tls_uart));
 	
     /* setting uart */			

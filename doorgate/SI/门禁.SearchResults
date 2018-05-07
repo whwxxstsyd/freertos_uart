@@ -1,0 +1,10 @@
+---- Wiegand_ReadCardModule Matches (9 in 3 files) ----
+Card.c (e:\doorgate\hardware\card):			Wiegand_ReadCardModule(0,0);   			 				
+Card.c (e:\doorgate\hardware\card):			Wiegand_ReadCardModule(0,1);				
+Card.c (e:\doorgate\hardware\card):			Wiegand_ReadCardModule(2,0);   			 				
+Card.c (e:\doorgate\hardware\card):			Wiegand_ReadCardModule(2,1);				
+Card.c (e:\doorgate\hardware\card):			Wiegand_ReadCardModule(1,0); 			 				
+Card.c (e:\doorgate\hardware\card):			Wiegand_ReadCardModule(1,1);			 				
+Wiegand.c (e:\doorgate\card):void Wiegand_ReadCardModule(u8 No,u8 Ta)
+Wiegand.c (e:\doorgate\card):void Wiegand_ReadCardModule
+Wiegand.h (e:\doorgate\card):extern void Wiegand_ReadCardModule(u8 No,u8 Ta);

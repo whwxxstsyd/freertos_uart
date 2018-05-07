@@ -12,7 +12,7 @@ int main(void)
 	//Initialize the platform.	
 	platformInit();			
 			
-	app_init();		
+	app_init();	
 	
 	vTaskStartScheduler();
 }	

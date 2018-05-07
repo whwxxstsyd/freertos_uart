@@ -5,6 +5,7 @@
 //#include "voice.h" 	
 //#include "sd2068.h"	
 //#include "led.h"		
+//#include "card.h"
 
 
 int platformInit(void)   	   
@@ -17,27 +18,31 @@ int platformInit(void)
 		
 	//Systick Init
 	delay_init();
-
-
+	
 #if BEEP_OPEN 
 	//Beep_Init();
 #endif
+
 
 #if EEPROM_OPEN 
 	
 #endif
 
+
 #if SST_OPEN 
 	
 #endif
+
 
 #if SD2068_OPEN 
 	//SD2068A_Initial();
 #endif
 
-#if VOICE_OPEN 
+
+#if VOICE_OPEN 	
 	//Voice_Init();
 #endif
+
 
 #if OUTSWITCH_OPEN 
 	
@@ -47,8 +52,17 @@ int platformInit(void)
 #if DateManager_OPEN 
 	 
 #endif	
-			
+
+
+#if	ReadCard_Open
+	//Card_Init();		
+	//CardLibrary_Init();
+#endif		
+
+
+#if	LED_Open
 	//Led_Init();			
+#endif	
 	
   return 1;	
 }
