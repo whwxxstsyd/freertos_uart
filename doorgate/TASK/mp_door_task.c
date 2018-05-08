@@ -2,6 +2,6 @@
 
 void tls_door_init()		
 {
-		
-}
+			
+}	
 

@@ -1,10 +1,10 @@
 #include "card.h"
 #include "delay.h"
+#include "wiegand.h"
 
 
 static void GPIO_WiegandPower_INIT(void);
-static void GPIO_WiegandPower_INIT(void);
-
+static void GPIO_Wiegand_INIT(void);			
 
 
 void Card_Init(void)	
@@ -72,11 +72,11 @@ static void GPIO_Wiegand_INIT(void)
 	//**********将EXTI线上出现下降沿产生中断************
 	EXTI_InitStructure.EXTI_Line = WGReader_H1D1_EXTLINE|WGReader_H1D0_EXTLINE|
 	                               WGReader_H2D1_EXTLINE|WGReader_H2D0_EXTLINE|
-                                 WGReader_H3D1_EXTLINE|WGReader_H3D0_EXTLINE;
-	EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;		 //设置 EXTI 线路为中断请求
-	EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Falling;  //下降沿中断
-	EXTI_InitStructure.EXTI_LineCmd = ENABLE;				//线路的状态
-	EXTI_Init(&EXTI_InitStructure);
+                                   WGReader_H3D1_EXTLINE|WGReader_H3D0_EXTLINE;	
+	EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;			 //设置 EXTI 线路为中断请求
+	EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising_Falling;  //下降沿中断
+	EXTI_InitStructure.EXTI_LineCmd = ENABLE;					//线路的状态
+	EXTI_Init(&EXTI_InitStructure);	
 	/***************** 外部中断使能设置 ***********************/		
 	/* Enable the EXTI8、9 Interrupt */
 	NVIC_InitStructure.NVIC_IRQChannel = EXTI9_5_IRQn;
@@ -103,58 +103,92 @@ static void GPIO_Wiegand_INIT(void)
 
 
 
-
-// 功能描述  : 外部中断
+	
 void EXTI9_5_IRQHandler(void)   
 {
 	if(EXTI_GetITStatus(EXTI_Line8)!= RESET)
 	{
 		EXTI_ClearITPendingBit(EXTI_Line8);
 		if(WGReader_H1D0_Reader==0)
-			wiegand_data_rec(0,0);   			 				
+		{	
+			wiegand_reader_d0(0,0);
+		}		
+		else
+		{
+			wiegand_reader_d0(0,1);
+		}
+		
 	}
 	else if(EXTI_GetITStatus(EXTI_Line9)!= RESET)
-	{
+	{	
 		EXTI_ClearITPendingBit(EXTI_Line9);
 		if(WGReader_H1D1_Reader==0)
-			wiegand_data_rec(0,1);				
+		{		
+			wiegand_reader_d0(1,0);
+		}
+		else
+		{
+			wiegand_reader_d0(1,1);
+		}
 	}  	
 
-		
-	
+			
 	if(EXTI_GetITStatus(EXTI_Line5)!= RESET)
 	{
 		EXTI_ClearITPendingBit(EXTI_Line5);
 		if(WGReader_H3D0_Reader==0)
-			wiegand_data_rec(2,0);   			 				
+		{
+			wiegand_reader_d3(0,0);
+		}
+		else
+		{
+			wiegand_reader_d3(0,1);
+		}
 	}	
 	else if(EXTI_GetITStatus(EXTI_Line6)!= RESET)
 	{
 		EXTI_ClearITPendingBit(EXTI_Line6);
 		if(WGReader_H3D1_Reader==0)
-			wiegand_data_rec(2,1);				
+		{
+			wiegand_reader_d3(1,0);
+		}
+		else
+		{	
+			wiegand_reader_d3(1,1);	
+		}
 	}  	
 }
 
-// 功能描述  : 外部中断
 void EXTI15_10_IRQHandler(void)   
 {	
 	if(EXTI_GetITStatus(EXTI_Line12)!= RESET)
 	{
 		EXTI_ClearITPendingBit(EXTI_Line12);
 		if(WGReader_H2D0_Reader==0)
-			Wiegand_ReadCardModule(1,0); 			 				
+		{		
+			wiegand_reader_d2(0,0);
+		}
+		else
+		{
+			wiegand_reader_d2(0,1);
+		}
 	} 
 }  
 
-// 功能描述  : 外部中断
 void EXTI2_IRQHandler(void)      
 {
 	if(EXTI_GetITStatus(EXTI_Line2)!= RESET)
 	{
 		EXTI_ClearITPendingBit(EXTI_Line2);
-		if(WGReader_H2D1_Reader==0)
-			Wiegand_ReadCardModule(1,1);			 				
+		if(WGReader_H2D1_Reader==0)	
+		{		
+			wiegand_reader_d2(1,0);
+		}
+		else
+		{
+			wiegand_reader_d2(1,1);	
+		}
 	} 
+	
 }  
 

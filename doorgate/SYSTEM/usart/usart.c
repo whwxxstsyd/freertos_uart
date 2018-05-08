@@ -287,7 +287,7 @@ void USART1_IRQHandler(void)               //串口1中断服务程序
 		intr_counter= 1;	
 		
 		USART_ClearITPendingBit(USART1,USART_IT_RXNE);				
-				
+					
 		tls_uart_put_into_buffer(COM1,USART_ReceiveData(USART1));	
 	} 
 	//接受不定长的数据	

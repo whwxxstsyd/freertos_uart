@@ -97,7 +97,7 @@ struct tls_uart *tls_uart_open(u32 uart_no)
 {
     struct tls_uart *uart;
     char *stk;
-
+	
     if (uart_no == COM1) 
 	{			
 		uart = &uart_st[0];	
@@ -317,40 +317,114 @@ static void tls_uart_2_tx_task(void *data)
 
 	
 
-
-static void parse_data(struct tls_uart *uart)
+static u8 *find_atcmd_eol(u8 *src, u32 len)
 {
+	u8 *p = NULL;
+	
+	p = memchr(src,0x0d,len);
+
+	if (p)
+    {	
+    	return p;
+    }
+
+	return NULL;
+}
+
+static void modify_atcmd_tail(struct tls_uart_circ_buf *recv, u8 *p)
+{
+	u32 cmd_len;
+	
+	cmd_len = p - &recv->buf[recv->tail];
+	if(cmd_len > 128)
+    {
+        recv->tail = recv->head;
+		p = NULL;
+    }
+	else
+	{
+    	recv->tail = (recv->tail + cmd_len) & (TLS_UART_RX_BUF_SIZE - 1);
+	}
+}
+
+
+static u8 *parse_atcmd_eol(struct tls_uart *uart)
+{
+    struct tls_uart_circ_buf *recv = &uart->uart_port->recv;
+    u8 *p = NULL;
+	
+    /* jump to end of line */
+    if(recv->head > recv->tail) 
+	{
+		p = find_atcmd_eol(&recv->buf[recv->tail], recv->head - recv->tail);
+        if(p)
+		{	
+			modify_atcmd_tail(recv, p);
+        }
+    } 
+	else 
+	{	
+        /* check buf[tail - END] */
+		p = find_atcmd_eol(&recv->buf[recv->tail], TLS_UART_RX_BUF_SIZE - recv->tail); 
+        if(p)
+		{	
+			modify_atcmd_tail(recv, p);
+        }
+    }
+	
+	
+    return p;
+}
+
+
+static void parse_protocol_line(struct tls_uart *uart)
+{	
 	struct tls_uart_circ_buf *recv = &uart->uart_port->recv;
-	u8 *atcmd_start = NULL;
+	u8 *proto_start = NULL;
+	u32 cmd_len , tail_len= 0;	
+	u8 *ptr_eol;
+	char *buf;
 
 	u8 Version,CID1,CID2;
 	u16 Addr;
 	u8 hostif_uart_type;
-
+	
 	while ((CIRC_CNT(recv->head, recv->tail, TLS_UART_RX_BUF_SIZE) >= 2) && (atcmd_start == NULL))
-	{		
-		
-		if((recv->buf[recv->tail] == '#'))	
-		{		
-			atcmd_start = &recv->buf[recv->tail];
+	{				
+		if((recv->buf[recv->tail] == '#') || (recv->buf[recv->tail] == '~') )		
+		{				
+			proto_start = &recv->buf[recv->tail];
 			recv->tail = (recv->tail + 1) & (TLS_UART_RX_BUF_SIZE - 1);	
-			
-			Version = TwoAscTOHex(recv->buf[recv->tail+1],recv->buf[recv->tail+2]);
-			Addr = TwoAscTOHex(recv->buf[recv->tail+3],recv->buf[recv->tail+4]);	
-			CID1 = TwoAscTOHex(recv->buf[recv->tail+5],recv->buf[recv->tail+6]);
-
-			//获得实际地址
-			Addr += (CID1&0x0F)*0x100;	
-			CID1 &= 0xF0;			
+			ptr_eol = parse_atcmd_eol(uart);	
 
 
+            if (ptr_eol >= proto_start)
+			{
+                cmd_len = ptr_eol - proto_start; 
+            } 
+			else 
+			{
+                tail_len = (u32)(&recv->buf[TLS_UART_RX_BUF_SIZE - 1] - atcmd_start + 1);
+                cmd_len = tail_len + (ptr_eol - &recv->buf[0]); 
+            }
 
-			if((CID1==DEVICE_TYPE_1)||(CID1==DEVICE_TYPE_2)||(CID1==DEVICE_TYPE_2))	
-			{	
-				//校验	
-			}
+			buf = tls_mem_alloc(cmd_len + 2);
+            if(!buf)
+            {
+                return;
+            }
 
-			
+
+            if (ptr_eol >= proto_start) 
+			{
+                MEMCPY(buf, proto_start, cmd_len); 
+            } 
+			else 
+			{
+                MEMCPY(buf, proto_start, tail_len);
+                MEMCPY(buf+tail_len, &recv->buf[0], ptr_eol - &recv->buf[0]);
+            }
+
 
 			if (uart->uart_port->uart_no == TLS_UART_0)
             {
@@ -361,26 +435,43 @@ static void parse_data(struct tls_uart *uart)
                 hostif_uart_type = HOSTIF_UART1_CMD;
             }
 
-
-
-			atcmd_start = NULL; 
+	        tls_hostif_cmd_handler( hostif_uart_type, buf, cmd_len);
+            tls_mem_free(buf);
+			proto_start = NULL; 
 		}
 		else
 		{
-
+			break;
 		}
-	
 	}
 	
 }
 
-void uart_rx(struct tls_uart *uart)
+
+
+Version = TwoAscTOHex(recv->buf[recv->tail+1],recv->buf[recv->tail+2]);
+Addr = TwoAscTOHex(recv->buf[recv->tail+3],recv->buf[recv->tail+4]);	
+CID1 = TwoAscTOHex(recv->buf[recv->tail+5],recv->buf[recv->tail+6]);
+
+//获得实际地址
+Addr += (CID1&0x0F)*0x100;	
+CID1 &= 0xF0;			
+
+
+
+if((CID1==DEVICE_TYPE_1)||(CID1==DEVICE_TYPE_2)||(CID1==DEVICE_TYPE_2)) 
 {	
-	parse_data(uart);
+	//校验	
 }
 
+	
 
 
+
+void uart_rx(struct tls_uart *uart)
+{	
+	parse_protocol_line(uart);
+}
 
 void uart_tx(struct tls_uart *uart)	
 {
@@ -390,7 +481,7 @@ void uart_tx(struct tls_uart *uart)
 	int write_cnt; 
 		
 	cpu_sr = tls_os_set_critical();
-	
+		
 	while (!dl_list_empty(&uart->tx_msg_pending_list))
 	{	
         tx_msg = dl_list_first(&uart->tx_msg_pending_list,

@@ -1,49 +1,32 @@
-实验器材:
-	Mini STM32F103开发板
+基于FreeRTOS的串口收发框架
+
+
+框架:将串口分为三层
 	
-实验目的:
-	学习使用FreeRTOS内存管理API函数，包括内存的申请和释放。
+mp_uart_task.c	负责上层协议通信
 	
-硬件资源:
-	1,DS0(连接在PA8)，DS1(连接在PD2上)
-	2,串口1(波特率:115200,PA9/PA10连接在板载USB转串口芯片CH340上面) 
-	3,ALIENTEK 2.8/3.5/4.3寸LCD模块(仅支持MCU屏)
-	4,按键KEY0(PC5)/KEY1(PA15)/KEY_UP(PA0,也称之为WK_UP)		
-
-实验现象:
-	按下KEY_UP键申请内存，内存申请成功以后就可以使用了，按下KEY0键
-	就是使用申请到的内存。当内存使用完成以后就可以按KEY1键将内存
-	释放掉。
+	tls_uart_port_init()硬件初始化
+		tls_uart_open
+			tls_uart_rx_register()注册串口接收中断回调(发送信号量)
+			tls_uart_tx_register()注册串口发送中断回调(发送信号量)
+			
+			tls_uart_1_rx_task()串口总任务(接收信号量)
+				uart_rx()
+					parse_atcmd_line()解析发来的数据
+						tls_hostif_cmd_handler()
+							tls_cmd_exec()
+								match->proc_func()执行命令对应的功能
+			tls_uart_1_tx_task
+				
 	
-注意事项:
-	无. 
-
-参考资料：STM32F103 FreeRTOS开发手册.pdf 第十七章
+	
+mp_uart.c	收发缓冲区的中间部分
 
 
--------------------------------------------------------------------------------------------
-
-◆其他重要连接：
-  开发板光盘资料下载地址（视频+文档+源码等）：http://www.openedv.com/posts/list/13912.htm
 
 
-◆友情提示：如果您想以后及时免费的收到正点原子所有开发板资料更新增加通知，请关注微信公众平台：
- 2种添加方法：（动动手提升您的学习效率，惊喜不断哦）
-（1）打开微信->添加朋友->公众号->输入“正点原子”->点击关注
-（2）打开微信->添加朋友->输入“alientek_stm32"->点击关注
- 具体微信添加方法，请参考帖子：http://www.openedv.com/posts/list/45157.htm
- 
 
 
-						
 
-						淘宝店铺： http://openedv.taobao.com
-						           http://eboard.taobao.com
-						公司网站：www.alientek.com
-						技术论坛：www.openedv.com
-                                                微信公众平台：正点原子
-						电话：020-38271790
-						传真：020-36773971
-						广州市星翼电子科技有限公司
-						正点原子@ALIENTEK
-						     2016-11月
+
+usart.c		硬件部分的初始化和串口的底层收发
