@@ -128,7 +128,7 @@ static void MP_Data_SOI_Send(void)
 // 功能描述  : 邮电部协议发送帧尾
 static void MP_Data_Tail_Send(void)	
 {		
-	SendByte(0x0d);
+	
 }
 
 static void MP_Data_CID2_Send(void)

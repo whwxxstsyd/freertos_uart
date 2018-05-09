@@ -7,7 +7,7 @@
 #define	BEEP_OPEN 	        	CFG_ON
 #define EEPROM_OPEN         	CFG_ON
 #define SST_OPEN 		        CFG_ON
-#define SD2068_OPEN         	CFG_ON
+#define DATA_OPEN         		CFG_ON
 #define VOICE_OPEN				CFG_ON
 
 #define OUTSWITCH_OPEN      	CFG_ON

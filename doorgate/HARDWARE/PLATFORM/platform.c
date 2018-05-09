@@ -3,7 +3,7 @@
 
 //#include "beep.h"
 //#include "voice.h" 	
-//#include "sd2068.h"	
+#include "sd2068.h"		
 //#include "led.h"		
 //#include "card.h"
 
@@ -34,8 +34,8 @@ int platformInit(void)
 #endif
 
 
-#if SD2068_OPEN 
-	//SD2068A_Initial();
+#if DATA_OPEN 	
+	Calendar_Init();
 #endif
 
 

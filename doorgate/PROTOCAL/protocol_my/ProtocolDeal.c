@@ -91,7 +91,7 @@ u8 CID2_Action(u8 CID2)
 			break;	
 
 		default :	
-			RTN= RTN_UNKNOW_CMD;     //Œﬁ–ß√¸¡Ó
+			
 			break;
 	}
 

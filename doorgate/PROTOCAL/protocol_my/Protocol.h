@@ -6,6 +6,10 @@ extern "C" {
 #endif
 
 #include "sys.h"
+#include "mp_protocol_hostif.h"
+
+#define Makepower_Protocol_Open 	1
+#define Post_Protocol_Open			0		
 
 
 typedef struct ProtocolResource_T
@@ -30,7 +34,27 @@ typedef struct ProtocolResource_T
 	//¶¨Ê±Æ÷
 	u16 Delay_ms;	
 
-}ProtocolResource
+}ProtocolResource;
+
+
+	
+typedef int (* protocmd_proc)(struct tls_protocmd_token_t *tok, char *res_resp, u32 *res_len);
+
+struct tls_protocmd_t {	
+    char name;
+    u8   flag;
+    int (* proc_func)(struct tls_protocmd_token_t *tok, char *res_resp, u32 *res_len);
+};
+
+
+
+
+
+
+
+int tls_protomd_parse(struct tls_atcmd_token_t *tok, char *buf, u32 len);
+
+int tls_protocmd_exec(struct tls_atcmd_token_t *tok,char *res_rsp, u32 *res_len);
 
 
 

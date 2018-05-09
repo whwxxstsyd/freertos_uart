@@ -1,5 +1,8 @@
----- find_atcmd_eol Matches (4 in 1 files) ----
-Mp_uart_task.c (e:\doorgate\task):static u8 *find_atcmd_eol(u8 *src, u32 len)
-Mp_uart_task.c (e:\doorgate\task):		p = find_atcmd_eol(&recv->buf[recv->tail], recv->head - recv->tail);
-Mp_uart_task.c (e:\doorgate\task):		p = find_atcmd_eol(&recv->buf[recv->tail], TLS_UART_RX_BUF_SIZE - recv->tail); 
-Mp_uart_task.c (e:\doorgate\task):			p = find_atcmd_eol(&recv->buf[0], recv->head); 
+---- uart_rx Matches (7 in 3 files) ----
+LED.htm (e:\doorgate\obj):<P><STRONG><a name="[12b]"></a>uart_rx</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, mp_uart_task.o(.text), UNUSED)
+LED.htm (e:\doorgate\obj):<BR>[Called By]<UL><LI><a href="#[12b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uart_rx
+Mp_uart_task.c (e:\doorgate\task):void uart_rx(struct tls_uart *uart);
+Mp_uart_task.c (e:\doorgate\task):            uart_rx(uart);									
+Mp_uart_task.c (e:\doorgate\task):            uart_rx(uart);
+Mp_uart_task.c (e:\doorgate\task):void uart_rx(struct tls_uart *uart)
+Readme.txt (e:\doorgate):				uart_rx()
