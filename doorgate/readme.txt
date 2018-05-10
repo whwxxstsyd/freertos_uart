@@ -3,6 +3,13 @@
 
 框架:将串口分为三层
 	
+	
+mp_protocol_hostif.c和protocol.c联系在一起，实现上层协议的解析，对相应功能的执行，通过信号量和mp_uart_task.c实现交互
+
+	
+	
+	
+	
 mp_uart_task.c	负责上层协议通信
 	
 	tls_uart_port_init()硬件初始化
@@ -29,4 +36,14 @@ mp_uart.c	收发缓冲区的中间部分
 
 
 
+
 usart.c		硬件部分的初始化和串口的底层收发
+
+
+
+
+
+
+
+
+
