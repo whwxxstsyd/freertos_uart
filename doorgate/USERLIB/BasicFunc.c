@@ -102,15 +102,27 @@ u16 TwoCharToInt(u8 c1,u8 c2)
 // 功能描述  : "9"的ASCII码与"A"的ASCII码值相差==7  注：字母都统一为大写字母的ASCII码值 
 u8 Hi_HexToAsc(u8 c1)
 {	
-  c1=c1>>4;
+	c1=c1>>4;	
 	return(c1>=0xa? (c1+0x37):(c1+0x30));
 }	
 // 功能描述  : "9"的ASCII码与"A"的ASCII码值相差==7  注：字母都统一为大写字母的ASCII码值 
 u8 Low_HexToAsc(u8 c1)
 {	
-  c1=c1&0xf;
+	c1=c1&0xf;
 	return(c1>=0xa? (c1+0x37):(c1+0x30));
 }
+
+void CharToAsc(u8 c1)
+{
+	u8 t1,t2;
+		
+	t1 = Hi_HexToAsc(c1);
+	t2 = Low_HexToAsc(c1);	
+
+	
+}
+
+
 // 功能描述  : 把ascii 的'0'~'f' 转换成 0~f 一个byte
 u8 AscToHex(u8 c1)
 {	
@@ -122,14 +134,17 @@ u8 AscToHex(u8 c1)
 // 功能描述  : 把两个ASC码合成一个HEX字符
 u8 TwoAscTOHex(u8 TPA,u8 TPB)   
 {    
-	TPA=AscToHex(TPA);
-	TPB=AscToHex(TPB);
+	TPA = AscToHex(TPA);
+	TPB = AscToHex(TPB);
 	return((TPA<<4)|TPB);
-}
+}	
+
+
+
 // 功能描述  : 把ASC码缓冲转换成HEX缓冲区
 void BufAscToHex(u8 *PTemp,u16 Len)  
 {	
-  u8  Ta,*PsouA;
+  	u8  Ta,*PsouA;
 	u16   i;
 	PsouA = PTemp;
 	Len >>=1;

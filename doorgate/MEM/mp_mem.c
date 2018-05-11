@@ -103,7 +103,7 @@ void * mem_alloc_debug(u32 size, char* file, int line)
     cpu_sr = tls_os_set_critical();
     //
     // Allocate the required memory chunk plus header and trailer bytes
-    //
+    //	
     pad_len = sizeof(u32) - (size & 0x3);	
 	
     buf = (unsigned char *)malloc(sizeof(MEMORY_PATTERN) + PRE_OVERSIZE + size + pad_len + OVERSIZE + sizeof(MEMORY_PATTERN));

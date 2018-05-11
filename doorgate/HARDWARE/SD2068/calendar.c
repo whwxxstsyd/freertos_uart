@@ -10,6 +10,7 @@
 #include "stm32f10x_lib.h"
 #include "sd2068.h"
 #include "calendar.h"
+#include "param.h"	
 
 
 /**
@@ -66,7 +67,7 @@ void Calendar_Init(void)
 * @return     none
 * @note    没有检查闰年 月大月小的问题     
 */
-static int check_time_format(TypedefDateTime *DateTime)
+int check_time_format(TypedefDateTime *DateTime)
 {	
 	if (DateTime->sec >= 60)
 	{
@@ -150,14 +151,12 @@ static int dummy_time_format(TypedefDateTime *DateTime)
 *       输入的年份需要在实际年份的基础上减去2000
 */
 int SetDateTime(TypedefDateTime *DateTime)
-{
+{	
 	if(SD2068A_SetTime((u8*)DateTime))	
 	{	
 		if (SD2068A_SetTime((u8*)DateTime))	
 		{
-			
 			RTC_OK_flag = 0;		//置位RTC功能异常标记
-				
 			return FALSE
 		}
 	}	
@@ -172,7 +171,7 @@ int SetDateTime(TypedefDateTime *DateTime)
 * @return     none
 * @note                    
 */
-int DataTime(TypedefDateTime *DateTime)
+int GetDateTime(TypedefDateTime *DateTime)	
 {	
 	u8 cnt = 0;
 	
@@ -198,26 +197,27 @@ int DataTime(TypedefDateTime *DateTime)
 	
 	return TRUE;	
 }
-/**
-* @brief     系统时间转换为BCD码
-* @param[out] BYTE * time_bcd
-* @return    none
-* @note                    
-*/
-void Systime2BCD(u8 *time_bcd)
-{
-	//time_bcd[0] = (((currentDateTime.year + 2000)/1000) << 4) + ((currentDateTime.year + 2000)%1000)/100;	 //0x20
-	//time_bcd[1] = ((((currentDateTime.year + 2000)%100)/10) << 4) + (currentDateTime.year + 2000)%10;	 //0x10
 
-	//为了提高速度，将上面年份的高两位固定为0x20，这样会导致设置系统时间超过2100年时，系统时间显示错误。
-	time_bcd[0] = 0x20;
-	time_bcd[1] = ((currentDateTime.year/10) << 4) + currentDateTime.year%10;	 //0x10
-	time_bcd[2] = ((currentDateTime.month/10) << 4) + currentDateTime.month%10;	 //0x05
-	time_bcd[3] = ((currentDateTime.day/10) << 4) + currentDateTime.day%10;	 //0x11
 
-	time_bcd[4] = ((currentDateTime.hour/10) << 4) + currentDateTime.hour%10;
-	time_bcd[5] = ((currentDateTime.min/10) << 4) + currentDateTime.min%10;
-	time_bcd[6] = ((currentDateTime.sec/10) << 4) + currentDateTime.sec%10;
-}	
 
+
+void DateTime_Trans(char *resp,TypedefDateTime *DataTime)
+{	
+	u16 temp;
+	u8 buff[8];
+
+	temp = DataTime->year + 2000;	
+
+	buff[0] = CharToAsc(temp>>8);	
+	buff[1] = CharToAsc(temp);
+	buff[2] = CharToAsc(DataTime->month);
+	buff[3] = CharToAsc(DataTime->day);	
+	buff[4] = CharToAsc(DataTime->week);
+	buff[5] = CharToAsc(DataTime->hour);
+	buff[6] = CharToAsc(DataTime->min);
+	buff[7] = CharToAsc(DataTime->sec);
+	
+	MEMCPY(resp, buff, sizeof(buff));
+
+}
 

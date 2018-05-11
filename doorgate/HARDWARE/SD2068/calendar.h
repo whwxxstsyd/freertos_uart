@@ -10,15 +10,17 @@ typedef struct
 {
 	u8	sec;
 	u8	min;
-	u8	hour;
-	u8   week;
-	u8   day;
-	u8   month;
-	u8   year;
+	u8	hour;	
+	u8  week;	
+	u8  day;
+	u8  month;	
+	u8  year;
 } TypedefDateTime;
 
 
 void Calendar_Init(void);	
+
+int check_time_format(TypedefDateTime *DateTime);	
 
 int SetDateTime(TypedefDateTime *DateTime);	
 

@@ -1,8 +1,5 @@
----- uart_rx Matches (7 in 3 files) ----
-LED.htm (e:\doorgate\obj):<P><STRONG><a name="[12b]"></a>uart_rx</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, mp_uart_task.o(.text), UNUSED)
-LED.htm (e:\doorgate\obj):<BR>[Called By]<UL><LI><a href="#[12b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uart_rx
-Mp_uart_task.c (e:\doorgate\task):void uart_rx(struct tls_uart *uart);
-Mp_uart_task.c (e:\doorgate\task):            uart_rx(uart);									
-Mp_uart_task.c (e:\doorgate\task):            uart_rx(uart);
-Mp_uart_task.c (e:\doorgate\task):void uart_rx(struct tls_uart *uart)
-Readme.txt (e:\doorgate):				uart_rx()
+---- tls_protocmd_exec Matches (4 in 4 files) ----
+Mp_protocol_hostif.c (e:\doorgate\userlib):                err = tls_protocmd_exec(&protocmd_tok, cmdrsp_buf, &cmdrsp_size);
+Protocol.c (e:\doorgate\protocal\protocol_my):int tls_protocmd_exec(struct tls_protocmd_token_t *tok,char *res_rsp, u32 *res_len)
+Protocol.h (e:\doorgate\protocal\protocol_my):int tls_protocmd_exec(struct tls_atcmd_token_t *tok,char *res_rsp, u32 *res_len);
+Readme.txt (e:\doorgate):			tls_protocmd_exec();//–≠“È√¸¡Ó÷¥––

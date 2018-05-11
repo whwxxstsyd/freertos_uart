@@ -392,11 +392,6 @@ tls_os_status_t tls_os_mailbox_receive(tls_os_mailbox_t tls_os_mailbox,
 
 
 
-	
-
-
-
-
 
 u32 tls_os_get_time(void)
 {	
@@ -415,6 +410,192 @@ void tls_os_release_critical(u32 cpu_sr)
     vPortExitCritical();	
 }
 	
+
+
+
+
+
+
+
+
+/*
+************************************************************************************************************************
+*                                                   CREATE A TIMER
+*
+* Description: This function is called by your application code to create a timer.
+*
+* Arguments  : timer	A pointer to an OS_TMR data structure.This is the 'handle' that your application 
+*						will use to reference the timer created.
+*
+*		        callback      Is a pointer to a callback function that will be called when the timer expires.  The
+*                               callback function must be declared as follows:
+*
+*                               void MyCallback (OS_TMR *ptmr, void *p_arg);
+*
+* 	             callback_arg  Is an argument (a pointer) that is passed to the callback function when it is called.
+*
+*          	   	 period        The 'period' being repeated for the timer.
+*                               If you specified 'OS_TMR_OPT_PERIODIC' as an option, when the timer expires, it will
+*                               automatically restart with the same period.
+*
+*			repeat	if repeat
+*
+*             	pname         Is a pointer to an ASCII string that is used to name the timer.  Names are useful for
+*                               debugging.
+*
+*Returns    : TLS_OS_SUCCESS
+*			TLS_OS_ERROR 
+************************************************************************************************************************
+*/
+
+
+tls_os_status_t tls_os_timer_create(tls_os_timer_t *timer,	
+										u32 period,
+										bool repeat,
+										const u8* Name,
+										TimerCallbackFunction_t CallbackFunction)
+{
+    tls_os_status_t os_status;
+
+	if(0 == period)
+		period = 1;
+	
+#if configUSE_TIMERS
+	
+	*timer  = xTimerCreate(Name , 
+						period , 
+						repeat, 	
+						NULL, 
+						CallbackFunction); 
+#endif
+
+    if (*timer  != NULL)	
+        os_status = TLS_OS_SUCCESS;
+    else 
+        os_status = TLS_OS_ERROR;
+    
+	return os_status;
+		
+}
+
+/*
+************************************************************************************************************************
+*                                                   START A TIMER
+*
+* Description: This function is called by your application code to start a timer.
+*
+* Arguments  : timer          Is a pointer to an OS_TMR
+*
+************************************************************************************************************************
+*/
+void tls_os_timer_start(tls_os_timer_t timer)
+{			
+	portBASE_TYPE pxHigherPriorityTaskWoken = pdFALSE;
+	u8 isrcount = 0;
+
+	//isrcount = tls_get_isr_count();
+	
+	if(isrcount > 0)
+	{
+#if configUSE_TIMERS
+		xTimerStartFromISR( timer, &pxHigherPriorityTaskWoken );
+#endif	
+	}
+	else
+	{
+#if configUSE_TIMERS
+		xTimerStart( timer, 0 );		//no block time
+#endif
+	}
+}
+/*
+************************************************************************************************************************
+*                                                   CHANGE A TIMER WAIT TIME
+*
+* Description: This function is called by your application code to change a timer wait time.
+*
+* Arguments  : timer          Is a pointer to an OS_TMR
+*
+*			ticks			is the wait time
+************************************************************************************************************************
+*/
+void tls_os_timer_change(tls_os_timer_t timer, u32 ticks)
+{	
+	portBASE_TYPE pxHigherPriorityTaskWoken = pdFALSE;
+	u8 isrcount = 0;
+
+	if(0 == ticks)
+		ticks = 1;
+	
+	//isrcount = tls_get_isr_count();
+	
+	if(isrcount > 0)
+	{
+#if configUSE_TIMERS
+		xTimerChangePeriodFromISR( timer, ticks, &pxHigherPriorityTaskWoken );
+		xTimerStartFromISR( timer, &pxHigherPriorityTaskWoken );
+#endif
+	}
+	else
+	{	
+#if configUSE_TIMERS	
+		xTimerChangePeriod( timer, ticks, 0 );
+		xTimerStart( timer, 0 );
+#endif
+	}
+}
+/*
+************************************************************************************************************************
+*                                                   STOP A TIMER
+*
+* Description: This function is called by your application code to stop a timer.
+*
+* Arguments  : timer          Is a pointer to the timer to stop.
+*
+************************************************************************************************************************
+*/
+void tls_os_timer_stop(tls_os_timer_t timer)
+{	
+	portBASE_TYPE pxHigherPriorityTaskWoken = pdFALSE;
+	u8 isrcount = 0;
+
+	//isrcount = tls_get_isr_count();
+	
+	if(isrcount > 0)
+	{
+#if configUSE_TIMERS
+		xTimerStopFromISR( timer, &pxHigherPriorityTaskWoken );
+#endif
+
+	}
+	else
+	{
+#if configUSE_TIMERS
+		xTimerStop( timer, 0 );
+#endif
+	}
+}
+
+
+/*
+************************************************************************************************************************
+*                                                   Delete A TIMER
+*
+* Description: This function is called by your application code to delete a timer.
+*
+* Arguments  : timer          Is a pointer to the timer to delete.
+*
+************************************************************************************************************************
+*/
+int tls_os_timer_delete(tls_os_timer_t timer)
+{
+	int ret = 0;	
+	/* xTimer is already active - delete it. */
+	ret = xTimerDelete(timer, 10);
+	return ret;
+}
+
+
 
 
 #endif

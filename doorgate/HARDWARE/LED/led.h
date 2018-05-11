@@ -16,7 +16,17 @@
 #define LED0 PAout(8)	// PA8
 #define LED1 PDout(2)	// PD2	
 
-void LED_Init(void);//初始化
+void Led_Init(void);//初始化	
+
+void hw_platform_led_ctrl(u16 led,u16 ctrl);	
+
+int hw_platform_start_led_blink(u16 led,u16 delay);	
+
+int hw_platform_stop_led_blink(void);
+
+
 
 		 				    
 #endif
+
+	

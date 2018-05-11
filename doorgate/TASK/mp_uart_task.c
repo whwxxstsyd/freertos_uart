@@ -126,15 +126,13 @@ struct tls_uart *tls_uart_open(u32 uart_no)
     if (uart_no == COM1) 
 	{		
 		
-		/*
+		/*	
 		xTaskCreate(tls_uart_1_tx_task, 
 					UART0_TX_TASK_NAME, 
 					UART0_TX_TASK_STACKSIZE, 
 					uart, 	
 					UART0_TX_TASK_PRIO, 
 					NULL);			
-
-		
 		*/	
 
 
@@ -144,9 +142,6 @@ struct tls_uart *tls_uart_open(u32 uart_no)
 					uart,				
 					UART0_RX_TASK_PRIO, 
 					NULL);	
-
-					
-
     } 
 	else
 	{
@@ -165,7 +160,6 @@ struct tls_uart *tls_uart_open(u32 uart_no)
 					uart,		 		
 					UART1_RX_TASK_PRIO, 
 					NULL);	
-
 	}	
 
 		
@@ -322,7 +316,7 @@ static u8 *find_atcmd_eol(u8 *src, u32 len)
 	u8 *p = NULL;
 	
 	p = memchr(src,0x0d,len);
-
+	
 	if (p)
     {	
     	return p;
@@ -362,11 +356,20 @@ static u8 *parse_atcmd_eol(struct tls_uart *uart)
 			modify_atcmd_tail(recv, p);
         }
     } 
-	else 
-	{	
-        /* check buf[tail - END] */
+	else 		
+	{			
 		p = find_atcmd_eol(&recv->buf[recv->tail], TLS_UART_RX_BUF_SIZE - recv->tail); 
-        if(p)
+		
+		if(!p) 
+		{
+			/* check buf[0 - HEAD] */
+			p = find_atcmd_eol(&recv->buf[0], recv->head); 
+            if(p) 
+			{
+                modify_atcmd_tail(recv, p + TLS_UART_RX_BUF_SIZE);
+            }
+        }
+        else
 		{	
 			modify_atcmd_tail(recv, p);
         }
@@ -384,31 +387,35 @@ static void parse_protocol_line(struct tls_uart *uart)
 	u32 cmd_len , tail_len= 0;	
 	u8 *ptr_eol;
 	char *buf;
-
 	u8 Version,CID1,CID2;
-	u16 Addr;
+	u16 Addr;	
 	u8 hostif_uart_type;
 	
-	while ((CIRC_CNT(recv->head, recv->tail, TLS_UART_RX_BUF_SIZE) >= 2) && (atcmd_start == NULL))
+	while ((CIRC_CNT(recv->head, recv->tail, TLS_UART_RX_BUF_SIZE) >= 2) && (proto_start == NULL))
 	{				
 		if((recv->buf[recv->tail] == '#') || (recv->buf[recv->tail] == '~') )		
-		{				
+		{		
+			/*
+				去除头部和尾部，
+				将有用的命令部分解析出来	
+			*/
 			proto_start = &recv->buf[recv->tail];
 			recv->tail = (recv->tail + 1) & (TLS_UART_RX_BUF_SIZE - 1);	
 			ptr_eol = parse_atcmd_eol(uart);	
 
-
+			/*ptr_eol指向命令的结尾，不包括结束符*/
             if (ptr_eol >= proto_start)
 			{
                 cmd_len = ptr_eol - proto_start; 
             } 
 			else 
 			{
-                tail_len = (u32)(&recv->buf[TLS_UART_RX_BUF_SIZE - 1] - atcmd_start + 1);
+                tail_len = (u32)(&recv->buf[TLS_UART_RX_BUF_SIZE - 1] - proto_start + 1);
                 cmd_len = tail_len + (ptr_eol - &recv->buf[0]); 
             }
 
 			buf = tls_mem_alloc(cmd_len + 2);
+			
             if(!buf)
             {
                 return;
@@ -435,8 +442,11 @@ static void parse_protocol_line(struct tls_uart *uart)
                 hostif_uart_type = HOSTIF_UART1_CMD;
             }
 
-	        tls_hostif_cmd_handler( hostif_uart_type, buf, cmd_len);
-            tls_mem_free(buf);
+			//将命令重新组合放到内存中
+	        tls_hostif_cmd_handler(hostif_uart_type, buf, cmd_len);
+			
+            tls_mem_free(buf);,
+				
 			proto_start = NULL; 
 		}
 		else
@@ -449,28 +459,13 @@ static void parse_protocol_line(struct tls_uart *uart)
 
 
 
-Version = TwoAscTOHex(recv->buf[recv->tail+1],recv->buf[recv->tail+2]);
-Addr = TwoAscTOHex(recv->buf[recv->tail+3],recv->buf[recv->tail+4]);	
-CID1 = TwoAscTOHex(recv->buf[recv->tail+5],recv->buf[recv->tail+6]);
 
-//获得实际地址
-Addr += (CID1&0x0F)*0x100;	
-CID1 &= 0xF0;			
-
-
-
-if((CID1==DEVICE_TYPE_1)||(CID1==DEVICE_TYPE_2)||(CID1==DEVICE_TYPE_2)) 
-{	
-	//校验	
-}
-
-	
 
 
 
 void uart_rx(struct tls_uart *uart)
 {	
-	parse_protocol_line(uart);
+	parse_protocol_line(uart);		
 }
 
 void uart_tx(struct tls_uart *uart)	

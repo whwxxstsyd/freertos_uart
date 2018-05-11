@@ -47,3 +47,18 @@ usart.c		硬件部分的初始化和串口的底层收发
 
 
 
+
+uart_rx();//串口接收任务
+	parse_protocol_line();
+		tls_hostif_cmd_handler();
+			tls_protocmd_parse();//协议数据解析
+			tls_protocmd_exec();//协议命令执行
+			tls_hostif_process_cmdrsp();//发送回复命令
+
+
+
+
+
+
+
+

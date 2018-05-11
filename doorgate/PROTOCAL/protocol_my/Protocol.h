@@ -11,6 +11,31 @@ extern "C" {
 #define Makepower_Protocol_Open 	1
 #define Post_Protocol_Open			0		
 
+#define   POST_VER		   	0x10 //协议版本	  
+
+
+//RTN返回的值
+enum
+{
+  RTN_NORMAL          = 0x00,     //正常回复
+  RTN_VER_ERR         = 0x01,     //版本不符合
+  RTN_CMDCHK_ERR      = 0x02,     //命令校验和CHKSUM失败
+  RTN_PARACHAK_ERR    = 0x03,     //参数部分的累加和校验失败
+  RTN_CID2_ERR        = 0x04,     //无效的CID2
+  RTN_UNKNOW_CMD      = 0x05,     //命令格式错误
+  RTN_UNVALID_DATA    = 0x06,     //数据部分有无效数据
+  RTN_NOACCESS        = 0x07,     //无权限进行访问
+  RTN_PASSWORD_WRONG  = 0xE0,     //权限校验密码不正确
+  RTN_MODPASSWORD_ERR = 0xE1,     //对密码修改失败
+  RTN_MEMORY_FULL     = 0xE2,     //存储空间已满
+  RTN_MODPARA_ERR     = 0xE3,     //修改内部参数失败不成功
+  RTN_MEMORY_EMPTY    = 0xE4,     //存储空间已空
+  RTN_NOHAVE_INFO     = 0xE5,     //无对应信息项
+  RTN_HAVESAME_USER   = 0xE6,     //重复设定相同的用户，门禁将保持不变
+  RTN_BluetoothPasswod_Error = 0xE9,	//蓝牙密码错误 
+}; 
+
+
 
 typedef struct ProtocolResource_T
 {	
@@ -50,7 +75,7 @@ struct tls_protocmd_t {
 
 
 
-
+void tls_protocol_rebuild();
 
 int tls_protomd_parse(struct tls_atcmd_token_t *tok, char *buf, u32 len);
 

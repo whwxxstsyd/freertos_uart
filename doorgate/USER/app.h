@@ -26,12 +26,6 @@ typedef enum
 
 #define MINIMAL_STACK_SIZE 		128
 
-
-#define LED_TASK_NAME 				"LED_TASK"
-#define LED_TASK_PRIO				4		
-#define LED_TASK_STACKSIZE 		MINIMAL_STACK_SIZE
-#define LED_QUEUE_SIZE				4
-
 #define IDLE_TASK_NAME 			"IDLE_TASK"
 #define IDLE_TASK_PRIO				3						
 #define IDLE_TASK_STACKSIZE 		MINIMAL_STACK_SIZE

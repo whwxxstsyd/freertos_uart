@@ -1,3 +1,4 @@
+#include "mp_protocol_hostif.h"
 #include "protocol.h"
 #include "calendar.h"	
 #include "debug.h"	
@@ -6,110 +7,145 @@
 
 #if Post_Protocol_Open
 
-static int post_protocmd_get_time_proc(struct tls_atcmd_token_t *tok,
-								       	 		char *res_resp, u32 *res_len)
-{
+static int post_protocmd_get_time_proc(struct tls_protocmd_token_t *tok,
+        char *res_resp, u32 *res_len)	
+{		
+	int ret; 
 	TypedefDateTime DataTime;	
 	
-	if(GetDateTime(&DataTime))
+	ret = GetDateTime(&DataTime);
+		
+	if(ret)	
 	{
-		LOG_ERROR("get data err!!\n");
+		LOG_ERROR("get time err!!\n");
+		return FALSE;
+	}	
+	else
+	{	
+		DateTime_Trans(res_resp,&DataTime);			
+		return TRUE;	
+	}
+
+}
+
+
+static int post_protocmd_set_time_proc(struct tls_protocmd_token_t *tok,
+        char *res_resp, u32 *res_len)
+{
+	u8 buff[PROTOCMD_MAX_ARG];
+	u8 i;	
+	u16 arg_found = tok->arg_found;
+		
+
+	for(i=0;i<arg_found;i++)
+	{
+		buff[i] = tok->arg[i];
+	}
+
+	for(i=0;i<arg_found/2;i++)	
+	{	
+		TwoAscTOHex(buff[i],buff[i+1]);
+	}
+		
+	
+		
+	if(check_time_format((TypedefDateTime *)buff))	
+	{
 		return FALSE;
 	}
 
-	DataTime.year	
-	DataTime.month	
-	DataTime.week
-	DataTime.day
-	DataTime.hour
-	DataTime.min
-	DataTime.sec
+	SetDateTime((TypedefDateTime *)buff);	
 
-		
-}
-
-
-static int post_protocmd_set_time_proc()
-{
-	u8 
-
-	SetDateTime
+	return TRUE;
 }
 
 
 
-static int post_protocmd_get_addr_proc()
+static int post_protocmd_get_addr_proc(struct tls_protocmd_token_t *tok,
+        char *res_resp, u32 *res_len)
 {
 	
 }
 
 
-static int post_protocmd_set_addr_proc()
+static int post_protocmd_set_addr_proc(struct tls_protocmd_token_t *tok,
+        char *res_resp, u32 *res_len)
 {
 	
 }
 
-static int post_protocmd_get_version_proc()
-{
-	
-}
-
-
-static int post_protocmd_set_configID_proc()
-{
-	
-}
-
-
-static int post_protocmd_get_configID_proc()
+static int post_protocmd_get_version_proc(struct tls_protocmd_token_t *tok,
+        char *res_resp, u32 *res_len)
 {
 	
 }
 
 
-static int post_protocmd_remote_proc()
+static int post_protocmd_set_configID_proc(struct tls_protocmd_token_t *tok,
+        char *res_resp, u32 *res_len)
 {
 	
 }
 
 
-static int post_protocmd_get_ariber_ver_proc()
+static int post_protocmd_get_configID_proc(struct tls_protocmd_token_t *tok,
+        char *res_resp, u32 *res_len)
 {
 	
 }
 
 
-static int post_protocmd_set_baudrate_proc()
+static int post_protocmd_remote_proc(struct tls_protocmd_token_t *tok,
+        char *res_resp, u32 *res_len)
 {
 	
 }
 
 
-static int post_protocmd_authority_confirm_proc()
+static int post_protocmd_get_ariber_ver_proc(struct tls_protocmd_token_t *tok,
+        char *res_resp, u32 *res_len)
 {
 	
 }
 
 
-static int post_protocmd_set_sys_param_proc()
+static int post_protocmd_set_baudrate_proc(struct tls_protocmd_token_t *tok,
+        char *res_resp, u32 *res_len)
 {
 	
 }
 
 
-static int post_protocmd_get_sys_param_proc()
+static int post_protocmd_authority_confirm_proc(struct tls_protocmd_token_t *tok,
+        char *res_resp, u32 *res_len)
 {
 	
 }
 
 
-static int post_protocmd_set_guard_param_proc()
+static int post_protocmd_set_sys_param_proc(struct tls_protocmd_token_t *tok,
+        char *res_resp, u32 *res_len)
 {
 	
 }
 
 
-static int post_protocmd_get_guard_param_proc()
+static int post_protocmd_get_sys_param_proc(struct tls_protocmd_token_t *tok,
+        char *res_resp, u32 *res_len)
+{
+	
+}
+
+
+static int post_protocmd_set_guard_param_proc(struct tls_protocmd_token_t *tok,
+        char *res_resp, u32 *res_len)
+{
+	
+}
+
+
+static int post_protocmd_get_guard_param_proc(struct tls_protocmd_token_t *tok,
+        char *res_resp, u32 *res_len)
 {
 	
 }
@@ -120,31 +156,36 @@ static int post_protocmd_get_guard_param_proc()
 
 #if Makepower_Protocol_Open
 
-static int mp_protocmd_get_device_info_proc()
+static int mp_protocmd_get_device_info_proc(struct tls_protocmd_token_t *tok,
+        char *res_resp, u32 *res_len)
 {
 	
 }
 
 
-static int mp_protocmd_set_addr_proc()
+static int mp_protocmd_set_addr_proc(struct tls_protocmd_token_t *tok,
+        char *res_resp, u32 *res_len)
 {
 	
 }
 
 
-static int mp_protocmd_get_time_proc()
+static int mp_protocmd_get_time_proc(struct tls_protocmd_token_t *tok,
+        char *res_resp, u32 *res_len)
 {
 	
 }
 
 
-static int mp_protocmd_set_time_proc()
+static int mp_protocmd_set_time_proc(struct tls_protocmd_token_t *tok,
+        char *res_resp, u32 *res_len)
 {
 	
 }
 
 
-static int mp_protocmd_mem_dev_proc()
+static int mp_protocmd_mem_dev_proc(struct tls_protocmd_token_t *tok,
+        char *res_resp, u32 *res_len)
 {
 	
 }
@@ -199,25 +240,69 @@ int protocmd_ok_resp(char *buf)
 }
 
 	
-static int protocmd_nop_proc(struct tls_protocmd_token_t *tok,
-        char *res_resp, u32 *res_len)
-{	
-    if (!tok->arg_found && (tok->op == ATCMD_OP_NULL)) 
-	{	
-        *res_len = protocmd_ok_resp(res_resp);	
-    } 
-	else 
-	{
-        *res_len = protocmd_err_resp(res_resp, CMD_ERR_OPS);
-    }
+	
+int LCHKSUM_LENID_CMP(u16 len_param)	
+{
+	u8 temp1 = (len_param >> 0)&0x0F;
+	u8 temp2 = (len_param >> 4)&0x0F;
+	u8 temp3 = (len_param >> 8)&0x0F;
+	u8 temp4 = (len_param >> 12)&0x0F;	
 
-    return 0;
+	u8 sum = temp1 + temp2 + temp3;
+	
+	sum = ~(sum%16)+1;
+
+	if(sum == temp4)
+	{
+		return TRUE;	
+	}
+	return FALSE;
+}
+
+int VERSION_CHK(u16 len_param)	
+{	
+	return TRUE;	
 }
 
 
 int tls_protocmd_parse(struct tls_protocmd_token_t *tok, char *buf, u32 len)
-{
+{	
+    u16 remain_len;
+	u8 lchksum,i;	
+    char *buf_start = buf;	
 	
+	tok->VER = TwoAscTOHex(*buf,*(buf+1));	
+	//版本检查
+	if(!VERSION_CHK(tok->VER))
+	{
+		return RTN_VER_ERR;		
+	}
+	
+	tok->ADDR	= 	TwoAscTOHex(*(buf+2),*(buf+3));
+	tok->CID1	= 	TwoAscTOHex(*(buf+4),*(buf+5));
+	tok->CID2	= 	TwoAscTOHex(*(buf+6),*(buf+7));	
+	tok->LENGTH = 	TwoCharToInt(TwoAscTOHex(*(buf+8),*(buf+9)),TwoAscTOHex(*(buf+10),*(buf+11)));
+
+	//数据校验监测
+	if(!LCHKSUM_LENID_CMP(tok->LENGTH))	
+	{		
+		return RTN_CMDCHK_ERR;	
+	}
+
+	tok->arg_found = tok->LENGTH & 0xFFF;	
+	remain_len = tok->arg_found;
+
+	if(remain_len >= (PROTOCMD_MAX_ARG - 1))	
+		return CMD_ERR_INV_PARAMS;		
+		
+	while (remain_len > 0)
+	{	
+		tok->arg[i] = *(buf+12+i);
+		i++;	
+		remain_len--;
+	}
+		
+	return 0;		
 }
 	
 	
@@ -226,18 +311,12 @@ int tls_protocmd_exec(struct tls_protocmd_token_t *tok,char *res_rsp, u32 *res_l
 	int err;
 	struct tls_protocmd_t *protocmd, *match = NULL;
 
-	if (strlen(tok->name) == 0) 
-	{
-		err = protocmd_nop_proc(tok, res_rsp, res_len);
-		return err;
-	}
-
 	/* look for AT CMD handle table */
 	protocmd = protocmd_tbl;
 	while (protocmd->name) 
 	{		
-		if (strcmp(protocmd->name, tok->name) == 0)
-		{	
+		if (protocmd->name == tok->CID2)		
+		{		
 			match = protocmd;
 			break;
 		}	
@@ -260,6 +339,98 @@ int tls_protocmd_exec(struct tls_protocmd_token_t *tok,char *res_rsp, u32 *res_l
 
 	return err;
 }
+
+
+
+/**
+* @brief	对发送缓冲区进行填充
+* @param[1]  u8 *buff			写入的缓冲区
+* @param[2]  u8 *data			写入的数据
+* @param[3]  u8 len			写入数据的长度
+* @param[4]  u8 tear_flag		是否进行拆分	
+* @return   none 
+*/
+
+void fill_buff(u8 *buff,u8 *data,u8 len,u8 tear_flag)	
+{
+	u8 i;
+	
+	if(tear_flag)
+	{
+		for(i=0;i<len;i++)
+		{	
+			*(buff + i) = Hi_HexToAsc(*(data + i));	
+			*(buff + i + 1) = Low_HexToAsc(*(data + i));	
+		}
+		buff = buff + len*2;
+
+	}
+	else
+	{
+		for(i=0;i<len;i++)
+		{	
+			*(buff + i) = *(data + i);	
+		}
+
+		buff = buff + len;	
+	}	
+	
+}
+
+void tls_protocol_add_head()
+{
+	char *p = buff;//指向数据头部
+	
+	u8 Ver  =  tok->VER;
+	u8 Adr  =  tok->ADDR; 	
+	u8 CID1 =  tok->CID1; 	
+	u8 len1 = 0;
+	u8 len2 = 0;		
+
+	u16 Host_Adr = Adr + (CID1&0x0F)*0x100;
+	
+	//添加头
+	fill_buff(p,'~',1,0);
+	fill_buff(p,&Ver,1,1);		
+	fill_buff(p,&Adr,1,1);
+	
+	if(Ver == 0x20)
+	{	
+		CID1 = 0xD0;
+	}
+	else
+	{				
+		CID1 = 0x80+((Host_Adr>>8)&0x0F);
+	}
+	
+	fill_buff(p,&CID1,1,1);
+	//两个字节的空	
+	fill_buff(p,&len1,1,1);
+	fill_buff(p,&len2,1,1);		
+
+}
+
+
+void tls_protocol_add_tail()
+{	
+	
+}
+
+void tls_protocol_add_body()
+{
+	
+}
+
+
+int tls_protocol_rebuild(struct tls_protocmd_token_t *tok,char *buff)
+{	
+	tls_protocol_add_head();
+	
+	tls_protocol_add_tail();
+
+	tls_protocol_add_body();
+}
+
 
 
 
