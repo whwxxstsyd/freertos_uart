@@ -48,4 +48,5 @@
 ..\obj\usart.o: ..\FreeRTOS\include\list.h
 ..\obj\usart.o: ..\FreeRTOS\include\semphr.h
 ..\obj\usart.o: ..\FreeRTOS\include\queue.h
+..\obj\usart.o: ..\FreeRTOS\include\timers.h
 ..\obj\usart.o: ..\INCLUDE\temp.h

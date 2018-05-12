@@ -3,13 +3,16 @@
 #include "card.h"		
 #include "app.h"
 
+#include "FreeRTOS.h"
+#include "task.h"	
+
 
 static void tls_card_task(void *data);
 
 
 void tls_card_init(void)		
 {
-	
+		
 	wiegand_reader_init();
 
 	

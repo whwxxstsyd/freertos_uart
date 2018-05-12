@@ -1,154 +1,98 @@
 #include "ProtocolBase.h"
+#include "debug.h"	
 
+u8 password_default[] = {1,2,3,4,5}	
 
-static void MP_Data_Init(void);
-static u8 MP_Data_Ver_Get(void);
-static void MP_Data_Ver_Send(void);
-static u8 MP_Data_Addr_Get(void);
-static void MP_Data_Addr_Send(void);
-static void MP_Data_CID1_Send(void);
-static void MP_Data_SOI_Send(void);
-static void MP_Data_CID2_Send(void);
-static void MP_Data_Length_Send(void);
-static void MP_Data_Info_Send(void);
-static void MP_Data_ChkSum_Send(void);
-static void MP_Data_Tail_Send(void);
-
-
-/**********************************************************************************************************
-* Description: 	MP_Data_SendHead()
-				MP_Data_SendTail()
-				MP_Data_SendDefault()	
-* 
-* Arguments  : 
-*
-* Returns    : 
-*
-**********************************************************************************************************/
-
-void MP_Data_Reply(void)
-{		
-	//将回复的数据放入缓冲区		
-	MP_Data_SOI_Send();
-	MP_Data_Ver_Send();
-	MP_Data_Addr_Send();
-	MP_Data_CID1_Send();
-	MP_Data_Length_Send();
-	MP_Data_Info_Send();
-	MP_Data_ChkSum_Send();
-	MP_Data_Tail_Send();
-
-	//将缓冲区的数据通过串口发送出去
-	
-}
-
-
-
-/**********************************************************************************************************
-* Description: 
-*			 void MP_Data_Init(void);	
-*			 u8 MP_Data_Ver_Get(void);
-*			 void MP_Data_Ver_Send(void);
-*			 u8 MP_Data_Addr_Get(void);
-*			 void MP_Data_Addr_Send(void);
-*			 void MP_Data_CID1_Send(void);
-*			 void MP_Data_SOI_Send(void);
-*
-* Arguments  : 
-*
-* Returns    : 
-*
-**********************************************************************************************************/
-
-static void MP_Data_Init(void)	
+//门禁艾贝尔协议
+int Ariber_PasswordConfirm(struct tls_protocmd_token_t *tok,
+        char *res_resp, u32 *res_len)
 {
-	
-}
+	u8 password[5];
+	u8 i;
 
-static u8 MP_Data_Ver_Get(void)
-{
-	
-	return ;
-}
-
-static void MP_Data_Ver_Send(void)
-{
-	u8 Ver = MP_Data_Ver_Get();
-	
-	if(Ver != NULL)
-	{
-		SendOneHexToTwoAsciiByte(Ver);	
-	}
-	else//发送默认的
-	{
-		SendOneHexToTwoAsciiByte(VERSION_DEF);	
-	}
-}
-
-static u8 MP_Data_Addr_Get(void)
-{
-	return ;
-}
-
-static void MP_Data_Addr_Send(void)
-{
-	u8 addr = MP_Data_Addr_Get();
-
-	if(addr == NULL)
-	{
-		addr = 1;	
+	for(i=0;i<5;i++)
+	{	
+		password[i] = tok->arg[2+i];
 	}
 
-	SendOneHexToTwoAsciiByte(addr);	
-
-}
-
-static void MP_Data_CID1_Send(void)
-{
-	u8 CID1;
-	if(MP_Data_Ver_Get() == 0x20)
-	{
-		CID1=0xD0;	
-	}	
-	else
-	{
-		u8 addr = MP_Data_Addr_Get();	
-		CID1=0x80+(addr&0x0F);	
+	if(memcmp(password,password_default,sizeof(password)) == 0)	
+	{	
+		return TRUE;
 	}
-	
-	SendOneHexToTwoAsciiByte(CID1);
+
+	return TRUE;
 }
 
-static void MP_Data_SOI_Send(void)
+
+int Ariber_CancelConfirm(void)
 {
-	SendByte('~');
+	LOG_INFO("Ariber_CancelConfirm\n");	
 }
 
 
-// 功能描述  : 邮电部协议发送帧尾
-static void MP_Data_Tail_Send(void)	
-{		
+int Ariber_ModifyPassword(struct tls_protocmd_token_t *tok,
+        char *res_resp, u32 *res_len)
+{
+	u8 password[6];
+	u8 i,sum;	
+
+	for(i=0;i<6;i++)
+	{		
+		password[i] = tok->arg[2+i];
+	}
+
+	sum = password[0];
+	for(i=1;i<5;i++)
+	{
+		sum = sum ^ password[i];
+	}
+	if(sum != password[i])
+	{
+		
+		return FALSE;
+	}
+
+	//讲密码保存
 	
 }
 
-static void MP_Data_CID2_Send(void)
+
+int Ariber_GetSysTime()
 {
 	
 }
 
-static void MP_Data_Length_Send(void)
-{
-	
-}
 
-static void MP_Data_Info_Send(void)
+int Ariber_SetSysTime()
 {
 	
 }
 
 
-static void MP_Data_ChkSum_Send(void)
+int Ariber_SetVoiceMark()
 {
 	
 }
+
+int Ariber_PlayVoice()
+{
+
+
+}
+
+
+int Ariber_GetVoiceMark()
+{
+	
+}
+
+
+
+int Ariber_GetFlashID()
+{
+	
+}
+
+
+
 

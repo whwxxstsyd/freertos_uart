@@ -112,17 +112,41 @@ u8 Low_HexToAsc(u8 c1)
 	return(c1>=0xa? (c1+0x37):(c1+0x30));
 }
 
-void CharToAsc(u8 c1)
+//将一个字节的数据转化为两个ASCII 码
+void CharToAsc(u8 c1,u8 *buf)	
 {
 	u8 t1,t2;
 		
 	t1 = Hi_HexToAsc(c1);
 	t2 = Low_HexToAsc(c1);	
 
-	
+	buf[0] = t1;
+	buf[1] = t2;
 }
 
+//将两个字节的数据转化为两个ASCII 码
+void u16ToAsc(u16 c1,u8 *buf)
+{
+	u8 t1,t2;
 
+	t1 = c1&0x0f;
+	t2 = (c1>>8)&0x0f;
+	
+	CharToAsc(t1,buf);
+	CharToAsc(t2,buf+2);
+}
+
+//将四个字节的数据转化为两个ASCII 码
+void u32ToAsc(u32 c1,u8 *buf)	
+{	
+	u16 t1,t2;
+
+	t1 = c1&0xff;
+	t2 = (c1>>16)&0xff;	
+
+	u16ToAsc(t1,buf);
+	u16ToAsc(t2,buf+4);	
+}
 // 功能描述  : 把ascii 的'0'~'f' 转换成 0~f 一个byte
 u8 AscToHex(u8 c1)
 {	

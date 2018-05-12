@@ -1,4 +1,5 @@
 #include "led.h"
+#include "param.h"	
 #include "mp_osal_rtos.h"
 
 //////////////////////////////////////////////////////////////////////////////////	 
@@ -33,15 +34,6 @@ void Led_Init(void)
 	GPIO_SetBits(GPIOD,GPIO_Pin_2); 						 //PE.5 Êä³ö¸ß 
 }
 
-
-static xTimerHandle timer_ms;
-
-
-
-void Led_Timer_Create(void)
-{
-		
-}
 
 
 static u8	current_blink_led;

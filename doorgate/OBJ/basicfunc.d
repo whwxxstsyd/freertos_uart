@@ -34,6 +34,7 @@
 ..\obj\basicfunc.o: ..\USERLIB\mp_osal_rtos.h
 ..\obj\basicfunc.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 ..\obj\basicfunc.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+..\obj\basicfunc.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 ..\obj\basicfunc.o: ..\FreeRTOS\include\FreeRTOS.h
 ..\obj\basicfunc.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 ..\obj\basicfunc.o: ..\FreeRTOS\include\FreeRTOSConfig.h
@@ -47,4 +48,5 @@
 ..\obj\basicfunc.o: ..\FreeRTOS\include\list.h
 ..\obj\basicfunc.o: ..\FreeRTOS\include\semphr.h
 ..\obj\basicfunc.o: ..\FreeRTOS\include\queue.h
+..\obj\basicfunc.o: ..\FreeRTOS\include\timers.h
 ..\obj\basicfunc.o: ..\INCLUDE\temp.h

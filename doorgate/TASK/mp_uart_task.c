@@ -19,12 +19,13 @@
 #include "app.h"	
 #include "delay.h"
 #include "usart.h"	
-#include "param.h"		
+#include "param.h"	
+#include "mp_mem.h"	
 #include "mp_uart.h"
 #include "debug.h"
 #include "list_base.h"					
 #include "mp_uart_task.h"	
-#include "mp_cmdp_hostif.h"	
+#include "mp_protocol_hostif.h"		
 	
 	
 #define      UART0_TX_TASK_STK_SIZE          256 
@@ -70,7 +71,7 @@ void tls_uart_init(void)
 {	
     struct tls_uart *uart;	
     struct tls_hostif *hif = tls_get_hostif();
-    struct tls_param_uart uart_cfg;
+    struct tls_param_uart uart_cfg;	
 		
     memset(uart_st, 0, 2 * sizeof(struct tls_uart));
 	
@@ -445,7 +446,7 @@ static void parse_protocol_line(struct tls_uart *uart)
 			//将命令重新组合放到内存中
 	        tls_hostif_cmd_handler(hostif_uart_type, buf, cmd_len);
 			
-            tls_mem_free(buf);,
+            tls_mem_free(buf);	
 				
 			proto_start = NULL; 
 		}

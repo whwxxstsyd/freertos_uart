@@ -1,9 +1,12 @@
 #include "mp_uart_task.h"	
 #include "mp_idle_task.h"
 #include "mp_memory_task.h"	
+#include "mp_door_task.h"	
 #include "mp_card_task.h"			
 
-#include "mp_cmdp_hostif.h"
+#include "mp_protocol_hostif.h"	
+#include "mp_card_task.h"	
+
 
 #include "app.h"
 
@@ -16,7 +19,7 @@ void app_init(void)
 	tls_hostif_init();			
 
 	//数据存储任务
-	tls_memory_init();		
+	tls_memory_init();			
 
 	//门禁卡识别任务
 	tls_card_init();	

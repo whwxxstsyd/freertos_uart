@@ -3,6 +3,7 @@
 ..\obj\mp_idle_task.o: ..\USERLIB\mp_osal_rtos.h
 ..\obj\mp_idle_task.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 ..\obj\mp_idle_task.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+..\obj\mp_idle_task.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 ..\obj\mp_idle_task.o: ..\SYSTEM\sys\sys.h
 ..\obj\mp_idle_task.o: ..\USER\stm32f10x.h
 ..\obj\mp_idle_task.o: ..\CORE\core_cm3.h
@@ -46,9 +47,9 @@
 ..\obj\mp_idle_task.o: ..\FreeRTOS\include\list.h
 ..\obj\mp_idle_task.o: ..\FreeRTOS\include\semphr.h
 ..\obj\mp_idle_task.o: ..\FreeRTOS\include\queue.h
+..\obj\mp_idle_task.o: ..\FreeRTOS\include\timers.h
 ..\obj\mp_idle_task.o: ..\INCLUDE\temp.h
 ..\obj\mp_idle_task.o: ..\USERLIB\mp_uart.h
-..\obj\mp_idle_task.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 ..\obj\mp_idle_task.o: ..\USER\app.h
 ..\obj\mp_idle_task.o: ..\SYSTEM\delay\delay.h
 ..\obj\mp_idle_task.o: ..\INCLUDE\debug.h

@@ -4,7 +4,8 @@
 
 #define CARD_DEVICE_NUM	4	
 
-void tls_card_init(void);		
+
+void tls_card_init(void);			
 
 
 #endif

@@ -80,6 +80,11 @@ struct tls_hostif {
 };
 
 
+struct tls_hostif *tls_get_hostif(void);
+
+int tls_hostif_init(void);	
+
+int tls_hostif_cmd_handler(u8 hostif_cmd_type, char *buf, u32 length);
 
 
 #endif

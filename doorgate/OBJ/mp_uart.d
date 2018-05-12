@@ -47,6 +47,7 @@
 ..\obj\mp_uart.o: ..\FreeRTOS\include\list.h
 ..\obj\mp_uart.o: ..\FreeRTOS\include\semphr.h
 ..\obj\mp_uart.o: ..\FreeRTOS\include\queue.h
+..\obj\mp_uart.o: ..\FreeRTOS\include\timers.h
 ..\obj\mp_uart.o: ..\INCLUDE\temp.h
 ..\obj\mp_uart.o: ..\MEM\mp_mem.h
 ..\obj\mp_uart.o: ..\INCLUDE\list_base.h

@@ -5,7 +5,7 @@
 //使用到的为GPIOD
 #define GPIOReadHead_RCC_CLK			(RCC_APB2Periph_GPIOD)
 //读卡头电源控制
-#define GPIOReadHead_PORT			`	GPIOD
+#define GPIOReadHead_PORT				GPIOD	
 #define GPIOReadHead_PIN				GPIO_Pin_12   	
 #define GPIOReadHead_Open        		GPIO_SetBits(GPIOReadHead_PORT,GPIOReadHead_PIN)					
 #define GPIOReadHead_Elapse    		GPIO_ResetBits(GPIOReadHead_PORT,GPIOReadHead_PIN)

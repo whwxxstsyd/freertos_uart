@@ -37,6 +37,8 @@
 ..\obj\mp_uart_task.o: ..\SYSTEM\delay\delay.h
 ..\obj\mp_uart_task.o: ..\SYSTEM\usart\usart.h
 ..\obj\mp_uart_task.o: ..\INCLUDE\param.h
+..\obj\mp_uart_task.o: ..\MEM\mp_mem.h
+..\obj\mp_uart_task.o: ..\INCLUDE\list_base.h
 ..\obj\mp_uart_task.o: ..\USERLIB\mp_uart.h
 ..\obj\mp_uart_task.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 ..\obj\mp_uart_task.o: ..\USERLIB\mp_osal_rtos.h
@@ -52,8 +54,8 @@
 ..\obj\mp_uart_task.o: ..\FreeRTOS\include\list.h
 ..\obj\mp_uart_task.o: ..\FreeRTOS\include\semphr.h
 ..\obj\mp_uart_task.o: ..\FreeRTOS\include\queue.h
+..\obj\mp_uart_task.o: ..\FreeRTOS\include\timers.h
 ..\obj\mp_uart_task.o: ..\INCLUDE\temp.h
 ..\obj\mp_uart_task.o: ..\INCLUDE\debug.h
-..\obj\mp_uart_task.o: ..\INCLUDE\list_base.h
 ..\obj\mp_uart_task.o: ..\TASK\mp_uart_task.h
-..\obj\mp_uart_task.o: ..\TASK\mp_cmdp_hostif.h
+..\obj\mp_uart_task.o: ..\USERLIB\mp_protocol_hostif.h

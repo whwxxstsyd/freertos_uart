@@ -7,10 +7,10 @@
 * @note    
 */
 
-#include "stm32f10x_lib.h"
-#include "sd2068.h"
+#include "sd2068.h"	
 #include "calendar.h"
 #include "param.h"	
+#include "BasicFunc.h"		
 
 
 /**
@@ -157,11 +157,11 @@ int SetDateTime(TypedefDateTime *DateTime)
 		if (SD2068A_SetTime((u8*)DateTime))	
 		{
 			RTC_OK_flag = 0;		//置位RTC功能异常标记
-			return FALSE
+			return FALSE;
 		}
 	}	
-		
-	return TRUE
+			
+	return TRUE;
 }
 
 /**
@@ -177,10 +177,10 @@ int GetDateTime(TypedefDateTime *DateTime)
 	
 	do 
 	{	
-		if (SD2068A_GetTime(DateTime))
-		{
-			if (SD2068A_GetTime(DateTime))
-			{	
+		if (SD2068A_GetTime((u8 *)DateTime))
+		{	
+			if (SD2068A_GetTime((u8 *)DateTime))
+			{		
 				RTC_OK_flag = 0;
 			}
 		}
@@ -190,7 +190,7 @@ int GetDateTime(TypedefDateTime *DateTime)
 
 
 	if (cnt == 4)
-	{
+	{	
 		dummy_time_format(DateTime);
 		return FALSE;	
 	}
@@ -201,23 +201,20 @@ int GetDateTime(TypedefDateTime *DateTime)
 
 
 
-void DateTime_Trans(char *resp,TypedefDateTime *DataTime)
-{	
+void DateTime_Trans(u8 *resp,TypedefDateTime *DataTime)
+{		
 	u16 temp;
-	u8 buff[8];
 
 	temp = DataTime->year + 2000;	
 
-	buff[0] = CharToAsc(temp>>8);	
-	buff[1] = CharToAsc(temp);
-	buff[2] = CharToAsc(DataTime->month);
-	buff[3] = CharToAsc(DataTime->day);	
-	buff[4] = CharToAsc(DataTime->week);
-	buff[5] = CharToAsc(DataTime->hour);
-	buff[6] = CharToAsc(DataTime->min);
-	buff[7] = CharToAsc(DataTime->sec);
+	CharToAsc(temp>>8,resp);	
+	CharToAsc(temp,resp++);	
+	CharToAsc(DataTime->month,resp++);
+	CharToAsc(DataTime->day,resp++);	
+	CharToAsc(DataTime->week,resp++);
+	CharToAsc(DataTime->hour,resp++);
+	CharToAsc(DataTime->min,resp++);	
+	CharToAsc(DataTime->sec,resp++);	
 	
-	MEMCPY(resp, buff, sizeof(buff));
-
 }
 

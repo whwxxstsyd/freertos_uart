@@ -23,9 +23,9 @@ static void GPIO_WiegandPower_INIT(void)
 	//读卡头电源开关	
 	GPIO_InitStructure.GPIO_Pin =  GPIOReadHead_PIN; 
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz; 
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_OD; 
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_OD;
+	
 	GPIO_Init(GPIOReadHead_PORT, &GPIO_InitStructure);
-	GPIOReadHead_Open;	
 }	
 
 

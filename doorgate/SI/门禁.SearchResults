@@ -1,5 +1,6 @@
----- tls_protocmd_exec Matches (4 in 4 files) ----
-Mp_protocol_hostif.c (e:\doorgate\userlib):                err = tls_protocmd_exec(&protocmd_tok, cmdrsp_buf, &cmdrsp_size);
-Protocol.c (e:\doorgate\protocal\protocol_my):int tls_protocmd_exec(struct tls_protocmd_token_t *tok,char *res_rsp, u32 *res_len)
-Protocol.h (e:\doorgate\protocal\protocol_my):int tls_protocmd_exec(struct tls_atcmd_token_t *tok,char *res_rsp, u32 *res_len);
-Readme.txt (e:\doorgate):			tls_protocmd_exec();//–≠“È√¸¡Ó÷¥––
+---- STR_32_LEN Matches (5 in 2 files) ----
+Common.h (e:\doorgate\include):    STR_32_LEN = 32,
+Param_base.h (e:\doorgate\userlib):	u8	SoftWare_Ver[STR_32_LEN];			
+Param_base.h (e:\doorgate\userlib):	u8  HardWare_Ver[STR_32_LEN];       		
+Param_base.h (e:\doorgate\userlib):	u8	Company_Name[STR_32_LEN];					
+Param_base.h (e:\doorgate\userlib):	u8	Device_Name[STR_32_LEN];	

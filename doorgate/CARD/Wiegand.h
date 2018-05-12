@@ -59,7 +59,7 @@ void wiegand_reader_d2(u8 pin,u8 state);
 void wiegand_reader_d3(u8 pin,u8 state);
 
 
-void wiegand_reader_init(WIEGAND_PARAM *wg_buf);
+void wiegand_reader_init(void);	
 
 
 		

@@ -1,7 +1,10 @@
 #include "mp_protocol_hostif.h"
+#include "mp_mem.h"
 #include "list_base.h"
 #include "debug.h"	
-
+#include "param.h"
+#include "protocol.h"	
+	
 
 /* data msg */
 struct tls_hostif_tx_msg       g_hostif_tx_msg[HOSTIF_TX_MSG_NUM];
@@ -23,12 +26,11 @@ int tls_hostif_init(void)
 	int i;
 	int err;
 
-	u16 transparent_trigger_length;
-	u8 mode;
-
     hif= &g_hostif;
     memset(hif, 0, sizeof(struct tls_hostif));
-    hif->uart_atlt = transparent_trigger_length;
+
+
+	return TRUE;
 }
 
 
@@ -73,7 +75,9 @@ struct tls_hostif_tx_msg *tls_hostif_get_tx_msg(void)
 
 int tls_hostif_recv_data(struct tls_hostif_tx_msg *tx_msg) 
 {
-	
+
+
+	return TRUE;
 }
 
 

@@ -2,6 +2,7 @@
 ..\obj\mp_osal_rtos.o: ..\USERLIB\mp_osal_rtos.h
 ..\obj\mp_osal_rtos.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 ..\obj\mp_osal_rtos.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+..\obj\mp_osal_rtos.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 ..\obj\mp_osal_rtos.o: ..\SYSTEM\sys\sys.h
 ..\obj\mp_osal_rtos.o: ..\USER\stm32f10x.h
 ..\obj\mp_osal_rtos.o: ..\CORE\core_cm3.h
@@ -45,6 +46,7 @@
 ..\obj\mp_osal_rtos.o: ..\FreeRTOS\include\list.h
 ..\obj\mp_osal_rtos.o: ..\FreeRTOS\include\semphr.h
 ..\obj\mp_osal_rtos.o: ..\FreeRTOS\include\queue.h
+..\obj\mp_osal_rtos.o: ..\FreeRTOS\include\timers.h
 ..\obj\mp_osal_rtos.o: ..\INCLUDE\temp.h
 ..\obj\mp_osal_rtos.o: ..\INCLUDE\debug.h
 ..\obj\mp_osal_rtos.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h

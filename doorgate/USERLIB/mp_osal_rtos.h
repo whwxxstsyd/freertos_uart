@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>	
 #include "sys.h"		
 
 #include "FreeRTOS.h"					
@@ -54,7 +55,7 @@ void tls_os_release_critical(u32 cpu_sr);
 
 
 
-	
+		
 tls_os_status_t tls_os_timer_create(tls_os_timer_t *timer,	
 									u32 period,	
 									bool repeat,
@@ -62,7 +63,7 @@ tls_os_status_t tls_os_timer_create(tls_os_timer_t *timer,
 									TimerCallbackFunction_t CallbackFunction);
 
 
-void tls_os_timer_start(tls_os_timer_t *timer);
+void tls_os_timer_start(tls_os_timer_t timer);	
 
 
 void tls_os_timer_change(tls_os_timer_t timer, u32 ticks);

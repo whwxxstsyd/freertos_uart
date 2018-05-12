@@ -332,7 +332,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F10X_HD,USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\SYSTEM\delay;..\SYSTEM\sys;..\SYSTEM\usart;..\USER;..\STM32F10x_FWLib\inc;..\CORE;..\MALLOC;..\FreeRTOS\include;..\FreeRTOS\portable\RVDS\ARM_CM3;..\HARDWARE\LED;..\HARDWARE\LCD;..\HARDWARE\TIMER;..\HARDWARE\EXTI;..\HARDWARE\KEY;..\TASK;..\USERLIB;..\INCLUDE;..\HARDWARE\PLATFORM;..\MEM</IncludePath>
+              <IncludePath>..\SYSTEM\delay;..\SYSTEM\sys;..\SYSTEM\usart;..\USER;..\STM32F10x_FWLib\inc;..\CORE;..\MALLOC;..\FreeRTOS\include;..\FreeRTOS\portable\RVDS\ARM_CM3;..\HARDWARE\LED;..\HARDWARE\LCD;..\HARDWARE\TIMER;..\HARDWARE\EXTI;..\HARDWARE\KEY;..\TASK;..\USERLIB;..\INCLUDE;..\HARDWARE\PLATFORM;..\MEM;..\PROTOCAL;..\HARDWARE\BEEP;..\HARDWARE\SD2068;..\HARDWARE\CARD;..\CARD</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -409,6 +409,26 @@
               <FileName>platform.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\HARDWARE\PLATFORM\platform.c</FilePath>
+            </File>
+            <File>
+              <FileName>beep.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\BEEP\beep.c</FilePath>
+            </File>
+            <File>
+              <FileName>calendar.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\SD2068\calendar.c</FilePath>
+            </File>
+            <File>
+              <FileName>sd2068.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\SD2068\sd2068.c</FilePath>
+            </File>
+            <File>
+              <FileName>card.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\CARD\card.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -556,11 +576,6 @@
           <GroupName>TASK</GroupName>
           <Files>
             <File>
-              <FileName>mp_cmdp_hostif.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\TASK\mp_cmdp_hostif.c</FilePath>
-            </File>
-            <File>
               <FileName>mp_uart_task.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\TASK\mp_uart_task.c</FilePath>
@@ -569,6 +584,21 @@
               <FileName>mp_idle_task.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\TASK\mp_idle_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>mp_memory_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\TASK\mp_memory_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>mp_card_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\TASK\mp_card_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>mp_door_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\TASK\mp_door_task.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -590,6 +620,16 @@
               <FileType>1</FileType>
               <FilePath>..\USERLIB\mp_osal_rtos.c</FilePath>
             </File>
+            <File>
+              <FileName>mp_protocol_hostif.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\USERLIB\mp_protocol_hostif.c</FilePath>
+            </File>
+            <File>
+              <FileName>param_base.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\USERLIB\param_base.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -599,6 +639,56 @@
               <FileName>mp_mem.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\MEM\mp_mem.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>PROTOCOL</GroupName>
+          <Files>
+            <File>
+              <FileName>Protocol.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\PROTOCAL\Protocol.c</FilePath>
+            </File>
+            <File>
+              <FileName>ProtocolBase.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\PROTOCAL\ProtocolBase.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>CARD_LIB</GroupName>
+          <Files>
+            <File>
+              <FileName>CardLibrary.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\CARD\CardLibrary.c</FilePath>
+            </File>
+            <File>
+              <FileName>CardPostProtocol.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\CARD\CardPostProtocol.c</FilePath>
+            </File>
+            <File>
+              <FileName>Keynum.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\CARD\Keynum.c</FilePath>
+            </File>
+            <File>
+              <FileName>Password.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\CARD\Password.c</FilePath>
+            </File>
+            <File>
+              <FileName>ReadCard.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\CARD\ReadCard.c</FilePath>
+            </File>
+            <File>
+              <FileName>Wiegand.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\CARD\Wiegand.c</FilePath>
             </File>
           </Files>
         </Group>
