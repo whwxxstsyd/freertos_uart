@@ -31,6 +31,7 @@ void tls_uart_put_into_buffer(int uart_no,u8 ch)
 	{	
 		port->icount.buf_overrun++;
 		LOG_DEBUG("rx buf overrun\n");
+		
 	}		
 	
 	/* insert the character into the buffer */

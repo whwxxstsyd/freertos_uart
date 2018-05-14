@@ -125,18 +125,17 @@ struct tls_uart *tls_uart_open(u32 uart_no)
     dl_list_init(&uart->tx_msg_pending_list);			
 		
     if (uart_no == COM1) 
-	{		
-		
-		/*	
+	{	
+	
+#if 0	
 		xTaskCreate(tls_uart_1_tx_task, 
 					UART0_TX_TASK_NAME, 
 					UART0_TX_TASK_STACKSIZE, 
 					uart, 	
 					UART0_TX_TASK_PRIO, 
-					NULL);			
-		*/	
-
-
+					NULL);	
+#endif
+		
 		xTaskCreate(tls_uart_1_rx_task, 	
 					UART0_RX_TASK_NAME, 
 					UART0_RX_TASK_STACKSIZE, 
@@ -146,7 +145,7 @@ struct tls_uart *tls_uart_open(u32 uart_no)
     } 
 	else
 	{
-		
+			
 		xTaskCreate(tls_uart_2_tx_task, 
 					UART1_TX_TASK_NAME, 
 					UART1_TX_TASK_STACKSIZE, 
@@ -178,8 +177,6 @@ static s16 tls_uart1_task_rx_cb(char *buf, u16 len)
 	if(NULL == buf)	
 		return WM_FAILED;		
 
-	LOG_INFO("nihao weiwsad\n");		
-	
 	if(uart->rx_mailbox)					
 		tls_os_mailbox_send(uart->rx_mailbox, (void *)MBOX_MSG_UART_RX);
 		
@@ -263,7 +260,7 @@ static void tls_uart_1_tx_task(void *data)
         err = tls_os_mailbox_receive(uart->tx_mailbox, (void *)msg, 0) ;
         if (err == 0) 
 		{		
-            uart_tx(uart);		 
+            //uart_tx(uart);			 
         } 
     }
 }
@@ -337,7 +334,7 @@ static void modify_atcmd_tail(struct tls_uart_circ_buf *recv, u8 *p)
 		p = NULL;
     }
 	else
-	{
+	{	
     	recv->tail = (recv->tail + cmd_len) & (TLS_UART_RX_BUF_SIZE - 1);
 	}
 }
@@ -350,7 +347,7 @@ static u8 *parse_atcmd_eol(struct tls_uart *uart)
 	
     /* jump to end of line */
     if(recv->head > recv->tail) 
-	{
+	{	
 		p = find_atcmd_eol(&recv->buf[recv->tail], recv->head - recv->tail);
         if(p)
 		{	
@@ -375,7 +372,12 @@ static u8 *parse_atcmd_eol(struct tls_uart *uart)
 			modify_atcmd_tail(recv, p);
         }
     }
-	
+
+	/* jump over EOI char */
+    if (recv->buf[recv->tail] == 0x0D)				
+    {		
+        recv->tail = (recv->tail + 1) & (TLS_UART_RX_BUF_SIZE - 1);
+    }
 	
     return p;
 }
@@ -390,14 +392,16 @@ static void parse_protocol_line(struct tls_uart *uart)
 	char *buf;
 	u8 Version,CID1,CID2;
 	u16 Addr;	
-	u8 hostif_uart_type;
-	
-	while ((CIRC_CNT(recv->head, recv->tail, TLS_UART_RX_BUF_SIZE) >= 2) && (proto_start == NULL))
-	{				
+	u8 hostif_uart_type;	
+
+	u8 CNT;
+		
+	while ((CIRC_CNT(recv->head, recv->tail, TLS_UART_RX_BUF_SIZE) >= 1) && (proto_start == NULL))
+	{		
 		if((recv->buf[recv->tail] == '#') || (recv->buf[recv->tail] == '~') )		
-		{		
+		{			
 			/*
-				去除头部和尾部，
+				去除头部和尾部，	
 				将有用的命令部分解析出来	
 			*/
 			proto_start = &recv->buf[recv->tail];
@@ -406,11 +410,11 @@ static void parse_protocol_line(struct tls_uart *uart)
 
 			/*ptr_eol指向命令的结尾，不包括结束符*/
             if (ptr_eol >= proto_start)
-			{
+			{	
                 cmd_len = ptr_eol - proto_start; 
             } 
 			else 
-			{
+			{		
                 tail_len = (u32)(&recv->buf[TLS_UART_RX_BUF_SIZE - 1] - proto_start + 1);
                 cmd_len = tail_len + (ptr_eol - &recv->buf[0]); 
             }
@@ -436,15 +440,17 @@ static void parse_protocol_line(struct tls_uart *uart)
 
 			if (uart->uart_port->uart_no == TLS_UART_0)
             {
-                hostif_uart_type = HOSTIF_UART0_CMD;	
+                hostif_uart_type = HOSTIF_UART0_CMD;		
             }
             else
             {	
                 hostif_uart_type = HOSTIF_UART1_CMD;
             }
-
+	
+			LOG_INFO("cmd_len = %d,uart_type = %d\n",cmd_len,hostif_uart_type);			
+			
 			//将命令重新组合放到内存中
-	        tls_hostif_cmd_handler(hostif_uart_type, buf, cmd_len);
+	        tls_hostif_cmd_handler(hostif_uart_type, buf, &cmd_len);
 			
             tls_mem_free(buf);	
 				
@@ -452,10 +458,9 @@ static void parse_protocol_line(struct tls_uart *uart)
 		}
 		else
 		{
-			break;
+			break; 
 		}
-	}
-	
+	}	
 }
 
 
@@ -482,11 +487,12 @@ void uart_tx(struct tls_uart *uart)
 	{	
         tx_msg = dl_list_first(&uart->tx_msg_pending_list,
         struct tls_hostif_tx_msg, list);
+		
 		tls_os_release_critical(cpu_sr);
 
 		switch (tx_msg->type) 
 		{
-				
+			
 		}
 
 		cpu_sr = tls_os_set_critical();

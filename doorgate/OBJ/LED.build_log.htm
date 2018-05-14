@@ -22,136 +22,78 @@ Dialog DLL:        TARMSTM.DLL
  
 <h2>Project:</h2>
 E:\doorgate\USER\FreeRTOS.uvprojx
-Project File Date:  05/04/2018
+Project File Date:  05/12/2018
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 1 (build 61)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'FreeRTOS'
+compiling mp_uart_task.c...
+..\TASK\mp_uart_task.c(74): warning:  #177-D: variable "uart_cfg" was declared but never referenced
+      struct tls_param_uart uart_cfg;   
+..\TASK\mp_uart_task.c(100): warning:  #177-D: variable "stk" was declared but never referenced
+      char *stk;
+..\TASK\mp_uart_task.c(393): warning:  #177-D: variable "Version" was declared but never referenced
+        u8 Version,CID1,CID2;
+..\TASK\mp_uart_task.c(393): warning:  #177-D: variable "CID1" was declared but never referenced
+        u8 Version,CID1,CID2;
+..\TASK\mp_uart_task.c(393): warning:  #177-D: variable "CID2" was declared but never referenced
+        u8 Version,CID1,CID2;
+..\TASK\mp_uart_task.c(394): warning:  #177-D: variable "Addr" was declared but never referenced
+        u16 Addr;       
+..\TASK\mp_uart_task.c(397): warning:  #177-D: variable "CNT" was declared but never referenced
+        u8 CNT;
+..\TASK\mp_uart_task.c(482): warning:  #177-D: variable "write_cnt" was declared but never referenced
+        int write_cnt; 
+..\TASK\mp_uart_task.c(250): warning:  #177-D: function "tls_uart_1_tx_task" was declared but never referenced
+  static void tls_uart_1_tx_task(void *data)
+..\TASK\mp_uart_task.c(95): warning:  #177-D: variable "temp" was declared but never referenced
+  static xSemaphoreHandle temp; 
+..\TASK\mp_uart_task.c: 10 warnings, 0 errors
 compiling mp_protocol_hostif.c...
-..\PROTOCAL\protocol.h(71): error:  #20: identifier "ProtocolStruct" is undefined
-        ProtocolStruct  ProBuffer;              //»º????
-..\PROTOCAL\protocol.h(107): warning:  #1295-D: Deprecated declaration tls_protocol_rebuild - give arg types
-  void tls_protocol_rebuild();
-..\PROTOCAL\protocol.h(109): warning:  #231-D: declaration is not visible outside of function
-  int tls_protomd_parse(struct tls_atcmd_token_t *tok, char *buf, u32 len);
-..\PROTOCAL\protocol.h(111): warning:  #231-D: declaration is not visible outside of function
-  int tls_protocmd_exec(struct tls_atcmd_token_t *tok,char *res_rsp, u32 *res_len);
 ..\USERLIB\mp_protocol_hostif.c(25): warning:  #177-D: variable "tx_msg" was declared but never referenced
         struct tls_hostif_tx_msg *tx_msg;
 ..\USERLIB\mp_protocol_hostif.c(26): warning:  #177-D: variable "i" was declared but never referenced
         int i;
 ..\USERLIB\mp_protocol_hostif.c(27): warning:  #177-D: variable "err" was declared but never referenced
         int err;
-..\USERLIB\mp_protocol_hostif.c(159): warning:  #223-D: function "tls_protocmd_parse" declared implicitly
-              err = tls_protocmd_parse(&protocmd_tok, buf, length);
-..\USERLIB\mp_protocol_hostif.c(163): error:  #29: expected an expression
-                                cmdrsp_buf = ;
-..\USERLIB\mp_protocol_hostif.c(164): error:  #29: expected an expression
-                  cmdrsp_size = ;
-..\USERLIB\mp_protocol_hostif.c(168): error:  #29: expected an expression
-                                cmdrsp_buf = ;
-..\USERLIB\mp_protocol_hostif.c(169): error:  #29: expected an expression
-                                cmdrsp_size = ;
-..\USERLIB\mp_protocol_hostif.c(176): error:  #167: argument of type "struct tls_protocmd_token_t *" is incompatible with parameter of type "struct tls_atcmd_token_t *"
-                  err = tls_protocmd_exec(&protocmd_tok, cmdrsp_buf, &cmdrsp_size);
 ..\USERLIB\mp_protocol_hostif.c(138): warning:  #177-D: variable "i" was declared but never referenced
       int i;            
-..\USERLIB\mp_protocol_hostif.c: 8 warnings, 6 errors
-compiling param_base.c...
-..\USERLIB\param_base.h(23): error:  #40: expected an identifier
-        u32     
-_ID;            
-..\USERLIB\param_base.c(18): error:  #137: expression must be a modifiable lvalue
-        Device_Info.SoftWare_Ver                =       
-OFTWARE_VERSION;
-..\USERLIB\param_base.c(19): error:  #137: expression must be a modifiable lvalue
-        Device_Info.HardWare_Ver                =       
-ARDWARE_VERSION;        
-..\USERLIB\param_base.c(20): error:  #137: expression must be a modifiable lvalue
-        Device_Info.Company_Name                =       
-OMPANY_NAME;            
-..\USERLIB\param_base.c(21): error:  #137: expression must be a modifiable lvalue
-        Device_Info.Device_Name                 =       
-EVICE_NAME;     
-..\USERLIB\param_base.c(22): error:  #134: expected a field name
-        Device_Info.
-_ID                             =       U_ID;
-..\USERLIB\param_base.c(26): warning:  #550-D: parameter "info" was set but never used
-  void Device_Info_Get(DEVICE_INFO *info)
-..\USERLIB\param_base.c(48): error:  #118: a void function may not return a value
-                return 
-ALSE;           
-..\USERLIB\param_base.c(56): error: At end of source:  #40: expected an identifier
-..\USERLIB\param_base.c(56): error: At end of source:  #65: expected a ";"
-..\USERLIB\param_base.c: 1 warning, 9 errors
+..\USERLIB\mp_protocol_hostif.c(139): warning:  #550-D: variable "hostif_type" was set but never used
+      u8 hostif_type;           
+..\USERLIB\mp_protocol_hostif.c: 5 warnings, 0 errors
 compiling Protocol.c...
-..\PROTOCAL\protocol.h(71): error:  #20: identifier "ProtocolStruct" is undefined
-        ProtocolStruct  ProBuffer;              //»º????
-..\PROTOCAL\protocol.h(107): warning:  #1295-D: Deprecated declaration tls_protocol_rebuild - give arg types
-  void tls_protocol_rebuild();
-..\PROTOCAL\protocol.h(109): warning:  #231-D: declaration is not visible outside of function
-  int tls_protomd_parse(struct tls_atcmd_token_t *tok, char *buf, u32 len);
-..\PROTOCAL\protocol.h(111): warning:  #231-D: declaration is not visible outside of function
-  int tls_protocmd_exec(struct tls_atcmd_token_t *tok,char *res_rsp, u32 *res_len);
-..\PROTOCAL\Protocol.c(3): error:  #5: cannot open source input file "procotol_base.h": No such file or directory
-  #include "procotol_base.h"    
-..\PROTOCAL\Protocol.c: 3 warnings, 2 errors
-compiling ProtocolBase.c...
-..\PROTOCAL\ProtocolBase.c(7): error:  #65: expected a ";"
-  int Ariber_PasswordConfirm(struct tls_protocmd_token_t *tok,
-..\PROTOCAL\ProtocolBase.c(97): warning: At end of source:  #12-D: parsing restarts here after previous syntax error
-..\PROTOCAL\ProtocolBase.c: 1 warning, 1 error
-compiling CardLibrary.c...
-..\CARD\CardLibrary.c(5): error:  #5: cannot open source input file "globe.h": No such file or directory
-  #include "globe.h"
-..\CARD\CardLibrary.c: 0 warnings, 1 error
-compiling CardPostProtocol.c...
-..\CARD\CardPostProtocol.h(8): error:  #5: cannot open source input file "system.h": No such file or directory
-  #include "system.h"
-..\CARD\CardPostProtocol.c: 0 warnings, 1 error
-compiling Keynum.c...
-..\CARD\Keynum.h(8): error:  #5: cannot open source input file "system.h": No such file or directory
-  #include "system.h"
-..\CARD\Keynum.c: 0 warnings, 1 error
-compiling Password.c...
-..\CARD\Password.h(8): error:  #5: cannot open source input file "config.h": No such file or directory
-  #include "config.h"
-..\CARD\Password.c: 0 warnings, 1 error
-compiling ReadCard.c...
-..\CARD\readcard.h(8): error:  #5: cannot open source input file "system.h": No such file or directory
-  #include "system.h"
-..\CARD\ReadCard.c: 0 warnings, 1 error
-compiling Wiegand.c...
-..\CARD\Wiegand.c(8): error:  #20: identifier "inline" is undefined
-  static inline u8 get_bit(u8 *data, u8 idx)
-..\CARD\Wiegand.c(8): error:  #101: "u8" has already been declared in the current scope
-  static inline u8 get_bit(u8 *data, u8 idx)
-..\CARD\Wiegand.c(8): error:  #65: expected a ";"
-  static inline u8 get_bit(u8 *data, u8 idx)
-..\CARD\Wiegand.c(66): warning:  #12-D: parsing restarts here after previous syntax error
-        return 
-RUE;    
-..\CARD\Wiegand.c(67): error:  #169: expected a declaration
+..\PROTOCAL\Protocol.c(30): warning:  #223-D: function "DateTime_Trans" declared implicitly
+                DateTime_Trans(res_resp,&DataTime);                     
+..\PROTOCAL\Protocol.c(101): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "u8 *"
+        u16ToAsc(dev_addr,temp2);       
+..\PROTOCAL\Protocol.c(117): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "u8 *"
+        u32ToAsc(info->Uer_ID,temp3);                           
+..\PROTOCAL\Protocol.c(93): warning:  #177-D: variable "buflen" was declared but never referenced
+        u32 buflen;
+..\PROTOCAL\Protocol.c(492): warning:  #177-D: variable "lchksum" was declared but never referenced
+        u8 lchksum,i=0,j=0,tmp,tmp1,tmp2;       
+..\PROTOCAL\Protocol.c(492): warning:  #177-D: variable "tmp" was declared but never referenced
+        u8 lchksum,i=0,j=0,tmp,tmp1,tmp2;       
+..\PROTOCAL\Protocol.c(492): warning:  #177-D: variable "tmp1" was declared but never referenced
+        u8 lchksum,i=0,j=0,tmp,tmp1,tmp2;       
+..\PROTOCAL\Protocol.c(492): warning:  #177-D: variable "tmp2" was declared but never referenced
+        u8 lchksum,i=0,j=0,tmp,tmp1,tmp2;       
+..\PROTOCAL\Protocol.c(493): warning:  #177-D: variable "buf_start" was declared but never referenced
+      char *buf_start = buf;    
+..\PROTOCAL\Protocol.c(678): warning:  #940-D: missing return statement at end of non-void function "tls_protocol_rebuild"
   }
-..\CARD\Wiegand.c(121): warning:  #12-D: parsing restarts here after previous syntax error
-                        return; 
-..\CARD\Wiegand.c(123): error:  #169: expected a declaration
-                case 3: /* Inter bit */
-..\CARD\Wiegand.c(127): error:  #169: expected a declaration
-                        return;
-..\CARD\Wiegand.c(129): error:  #169: expected a declaration
-        }
-..\CARD\Wiegand.c(178): warning: At end of source:  #12-D: parsing restarts here after previous syntax error
-..\CARD\Wiegand.c: 3 warnings, 7 errors
-"..\OBJ\LED.axf" - 30 Error(s), 16 Warning(s).
+..\PROTOCAL\Protocol.c: 10 warnings, 0 errors
+linking...
+Program Size: Code=28564 RO-data=632 RW-data=876 ZI-data=29548  
+FromELF: creating hex file...
+"..\OBJ\LED.axf" - 0 Error(s), 25 Warning(s).
 
 <h2>Collection of Component include folders:</h2>
   E:\doorgate\USER\RTE
   C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.0.0\Device\Include
 
 <h2>Collection of Component Files used:</h2>
-Target not created.
-Build Time Elapsed:  00:00:10
+Build Time Elapsed:  00:00:06
 </pre>
 </body>
 </html>

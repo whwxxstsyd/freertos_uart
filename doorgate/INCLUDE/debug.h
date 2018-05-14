@@ -29,6 +29,7 @@ enum DEBUG_LEVEL
 
 static char debug_str[LEVEL_MAX][20] =
 {
+	"",	
 	"error",
 	"warn",
 	"info",
@@ -126,7 +127,7 @@ static char *get_filename(const char *dir)
 #define	LOG_INFO(arg...)		LOG_OUT(LEVEL_INFO, ##arg)
 #define	LOG_WARN(arg...)		LOG_OUT(LEVEL_WARN, ##arg)
 #define	LOG_ERROR(arg...)		LOG_OUT(LEVEL_ERROR, ##arg)
-#define	LOG_STATUS(str)			LOG_INFO("status:\t%s\n", str);
+#define	LOG_STATUS(str)		LOG_INFO("status:\t%s\n", str);
 #endif	/* end LINUX */
 
 #ifdef	__cplusplus

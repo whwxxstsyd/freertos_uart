@@ -1,4 +1,5 @@
 ..\obj\param_base.o: ..\USERLIB\param_base.c
+..\obj\param_base.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 ..\obj\param_base.o: ..\USERLIB\param_base.h
 ..\obj\param_base.o: ..\SYSTEM\sys\sys.h
 ..\obj\param_base.o: ..\USER\stm32f10x.h
@@ -33,5 +34,4 @@
 ..\obj\param_base.o: ..\INCLUDE\common.h
 ..\obj\param_base.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 ..\obj\param_base.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
-..\obj\param_base.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 ..\obj\param_base.o: ..\INCLUDE\param.h

@@ -5,13 +5,12 @@
 extern "C" {
 #endif
 
-#include "system.h"
-#include "globe.h"
+#include "sys.h"
 	
 #if ReadCard_Open
 
 #define ReadCardNum		4
-typedef __packed struct
+typedef struct	
 {
   IDCardStruct 	OldIDCard;				//Ë¢¿¨¿¨ºÅ;
   

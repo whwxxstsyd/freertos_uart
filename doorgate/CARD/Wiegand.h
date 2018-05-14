@@ -48,6 +48,8 @@ typedef struct WIEGAND_PARAM_t
 	u8 bits[WIEGAND_BYTE_NUM];//真实数据		
 	u8 num_bits;	
 	
+	u8 data_pins;	
+	
 }WIEGAND_PARAM;	
 
 	

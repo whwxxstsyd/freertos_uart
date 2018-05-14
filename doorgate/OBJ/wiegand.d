@@ -1,4 +1,5 @@
 ..\obj\wiegand.o: ..\CARD\Wiegand.c
+..\obj\wiegand.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 ..\obj\wiegand.o: ..\INCLUDE\param.h
 ..\obj\wiegand.o: ..\SYSTEM\sys\sys.h
 ..\obj\wiegand.o: ..\USER\stm32f10x.h

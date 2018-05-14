@@ -29,9 +29,56 @@ int tls_hostif_init(void)
     hif= &g_hostif;
     memset(hif, 0, sizeof(struct tls_hostif));
 
+	dl_list_init(&hif->tx_msg_list);
+	dl_list_init(&hif->tx_event_msg_list);
 
-	return TRUE;
+    for (i = 0; i < HOSTIF_TX_MSG_NUM; i++) 
+	{
+        tx_msg = &g_hostif_tx_msg[i];
+        dl_list_add_tail(&hif->tx_msg_list, &tx_msg->list); 
+    }
+
+    for (i = 0; i < HOSTIF_TX_EVENT_MSG_NUM; i++) 
+	{
+        tx_msg = &g_hostif_tx_event_msg[i];	
+        dl_list_add_tail(&hif->tx_event_msg_list, &tx_msg->list);
+    }
+
+	err = tls_os_sem_create(&hif->uart_atcmd_sem, 0);
+    if (err)
+        return err;
+
+	err = tls_os_timer_create(&hif->tx_timer,
+					            tls_hostif_tx_timeout,
+					            hif,
+					            60*HZ,  /* 60 seconds */
+					            true,
+					            NULL);
+
+    if (!err)		
+        tls_os_timer_start(hif->tx_timer); 
+
+
+	return err;	
 }
+
+
+void tls_hostif_tx_timeout(void *ptmr, void *parg)
+{
+    struct tls_hostif *hif = (struct tls_hostif *)parg;
+
+	if (hif->hostif_mode == HOSTIF_MODE_UART0) 
+	{
+        if(hif->uart_send_tx_msg_callback != NULL)
+            hif->uart_send_tx_msg_callback(HOSTIF_MODE_UART0, NULL, FALSE);
+    } 
+	else if (hif->hostif_mode == HOSTIF_MODE_UART1) 	
+    {
+        if(hif->uart_send_tx_msg_callback != NULL)	
+            hif->uart_send_tx_msg_callback(HOSTIF_MODE_UART1, NULL, FALSE);
+    }
+}
+
 
 
 
@@ -85,7 +132,7 @@ int tls_hostif_process_cmdrsp(u8 hostif_type, char *cmdrsp, u32 cmdrsp_size)
 {
     struct tls_hostif_tx_msg *tx_msg;
     struct tls_hostif *hif = tls_get_hostif();
-    	
+    		
     if (cmdrsp == NULL || cmdrsp_size == 0)
         return -1;
 
@@ -101,7 +148,7 @@ int tls_hostif_process_cmdrsp(u8 hostif_type, char *cmdrsp, u32 cmdrsp_size)
             tx_msg->u.msg_cmdrsp.buf = cmdrsp;
             tx_msg->type = HOSTIF_TX_MSG_TYPE_CMDRSP;	
             tx_msg->u.msg_cmdrsp.buflen = cmdrsp_size;
-
+			
             if(hif->uart_send_tx_msg_callback != NULL)
                 hif->uart_send_tx_msg_callback(hostif_type, tx_msg, FALSE);
             break;
@@ -127,11 +174,11 @@ int tls_hostif_process_cmdrsp(u8 hostif_type, char *cmdrsp, u32 cmdrsp_size)
 
 
 
-#define CMD_RSP_BUF_SIZE	128 
+#define CMD_RSP_BUF_SIZE	64	
 
-int tls_hostif_cmd_handler(u8 hostif_cmd_type, char *buf, u32 length)
-{		
-    char *cmdrsp_buf;
+int tls_hostif_cmd_handler(u8 hostif_cmd_type, char *buf, u32 *len)
+{			
+    char *cmdrsp_buf;	
     u32 cmdrsp_size;
     struct tls_protocmd_token_t protocmd_tok;
     int err;	
@@ -141,7 +188,7 @@ int tls_hostif_cmd_handler(u8 hostif_cmd_type, char *buf, u32 length)
     cmdrsp_size = CMD_RSP_BUF_SIZE;
 
     switch (hostif_cmd_type) 
-	{
+	{	
         case HOSTIF_UART1_CMD:
         case HOSTIF_UART0_CMD:	
             if (hostif_cmd_type == HOSTIF_UART1_CMD)
@@ -151,27 +198,32 @@ int tls_hostif_cmd_handler(u8 hostif_cmd_type, char *buf, u32 length)
 			
             cmdrsp_buf = tls_mem_alloc(CMD_RSP_BUF_SIZE);
 				
-            if (!cmdrsp_buf)		
+            if (!cmdrsp_buf)	
+            {	
+            	LOG_ERROR("cmdrsp_buf alloc failed\n");			
                 return -1;	
+			}
 				
             memset(&protocmd_tok, 0, sizeof(struct tls_protocmd_token_t));
-			
-            err = tls_protocmd_parse(&protocmd_tok, buf, length);
+				
+            err = tls_protocmd_parse(&protocmd_tok, buf, len);	
 
             if (err == RTN_CMDCHK_ERR) //校验错误
 			{	
-				cmdrsp_buf = ;
-                cmdrsp_size = ;
+				LOG_ERROR("cmd check sum error\n");		
+				//cmdrsp_buf = ;	
+                //cmdrsp_size = ;
             } 	
 			else if(err == RTN_VER_ERR)
-			{
-				cmdrsp_buf = ;
-				cmdrsp_size = ;
+			{	
+				LOG_ERROR("return version err\n");		
+				//cmdrsp_buf = ;
+				//cmdrsp_size = ;	
 			}
 			else 
-			{
+			{			
                 cmdrsp_size = CMD_RSP_BUF_SIZE;
-
+				
 				//执行命令,发送回复
                 err = tls_protocmd_exec(&protocmd_tok, cmdrsp_buf, &cmdrsp_size);
             }
@@ -183,8 +235,8 @@ int tls_hostif_cmd_handler(u8 hostif_cmd_type, char *buf, u32 length)
             //break;
     }
 
-	//将需要发送的信息重新组装
-	tls_protocol_rebuild(&protocmd_tok,cmdrsp_buf,cmdrsp_size);	
+	//将需要发送的信息重新组装	
+	//tls_protocol_rebuild(&protocmd_tok,cmdrsp_buf,&cmdrsp_size);		
 	
 	//发送回复信息
     err = tls_hostif_process_cmdrsp(hostif_type, cmdrsp_buf, cmdrsp_size);

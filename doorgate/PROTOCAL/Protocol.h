@@ -8,8 +8,8 @@ extern "C" {
 #include "sys.h"
 #include "mp_protocol_hostif.h"
 
-#define Makepower_Protocol_Open 	1
-#define Post_Protocol_Open			0		
+#define Makepower_Protocol_Open 	0		
+#define Post_Protocol_Open			1					
 
 #define   POST_VER		   	0x10 //协议版本	  
 
@@ -27,7 +27,8 @@ extern "C" {
 
 
 //0x4A命令的type
-#define CMD_0x4A_GET_DATE 		0xE0	
+#define CMD_0x4A_GET_DATE 			0xE0		
+#define CMD_0x4A_GET_DOOR_STA 		0xE8		
 
 
 //0x4B命令的type
@@ -95,19 +96,19 @@ typedef int (* protocmd_proc)(struct tls_protocmd_token_t *tok, char *res_resp, 
 
 struct tls_protocmd_t {	
     char name;
-    u8   flag;
+    u8   flag;	
     int (* proc_func)(struct tls_protocmd_token_t *tok, char *res_resp, u32 *res_len);
 };
 
 
 
+		
 
+int tls_protocol_rebuild(struct tls_protocmd_token_t *tok,u8 *buff,u32 *res_len);	
 
-void tls_protocol_rebuild();
+int tls_protocmd_parse(struct tls_protocmd_token_t *tok, char *buf,u32 *res_len);	
 
-int tls_protomd_parse(struct tls_atcmd_token_t *tok, char *buf, u32 len);
-
-int tls_protocmd_exec(struct tls_atcmd_token_t *tok,char *res_rsp, u32 *res_len);
+int tls_protocmd_exec(struct tls_protocmd_token_t *tok,char *res_rsp, u32 *res_len);
 
 
 

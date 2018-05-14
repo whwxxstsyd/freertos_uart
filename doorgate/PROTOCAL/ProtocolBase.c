@@ -1,7 +1,8 @@
 #include "ProtocolBase.h"
+#include "param.h"	
 #include "debug.h"	
 
-u8 password_default[] = {1,2,3,4,5}	
+u8 password_default[] = {1,2,3,4,5};
 
 //ÃÅ½û°¬±´¶ûÐ­Òé
 int Ariber_PasswordConfirm(struct tls_protocmd_token_t *tok,
@@ -17,16 +18,17 @@ int Ariber_PasswordConfirm(struct tls_protocmd_token_t *tok,
 
 	if(memcmp(password,password_default,sizeof(password)) == 0)	
 	{	
-		return 1;
+		return TRUE;
 	}
 
-	return 0;
+	return FALSE;		
 }
 
 
 int Ariber_CancelConfirm(void)
 {
 	LOG_INFO("Ariber_CancelConfirm\n");	
+	return TRUE;
 }
 
 
@@ -34,8 +36,8 @@ int Ariber_ModifyPassword(struct tls_protocmd_token_t *tok,
         char *res_resp, u32 *res_len)
 {
 	u8 password[6];
-	u8 i,sum;	
-
+	u8 i,sum;		
+	
 	for(i=0;i<6;i++)
 	{		
 		password[i] = tok->arg[2+i];
@@ -48,48 +50,47 @@ int Ariber_ModifyPassword(struct tls_protocmd_token_t *tok,
 	}
 	if(sum != password[i])
 	{
-		
-		return;
+			
+		return FALSE;
 	}
 
-	
+	return TRUE;
 }
 
 
-int Ariber_GetSysTime()
+int Ariber_GetSysTime(void)
 {
-	
+	return TRUE;
 }
 
 
-int Ariber_SetSysTime()
+int Ariber_SetSysTime(void)
 {
-	
+	return TRUE;
 }
 
 
-int Ariber_SetVoiceMark()
+int Ariber_SetVoiceMark(void)
 {
-	
+	return TRUE;
 }
 
-int Ariber_PlayVoice()
+int Ariber_PlayVoice(void)
 {
-
-
-}
-
-
-int Ariber_GetVoiceMark()
-{
-	
+	return TRUE;
 }
 
 
-
-int Ariber_GetFlashID()
+int Ariber_GetVoiceMark(void)
 {
-	
+	return TRUE;
+}
+
+
+
+int Ariber_GetFlashID(void)
+{
+	return TRUE;		
 }
 
 

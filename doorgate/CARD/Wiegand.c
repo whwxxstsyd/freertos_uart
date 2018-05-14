@@ -1,18 +1,21 @@
+#include <string.h> 
 #include "param.h"	
 #include "Wiegand.h"		
 #include "mp_card_task.h"	
 
+
+
 WIEGAND_PARAM Wiegand_Buf[CARD_DEVICE_NUM];//伟根缓冲区
 		
 
-static inline u8 get_bit(u8 *data, u8 idx)
+static u8 get_bit(u8 *data, u8 idx)
 {
 	return (data[idx >> 3] >> (idx & 7)) & 1;
 }
 
 
-static inline void set_bit(u8 *data, u8 idx, u8 val)
-{	
+static void set_bit(u8 *data, u8 idx, u8 val)
+{		
 	if (val)	
 		data[idx >> 3] |= 1 << (idx & 7);
 	else
@@ -70,30 +73,30 @@ static s8 wiegand_reader_process_66bits_code(WIEGAND_PARAM *wr)
 
 static void wiegand_reader_on_word_timeout(void *context)
 {
-	struct WIEGAND_PARAM *wr = context;
-	int err = FALSE;	
-
-	switch(wr->num_bits)
+	WIEGAND_PARAM *wr = context;	
+	int err = FALSE;		
+		
+	switch(wr->num_bits)	
 	{	
 		case 26:
 			break;
-			
-		case 34:	
-			err = wiegand_reader_process_66bits_code(wr);
+				
+		case 66:				
+			//err = wiegand_reader_process_66bits_code(wr);
 			break;
 
 		default:	
 			break;
 	}	
 	
-	wr->num_bits = 0;
+	//wr->num_bits = 0;	
 	
-	if (!err)		
+	//if (!err)		
 		//wiegand_reader_event(wr, WIEGAND_READER_ERROR, err);
 }
 
 
-
+	
 
 //中断里面调用	
 static void wiegand_reader_data_pin_changed(WIEGAND_PARAM *pWiegandParam,u8 pin,u8 state)			
@@ -101,7 +104,7 @@ static void wiegand_reader_data_pin_changed(WIEGAND_PARAM *pWiegandParam,u8 pin,
 	set_bit(&pWiegandParam->data_pins, pin, state);
 	
 	switch (pWiegandParam->data_pins & 3)
-	{
+	{	
 		case 0://读卡器设备错误	
 			pWiegandParam->num_bits = 0;		
 			//关闭定时器

@@ -52,8 +52,8 @@ static void tls_idle_task(void *data)
 {
 	while(1)
 	{
-		LOG_INFO("Here is the idle_task\n");	
-		delay_ms(1000);		 	
+		//LOG_INFO("Here is the idle_task\n");	
+		delay_ms(5000);		 		
 	}
 }
 
@@ -61,9 +61,9 @@ static void tls_idle_task(void *data)
 static void tls_busy_task(void *data)
 {	
 	while(1)
-	{	
-		LOG_INFO("Here is the busy_task\n");	
-		delay_ms(1000);					
+	{		
+		//LOG_INFO("Here is the busy_task\n");	
+		delay_ms(3000);						
 	}		
 }
 

@@ -1,6 +1,7 @@
----- STR_32_LEN Matches (5 in 2 files) ----
-Common.h (e:\doorgate\include):    STR_32_LEN = 32,
-Param_base.h (e:\doorgate\userlib):	u8	SoftWare_Ver[STR_32_LEN];			
-Param_base.h (e:\doorgate\userlib):	u8  HardWare_Ver[STR_32_LEN];       		
-Param_base.h (e:\doorgate\userlib):	u8	Company_Name[STR_32_LEN];					
-Param_base.h (e:\doorgate\userlib):	u8	Device_Name[STR_32_LEN];	
+---- dl_list_init Matches (6 in 3 files) ----
+List_base.h (e:\doorgate\include):static __inline void dl_list_init(struct dl_list *list)
+Mp_mem.c (e:\doorgate\mem):        dl_list_init(&memory_used_list);
+Mp_mem.c (e:\doorgate\mem):        dl_list_init(&memory_free_list);
+Mp_mem.c (e:\doorgate\mem):        dl_list_init(&memory_used_list);
+Mp_mem.c (e:\doorgate\mem):        dl_list_init(&memory_free_list);
+Mp_uart_task.c (e:\doorgate\task):    dl_list_init(&uart->tx_msg_pending_list);			

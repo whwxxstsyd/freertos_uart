@@ -5,7 +5,7 @@
 extern "C" {
 #endif
 
-#include "system.h"
+#include "sys.h"	
 	
 #if ReadCard_Open
   

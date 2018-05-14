@@ -10,8 +10,8 @@
 #define HOSTIF_MODE_UART0   	0
 #define HOSTIF_MODE_UART1   	1	
 
-#define HOSTIF_UART0_CMD   	1
-#define HOSTIF_UART1_CMD   	0	
+#define HOSTIF_UART0_CMD   	0
+#define HOSTIF_UART1_CMD   	1		
 
 
 /* ri data format type definition */
@@ -69,6 +69,7 @@ struct tls_protocmd_token_t {
 typedef void (*hostif_send_tx_msg_callback)(u8 hostif_mode, struct tls_hostif_tx_msg *tx_msg, bool is_event);
 
 struct tls_hostif {
+	tls_os_timer_t          tx_timer;
 	struct dl_list          tx_msg_list;	
 	struct dl_list          tx_event_msg_list;
 
@@ -83,8 +84,8 @@ struct tls_hostif {
 struct tls_hostif *tls_get_hostif(void);
 
 int tls_hostif_init(void);	
-
-int tls_hostif_cmd_handler(u8 hostif_cmd_type, char *buf, u32 length);
+	
+int tls_hostif_cmd_handler(u8 hostif_cmd_type, char *buf, u32 *len);
 
 
 #endif
