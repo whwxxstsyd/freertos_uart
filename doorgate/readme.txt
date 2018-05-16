@@ -58,6 +58,23 @@ uart_rx();//串口接收任务
 
 
 
+tls_uart_init
+	hif->uart_send_tx_msg_callback = uart_send_tx_msg;	
+		//在这里将数据填充进列表，其实就相当于，将tx_event_msg_list内的数据复制给tx_msg_pending_list，再进行发送
+		dl_list_add_tail(&uart_st[0].tx_msg_pending_list, &tx_msg->list);
+		tls_os_mailbox_send(uart_st[0].tx_mailbox, (void *)MBOX_MSG_UART_TX);//发送信号量到tls_uart_x_tx_task()=>uart_tx()=>dl_list_first()将数据取出并发送
+	
+
+tx_msg_pending_list表示等待发送的数据列表由&tx_msg->list数据传入
+
+uart_send_tx_msg_callback在以下函数中被调用	
+1.tls_hostif_atcmd_loopback(将输入的数据再次显示在串口上)		NO
+2.tls_hostif_process_cmdrsp(将任务执行完毕的回复信息输出)		YES
+	tx_msg = tls_hostif_get_tx_event_msg(hif);//tx_msg由tls_hostif_get_tx_event_msg()获得，在传入下方的函数中
+	hif->uart_send_tx_msg_callback(hostif_type, tx_msg);	
+3.tls_hostif_send_event(用于特殊事件发生的时候传输)				NO
+4.tls_hostif_tx_timeout(定时器中定时返回)						NO	
+5.tls_hostif_recv_data(在原版的SDK中用于网络传输，不适用)		NO
 
 
 

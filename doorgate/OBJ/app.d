@@ -50,9 +50,9 @@
 ..\obj\app.o: ..\FreeRTOS\include\timers.h
 ..\obj\app.o: ..\INCLUDE\temp.h
 ..\obj\app.o: ..\INCLUDE\list_base.h
+..\obj\app.o: ..\USERLIB\mp_protocol_hostif.h
 ..\obj\app.o: ..\TASK\mp_idle_task.h
 ..\obj\app.o: ..\TASK\mp_memory_task.h
 ..\obj\app.o: ..\TASK\mp_door_task.h
 ..\obj\app.o: ..\TASK\mp_card_task.h
-..\obj\app.o: ..\USERLIB\mp_protocol_hostif.h
 ..\obj\app.o: app.h

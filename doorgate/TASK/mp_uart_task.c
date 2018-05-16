@@ -25,8 +25,7 @@
 #include "debug.h"
 #include "list_base.h"					
 #include "mp_uart_task.h"	
-#include "mp_protocol_hostif.h"		
-	
+
 	
 #define      UART0_TX_TASK_STK_SIZE          256 
 #define      UART0_RX_TASK_STK_SIZE          300 
@@ -58,34 +57,70 @@ static void tls_uart_1_tx_task(void *data);
 static void tls_uart_2_rx_task(void *data);
 static void tls_uart_2_tx_task(void *data);
 
-
-
-
-static void uart_send_tx_msg(u8 hostif_mode, struct tls_hostif_tx_msg *tx_msg, bool is_event)
-{
+static void uart_send_tx_msg(u8 hostif_mode, struct tls_hostif_tx_msg *tx_msg)	
+{	
+	u32 cpu_sr;		
 	
+	switch (hostif_mode) 
+	{	
+		case HOSTIF_MODE_UART0:
+			if (uart_st[0].uart_port == NULL)
+				return;	
+			
+			if(tx_msg != NULL)
+			{
+				cpu_sr = tls_os_set_critical();
+				dl_list_add_tail(&uart_st[0].tx_msg_pending_list, &tx_msg->list);
+				tls_os_release_critical(cpu_sr);
+			}	
+				
+			tls_os_mailbox_send(uart_st[0].tx_mailbox, (void *)MBOX_MSG_UART_TX); 
+			break;
+			
+		case HOSTIF_MODE_UART1:
+			if (uart_st[1].uart_port == NULL)
+				return;
+			if(tx_msg != NULL)
+			{
+				cpu_sr = tls_os_set_critical();
+				dl_list_add_tail(&uart_st[1].tx_msg_pending_list, &tx_msg->list);
+				tls_os_release_critical(cpu_sr);
+			}
+			tls_os_mailbox_send(uart_st[1].tx_mailbox, (void *)MBOX_MSG_UART_TX); 
+			break;
+			
+		default:
+			break;
+	}
 }
+
 
 	
 void tls_uart_init(void)
-{	
+{		
     struct tls_uart *uart;	
-    struct tls_hostif *hif = tls_get_hostif();
-    struct tls_param_uart uart_cfg;	
+    struct tls_hostif *hif = tls_get_hostif();	
 		
     memset(uart_st, 0, 2 * sizeof(struct tls_uart));
 	
-    /* setting uart */			
+    /* setting uart */				
     if(WM_SUCCESS  != tls_uart_port_init(COM1, NULL))
-		return;
+		return;	
 	
-#if 1	
+#if 1
 	/*start the uart task*/		
     uart = tls_uart_open(COM1); 	
     if(NULL == uart)	
-		return;		
-		
+    {	
+		return; 	
+	}
+			
     hif->uart_send_tx_msg_callback = uart_send_tx_msg;	
+	if(hif->uart_send_tx_msg_callback == NULL)
+	{	
+		LOG_INFO("uart_send_tx_msg init failed \n");		
+		return;
+	}
 
 #endif	 
 
@@ -119,6 +154,7 @@ struct tls_uart *tls_uart_open(u32 uart_no)
     } 
 	else
 	{	
+		
         return NULL;
 	}
 	
@@ -126,13 +162,12 @@ struct tls_uart *tls_uart_open(u32 uart_no)
 		
     if (uart_no == COM1) 
 	{	
-	
-#if 0	
-		xTaskCreate(tls_uart_1_tx_task, 
+#if 1	
+		xTaskCreate(tls_uart_1_tx_task, 	
 					UART0_TX_TASK_NAME, 
 					UART0_TX_TASK_STACKSIZE, 
 					uart, 	
-					UART0_TX_TASK_PRIO, 
+					UART0_TX_TASK_PRIO, 	
 					NULL);	
 #endif
 		
@@ -237,10 +272,10 @@ static void tls_uart_1_rx_task(void *data)
     for ( ;; )	
 	{												
         err = tls_os_mailbox_receive(uart->rx_mailbox, (void *)msg, 0) ;			
-		
-        if (!err) 
+		 
+        if (err == 0) 
 		{	
-			LOG_INFO("!!!!!!Uart1 Recv Data!!!!!!\n");	
+			LOG_INFO("!!!!!!Uart1 Rx Data!!!!!!\n");		
             uart_rx(uart);									
         } 	
     }
@@ -253,14 +288,15 @@ static void tls_uart_1_tx_task(void *data)
     u32 *msg = NULL;
     int err;		
 
-	LOG_INFO("!!!tls_uart_1_tx_task start!!!\n");
-	
+	LOG_INFO("!!!!!!task uart tx create succeed!!!!!!\n");	
+		
     for ( ;; ) 	
 	{					
         err = tls_os_mailbox_receive(uart->tx_mailbox, (void *)msg, 0) ;
         if (err == 0) 
 		{		
-            //uart_tx(uart);			 
+			LOG_INFO("!!!!!!Uart1 Tx Data!!!!!!\n");	
+            uart_tx(uart);				 
         } 
     }
 }
@@ -480,23 +516,45 @@ void uart_tx(struct tls_uart *uart)
 	struct tls_hostif_tx_msg *tx_msg;
 	u32 cpu_sr;
 	int write_cnt; 
-		
+
 	cpu_sr = tls_os_set_critical();
-		
-	while (!dl_list_empty(&uart->tx_msg_pending_list))
-	{	
-        tx_msg = dl_list_first(&uart->tx_msg_pending_list,
-        struct tls_hostif_tx_msg, list);
-		
+	while (!dl_list_empty(&uart->tx_msg_pending_list)) 
+	{
+		tx_msg = dl_list_first(&uart->tx_msg_pending_list,
+				struct tls_hostif_tx_msg, list);
 		tls_os_release_critical(cpu_sr);
 
 		switch (tx_msg->type) 
-		{
-			
-		}
+		{	
+			case HOSTIF_TX_MSG_TYPE_EVENT:
+			case HOSTIF_TX_MSG_TYPE_CMDRSP:
+				/* copy data to uart tx ring buffer */
+				write_cnt = tls_uart_write(uart->uart_port, 
+						tx_msg->u.msg_cmdrsp.buf + tx_msg->offset, 
+						tx_msg->u.msg_cmdrsp.buflen);
+				tx_msg->offset += write_cnt;		
+				
+				LOG_INFO("write_cnt = %d,offset = %d,buflen = %d\n",write_cnt,tx_msg->offset,tx_msg->u.msg_cmdrsp.buflen);
+				
+				if (tx_msg->offset >= tx_msg->u.msg_cmdrsp.buflen) 	
+				{		
+					tls_mem_free(tx_msg->u.msg_cmdrsp.buf);
+					tx_msg->offset = 0;	
+					cpu_sr = tls_os_set_critical();
+					dl_list_del(&tx_msg->list);
+					dl_list_add_tail(&hif->tx_event_msg_list, 
+							&tx_msg->list);
+					tls_os_release_critical(cpu_sr);
+				}
 
+				tls_uart_tx_chars_start(uart->uart_port);
+				break;
+			default:
+				break;
+		}
 		cpu_sr = tls_os_set_critical();
 	}
 	tls_os_release_critical(cpu_sr);
 }
+
 

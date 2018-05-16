@@ -120,17 +120,16 @@ void tls_uart_tx_chars_start(struct tls_uart_port *port)
     /* send some chars */
     tx_count = 32;
     cpu_sr = tls_os_set_critical();
-    while (!uart_circ_empty(xmit) && tx_count-- > 0) 
-	{	
-        /*check if fifo is full*/	
-		
-				
+
+    while (!uart_circ_empty(xmit)) 	
+	{			
 		/*send the data*/
-		Uart_SendByte(xmit->buf[xmit->tail]);		
+		Uart_SendByte(xmit->buf[xmit->tail]);			
 		
         xmit->tail = (xmit->tail + 1) & (TLS_UART_TX_BUF_SIZE - 1);
-        port->icount.tx++;
-    }
+    }	
+
+	
     tls_os_release_critical(cpu_sr);
     return;
 }
@@ -227,7 +226,7 @@ int tls_uart_port_init(int uart_no, tls_uart_options_t *opts)
 
 	if(NULL == opts)
 	{	
-		opt.baudrate = UART_BAUDRATE_B115200;	
+		opt.baudrate = UART_BAUDRATE_B9600;		
 		opt.charlength = USART_WordLength_8b;	
 		opt.flow_ctrl = USART_HardwareFlowControl_None;
 		opt.paritytype = USART_Parity_No;	

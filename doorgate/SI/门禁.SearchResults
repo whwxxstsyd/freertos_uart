@@ -1,7 +1,6 @@
----- dl_list_init Matches (6 in 3 files) ----
-List_base.h (e:\doorgate\include):static __inline void dl_list_init(struct dl_list *list)
-Mp_mem.c (e:\doorgate\mem):        dl_list_init(&memory_used_list);
-Mp_mem.c (e:\doorgate\mem):        dl_list_init(&memory_free_list);
-Mp_mem.c (e:\doorgate\mem):        dl_list_init(&memory_used_list);
-Mp_mem.c (e:\doorgate\mem):        dl_list_init(&memory_free_list);
-Mp_uart_task.c (e:\doorgate\task):    dl_list_init(&uart->tx_msg_pending_list);			
+---- cmdrsp Matches (5 in 1 files) ----
+Mp_protocol_hostif.c (e:\doorgate\userlib):int tls_hostif_process_cmdrsp(u8 hostif_type, char *cmdrsp, u32 cmdrsp_size)
+Mp_protocol_hostif.c (e:\doorgate\userlib):    if (cmdrsp == NULL || cmdrsp_size == 0)
+Mp_protocol_hostif.c (e:\doorgate\userlib):            tx_msg->u.msg_cmdrsp.buf = cmdrsp;
+Mp_protocol_hostif.c (e:\doorgate\userlib):			LOG_INFO("The cmdrsp is %s\n",tx_msg->u.msg_cmdrsp.buf);			
+Mp_protocol_hostif.c (e:\doorgate\userlib):            tx_msg->u.msg_cmdrsp.buf = cmdrsp;

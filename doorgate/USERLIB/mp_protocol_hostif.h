@@ -66,15 +66,14 @@ struct tls_protocmd_token_t {
 };	
 
 
-typedef void (*hostif_send_tx_msg_callback)(u8 hostif_mode, struct tls_hostif_tx_msg *tx_msg, bool is_event);
+typedef void (*hostif_send_tx_msg_callback)(u8 hostif_mode, struct tls_hostif_tx_msg *tx_msg);	
 
 struct tls_hostif {
 	tls_os_timer_t          tx_timer;
-	struct dl_list          tx_msg_list;	
-	struct dl_list          tx_event_msg_list;
+	struct dl_list          tx_msg_list;	//用于网络发送的消息(暂时不使用)
+	struct dl_list          tx_event_msg_list;//用于发送普通事件消息
 
 	hostif_send_tx_msg_callback uart_send_tx_msg_callback;
-	tls_os_sem_t            *uart_atcmd_sem;
 
 	/*  indicate use which port: SYS_HOSTIF_XXX */
 	u8 hostif_mode;		

@@ -170,7 +170,6 @@ typedef struct tls_uart_port {
     /** uart tx fifo trigger level */
     u32                         tx_fifofull;
 
-
     /** uart statistics information */
 	struct tls_uart_icount	    icount;			
 

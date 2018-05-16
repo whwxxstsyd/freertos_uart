@@ -50,6 +50,7 @@
 ..\obj\mp_protocol_hostif.o: ..\FreeRTOS\include\queue.h
 ..\obj\mp_protocol_hostif.o: ..\FreeRTOS\include\timers.h
 ..\obj\mp_protocol_hostif.o: ..\INCLUDE\temp.h
+..\obj\mp_protocol_hostif.o: ..\TASK\mp_uart_task.h
 ..\obj\mp_protocol_hostif.o: ..\MEM\mp_mem.h
 ..\obj\mp_protocol_hostif.o: ..\INCLUDE\debug.h
 ..\obj\mp_protocol_hostif.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h

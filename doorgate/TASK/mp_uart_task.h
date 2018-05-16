@@ -5,6 +5,7 @@
 
 #include "mp_osal_rtos.h"		
 #include "list_base.h"	
+#include "mp_protocol_hostif.h"			
 
 
 #define INS_SYNC_CHAR       0x01

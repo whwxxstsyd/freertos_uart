@@ -14,6 +14,9 @@
 #include "temp.h"		
 	
 
+#define HZ        (configTICK_RATE_HZ)
+
+
 #define tls_os_sem_t 		QueueHandle_t			
 #define tls_os_queue_t 	QueueHandle_t
 #define tls_os_mailbox_t 	xSemaphoreHandle	

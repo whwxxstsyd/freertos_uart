@@ -1,5 +1,5 @@
-#ifndef MP_MEMORY_TASK_H
-#define MP_MEMORY_TASK_H	
+#ifndef MP_CARD_TASK_H
+#define MP_CARD_TASK_H		
 #include "sys.h"	
 
 #define CARD_DEVICE_NUM	4	

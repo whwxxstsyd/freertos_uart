@@ -28,39 +28,33 @@ Project File Date:  05/12/2018
 *** Using Compiler 'V5.06 update 1 (build 61)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'FreeRTOS'
 compiling mp_uart_task.c...
-..\TASK\mp_uart_task.c(74): warning:  #177-D: variable "uart_cfg" was declared but never referenced
-      struct tls_param_uart uart_cfg;   
-..\TASK\mp_uart_task.c(100): warning:  #177-D: variable "stk" was declared but never referenced
+..\TASK\mp_uart_task.c(135): warning:  #177-D: variable "stk" was declared but never referenced
       char *stk;
-..\TASK\mp_uart_task.c(393): warning:  #177-D: variable "Version" was declared but never referenced
+..\TASK\mp_uart_task.c(429): warning:  #177-D: variable "Version" was declared but never referenced
         u8 Version,CID1,CID2;
-..\TASK\mp_uart_task.c(393): warning:  #177-D: variable "CID1" was declared but never referenced
+..\TASK\mp_uart_task.c(429): warning:  #177-D: variable "CID1" was declared but never referenced
         u8 Version,CID1,CID2;
-..\TASK\mp_uart_task.c(393): warning:  #177-D: variable "CID2" was declared but never referenced
+..\TASK\mp_uart_task.c(429): warning:  #177-D: variable "CID2" was declared but never referenced
         u8 Version,CID1,CID2;
-..\TASK\mp_uart_task.c(394): warning:  #177-D: variable "Addr" was declared but never referenced
+..\TASK\mp_uart_task.c(430): warning:  #177-D: variable "Addr" was declared but never referenced
         u16 Addr;       
-..\TASK\mp_uart_task.c(397): warning:  #177-D: variable "CNT" was declared but never referenced
+..\TASK\mp_uart_task.c(433): warning:  #177-D: variable "CNT" was declared but never referenced
         u8 CNT;
-..\TASK\mp_uart_task.c(482): warning:  #177-D: variable "write_cnt" was declared but never referenced
-        int write_cnt; 
-..\TASK\mp_uart_task.c(250): warning:  #177-D: function "tls_uart_1_tx_task" was declared but never referenced
-  static void tls_uart_1_tx_task(void *data)
-..\TASK\mp_uart_task.c(95): warning:  #177-D: variable "temp" was declared but never referenced
+..\TASK\mp_uart_task.c(130): warning:  #177-D: variable "temp" was declared but never referenced
   static xSemaphoreHandle temp; 
-..\TASK\mp_uart_task.c: 10 warnings, 0 errors
+..\TASK\mp_uart_task.c: 7 warnings, 0 errors
+compiling mp_uart.c...
+..\USERLIB\mp_uart.c(117): warning:  #550-D: variable "tx_count" was set but never used
+      int tx_count;
+..\USERLIB\mp_uart.c(206): warning:  #177-D: variable "ret" was declared but never referenced
+        int ret;
+..\USERLIB\mp_uart.c: 2 warnings, 0 errors
 compiling mp_protocol_hostif.c...
-..\USERLIB\mp_protocol_hostif.c(25): warning:  #177-D: variable "tx_msg" was declared but never referenced
-        struct tls_hostif_tx_msg *tx_msg;
-..\USERLIB\mp_protocol_hostif.c(26): warning:  #177-D: variable "i" was declared but never referenced
-        int i;
-..\USERLIB\mp_protocol_hostif.c(27): warning:  #177-D: variable "err" was declared but never referenced
-        int err;
-..\USERLIB\mp_protocol_hostif.c(138): warning:  #177-D: variable "i" was declared but never referenced
+..\USERLIB\mp_protocol_hostif.c(160): warning:  #177-D: variable "i" was declared but never referenced
       int i;            
-..\USERLIB\mp_protocol_hostif.c(139): warning:  #550-D: variable "hostif_type" was set but never used
-      u8 hostif_type;           
-..\USERLIB\mp_protocol_hostif.c: 5 warnings, 0 errors
+..\USERLIB\mp_protocol_hostif.c(16): warning:  #177-D: function "tls_hostif_tx_timeout" was declared but never referenced
+  static void tls_hostif_tx_timeout(void *parg);
+..\USERLIB\mp_protocol_hostif.c: 2 warnings, 0 errors
 compiling Protocol.c...
 ..\PROTOCAL\Protocol.c(30): warning:  #223-D: function "DateTime_Trans" declared implicitly
                 DateTime_Trans(res_resp,&DataTime);                     
@@ -70,30 +64,30 @@ compiling Protocol.c...
         u32ToAsc(info->Uer_ID,temp3);                           
 ..\PROTOCAL\Protocol.c(93): warning:  #177-D: variable "buflen" was declared but never referenced
         u32 buflen;
-..\PROTOCAL\Protocol.c(492): warning:  #177-D: variable "lchksum" was declared but never referenced
+..\PROTOCAL\Protocol.c(495): warning:  #177-D: variable "lchksum" was declared but never referenced
         u8 lchksum,i=0,j=0,tmp,tmp1,tmp2;       
-..\PROTOCAL\Protocol.c(492): warning:  #177-D: variable "tmp" was declared but never referenced
+..\PROTOCAL\Protocol.c(495): warning:  #177-D: variable "tmp" was declared but never referenced
         u8 lchksum,i=0,j=0,tmp,tmp1,tmp2;       
-..\PROTOCAL\Protocol.c(492): warning:  #177-D: variable "tmp1" was declared but never referenced
+..\PROTOCAL\Protocol.c(495): warning:  #177-D: variable "tmp1" was declared but never referenced
         u8 lchksum,i=0,j=0,tmp,tmp1,tmp2;       
-..\PROTOCAL\Protocol.c(492): warning:  #177-D: variable "tmp2" was declared but never referenced
+..\PROTOCAL\Protocol.c(495): warning:  #177-D: variable "tmp2" was declared but never referenced
         u8 lchksum,i=0,j=0,tmp,tmp1,tmp2;       
-..\PROTOCAL\Protocol.c(493): warning:  #177-D: variable "buf_start" was declared but never referenced
+..\PROTOCAL\Protocol.c(496): warning:  #177-D: variable "buf_start" was declared but never referenced
       char *buf_start = buf;    
-..\PROTOCAL\Protocol.c(678): warning:  #940-D: missing return statement at end of non-void function "tls_protocol_rebuild"
+..\PROTOCAL\Protocol.c(688): warning:  #940-D: missing return statement at end of non-void function "tls_protocol_rebuild"
   }
 ..\PROTOCAL\Protocol.c: 10 warnings, 0 errors
 linking...
-Program Size: Code=28564 RO-data=632 RW-data=876 ZI-data=29548  
+Program Size: Code=28868 RO-data=632 RW-data=876 ZI-data=29828  
 FromELF: creating hex file...
-"..\OBJ\LED.axf" - 0 Error(s), 25 Warning(s).
+"..\OBJ\LED.axf" - 0 Error(s), 21 Warning(s).
 
 <h2>Collection of Component include folders:</h2>
   E:\doorgate\USER\RTE
   C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.0.0\Device\Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:06
+Build Time Elapsed:  00:00:09
 </pre>
 </body>
 </html>

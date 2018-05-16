@@ -97,12 +97,12 @@ static int post_protocmd_get_version_proc(struct tls_protocmd_token_t *tok,
 	Device_Info_Get(info);
 	
 	dev_addr = info->Device_Addr[0];	
-
+	
 	u16ToAsc(dev_addr,temp2);	
 	for(i=0;i<sizeof(temp2);i++)
 	{	
 		*p++ = temp2[i];
-	}
+	}	
 	
 	MEMCPY(p, info->SoftWare_Ver, sizeof(info->SoftWare_Ver)-1);
 	p += sizeof(info->SoftWare_Ver)-1;
@@ -126,7 +126,7 @@ static int post_protocmd_get_version_proc(struct tls_protocmd_token_t *tok,
 	MEMCPY(p, SysCreatedTime, sizeof(SysCreatedTime));
 	p += sizeof(SysCreatedTime);			
 
-	*res_len = 100;
+	*res_len = 100;	
 
 	return TRUE;
 }
@@ -276,9 +276,12 @@ static int post_protocmd_get_sys_param_proc(struct tls_protocmd_token_t *tok,
 			break;
 
 		default:
-	
+		
 			break;
 	}
+	
+	
+	
 	return TRUE;
 }
 
@@ -411,7 +414,7 @@ static int mp_protocmd_mem_dev_proc(struct tls_protocmd_token_t *tok,
 
 
 
-static struct tls_protocmd_t  protocmd_tbl[] = {
+static struct tls_protocmd_t  protocmd_tbl[] = {			
 #if Post_Protocol_Open	
 	{ 0x4D, 0, post_protocmd_get_time_proc },				//获取时间
 	{ 0x4E, 0, post_protocmd_set_time_proc },				//设置时间
@@ -429,17 +432,17 @@ static struct tls_protocmd_t  protocmd_tbl[] = {
 	{ 0x4A, 0, post_protocmd_get_sys_param_proc },		//获取系统参数
 	{ 0x4B, 0, post_protocmd_set_guard_param_proc },		//设置门禁参数
 	{ 0x4C, 0, post_protocmd_get_guard_param_proc },		//获取门禁参数
-#endif 
+#endif 	
 		
 #if Makepower_Protocol_Open
-	{ 0x11, 0, mp_protocmd_get_device_info_proc },		//获取设备信息
+	{ 0x11, 0, mp_protocmd_get_device_info_proc },	//获取设备信息
 	{ 0xA1, 0, mp_protocmd_set_addr_proc },		//设置设备地址
 	{ 0x13, 0, mp_protocmd_get_time_proc },		//获取时间
 	{ 0xA3, 0, mp_protocmd_set_time_proc },		//设置时间
 	{ 0x37, 0, mp_protocmd_mem_dev_proc }, 		//存储测试
 #endif
 
-};	
+};		
 
 
 int protocmd_err_resp(char *buf, int err_code)
@@ -614,7 +617,14 @@ void fill_buff(u8 *buff,u8 *data,u8 len,u8 tear_flag)
 	
 }
 
-void tls_protocol_add_head()
+
+
+
+
+
+
+
+static void tls_protocol_add_head()	
 #if 0
 {
 	char *p = buff;//指向数据头部
@@ -656,12 +666,12 @@ void tls_protocol_add_head()
 
 
 
-void tls_protocol_add_tail()
+static void tls_protocol_add_tail()
 {	
 	
 }
 
-void tls_protocol_add_body()
+static void tls_protocol_add_body()
 {
 	
 }
@@ -751,9 +761,9 @@ void makepower_protocol_deal(void)
 
 
 //邮电协议
-void post__protocol_deal(void)
+void post_protocol_deal(void)
 {
-	
+		
 }
 
 
