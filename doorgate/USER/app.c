@@ -17,8 +17,6 @@ void app_init(void)
 	//串口数据交互(	底层)		
 	tls_uart_init();				
 
-	
-
 	//数据存储任务
 	tls_memory_init();				
 

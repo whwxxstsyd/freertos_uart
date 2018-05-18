@@ -27,67 +27,24 @@ Project File Date:  05/12/2018
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 1 (build 61)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'FreeRTOS'
-compiling mp_uart_task.c...
-..\TASK\mp_uart_task.c(135): warning:  #177-D: variable "stk" was declared but never referenced
-      char *stk;
-..\TASK\mp_uart_task.c(429): warning:  #177-D: variable "Version" was declared but never referenced
-        u8 Version,CID1,CID2;
-..\TASK\mp_uart_task.c(429): warning:  #177-D: variable "CID1" was declared but never referenced
-        u8 Version,CID1,CID2;
-..\TASK\mp_uart_task.c(429): warning:  #177-D: variable "CID2" was declared but never referenced
-        u8 Version,CID1,CID2;
-..\TASK\mp_uart_task.c(430): warning:  #177-D: variable "Addr" was declared but never referenced
-        u16 Addr;       
-..\TASK\mp_uart_task.c(433): warning:  #177-D: variable "CNT" was declared but never referenced
-        u8 CNT;
-..\TASK\mp_uart_task.c(130): warning:  #177-D: variable "temp" was declared but never referenced
-  static xSemaphoreHandle temp; 
-..\TASK\mp_uart_task.c: 7 warnings, 0 errors
-compiling mp_uart.c...
-..\USERLIB\mp_uart.c(117): warning:  #550-D: variable "tx_count" was set but never used
-      int tx_count;
-..\USERLIB\mp_uart.c(206): warning:  #177-D: variable "ret" was declared but never referenced
-        int ret;
-..\USERLIB\mp_uart.c: 2 warnings, 0 errors
-compiling mp_protocol_hostif.c...
-..\USERLIB\mp_protocol_hostif.c(160): warning:  #177-D: variable "i" was declared but never referenced
-      int i;            
-..\USERLIB\mp_protocol_hostif.c(16): warning:  #177-D: function "tls_hostif_tx_timeout" was declared but never referenced
-  static void tls_hostif_tx_timeout(void *parg);
-..\USERLIB\mp_protocol_hostif.c: 2 warnings, 0 errors
-compiling Protocol.c...
-..\PROTOCAL\Protocol.c(30): warning:  #223-D: function "DateTime_Trans" declared implicitly
-                DateTime_Trans(res_resp,&DataTime);                     
-..\PROTOCAL\Protocol.c(101): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "u8 *"
-        u16ToAsc(dev_addr,temp2);       
-..\PROTOCAL\Protocol.c(117): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "u8 *"
-        u32ToAsc(info->Uer_ID,temp3);                           
-..\PROTOCAL\Protocol.c(93): warning:  #177-D: variable "buflen" was declared but never referenced
-        u32 buflen;
-..\PROTOCAL\Protocol.c(495): warning:  #177-D: variable "lchksum" was declared but never referenced
-        u8 lchksum,i=0,j=0,tmp,tmp1,tmp2;       
-..\PROTOCAL\Protocol.c(495): warning:  #177-D: variable "tmp" was declared but never referenced
-        u8 lchksum,i=0,j=0,tmp,tmp1,tmp2;       
-..\PROTOCAL\Protocol.c(495): warning:  #177-D: variable "tmp1" was declared but never referenced
-        u8 lchksum,i=0,j=0,tmp,tmp1,tmp2;       
-..\PROTOCAL\Protocol.c(495): warning:  #177-D: variable "tmp2" was declared but never referenced
-        u8 lchksum,i=0,j=0,tmp,tmp1,tmp2;       
-..\PROTOCAL\Protocol.c(496): warning:  #177-D: variable "buf_start" was declared but never referenced
-      char *buf_start = buf;    
-..\PROTOCAL\Protocol.c(688): warning:  #940-D: missing return statement at end of non-void function "tls_protocol_rebuild"
-  }
-..\PROTOCAL\Protocol.c: 10 warnings, 0 errors
+compiling platform.c...
+compiling flash.c...
+..\HARDWARE\FLASH\flash.c(45): warning:  #167-D: argument of type "const u8 *" is incompatible with parameter of type "const char *"
+        len = strlen(Flash_Test)        ;               
+..\HARDWARE\FLASH\flash.c(84): warning:  #177-D: variable "dummy_byte" was declared but never referenced
+        u8 dummy_byte = 0x00;   
+..\HARDWARE\FLASH\flash.c: 2 warnings, 0 errors
 linking...
-Program Size: Code=28868 RO-data=632 RW-data=876 ZI-data=29828  
+Program Size: Code=32372 RO-data=656 RW-data=904 ZI-data=29880  
 FromELF: creating hex file...
-"..\OBJ\LED.axf" - 0 Error(s), 21 Warning(s).
+"..\OBJ\LED.axf" - 0 Error(s), 2 Warning(s).
 
 <h2>Collection of Component include folders:</h2>
   E:\doorgate\USER\RTE
   C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.0.0\Device\Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:09
+Build Time Elapsed:  00:00:03
 </pre>
 </body>
 </html>

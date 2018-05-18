@@ -1,4 +1,5 @@
 #include "led.h"
+#include "delay.h"
 #include "param.h"	
 #include "mp_osal_rtos.h"
 
@@ -18,22 +19,36 @@
 //初始化PB5和PE5为输出口.并使能这两个口的时钟		    
 //LED IO初始化
 void Led_Init(void)
-{
+{	
 	GPIO_InitTypeDef  GPIO_InitStructure;
-		
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA|RCC_APB2Periph_GPIOD, ENABLE);	 //使能PB,PE端口时钟
 
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB|RCC_APB2Periph_GPIOE, ENABLE);	//使能PB,PE端口时钟
+	
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8;				 //LED0-->PB.5 端口配置
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP; 		 //推挽输出
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;		 //推挽输出
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;		 //IO口速度为50MHz
-	GPIO_Init(GPIOA, &GPIO_InitStructure);					 //根据设定参数初始化GPIOB.5
-	GPIO_SetBits(GPIOA,GPIO_Pin_8);						 //PB.5 输出高
+	GPIO_Init(GPIOB, &GPIO_InitStructure);				 //根据设定参数初始化GPIOB.5
+	GPIO_SetBits(GPIOB,GPIO_Pin_8); 					 //PB.5 输出高
 
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2;	    		 //LED1-->PE.5 端口配置, 推挽输出
-	GPIO_Init(GPIOD, &GPIO_InitStructure);	  				 //推挽输出 ，IO口速度为50MHz
-	GPIO_SetBits(GPIOD,GPIO_Pin_2); 						 //PE.5 输出高 
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0;				 //LED1-->PE.5 端口配置, 推挽输出
+	GPIO_Init(GPIOE, &GPIO_InitStructure);				 //推挽输出 ，IO口速度为50MHz
+	GPIO_SetBits(GPIOE,GPIO_Pin_0); 					 //PE.5 输出高 
 }
 
+
+
+void Led_Test(void)
+{	
+	u8 i;
+	u8 Blink_Num = 8;//快闪次数
+	
+	for(i=0;i<Blink_Num;i++)	
+	{		
+		delay_ms(1000);	
+		LED0=!LED0;
+		LED1=!LED1;			
+	}
+}	
 
 
 static u8	current_blink_led;
@@ -42,7 +57,7 @@ static u8   current_blink_frq;
 static u16  current_timer_cnt;	
 static u8 	led_running;
 
-static tls_os_timer_t 	led_timer;
+static tls_os_timer_t 	led_timer;	
 #define TIMER_LED_PERIOD 	M2T(500) 		
 
 	

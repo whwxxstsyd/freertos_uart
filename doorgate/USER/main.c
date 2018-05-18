@@ -10,8 +10,13 @@
 int main(void)
 {	
 	//Initialize the platform.	
-	platformInit();			
-			
+	Platform_Init();	
+
+	//∆ΩÃ®≤‚ ‘≥Ã–Ú
+#if	TEST_OPEN	
+	Platform_Test();	
+#endif
+		
 	app_init();	
 	
 	vTaskStartScheduler();

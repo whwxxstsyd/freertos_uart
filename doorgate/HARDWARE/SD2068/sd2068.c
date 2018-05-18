@@ -5,9 +5,8 @@ static int  SD2068A_WriteTimeOff(void);
 
 static void  SD2068A_PortInitial(void)
 {
-	GPIO_InitTypeDef					GPIO_InitStructure;
+	GPIO_InitTypeDef GPIO_InitStructure;
 
-	//SCL-----PE2,  SDA----PE3 , INT---- PB5,
 	RCC_APB2PeriphClockCmd(GPIO_SD2068_CLK,ENABLE);
 
 	GPIO_InitStructure.GPIO_Pin			= GPIO_SD2068_SCL_PIN;
@@ -47,7 +46,7 @@ static void  SD2068A_SDA_OUT(void)
 
 void  SD2068A_Initial(void)
 {
-	SD2068A_PortInitial();	
+	SD2068A_PortInitial();		
 }
 
 

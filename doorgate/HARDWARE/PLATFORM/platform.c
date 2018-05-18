@@ -1,14 +1,14 @@
 #include "platform.h"	
 #include "delay.h"
 
-//#include "beep.h"
-//#include "voice.h" 	
+#include "flash.h"	
+#include "24CXXX.h"
+#include "beep.h"
 #include "calendar.h"		
-//#include "led.h"		
-//#include "card.h"
+#include "led.h"
+	
 
-
-int platformInit(void)   	   
+int Platform_Init(void)   	   
 { 		
 	//Low level init: Clock and Interrupt controller
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);	
@@ -17,53 +17,51 @@ int platformInit(void)
 	//DWT_INIT(SystemCoreClock);		
 		
 	//Systick Init
-	delay_init();
-	
+	delay_init();	
+
+#if	LED_OPEN	
+	Led_Init();			
+#endif	
+
 #if BEEP_OPEN 
-	//Beep_Init();
+	Beep_Init();	
 #endif
-
-
+		
 #if EEPROM_OPEN 
-	
+	_24CXXX_init();	
 #endif
 
-
-#if SST_OPEN 
-	
+#if FLASH_OPEN 		
+	SPI_Flash_Init();
 #endif
 
-
-#if DATA_OPEN 	
-	Calendar_Init();
+#if DATE_OPEN 		
+	Calendar_Init();	
 #endif
-
-
-#if VOICE_OPEN 	
-	//Voice_Init();
-#endif
-
 
 #if OUTSWITCH_OPEN 
-	
+		
 #endif
-	 
 	 
 #if DateManager_OPEN 
 	 
-#endif	
+#endif		
 
-
-#if	ReadCard_Open
+#if	ReadCard_OPEN
 	//Card_Init();		
 	//CardLibrary_Init();
 #endif		
 
-
-#if	LED_Open
-	//Led_Init();			
-#endif	
-	
   return 1;	
+}
+
+
+
+void Platform_Test(void)
+{	
+	Led_Test();		
+	_24CXXX_Test();
+	SPI_Flash_Test();	
+	Beep_Test();
 }
 

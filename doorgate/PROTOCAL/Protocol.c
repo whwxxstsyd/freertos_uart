@@ -235,7 +235,7 @@ static int post_protocmd_set_sys_param_proc(struct tls_protocmd_token_t *tok,
 	
 			LOG_INFO("CMD:0x49 Type:Set Date\n");		
 	
-			Ariber_SetSysTime();
+			//Ariber_SetSysTime();	
 
 			break;
 
@@ -265,7 +265,7 @@ static int post_protocmd_get_sys_param_proc(struct tls_protocmd_token_t *tok,
 	
 			LOG_INFO(" CMD:0x4A Type:Get Module Date\n");		
 				
-			Ariber_GetSysTime();	
+			//Ariber_GetSysTime();			
 
 			break;
 

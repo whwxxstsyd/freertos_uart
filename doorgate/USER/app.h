@@ -14,6 +14,7 @@ typedef struct _APP_MSG{
 	u32 param;	
 }APP_MSG;	
 
+
 typedef enum
 {
 	MSG_KEY = 0x01,
@@ -22,14 +23,17 @@ typedef enum
 	MSG_TIMER,
 	MSG_SPI
 }MSG_TYPE;	
-	
-#define MAX_STACK_SIZE 		512	
-#define MIN_STACK_SIZE 		128	
 
+	
+#define MAX_STACK_SIZE 			512	
+#define MIN_STACK_SIZE 			128		
+
+	
 #define IDLE_TASK_NAME 			"IDLE_TASK"
 #define IDLE_TASK_PRIO				3						
 #define IDLE_TASK_STACKSIZE 		MIN_STACK_SIZE
 #define IDLE_QUEUE_SIZE			4	
+
 
 #define BUSY_TASK_NAME 			"BUSY_TASK"
 #define BUSY_TASK_PRIO				9						
@@ -42,7 +46,6 @@ typedef enum
 #define CARD_TASK_STACKSIZE 		MIN_STACK_SIZE
 #define CARD_QUEUE_SIZE			4	
 	
-
 
 #define UART0_TX_TASK_NAME 		"UART1_TX"
 #define UART0_TX_TASK_PRIO			7
@@ -60,6 +63,7 @@ typedef enum
 #define UART1_TX_TASK_PRIO			5
 #define UART1_TX_TASK_STACKSIZE 	MAX_STACK_SIZE
 #define UART1_TX_QUEUE_SIZE		4	
+
 
 #define UART1_RX_TASK_NAME 		"UART2_RX"
 #define UART1_RX_TASK_PRIO			6

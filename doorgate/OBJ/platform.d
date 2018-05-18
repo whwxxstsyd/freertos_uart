@@ -32,4 +32,9 @@
 ..\obj\platform.o: ..\STM32F10x_FWLib\inc\misc.h
 ..\obj\platform.o: ..\INCLUDE\param.h
 ..\obj\platform.o: ..\SYSTEM\delay\delay.h
+..\obj\platform.o: ..\HARDWARE\FLASH\flash.h
+..\obj\platform.o: ..\HARDWARE\24CXXX\24CXXX.h
+..\obj\platform.o: ..\HARDWARE\24CXXX\IIC.h
+..\obj\platform.o: ..\HARDWARE\BEEP\beep.h
 ..\obj\platform.o: ..\HARDWARE\SD2068\calendar.h
+..\obj\platform.o: ..\HARDWARE\LED\led.h

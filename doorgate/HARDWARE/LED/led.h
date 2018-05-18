@@ -13,10 +13,12 @@
 //Copyright(C) 广州市星翼电子科技有限公司 2009-2019
 //All rights reserved									  
 ////////////////////////////////////////////////////////////////////////////////// 
-#define LED0 PAout(8)	// PA8
-#define LED1 PDout(2)	// PD2	
+#define LED0 PBout(8)	// PA8	
+#define LED1 PEout(0)	// PD2	
 
-void Led_Init(void);//初始化	
+void Led_Init(void);//初始化
+
+void Led_Test(void);	
 
 void hw_platform_led_ctrl(u16 led,u16 ctrl);	
 

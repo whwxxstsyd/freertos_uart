@@ -35,7 +35,7 @@ int tls_hostif_init(void)
 	dl_list_init(&hif->tx_event_msg_list);
 	
     for (i = 0; i < HOSTIF_TX_EVENT_MSG_NUM; i++) 
-	{	
+	{		
         tx_msg = &g_hostif_tx_event_msg[i];	
         dl_list_add_tail(&hif->tx_event_msg_list, &tx_msg->list);
     }

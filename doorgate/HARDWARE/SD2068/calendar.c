@@ -36,7 +36,7 @@ void Calendar_Init(void)
 	SD2068A_GetTime((u8*)&curDateTime);
 	
 	if (curDateTime.year + 2000 > 2200)
-	{	
+	{
 		curDateTime.sec		= 0x00;	
 		curDateTime.min		= 0x00;
 		curDateTime.hour	= 0x00;
