@@ -5,6 +5,8 @@
 
 #define LED_SystemRun_OPEN  	3 		//1：只作为程序运行灯，2：程序运行灯+开锁指示灯 3:程序运行灯+蜂鸣器同步指示灯
 
+#define	DEVICE_ALL				CFG_OFF
+
 #define LED_OPEN        		CFG_ON	
 #define	BEEP_OPEN 	        	CFG_ON
 #define EEPROM_OPEN         	CFG_ON

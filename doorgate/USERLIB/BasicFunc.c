@@ -120,8 +120,8 @@ void CharToAsc(u8 c1,u8 *buf)
 	t1 = Hi_HexToAsc(c1);
 	t2 = Low_HexToAsc(c1);	
 
-	buf[0] = t1;
-	buf[1] = t2;
+	*buf 	 = t1;	
+	*(buf+1) = t2;
 }
 
 //将两个字节的数据转化为两个ASCII 码

@@ -19,7 +19,7 @@
 
 
 /* error code */
-#define CMD_ETRUERR_OK              0
+#define CMD_ETRUERR_OK          0
 #define CMD_ERR_INV_FMT         1
 #define CMD_ERR_UNSUPP          2
 #define CMD_ERR_OPS             3

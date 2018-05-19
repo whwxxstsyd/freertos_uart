@@ -15,21 +15,30 @@
 static int post_protocmd_get_time_proc(struct tls_protocmd_token_t *tok,
         char *res_resp, u32 *res_len)	
 {		
-	int ret; 
-	TypedefDateTime DataTime;	
+	u8 cmd_group = tok->arg[0];
+	u8 cmd_type  = tok->arg[1];
 	
-	ret = GetDateTime(&DataTime);
-		
-	if(ret)	
-	{
-		LOG_ERROR("get time err!!\n");
-		return FALSE;
-	}	
-	else
-	{	
-		DateTime_Trans(res_resp,&DataTime);			
-		return TRUE;	
+	if(cmd_group != 0xF2)
+	{		
+		LOG_INFO("cmd_group error\n");		
+		return RTN_UNVALID_DATA;		
 	}
+	
+	switch(cmd_type)
+	{	
+		case CMD_0x4D_GET_DATE:		
+								
+			*res_len = Ariber_GetSysTime(res_resp);	
+			return RTN_NORMAL;
+
+			break;	
+
+		default:
+		
+			break;
+	}
+	
+	return RTN_UNVALID_DATA;
 
 }
 
@@ -61,7 +70,7 @@ static int post_protocmd_set_time_proc(struct tls_protocmd_token_t *tok,
 
 	SetDateTime((TypedefDateTime *)buff);	
 
-	return TRUE;
+	return RTN_NORMAL;
 }
 
 
@@ -69,40 +78,34 @@ static int post_protocmd_set_time_proc(struct tls_protocmd_token_t *tok,
 static int post_protocmd_get_addr_proc(struct tls_protocmd_token_t *tok,
         char *res_resp, u32 *res_len)
 {
-	return TRUE;
+	return RTN_NORMAL;
 }	
 
 
 static int post_protocmd_set_addr_proc(struct tls_protocmd_token_t *tok,
-        char *res_resp, u32 *res_len)
+        										char *res_resp, u32 *res_len)
 {
-	return TRUE;
+	return RTN_NORMAL;	
 }
 
 const u8 SysCreatedDate[12] = __DATE__;	
 const u8 SysCreatedTime[8] = __TIME__;
 
 static int post_protocmd_get_version_proc(struct tls_protocmd_token_t *tok,
-        char *res_resp, u32 *res_len)
+        											char *res_resp, u32 *res_len)
 {
-	char temp2[4],temp3[12];		
-	char *p;
+	u8 temp3[12];			
 	DEVICE_INFO *info;
 	u8 i;
 	u16 dev_addr;	
 	u32 buflen;
 
-	p = res_resp + 13;
+	u8 data_len;
 	
 	Device_Info_Get(info);
 	
-	dev_addr = info->Device_Addr[0];	
-	
-	u16ToAsc(dev_addr,temp2);	
-	for(i=0;i<sizeof(temp2);i++)
-	{	
-		*p++ = temp2[i];
-	}	
+	dev_addr = info->Device_Addr[0];		
+	u16ToAsc(dev_addr,res_resp);		
 	
 	MEMCPY(p, info->SoftWare_Ver, sizeof(info->SoftWare_Ver)-1);
 	p += sizeof(info->SoftWare_Ver)-1;
@@ -110,8 +113,8 @@ static int post_protocmd_get_version_proc(struct tls_protocmd_token_t *tok,
 	p += sizeof(info->HardWare_Ver)-1;	
 	MEMCPY(p, info->Company_Name, sizeof(info->Company_Name)-1);
 	p += sizeof(info->Company_Name)-1;
-	MEMCPY(p, info->Device_Name, sizeof(info->Device_Name)-1);
-	p += sizeof(info->Device_Name)-1;		
+	MEMCPY(p, info->Device_Name, sizeo(info->Device_Name)-1);
+	p += sizeof(info->Device_Name)-1;f		
 
 	//这里解析设备唯一序列号还有点问题
 	u32ToAsc(info->Uer_ID,temp3);				
@@ -122,34 +125,34 @@ static int post_protocmd_get_version_proc(struct tls_protocmd_token_t *tok,
 
 	MEMCPY(p, SysCreatedDate, sizeof(SysCreatedDate));
 	p += sizeof(SysCreatedDate);		
-
+	
 	MEMCPY(p, SysCreatedTime, sizeof(SysCreatedTime));
 	p += sizeof(SysCreatedTime);			
 
-	*res_len = 100;	
-
-	return TRUE;
+	
+	
+	return RTN_NORMAL;
 }
 
 
 static int post_protocmd_set_configID_proc(struct tls_protocmd_token_t *tok,
         char *res_resp, u32 *res_len)
 {
-	return TRUE;
+	return RTN_NORMAL;
 }
 
 
 static int post_protocmd_get_configID_proc(struct tls_protocmd_token_t *tok,
         char *res_resp, u32 *res_len)
 {
-	return TRUE;	
+	return RTN_NORMAL;	
 }
 
 
 static int post_protocmd_remote_proc(struct tls_protocmd_token_t *tok,
         char *res_resp, u32 *res_len)
 {
-	return TRUE;
+	return RTN_NORMAL;
 }
 
 
@@ -161,14 +164,14 @@ static int post_protocmd_remote_proc(struct tls_protocmd_token_t *tok,
 static int post_protocmd_get_ariber_ver_proc(struct tls_protocmd_token_t *tok,
         char *res_resp, u32 *res_len)
 {
-	return TRUE;
+	return RTN_NORMAL;
 }
 
 
 static int post_protocmd_set_baudrate_proc(struct tls_protocmd_token_t *tok,
         char *res_resp, u32 *res_len)
 {
-	return TRUE;
+	return RTN_NORMAL;
 }
 
 
@@ -214,7 +217,7 @@ static int post_protocmd_authority_confirm_proc(struct tls_protocmd_token_t *tok
 			break;
 		
 	}
-	return TRUE;	
+	return RTN_NORMAL;	
 }
 	
 
@@ -243,7 +246,7 @@ static int post_protocmd_set_sys_param_proc(struct tls_protocmd_token_t *tok,
 
 			break;
 	}
-	return TRUE;	
+	return RTN_NORMAL;
 }
 
 	
@@ -252,26 +255,22 @@ static int post_protocmd_get_sys_param_proc(struct tls_protocmd_token_t *tok,
 {
 	u8 cmd_group = tok->arg[0];
 	u8 cmd_type  = tok->arg[1];
-
+	
 	if(cmd_group != 0xF2)
 	{	
 		LOG_INFO("cmd_group error\n");		
 		return FALSE;	
 	}
-
+	
 	switch(cmd_type)
 	{	
 		case CMD_0x4A_GET_DATE:		
-	
-			LOG_INFO(" CMD:0x4A Type:Get Module Date\n");		
 				
-			//Ariber_GetSysTime();			
+			*res_len = Ariber_GetSysTime(res_resp);			
 
 			break;
 
-		case CMD_0x4A_GET_DOOR_STA:	
-
-			LOG_INFO("0x4A CMD,Get Door State\n");		
+		case CMD_0x4A_GET_DOOR_STA:				
 			
 			break;
 
@@ -282,7 +281,7 @@ static int post_protocmd_get_sys_param_proc(struct tls_protocmd_token_t *tok,
 	
 	
 	
-	return TRUE;
+	return RTN_NORMAL;
 }
 
 
@@ -319,7 +318,7 @@ static int post_protocmd_set_guard_param_proc(struct tls_protocmd_token_t *tok,
 
 			break;
 	}
-	return TRUE;
+	return RTN_NORMAL;
 }
 
 
@@ -356,7 +355,7 @@ static int post_protocmd_get_guard_param_proc(struct tls_protocmd_token_t *tok,
 
 			break;
 	}
-	return TRUE;
+	return RTN_NORMAL;
 }
 
 #endif
@@ -371,35 +370,35 @@ static int post_protocmd_get_guard_param_proc(struct tls_protocmd_token_t *tok,
 static int mp_protocmd_get_device_info_proc(struct tls_protocmd_token_t *tok,
         char *res_resp, u32 *res_len)
 {
-	return TRUE;	
+	return RTN_NORMAL;
 }
 
 
 static int mp_protocmd_set_addr_proc(struct tls_protocmd_token_t *tok,
         char *res_resp, u32 *res_len)
 {
-	return TRUE;
+	return RTN_NORMAL;
 }
 
 
 static int mp_protocmd_get_time_proc(struct tls_protocmd_token_t *tok,
         char *res_resp, u32 *res_len)
 {
-	return TRUE;
+	return RTN_NORMAL;
 }
 
 
 static int mp_protocmd_set_time_proc(struct tls_protocmd_token_t *tok,
         char *res_resp, u32 *res_len)
 {
-	return TRUE;
+	return RTN_NORMAL;
 }
 
 
 static int mp_protocmd_mem_dev_proc(struct tls_protocmd_token_t *tok,
         char *res_resp, u32 *res_len)
 {
-	return TRUE;
+	return RTN_NORMAL;
 }
 
 #endif
@@ -492,13 +491,12 @@ int VERSION_CHK(u16 len_param)
 int tls_protocmd_parse(struct tls_protocmd_token_t *tok, char *buf, u32 *res_len)
 {	
     u16 remain_len=0;
-	u8 lchksum,i=0,j=0,tmp,tmp1,tmp2;	
-    char *buf_start = buf;	
+	u8 i=0,j=0;			
 	
 	tok->VER = TwoAscTOHex(*(buf+1),*(buf+2));	//(1,2)
 	//版本检查
 	if(!VERSION_CHK(tok->VER))
-	{
+	{	
 		return RTN_VER_ERR;		
 	}						
 	
@@ -527,9 +525,9 @@ int tls_protocmd_parse(struct tls_protocmd_token_t *tok, char *buf, u32 *res_len
 		i=i+2;				
 		remain_len--;
 	}
-
-	LOG_INFO("Cmd_X = %x\n",tok->CID2); //执行的命令
-
+	
+	LOG_INFO("Cmd = %x\n",tok->CID2); //执行的命令
+	
 	LOG_INFO("argv_cnt = %d\n",tok->arg_found);//参数个数
 	
 	LOG_INFO("ARGV = ");//参数数值
@@ -545,7 +543,7 @@ int tls_protocmd_parse(struct tls_protocmd_token_t *tok, char *buf, u32 *res_len
 	
 	
 int tls_protocmd_exec(struct tls_protocmd_token_t *tok,char *res_rsp,u32 *res_len)
-{		
+{			
 	int err;
 	struct tls_protocmd_t *protocmd, *match = NULL;
 
@@ -566,7 +564,6 @@ int tls_protocmd_exec(struct tls_protocmd_token_t *tok,char *res_rsp,u32 *res_le
 	/* at command handle */
 	if (match) 
 	{	
-		//TLS_DBGPRT_INFO("command find: %s\n", atcmd->name);
 		err = match->proc_func(tok, res_rsp, res_len);
 	} 
 	else 
@@ -591,99 +588,137 @@ int tls_protocmd_exec(struct tls_protocmd_token_t *tok,char *res_rsp,u32 *res_le
 * @return   none 
 */
 
-void fill_buff(u8 *buff,u8 *data,u8 len,u8 tear_flag)	
+void fill_buff(u8 **buff,u8 data,u8 tear_flag)		
 {
-	u8 i;
+	/*
+	函数传递参数时,会做一份拷贝,只保留了传入参数的值,
+	也就说容器变了,但是内容没有变。
+	指针地址的变化就是因为这个“容器”变了，
+	但是指针所指向的那块的地址是没变的。
+	函数在调用完就会销毁那份拷贝。
+	*/
 	
 	if(tear_flag)
-	{
-		for(i=0;i<len;i++)
-		{	
-			*(buff + i) = Hi_HexToAsc(*(data + i));	
-			*(buff + i + 1) = Low_HexToAsc(*(data + i));	
-		}
-		buff = buff + len*2;
-
+	{		
+		**buff = Hi_HexToAsc(data);	
+		(*buff)++;
+		**buff = Low_HexToAsc(data);		
+		(*buff)++;	
 	}
 	else
-	{
-		for(i=0;i<len;i++)
-		{	
-			*(buff + i) = *(data + i);	
-		}
-
-		buff = buff + len;	
-	}	
-	
-}
-
-
-
-
-
-
-
-
-static void tls_protocol_add_head()	
-#if 0
-{
-	char *p = buff;//指向数据头部
-	
-	u8 Ver  =  tok->VER;
-	u8 Adr  =  tok->ADDR; 	
-	u8 CID1 =  tok->CID1; 	
-	u8 len1 = 0;
-	u8 len2 = 0;		
-
-	u16 Host_Adr = Adr + (CID1&0x0F)*0x100;
-	
-	//添加头
-	fill_buff(p,'~',1,0);
-	fill_buff(p,&Ver,1,1);		
-	fill_buff(p,&Adr,1,1);
-	
-	if(Ver == 0x20)
 	{	
-		CID1 = 0xD0;
-	}
-	else
-	{				
-		CID1 = 0x80+((Host_Adr>>8)&0x0F);
-	}
-	
-	fill_buff(p,&CID1,1,1);
-	//两个字节的空	
-	fill_buff(p,&len1,1,1);
-	fill_buff(p,&len2,1,1);		
-
+		**buff = data;
+		(*buff)++;	
+	}	
 }
 
-#else
+
+
+
+
+
+static void tls_protocol_add_head(tls_respon_head *resp_h,u8 *buff,u32 *res_len)	
+{	
+	u8 *p = buff;//指向数据头部
+	u8 Head =  resp_h->SOI;					
+	u8 Ver  =  resp_h->VER;
+	u8 Adrr =  resp_h->ADR; 	
+	u8 CID1 =  resp_h->CID1; 	
+	
+	//RTN和Length根据前面的收到的消息做具体的回复
+	u8 RTN = resp_h->RTN;					
+	u16 LEN = resp_h->RESPON_LEN;	
+	
+	u8 Len_H  = (u8)(LEN>>8);				
+	u8 Len_L  = (u8)(LEN);			
+	
+	u16 Host_Adr = Adrr + (CID1&0x0F)*0x100;	
+		
+	LOG_INFO("RTN %x,HIGH %x,LOW %x\n",RTN,Len_H,Len_L);			
+			
+	//添加头
+	fill_buff(&p,Head,0);				
+	fill_buff(&p,Ver,1);						
+	fill_buff(&p,Adrr,1);	
+	fill_buff(&p,CID1,1);
+	fill_buff(&p,RTN,1);						
+	//长度
+	fill_buff(&p,Len_H,1);				
+	fill_buff(&p,Len_L,1);							
+				
+	*res_len = *res_len + PROTOCOL_HEAD_LEN;	
+}
+
+
+
+static void tls_protocol_add_body(void)
 {
 		
 }
-#endif
 
 
-
-static void tls_protocol_add_tail()
+static void tls_protocol_add_tail(u8 *buff,u32 *res_len)
 {	
+	u8 *p = buff;	
+	u16 i,chk_sum,data_cnt;
+	u8 tail = PROTOCOL_TAIL;			
+	u8 tempSum[2];	
 	
-}
-
-static void tls_protocol_add_body()
-{
+	p++;//去掉头	
 	
-}
+	data_cnt = 8*2 + 12;		
 
-
-int tls_protocol_rebuild(struct tls_protocmd_token_t *tok,u8 *buff,u32 *res_len)
-{	
-	tls_protocol_add_head();
-
-	tls_protocol_add_body();
+	for(i=0;i<data_cnt;i++)	
+	{		
+		chk_sum += *p++;
+	}
 		
-	tls_protocol_add_tail();
+	chk_sum = ~chk_sum+1;		
+
+	tempSum[0] = (u8)(chk_sum>>8);
+	tempSum[1] = (u8)(chk_sum);			
+
+	fill_buff(&p,tempSum[0],1);
+	fill_buff(&p,tempSum[1],1);	
+	fill_buff(&p,tail,0);
+
+	*res_len = *res_len + PROTOCOL_TAIL_LEN;		
+}
+
+
+//这个函数中处理RTN和LENGTH这些对应不同情况下的数值
+static void tls_token_reunion(struct tls_protocmd_token_t *tok,
+									tls_respon_head *respon_h,
+									u8 err)
+{
+	u8  Head = PROTOCOL_HEAD;				
+	u8  RTN  = err;								
+	u16 LEN  = 0xF010;	
+
+	respon_h->SOI 			= 	Head;
+	respon_h->VER			= 	tok->VER;
+	respon_h->ADR 			= 	tok->ADDR;
+	respon_h->CID1 			=	tok->CID1;
+	respon_h->RTN			=	RTN;	
+	respon_h->RESPON_LEN	=	LEN;	
+	respon_h->HEAD_LEN		=	PROTOCOL_HEAD_LEN;
+	respon_h->TAIL_LEN		=	PROTOCOL_TAIL_LEN;	
+}
+
+
+
+int tls_protocol_rebuild(struct tls_protocmd_token_t *tok,
+							 u8  *buff,
+							 u32 *res_len,
+							 u8 err)			
+{	
+	tls_respon_head respon_head;	
+
+	tls_token_reunion(tok,&respon_head,err);			
+
+	tls_protocol_add_head(&respon_head,buff,res_len);	
+		
+	tls_protocol_add_tail(buff,res_len);
 	
 }
 

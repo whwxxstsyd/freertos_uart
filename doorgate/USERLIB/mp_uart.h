@@ -4,8 +4,8 @@
 #include "mp_osal_rtos.h"	
 
 
-#define TLS_UART_RX_BUF_SIZE   128		
-#define TLS_UART_TX_BUF_SIZE   128											
+#define TLS_UART_RX_BUF_SIZE   256		
+#define TLS_UART_TX_BUF_SIZE   256												
 #define WAKEUP_CHARS          (TLS_UART_TX_BUF_SIZE/2)  //  256
 	
 #define MBOX_MSG_UART_RX       1

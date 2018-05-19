@@ -1,9 +1,9 @@
----- tls_hostif_process_cmdrsp Matches (8 in 3 files) ----
-LED.htm (e:\doorgate\obj):<BR>[Called By]<UL><LI><a href="#[1d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_hostif_process_cmdrsp
-LED.htm (e:\doorgate\obj):<P><STRONG><a name="[1d1]"></a>tls_hostif_process_cmdrsp</STRONG> (Thumb, 72 bytes, Stack size 32 bytes, mp_protocol_hostif.o(.text))
-LED.htm (e:\doorgate\obj):<LI>Call Chain = tls_hostif_process_cmdrsp &rArr; tls_hostif_get_tx_event_msg &rArr; tls_os_set_critical &rArr; vPortEnterCritical &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
-LED.htm (e:\doorgate\obj):<LI><a href="#[1d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_hostif_process_cmdrsp
-Mp_protocol_hostif.c (e:\doorgate\userlib):int tls_hostif_process_cmdrsp(u8 hostif_type, char *cmdrsp, u32 cmdrsp_size)
-Mp_protocol_hostif.c (e:\doorgate\userlib):    err = tls_hostif_process_cmdrsp(hostif_type, cmdrsp_buf, cmdrsp_size);
-Readme.txt (e:\doorgate):			tls_hostif_process_cmdrsp();//发送回复命令
-Readme.txt (e:\doorgate):2.tls_hostif_process_cmdrsp(将任务执行完毕的回复信息输出)		YES
+---- tls_protocmd_exec Matches (8 in 5 files) ----
+LED.htm (e:\doorgate\obj):<LI><a href="#[1d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_protocmd_exec
+LED.htm (e:\doorgate\obj):<P><STRONG><a name="[1d2]"></a>tls_protocmd_exec</STRONG> (Thumb, 62 bytes, Stack size 24 bytes, protocol.o(.text))
+LED.htm (e:\doorgate\obj):<LI>Call Chain = tls_protocmd_exec &rArr; __2sprintf &rArr; _printf_char_common &rArr; __printf
+LED.htm (e:\doorgate\obj):<BR>[Called By]<UL><LI><a href="#[1d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_protocmd_exec
+Mp_protocol_hostif.c (e:\doorgate\userlib):                err = tls_protocmd_exec(&protocmd_tok,cmdrsp_buf,&cmdrsp_size);		
+Protocol.c (e:\doorgate\protocal):int tls_protocmd_exec(struct tls_protocmd_token_t *tok,char *res_rsp,u32 *res_len)
+Protocol.h (e:\doorgate\protocal):int tls_protocmd_exec(struct tls_protocmd_token_t *tok,char *res_rsp, u32 *res_len);	
+Readme.txt (e:\doorgate):			tls_protocmd_exec();//协议命令执行

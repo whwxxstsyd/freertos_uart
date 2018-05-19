@@ -52,5 +52,6 @@
 ..\obj\protocolbase.o: ..\FreeRTOS\include\timers.h
 ..\obj\protocolbase.o: ..\INCLUDE\temp.h
 ..\obj\protocolbase.o: ..\INCLUDE\param.h
+..\obj\protocolbase.o: ..\USERLIB\BasicFunc.h
 ..\obj\protocolbase.o: ..\INCLUDE\debug.h
 ..\obj\protocolbase.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h

@@ -17,7 +17,9 @@ int Platform_Init(void)
 	//DWT_INIT(SystemCoreClock);		
 		
 	//Systick Init
-	delay_init();	
+	delay_init();		
+	
+#if DEVICE_ALL	
 
 #if	LED_OPEN	
 	Led_Init();			
@@ -51,6 +53,8 @@ int Platform_Init(void)
 	//Card_Init();		
 	//CardLibrary_Init();
 #endif		
+
+#endif
 
   return 1;	
 }

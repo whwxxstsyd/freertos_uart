@@ -56,7 +56,7 @@
 ..\obj\protocol.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 ..\obj\protocol.o: ..\MEM\mp_mem.h
 ..\obj\protocol.o: ..\PROTOCAL\protocol.h
+..\obj\protocol.o: ..\INCLUDE\param.h
 ..\obj\protocol.o: ..\USERLIB\BasicFunc.h
 ..\obj\protocol.o: ..\HARDWARE\SD2068\calendar.h
 ..\obj\protocol.o: ..\INCLUDE\debug.h
-..\obj\protocol.o: ..\INCLUDE\param.h

@@ -149,18 +149,17 @@ int tls_hostif_process_cmdrsp(u8 hostif_type, char *cmdrsp, u32 cmdrsp_size)
 
 
 
-#define CMD_RSP_BUF_SIZE	64	
+#define CMD_RSP_BUF_SIZE	128	
+#define LENGTH_HEAD			13
 
 int tls_hostif_cmd_handler(u8 hostif_cmd_type, char *buf, u32 *len)
 {			
-    char *cmdrsp_buf;	
+    char *cmdrsp_buf,*start;	
     u32 cmdrsp_size;
     struct tls_protocmd_token_t protocmd_tok;
     int err;	
-    int i;		
-    u8 hostif_type;		
-	
-    cmdrsp_size = CMD_RSP_BUF_SIZE;
+    int i;				
+    u8 hostif_type;			
 
     switch (hostif_cmd_type) 
 	{	
@@ -186,35 +185,34 @@ int tls_hostif_cmd_handler(u8 hostif_cmd_type, char *buf, u32 *len)
             if (err == RTN_CMDCHK_ERR) //校验错误
 			{	
 				LOG_ERROR("cmd check sum error\n");		
-				//cmdrsp_buf = ;	
-                //cmdrsp_size = ;
             } 	
 			else if(err == RTN_VER_ERR)
 			{	
-				LOG_ERROR("return version err\n");		
-				//cmdrsp_buf = ;
-				//cmdrsp_size = ;	
-			}
+				LOG_ERROR("return version err\n");			
+			}	
 			else 
-			{			
-                cmdrsp_size = CMD_RSP_BUF_SIZE;
-				
+			{						
+				start = cmdrsp_buf;
+
+				//给回复的命令流出头空间
+				cmdrsp_buf += LENGTH_HEAD;		
+	
 				//执行命令,发送回复
-                err = tls_protocmd_exec(&protocmd_tok, cmdrsp_buf, &cmdrsp_size);
-            }
+                err = tls_protocmd_exec(&protocmd_tok,cmdrsp_buf,&cmdrsp_size);		
+            }	
             break;
 				
-        default:
-            
-			return -1;
+        default:	
+            	
+			return -1;			
             //break;
     }
-
+				
 	//将需要发送的信息重新组装	
-	//tls_protocol_rebuild(&protocmd_tok,cmdrsp_buf,&cmdrsp_size);		
-	
-	//发送回复信息
-    err = tls_hostif_process_cmdrsp(hostif_type, cmdrsp_buf, cmdrsp_size);
+	tls_protocol_rebuild(&protocmd_tok,start,&cmdrsp_size,(u8)err);		
+			
+	//发送回复信息				
+    err = tls_hostif_process_cmdrsp(hostif_type,start,cmdrsp_size);
 	
     if (err)
     {	

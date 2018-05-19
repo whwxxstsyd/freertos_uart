@@ -136,7 +136,7 @@
             <DriverSelection>4099</DriverSelection>
           </Flash1>
           <bUseTDR>1</bUseTDR>
-          <Flash2>Segger\JL2CM3.dll</Flash2>
+          <Flash2>BIN\UL2CM3.DLL</Flash2>
           <Flash3></Flash3>
           <Flash4></Flash4>
           <pFcarmOut></pFcarmOut>
@@ -332,7 +332,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F10X_HD,USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\SYSTEM\delay;..\SYSTEM\sys;..\SYSTEM\usart;..\USER;..\STM32F10x_FWLib\inc;..\CORE;..\MALLOC;..\FreeRTOS\include;..\FreeRTOS\portable\RVDS\ARM_CM3;..\HARDWARE\LED;..\HARDWARE\LCD;..\HARDWARE\TIMER;..\HARDWARE\EXTI;..\HARDWARE\KEY;..\TASK;..\USERLIB;..\INCLUDE;..\HARDWARE\PLATFORM;..\MEM;..\PROTOCAL;..\HARDWARE\BEEP;..\HARDWARE\SD2068;..\HARDWARE\CARD;..\CARD</IncludePath>
+              <IncludePath>..\SYSTEM\delay;..\SYSTEM\sys;..\SYSTEM\usart;..\USER;..\STM32F10x_FWLib\inc;..\CORE;..\MALLOC;..\FreeRTOS\include;..\FreeRTOS\portable\RVDS\ARM_CM3;..\HARDWARE\LED;..\HARDWARE\LCD;..\HARDWARE\TIMER;..\HARDWARE\EXTI;..\HARDWARE\KEY;..\TASK;..\USERLIB;..\INCLUDE;..\HARDWARE\PLATFORM;..\MEM;..\PROTOCAL;..\HARDWARE\BEEP;..\HARDWARE\SD2068;..\HARDWARE\CARD;..\CARD;..\HARDWARE\24CXXX;..\HARDWARE\FLASH;..\HARDWARE\SPI</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -430,6 +430,26 @@
               <FileType>1</FileType>
               <FilePath>..\HARDWARE\CARD\card.c</FilePath>
             </File>
+            <File>
+              <FileName>24CXXX.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\24CXXX\24CXXX.c</FilePath>
+            </File>
+            <File>
+              <FileName>IO_IIC.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\24CXXX\IO_IIC.c</FilePath>
+            </File>
+            <File>
+              <FileName>spi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\SPI\spi.c</FilePath>
+            </File>
+            <File>
+              <FileName>flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\FLASH\flash.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -499,6 +519,11 @@
               <FileName>stm32f10x_exti.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\STM32F10x_FWLib\src\stm32f10x_exti.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f10x_spi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STM32F10x_FWLib\src\stm32f10x_spi.c</FilePath>
             </File>
           </Files>
         </Group>

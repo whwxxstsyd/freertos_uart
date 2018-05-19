@@ -66,14 +66,12 @@ static void uart_send_tx_msg(u8 hostif_mode, struct tls_hostif_tx_msg *tx_msg)
 		case HOSTIF_MODE_UART0:
 			if (uart_st[0].uart_port == NULL)
 				return;	
-			
 			if(tx_msg != NULL)
 			{
 				cpu_sr = tls_os_set_critical();
 				dl_list_add_tail(&uart_st[0].tx_msg_pending_list, &tx_msg->list);
 				tls_os_release_critical(cpu_sr);
 			}	
-				
 			tls_os_mailbox_send(uart_st[0].tx_mailbox, (void *)MBOX_MSG_UART_TX); 
 			break;
 			
@@ -287,8 +285,6 @@ static void tls_uart_1_tx_task(void *data)
     struct tls_uart *uart = (struct tls_uart *)data;
     u32 *msg = NULL;
     int err;		
-
-	LOG_INFO("!!!!!!task uart tx create succeed!!!!!!\n");	
 		
     for ( ;; ) 	
 	{					
@@ -436,14 +432,9 @@ static void parse_protocol_line(struct tls_uart *uart)
 	{		
 		if((recv->buf[recv->tail] == '#') || (recv->buf[recv->tail] == '~') )		
 		{			
-			/*
-				去除头部和尾部，	
-				将有用的命令部分解析出来	
-			*/
 			proto_start = &recv->buf[recv->tail];
-			recv->tail = (recv->tail + 1) & (TLS_UART_RX_BUF_SIZE - 1);	
-			ptr_eol = parse_atcmd_eol(uart);	
-
+			ptr_eol = parse_atcmd_eol(uart);		
+	
 			/*ptr_eol指向命令的结尾，不包括结束符*/
             if (ptr_eol >= proto_start)
 			{	
@@ -453,7 +444,7 @@ static void parse_protocol_line(struct tls_uart *uart)
 			{		
                 tail_len = (u32)(&recv->buf[TLS_UART_RX_BUF_SIZE - 1] - proto_start + 1);
                 cmd_len = tail_len + (ptr_eol - &recv->buf[0]); 
-            }
+            }	
 
 			buf = tls_mem_alloc(cmd_len + 2);
 			
@@ -471,20 +462,20 @@ static void parse_protocol_line(struct tls_uart *uart)
 			{
                 MEMCPY(buf, proto_start, tail_len);
                 MEMCPY(buf+tail_len, &recv->buf[0], ptr_eol - &recv->buf[0]);
-            }
+            }	
 
 
 			if (uart->uart_port->uart_no == TLS_UART_0)
-            {
+            {	
                 hostif_uart_type = HOSTIF_UART0_CMD;		
             }
             else
             {	
                 hostif_uart_type = HOSTIF_UART1_CMD;
             }
-	
-			LOG_INFO("cmd_len = %d,uart_type = %d\n",cmd_len,hostif_uart_type);			
 			
+			LOG_INFO("cmd_len = %d\n",cmd_len);				
+				
 			//将命令重新组合放到内存中
 	        tls_hostif_cmd_handler(hostif_uart_type, buf, &cmd_len);
 			
@@ -534,8 +525,8 @@ void uart_tx(struct tls_uart *uart)
 						tx_msg->u.msg_cmdrsp.buflen);
 				tx_msg->offset += write_cnt;		
 				
-				LOG_INFO("write_cnt = %d,offset = %d,buflen = %d\n",write_cnt,tx_msg->offset,tx_msg->u.msg_cmdrsp.buflen);
-				
+				//LOG_INFO("buflen = %d\n",tx_msg->u.msg_cmdrsp.buflen);
+								
 				if (tx_msg->offset >= tx_msg->u.msg_cmdrsp.buflen) 	
 				{		
 					tls_mem_free(tx_msg->u.msg_cmdrsp.buf);

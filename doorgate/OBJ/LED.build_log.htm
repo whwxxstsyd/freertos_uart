@@ -17,34 +17,37 @@ Library Manager: ArmAr.exe V5.06 update 1 (build 61)
 Hex Converter:   FromElf.exe V5.06 update 1 (build 61)
 CPU DLL:         SARMCM3.DLL V5.18
 Dialog DLL:      DARMSTM.DLL V1.65.0.0
-Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V2.0.18.0
+Target DLL:      UL2CM3.DLL V1.157.5.0
 Dialog DLL:        TARMSTM.DLL   
  
 <h2>Project:</h2>
 E:\doorgate\USER\FreeRTOS.uvprojx
-Project File Date:  05/12/2018
+Project File Date:  05/18/2018
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 1 (build 61)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'FreeRTOS'
-compiling platform.c...
-compiling flash.c...
-..\HARDWARE\FLASH\flash.c(45): warning:  #167-D: argument of type "const u8 *" is incompatible with parameter of type "const char *"
-        len = strlen(Flash_Test)        ;               
-..\HARDWARE\FLASH\flash.c(84): warning:  #177-D: variable "dummy_byte" was declared but never referenced
-        u8 dummy_byte = 0x00;   
-..\HARDWARE\FLASH\flash.c: 2 warnings, 0 errors
+compiling Protocol.c...
+..\PROTOCAL\Protocol.c(101): warning:  #177-D: variable "buflen" was declared but never referenced
+        u32 buflen;
+..\PROTOCAL\Protocol.c(640): warning:  #177-D: variable "Host_Adr" was declared but never referenced
+        u16 Host_Adr = Adrr + (CID1&0x0F)*0x100;        
+..\PROTOCAL\Protocol.c(725): warning:  #940-D: missing return statement at end of non-void function "tls_protocol_rebuild"
+  }
+..\PROTOCAL\Protocol.c(659): warning:  #177-D: function "tls_protocol_add_body" was declared but never referenced
+  static void tls_protocol_add_body(void)
+..\PROTOCAL\Protocol.c: 4 warnings, 0 errors
 linking...
-Program Size: Code=32372 RO-data=656 RW-data=904 ZI-data=29880  
+Program Size: Code=32640 RO-data=656 RW-data=904 ZI-data=29880  
 FromELF: creating hex file...
-"..\OBJ\LED.axf" - 0 Error(s), 2 Warning(s).
+"..\OBJ\LED.axf" - 0 Error(s), 4 Warning(s).
 
 <h2>Collection of Component include folders:</h2>
   E:\doorgate\USER\RTE
   C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.0.0\Device\Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:03
+Build Time Elapsed:  00:00:04
 </pre>
 </body>
 </html>
