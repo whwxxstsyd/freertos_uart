@@ -3,6 +3,17 @@
 
 static void GPIO_BEEP_INIT(void);
 
+static void beep_delay_us(unsigned int time)
+{ 	   
+	unsigned int i=0;  
+	while(time--)
+	{
+		i=8;  
+		while(i--) ;    
+	}
+}
+
+
 
 void Beep_Init(void)
 {	
@@ -29,19 +40,15 @@ static void GPIO_BEEP_INIT(void)
 
 //蜂鸣器测试程序
 void Beep_Test(void)
-{
-	u8 i;
-	u8 Beep_Num = 3;//快闪次数
-
-	for(i=0;i<Beep_Num;i++)
-	{
-		BEEP_ON;
-		delay_xms(300);	
-		BEEP_OFF;
-		delay_xms(300);	
-	}
-
-
+{		
+	hw_platform_beep_ctrl(250,1000);		
+	delay_ms(100);		
+	
+	hw_platform_beep_ctrl(250,1000);	
+	delay_ms(50);
+	
+	hw_platform_beep_ctrl(250,1000);		
+	
 }
 
 
@@ -52,9 +59,9 @@ void hw_platform_beep_ctrl(unsigned short delay,unsigned int beep_freq)
 	for (i = 0; i < (delay*beep_freq)/2000;i++)
 	{		
 		BEEP_ON;
-		delay_us(1000000/beep_freq);	
-		BEEP_OFF;		
-		delay_us(1000000/beep_freq);
+		beep_delay_us(1000000/beep_freq);	
+		BEEP_OFF;			
+		beep_delay_us(1000000/beep_freq);
 	}
 }
 

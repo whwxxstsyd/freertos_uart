@@ -1,4 +1,7 @@
-#include "led.h"
+#include "FreeRTOS.h"
+#include "task.h"
+
+#include "led.h"	
 #include "delay.h"
 #include "param.h"	
 #include "mp_osal_rtos.h"
@@ -20,7 +23,7 @@
 //LED IO初始化
 void Led_Init(void)
 {	
-	GPIO_InitTypeDef  GPIO_InitStructure;
+	GPIO_InitTypeDef  GPIO_InitStructure;	
 
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB|RCC_APB2Periph_GPIOE, ENABLE);	//使能PB,PE端口时钟
 	
@@ -37,29 +40,32 @@ void Led_Init(void)
 
 
 
-void Led_Test(void)
-{	
-	u8 i;
-	u8 Blink_Num = 8;//快闪次数
+
+#define		LED_RUN_MASK			(0x01<<0)
+#define		LED_FUN_MASK			(0x01<<1)		
 	
-	for(i=0;i<Blink_Num;i++)	
-	{		
-		delay_ms(1000);	
-		LED0=!LED0;
-		LED1=!LED1;			
-	}
+#define		LED_RUN_ON_MASK		(0x01<<4)
+#define		LED_FUN_ON_MASK		(0x01<<5)
+
+#define LED_RUN_PERIOD 	M2T(300)				
+#define LED_FUN_PERIOD 	M2T(600)				
+
+
+static u8 current_blink_led;
+static u8 current_led_state;	
+static u8 current_blink_frq;		
+
+static tls_os_timer_t 	led_run_timer;	
+static tls_os_timer_t 	led_fun_timer;	
+
+
+
+
+void Led_Test(void)
+{				
+	hw_platform_start_led_blink(LED_RUN,LED_RUN_PERIOD);			
+	hw_platform_start_led_blink(LED_FUN,LED_FUN_PERIOD);		
 }	
-
-
-static u8	current_blink_led;
-static u8	current_led_state;
-static u8   current_blink_frq;
-static u16  current_timer_cnt;	
-static u8 	led_running;
-
-static tls_os_timer_t 	led_timer;	
-#define TIMER_LED_PERIOD 	M2T(500) 		
-
 	
 /**
 * @brief	LED控制接口
@@ -69,42 +75,44 @@ static tls_os_timer_t 	led_timer;
 */
 void hw_platform_led_ctrl(u16 led,u16 ctrl)
 {
-	if (led == LED0)
-	{
+	if (led == LED_RUN)
+	{	
 		if (ctrl)
-		{
-			GPIO_ResetBits(GPIOF, GPIO_Pin_6);
+		{	
+			GPIO_ResetBits(GPIOB, GPIO_Pin_8);
 		}
 		else
 		{
-			GPIO_SetBits(GPIOF, GPIO_Pin_6);
+			GPIO_SetBits(GPIOB, GPIO_Pin_8);			
 		}
 	}
-	else if (led == LED1)	
+	else if (led == LED_FUN)		
 	{	
 		if (ctrl)
 		{
-			GPIO_ResetBits(GPIOF, GPIO_Pin_7);
+			GPIO_ResetBits(GPIOE, GPIO_Pin_0);
 		}
-		else
+		else	
 		{
-			GPIO_SetBits(GPIOF, GPIO_Pin_7);
+			GPIO_SetBits(GPIOE, GPIO_Pin_0);	
 		}
 	}
 }
 
 
 
-static void led_blink_timer_hook(tls_os_timer_t timer)	
+static void led_run_blink_timer_hook(tls_os_timer_t timer)	
+{			
+	current_led_state ^= LED_RUN_MASK;
+	hw_platform_led_ctrl(LED_RUN,current_led_state & LED_RUN_MASK);
+}	
+
+static void led_fun_blink_timer_hook(tls_os_timer_t timer)	
 {	
-	current_timer_cnt++;
-	if (current_timer_cnt == current_blink_frq*2*10)
-	{	
-		current_led_state ^= 0x01;
-		hw_platform_led_ctrl(current_blink_led,current_led_state);
-		current_timer_cnt = 0;
-	}
+	current_led_state ^= LED_FUN_MASK;			
+	hw_platform_led_ctrl(LED_FUN,current_led_state & LED_FUN_MASK);
 }
+
 
 /**
  * @brief 开始LED闪烁指示
@@ -114,25 +122,84 @@ static void led_blink_timer_hook(tls_os_timer_t timer)
 */
 int hw_platform_start_led_blink(u16 led,u16 delay)
 {		
-	if(!led_running)
-	{
-		current_timer_cnt = 0;
-		current_blink_led = led;
-		current_blink_frq = delay;
-		current_led_state = 1;
-		led_running = 1;
-		hw_platform_led_ctrl(current_blink_led,current_led_state);
-		
-		tls_os_timer_create(&led_timer,  
-							TIMER_LED_PERIOD , 
-							pdTRUE, 		
-							NULL, 
-							led_blink_timer_hook); 
-		
-		tls_os_timer_start(led_timer);
+	if (led == LED_RUN)
+	{	
+		if (current_led_state & LED_RUN_ON_MASK)
+		{	
+			current_led_state |= LED_RUN_MASK;
+			tls_os_timer_change(led_run_timer,0);
+		}	
+		else
+		{
+			current_led_state |= (LED_RUN_MASK | LED_RUN_ON_MASK);
+			tls_os_timer_create(&led_run_timer,  
+									delay,			 	
+									pdTRUE, 				
+									NULL, 			
+									led_run_blink_timer_hook); 
+
+			tls_os_timer_start(led_run_timer);	
+		}
+
+		return TRUE;	
+	}
+	else if (led == LED_FUN)	
+	{	
+		if (current_led_state & LED_FUN_ON_MASK)
+		{		
+			current_led_state |= LED_FUN_MASK;
+			tls_os_timer_change(led_fun_timer,0);	
+		}
+		else
+		{		
+			current_led_state |= (LED_FUN_MASK | LED_FUN_ON_MASK);
+			tls_os_timer_create(&led_fun_timer, 		 
+									delay,	 		
+									pdTRUE, 					
+									NULL, 		
+									led_fun_blink_timer_hook); 	
+
+			tls_os_timer_start(led_fun_timer);	
+		}
 
 		return TRUE;
+	}
+	else
+	{
+		return FALSE;
+	}
+}
 
+/**
+ * @brief 关闭正在闪烁的LED
+*/
+int hw_platform_stop_led_blink(u16 led)	
+{			
+	if(led == LED_RUN)	
+	{	
+		hw_platform_led_ctrl(LED_RUN,0);			
+
+		if (current_led_state & LED_RUN_ON_MASK)
+		{
+			current_led_state &= ~LED_RUN_MASK;
+			current_led_state &= ~LED_RUN_ON_MASK;
+			tls_os_timer_stop(led_run_timer);
+		}
+						
+		return TRUE;
+	}
+	else if (led == LED_FUN)	
+	{
+		hw_platform_led_ctrl(LED_FUN,0);			
+
+		if (current_led_state & LED_FUN_ON_MASK)
+		{
+			current_led_state &= ~LED_FUN_MASK;
+			current_led_state &= ~LED_FUN_ON_MASK;
+			tls_os_timer_stop(led_fun_timer);	
+		}
+						
+		return TRUE;
 	}
 	else
 	{
@@ -141,23 +208,7 @@ int hw_platform_start_led_blink(u16 led,u16 delay)
 
 }
 
-/**
- * @brief 关闭正在闪烁的LED
-*/
-int hw_platform_stop_led_blink(void)
-{		
-	if(led_running)	
-	{
-		tls_os_timer_stop(led_timer);
-		tls_os_timer_delete(led_timer);	
-		hw_platform_led_ctrl(current_blink_led,0);
-		return TRUE;
-	}
-	else
-	{
-		return FALSE;		
-	}
-}
 
 
- 
+
+

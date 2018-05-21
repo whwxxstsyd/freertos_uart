@@ -116,8 +116,9 @@ typedef struct tls_respon_head_t {
 	u8 	 ADR;
 	u8 	 CID1;		
 	u8 	 RTN;		
-	u16  RESPON_LEN;
+	u16  RESPON_DATA;
 	u8 	 HEAD_LEN;
+	u8 	 BODY_LEN;	
 	u8   TAIL_LEN;
 }tls_respon_head;		
 

@@ -21,7 +21,7 @@ struct tls_hostif *tls_get_hostif(void)
 	return &g_hostif;
 }		
 
-		
+
 int tls_hostif_init(void)
 {
 	struct tls_hostif *hif;		

@@ -16,6 +16,10 @@
 #define LED0 PBout(8)	// PA8	
 #define LED1 PEout(0)	// PD2	
 
+#define LED_RUN 0	// PA8	
+#define LED_FUN 1	// PD2
+
+
 void Led_Init(void);//≥ı ºªØ
 
 void Led_Test(void);	
@@ -24,7 +28,7 @@ void hw_platform_led_ctrl(u16 led,u16 ctrl);
 
 int hw_platform_start_led_blink(u16 led,u16 delay);	
 
-int hw_platform_stop_led_blink(void);
+int hw_platform_stop_led_blink(u16 led);	
 
 
 

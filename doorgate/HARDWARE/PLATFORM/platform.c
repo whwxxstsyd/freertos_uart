@@ -63,9 +63,9 @@ int Platform_Init(void)
 
 void Platform_Test(void)
 {	
-	Led_Test();		
-	_24CXXX_Test();
-	SPI_Flash_Test();	
+	Led_Test();			
+	//_24CXXX_Test();
+	//SPI_Flash_Test();	
 	Beep_Test();
 }
 

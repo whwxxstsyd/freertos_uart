@@ -14,8 +14,10 @@
 
 
 void Beep_Test(void);
-void Beep_Init(void);
 	
+void Beep_Init(void);	
+
+void hw_platform_beep_ctrl(unsigned short delay,unsigned int beep_freq);
 
 #endif 
 

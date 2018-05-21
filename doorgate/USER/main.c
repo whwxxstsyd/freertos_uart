@@ -14,7 +14,7 @@ int main(void)
 
 	//∆ΩÃ®≤‚ ‘≥Ã–Ú
 #if	TEST_OPEN	
-	Platform_Test();	
+	Platform_Test();		
 #endif
 		
 	app_init();	
