@@ -56,6 +56,9 @@ int Platform_Init(void)
 
 #endif
 
+  My_Led_Init();	
+
+
   return 1;	
 }
 

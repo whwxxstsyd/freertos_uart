@@ -16,8 +16,16 @@
 #define LED0 PBout(8)	// PA8	
 #define LED1 PEout(0)	// PD2	
 
+
+#define LED3 PAout(8)	// PA8
+#define LED4 PDout(2)	// PD2		
+
+
 #define LED_RUN 0	// PA8	
 #define LED_FUN 1	// PD2
+
+
+void My_Led_Init(void);
 
 
 void Led_Init(void);//≥ı ºªØ

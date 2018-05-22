@@ -96,6 +96,8 @@ static int post_protocmd_get_version_proc(struct tls_protocmd_token_t *tok,
         											char *res_resp, u32 *res_len)
 {
 	
+
+	return RTN_NORMAL;
 }
 
 		
@@ -128,6 +130,9 @@ static int post_protocmd_remote_proc(struct tls_protocmd_token_t *tok,
 static int post_protocmd_get_ariber_ver_proc(struct tls_protocmd_token_t *tok,
         char *res_resp, u32 *res_len)
 {
+	
+	*res_len = Ariber_GetDeviceInfo(res_resp);		
+	
 	return RTN_NORMAL;
 }
 
@@ -147,7 +152,7 @@ static int post_protocmd_authority_confirm_proc(struct tls_protocmd_token_t *tok
 
 	if(cmd_group != 0xF0)
 	{
-		return FALSE;
+		return RTN_UNKNOW_CMD;
 	}
 
 	switch(cmd_type)
@@ -194,18 +199,35 @@ static int post_protocmd_set_sys_param_proc(struct tls_protocmd_token_t *tok,
 
 	if(cmd_group != 0xF1)
 	{	
-		return FALSE;
+		return RTN_UNKNOW_CMD;
 	}
 	
 	switch(cmd_type)
 	{
-		case CMD_0x49_SET_DATE:
+		case CMD_0x49_SET_WORK_DAY_IN:
 	
-			LOG_INFO("CMD:0x49 Type:Set Date\n");		
+			LOG_INFO("CMD_0x49_SET_WORK_DAY_IN\n");		
 			
 			*res_len = Ariber_SetSysTime(tok,res_resp);			
 
 			break;
+
+		case CMD_0x49_SET_REST_DAY_IN:
+	
+			LOG_INFO("CMD_0x49_SET_REST_DAY_IN\n");			
+			
+			*res_len = Ariber_SetSysTime(tok,res_resp);			
+
+			break;
+	
+		case CMD_0x49_SET_WEEK_IN:
+	
+			LOG_INFO("CMD_0x49_SET_WEEK_IN\n");		
+			
+			*res_len = Ariber_SetSysTime(tok,res_resp);			
+
+			break;
+
 
 		default:
 
@@ -224,20 +246,32 @@ static int post_protocmd_get_sys_param_proc(struct tls_protocmd_token_t *tok,
 	if(cmd_group != 0xF2)
 	{	
 		LOG_INFO("cmd_group error\n");		
-		return FALSE;	
+		return RTN_UNKNOW_CMD;	
 	}
 		
 	switch(cmd_type)
 	{	
-		case CMD_0x4A_GET_DATE:		
+		case CMD_0x4A_GET_WORK_DAY_IN:		
 
-			LOG_INFO("CMD_0x4A_GET_DATE\n");			
-				
-			*res_len = Ariber_GetSysTime(res_resp);			
+			LOG_INFO("CMD_0x4A_GET_WORK_DAY_IN\n");				
+			
+			*res_len = Ariber_GetWorkDayPermitList(tok,res_resp);
 			
 			break;
 
-		case CMD_0x4A_GET_DOOR_STA:				
+		case CMD_0x4A_GET_REST_DAY_IN:			
+			
+			LOG_INFO("CMD_0x4A_GET_REST_DAY_IN\n");	
+			
+			*res_len = Ariber_GetRestDayPermitList(tok,res_resp);
+			
+			break;
+
+		case CMD_0x4A_GET_WEEK_IN:				
+			
+			LOG_INFO("CMD_0x4A_GET_WEEK_IN\n");		
+			
+			*res_len = Ariber_GetWeekPermitList(tok,res_resp);	
 			
 			break;
 
@@ -258,7 +292,7 @@ static int post_protocmd_set_guard_param_proc(struct tls_protocmd_token_t *tok,
 
 	if(cmd_group != 0xF3)
 	{
-		return FALSE;
+		return RTN_UNKNOW_CMD;
 	}
 
 	switch(cmd_type)
@@ -295,27 +329,99 @@ static int post_protocmd_get_guard_param_proc(struct tls_protocmd_token_t *tok,
 
 	if(cmd_group != 0xF4)
 	{
-		return FALSE;
+		return RTN_UNKNOW_CMD;
 	}	
 
 	switch(cmd_type)
 	{
-		case CMD_0x4C_GET_VOICE:		
+		case CMD_0x4C_GET_HANDLE_POS:			
 
-			LOG_INFO(" CMD:0x4C Type:Get Voice Mark\n");
+			LOG_INFO("CMD_0x4C_GET_HANDLE_POS\n");
+
+			break;
+
+		case CMD_0x4C_GET_CARD_BIT:			
+
+			LOG_INFO("CMD_0x4C_GET_CARD_BIT\n");
+
+
+			break;
+
+		case CMD_0x4C_GET_ARMY_OFF_STA:			
+
+			LOG_INFO("CMD_0x4C_GET_ARMY_OFF_STA\n");
+
+
+			break;
+
+		case CMD_0x4C_GET_ALARM_PARAM:			
+
+			LOG_INFO("CMD_0x4C_GET_ALARM_PARAM\n");
+
+
+			break;
+
+
+		case CMD_0x4C_GET_ARMY_ON_STA:			
+
+			LOG_INFO("CMD_0x4C_GET_ARMY_ON_STA\n");
+
+
+			break;
+
+		case CMD_0x4C_GET_DIY_PARAM:			
+
+			LOG_INFO("CMD_0x4C_GET_DIY_PARAM\n");
+
+
+			break;
+
+		case CMD_0x4C_GET_VOICE_STA:			
+
+			LOG_INFO("CMD_0x4C_GET_VOICE_STA\n");
 
 			Ariber_GetVoiceMark();
 
 			break;
 
-		case CMD_0x4C_GET_FLASH_ID:			
+		case CMD_0x4C_GET_SWITCH_PARAM:			
 
-			LOG_INFO(" CMD:0x4C Type:Get Falsh ID\n");
-			
-			Ariber_GetFlashID();
+			LOG_INFO("CMD_0x4C_GET_SWITCH_PARAM\n");
+
+
+			break;
+
+		case CMD_0x4C_ARMY_PARAM:			
+
+			LOG_INFO("CMD_0x4C_ARMY_PARAM\n");
+
+
+			break;
+
+		
+		case CMD_0x4C_GET_USER_PWD:			
+		
+			LOG_INFO("CMD_0x4C_GET_USER_PWD\n");
+		
 		
 			break;
 
+		
+		case CMD_0x4C_GET_FLASH_ID:			
+		
+			LOG_INFO("CMD_0x4C_GET_FLASH_ID\n");
+			
+			*res_len = Ariber_GetFlashID(res_resp);		
+			
+			break;
+
+		case CMD_0x4C_GET_DOOR_LOG:			
+		
+			LOG_INFO("CMD_0x4C_GET_DOOR_LOG\n");
+		
+		
+			break;
+					
 		default:
 
 			break;
@@ -497,11 +603,16 @@ int tls_protocmd_parse(struct tls_protocmd_token_t *tok, char *buf, u32 *res_len
 	
 	LOG_INFO("ARGV = ");//参数数值
 
+#if DEBUG_ON
+			
 	for(j=0;j<tok->arg_found;j++)				
 	{								
 		printf("%x ",tok->arg[j]);						
 	}	
-	printf("\n");			
+	printf("\n");
+
+#endif 
+			
 		
 	return 0;		
 }
@@ -618,7 +729,7 @@ static void tls_protocol_add_head(tls_respon_head *resp_h,u8 *buff,u32 *res_len)
 
 static void tls_protocol_add_body(void)
 {
-		
+	
 }
 
 
@@ -629,31 +740,29 @@ static void tls_protocol_add_tail(tls_respon_head *resp_h,u8 *buff,u32 *res_len)
 	u8 tail = PROTOCOL_TAIL;			
 	u8 tempSum[2]={0};		
 	
-	p++;//去掉头	
+	p++;//去掉头		
 	
 	data_cnt = resp_h->BODY_LEN + (PROTOCOL_HEAD_LEN - 1);//有效信息的长度				
-
-	LOG_INFO("tail cnt = %d\n",data_cnt);		
-
+		
 	LOG_INFO("data dump\n");			
 
-	for(i=0;i<data_cnt;i++)				
-	{		
-		printf("No.%d data:%x,chksum:%x\n",i,*p,chk_sum);							
-		chk_sum += *p++;	
-	}		
-	printf("No.%d data:%x,chksum:%x\n",i,*p,chk_sum);					
-
+	for(i=0;i<data_cnt;i++) 				
+	{				
+		LOG_INFO("No.%d data:%x,chksum:%x\n",i,*p,chk_sum);							
+		chk_sum += *p++;		
+	}			
+	LOG_INFO("No.%d data:%x,chksum:%x\n",i,*p,chk_sum);	
+	
 	chk_sum = ~chk_sum+1;			
 
-	LOG_INFO("tail chksum trans= %x\n",chk_sum);			
+	LOG_INFO("tail chksum= %x\n",chk_sum);				
 	
-	tempSum[0] = (u8)(chk_sum>>8);	
-	tempSum[1] = (u8)(chk_sum);				
+	tempSum[0] = (u8)(chk_sum>>8);		
+	tempSum[1] = (u8)(chk_sum);					
 
 	fill_buff(&p,tempSum[0],1);
 	fill_buff(&p,tempSum[1],1);	
-	fill_buff(&p,tail,0);
+	fill_buff(&p,tail,0);	
 
 	*res_len = *res_len + PROTOCOL_TAIL_LEN;		
 }
@@ -669,7 +778,7 @@ u16 tls_token_resp_len(u32 *res_len)
 		return 0x0000;		
 	}		
 	else
-	{		
+	{			
 		LOG_INFO("token resp len=%d\n",len);	
 		
 		chk_tmp[0] = (len>>8)&0x0F;  //len的倒数第三四位
@@ -677,16 +786,24 @@ u16 tls_token_resp_len(u32 *res_len)
 		chk_tmp[2] = len&0x0F;//len的最低四位		
 
 		chk_sum = (chk_tmp[0]+chk_tmp[1]+chk_tmp[2])%16;
-	
+			
 		LOG_INFO("chk_sum phrase1 = %x\n",chk_sum);		
 		
-		chk_sum = (~chk_sum)&0x0F+1;						
+		chk_sum = ~chk_sum;								
 
-		LOG_INFO("chk_sum phrase2 = %x\n",chk_sum);		
+		LOG_INFO("chk_sum phrase2 = %x\n",chk_sum);				
+
+		chk_sum = (chk_sum&0x0F) + 1;				
+
+		LOG_INFO("chk_sum phrase3 = %x\n",chk_sum);		
+
+		ret = ret + (u16)chk_sum;	
 	
-		ret = (ret + chk_sum)<<12 + len;				
+		LOG_INFO("ret phrase4 = %x\n",ret);					
+	
+		ret = (ret<<12) + len;									
 		
-		LOG_INFO("chk_sum phrase3 = %x\n",ret);						
+		LOG_INFO("ret phrase5 = %x\n",ret);			
 
 		return ret;	
 	}
@@ -699,15 +816,17 @@ static void tls_token_reunion(tls_respon_head *respon_h,
 {			
 	u8  RTN  = err;								
 	u16 Length  = tls_token_resp_len(res_len);//根据命令发送不同长度的回复
+		
+	LOG_INFO("The data len = %x\n",Length);				
 	
 	respon_h->SOI 			= 	PROTOCOL_HEAD;		
 	respon_h->VER			= 	tok->VER;
 	respon_h->ADR 			= 	tok->ADDR;
 	respon_h->CID1 			=	tok->CID1;
 	respon_h->RTN			=	RTN;		
-	respon_h->RESPON_DATA	=	Length;
+	respon_h->RESPON_DATA	=	Length;		
 	respon_h->HEAD_LEN		=	PROTOCOL_HEAD_LEN;	//发送的ASCII数
-	respon_h->BODY_LEN		= 	(Length&0x0FFF)*2;	//发送的ASCII数
+	respon_h->BODY_LEN		= 	(Length&0x0FFF);	//发送的ASCII数
 	respon_h->TAIL_LEN		=	PROTOCOL_TAIL_LEN;	//发送的ASCII数
 }
 

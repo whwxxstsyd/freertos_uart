@@ -18,18 +18,19 @@
 typedef struct	DEVICE_INFO_t
 {	
 	u16 Device_Addr[DEVICE_NUM];						
-	u8	SoftWare_Ver[7];			
-	u8  HardWare_Ver[7];       		
-	u8	Company_Name[21];						
-	u8	Device_Name[21];	
-	u32	Uer_ID;			
+	u8	*SoftWare_Ver;			
+	u8  *HardWare_Ver;       		
+	u8	*Company_Name;						
+	u8	*Device_Name;	
+	u32	User_ID;			
 }DEVICE_INFO;			
 
 
 
 void Device_Info_Default(void);		
 
-void Device_Info_Get(DEVICE_INFO *info);
+DEVICE_INFO *Device_Info_Get(void);
+
 
 u16 Device_Addr_Info_Get(u8 num);
 

@@ -34,4 +34,5 @@
 ..\obj\param_base.o: ..\INCLUDE\common.h
 ..\obj\param_base.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 ..\obj\param_base.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+..\obj\param_base.o: ..\INCLUDE\debug.h
 ..\obj\param_base.o: ..\INCLUDE\param.h

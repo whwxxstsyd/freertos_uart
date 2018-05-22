@@ -1,9 +1,48 @@
----- tls_protocmd_exec Matches (8 in 5 files) ----
-LED.htm (e:\doorgate\obj):<LI><a href="#[1ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_protocmd_exec
-LED.htm (e:\doorgate\obj):<P><STRONG><a name="[1ae]"></a>tls_protocmd_exec</STRONG> (Thumb, 60 bytes, Stack size 24 bytes, protocol.o(.text))
-LED.htm (e:\doorgate\obj):<LI>Call Chain = tls_protocmd_exec &rArr; __2sprintf &rArr; _printf_char_common &rArr; __printf
-LED.htm (e:\doorgate\obj):<BR>[Called By]<UL><LI><a href="#[1ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_protocmd_exec
-Mp_protocol_hostif.c (e:\doorgate\userlib):                err = tls_protocmd_exec(&protocmd_tok,cmdrsp_buf,&cmdrsp_size);		
-Protocol.c (e:\doorgate\protocal):int tls_protocmd_exec(struct tls_protocmd_token_t *tok,char *res_rsp,u32 *res_len)
-Protocol.h (e:\doorgate\protocal):int tls_protocmd_exec(struct tls_protocmd_token_t *tok,char *res_rsp, u32 *res_len);	
-Readme.txt (e:\doorgate):			tls_protocmd_exec();//Ð­ÒéÃüÁîÖ´ÐÐ
+---- printf Matches (47 in 6 files) ----
+Debug.h (e:\doorgate\include):						printf("[%s-%s-%d]\t", debug_str[level], pcStr, __LINE__);		\
+Debug.h (e:\doorgate\include):						printf(__VA_ARGS__);							\
+Debug.h (e:\doorgate\include):#define zprint_r(fmt, args...) printf ("\e[31m#zprint#[%s][%d]"fmt"\e[0m\n", __func__, __LINE__, ##args);
+Debug.h (e:\doorgate\include):#define zprint_g(fmt, args...) printf ("\e[42m#zprint#[%s][%d]"fmt"\e[0m\n", __func__, __LINE__, ##args);
+Debug.h (e:\doorgate\include):#define zprint_y(fmt, args...) printf ("\e[33m#zprint#[%s][%d]"fmt"\e[0m\n", __func__, __LINE__, ##args);
+Debug.h (e:\doorgate\include):#define zprint_b(fmt, args...) printf ("\e[44m#zprint#[%s][%d]"fmt"\e[0m\n", __func__, __LINE__, ##args);
+Debug.h (e:\doorgate\include):#define zprint_G(fmt, args...) printf ("\e[36m#zprint#[%s][%d]"fmt"\e[0m\n", __func__, __LINE__, ##args);
+Debug.h (e:\doorgate\include):						printf("[%s-%s-%d]\t", debug_str[level], pcStr, __LINE__);		\
+Debug.h (e:\doorgate\include):						printf(arg);									\
+Debug.h (e:\doorgate\include):#define zprint_r(fmt, args...) printf ("\e[31m#zprint#[%s][%d]"fmt"\e[0m\n", __func__, __LINE__, ##args);
+Debug.h (e:\doorgate\include):#define zprint_g(fmt, args...) printf ("\e[42m#zprint#[%s][%d]"fmt"\e[0m\n", __func__, __LINE__, ##args);
+Debug.h (e:\doorgate\include):#define zprint_y(fmt, args...) printf ("\e[33m#zprint#[%s][%d]"fmt"\e[0m\n", __func__, __LINE__, ##args);
+Debug.h (e:\doorgate\include):#define zprint_b(fmt, args...) printf ("\e[44m#zprint#[%s][%d]"fmt"\e[0m\n", __func__, __LINE__, ##args);
+Debug.h (e:\doorgate\include):#define zprint_G(fmt, args...) printf ("\e[36m#zprint#[%s][%d]"fmt"\e[0m\n", __func__, __LINE__, ##args);
+FreeRTOSConfig.h (e:\doorgate\freertos\include):#define vAssertCalled(char,int) printf("Error:%s,%d\r\n",char,int)
+Mp_mem.c (e:\doorgate\mem):            printf("mem_alloc_debug: tls_os_sem_create mem_sem error\n");
+Mp_mem.c (e:\doorgate\mem):		     printf("Memory blocks empty!\n");
+Mp_mem.c (e:\doorgate\mem):        printf("==>Memory was allocated from %s at line %d with length %d, allocated size %d, count %d\n",
+Mp_mem.c (e:\doorgate\mem):            printf("mem_alloc_debug: tls_os_sem_create mem_sem error\n");
+Mp_mem.c (e:\doorgate\mem):	     printf("Memory blocks empty!\n");
+Mp_mem.c (e:\doorgate\mem):        printf("==>Memory was allocated from %s at line %d with length %d, allocated size %d, count %d\n",
+Mp_mem.c (e:\doorgate\mem):	 printf("Memory Block %p was deallocated from %s at line %d \n", mem_ptn_hd, file, line);
+Mp_mem.c (e:\doorgate\mem):	 printf("Memory %p has been deallocated!\n", p);
+Mp_mem.c (e:\doorgate\mem):                printf("Memory Block %p has been put free list!\n", mem_ptn_hd);
+Mp_mem.c (e:\doorgate\mem):        printf("Memory %p was deallocated from %s at line %d \n", p, file, line);
+Mp_mem.c (e:\doorgate\mem):        printf("Memory header corruption due to underflow detected at memory block %p\n",
+Mp_mem.c (e:\doorgate\mem):        printf("Header pattern 0(0x%x)\n",//, 1(0x%x), 2(0x%x), 3(0x%x)
+Mp_mem.c (e:\doorgate\mem):        printf("Memory was allocated from %s at line %d with length %d\n",
+Mp_mem.c (e:\doorgate\mem):	 printf("Memory %p was deallocated from %s at line %d \n", p, file, line);
+Mp_mem.c (e:\doorgate\mem):        printf("Memory tailer corruption due to overflow detected at %p\n", mem_ptn_hd);
+Mp_mem.c (e:\doorgate\mem):        printf("Tailer pattern 0(0x%x)\n",//, 1(0x%x), 2(0x%x), 3(0x%x)
+Mp_mem.c (e:\doorgate\mem):        printf("Memory was allocated from %s at line %d with length %d\n",
+Mp_mem.c (e:\doorgate\mem):		printf("mem_realloc_debug failed(size=%d).\n", size);
+Mp_mem.c (e:\doorgate\mem):        printf("Block(%2d): addr<%p>, file<%s>, line<%d>, length<%d>\n",
+Mp_mem.c (e:\doorgate\mem):                printf("==>Memory oversize. Block(%2d): addr<%p>, file<%s>, line<%d>, length<%d>\n",
+Mp_mem.c (e:\doorgate\mem):    printf("==>Memory is not safe addr<%p>, file<%s>, line<%d>.\n",p, file, line);
+Mp_uart.c (e:\doorgate\userlib):			printf("\ntx len=%d\n",len);
+Mp_uart.c (e:\doorgate\userlib):			printf("\ntx len 0=%d\n",len);
+Mp_uart.c (e:\doorgate\userlib):			printf("\ntx len 1=%d\n",len);
+Protocol.c (e:\doorgate\protocal):		printf("%x ",tok->arg[j]);						
+Protocol.c (e:\doorgate\protocal):	printf("\n");
+ProtocolBase.c (e:\doorgate\protocal):			printf("%x %x ",*res_resp,*(res_resp+1));	
+ProtocolBase.c (e:\doorgate\protocal):		printf("\n");	
+ProtocolBase.c (e:\doorgate\protocal):			printf("%x %x ",*res_resp,*(res_resp+1));	
+ProtocolBase.c (e:\doorgate\protocal):		printf("\n");
+ProtocolBase.c (e:\doorgate\protocal):			printf("%x %x ",*res_resp,*(res_resp+1));	
+ProtocolBase.c (e:\doorgate\protocal):		printf("\n");

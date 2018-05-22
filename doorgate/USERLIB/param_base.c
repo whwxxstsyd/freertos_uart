@@ -1,33 +1,35 @@
 #include <string.h>	
 
 #include "param_base.h"	
+#include "debug.h"
 #include "param.h"	
 
 
-static DEVICE_INFO Device_Info;
+DEVICE_INFO Device_Info;
 
-
-
+	
 void Device_Info_Default(void)		
 {	
 	u16 i;
-
+	
 	for(i=0;i<DEVICE_NUM;i++)
 	{
-		Device_Info.Device_Addr[i] = DEVICE_ADDR_DEFAULT+i;
-	}
-	
-	strcpy(Device_Info.SoftWare_Ver,SOFTWARE_VERSION);
-	strcpy(Device_Info.HardWare_Ver,HARDWARE_VERSION);
-	strcpy(Device_Info.Company_Name,COMPANY_NAME);
-	strcpy(Device_Info.Device_Name,DEVICE_NAME);		
-	Device_Info.Uer_ID		= 	U_ID;	
+		Device_Info.Device_Addr[i] = DEVICE_ADDR_DEFAULT + i;	
+	}		
+		
+	Device_Info.SoftWare_Ver = SOFTWARE_VERSION;
+	Device_Info.HardWare_Ver = HARDWARE_VERSION;
+	Device_Info.Company_Name = COMPANY_NAME;
+	Device_Info.Device_Name  = DEVICE_NAME;		
+	Device_Info.User_ID	   = U_ID;		
 }
 
 
-void Device_Info_Get(DEVICE_INFO *info)
+DEVICE_INFO *Device_Info_Get(void)
 {	
-	info = &Device_Info;
+	DEVICE_INFO *info = &Device_Info;		
+
+	return info;
 }
 	
 
