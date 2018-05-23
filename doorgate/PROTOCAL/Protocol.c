@@ -297,26 +297,91 @@ static int post_protocmd_set_guard_param_proc(struct tls_protocmd_token_t *tok,
 
 	switch(cmd_type)
 	{
-		case CMD_0x4B_SET_VOICE:		
+		case CMD_0x4B_SET_HANDLE_POS:		
 
-			LOG_INFO(" CMD:0x4B Type:Set Voice\n");	
-			
-			Ariber_SetVoiceMark();
+			LOG_INFO("CMD_0x4B_SET_VOICE_MARK\n");		
+
+			*res_len = Ariber_SetHandlePos(tok,res_resp);
 
 			break;
 
-		case CMD_0x4B_PLY_VOICE:			
+		case CMD_0x4B_SET_CARD_BIT:			
 
-			LOG_INFO(" CMD:0x4B Type:Play Voice\n"); 
+			LOG_INFO("CMD_0x4B_SET_CARD_BIT\n");		
 
-			Ariber_PlayVoice();	
+			*res_len = Ariber_SetCardBit(tok,res_resp);	
+				
+			break;
 
+		case CMD_0x4B_SET_ARMY_PARAM:		
+
+			LOG_INFO("CMD_0x4B_SET_ARMY_PARAM\n");	
+			
+			*res_len = Ariber_SetArmyParam(tok,res_resp);	
+		
+			break;
+			
+		case CMD_0x4B_SET_ALARM_PARAM:		
+			
+			LOG_INFO("CMD_0x4B_SET_ALARM_PARAM\n");	
+
+			*res_len = Ariber_SetAlarmParam(tok,res_resp);	
+				
+			break;
+
+		case CMD_0x4B_SET_ARMYING_STA:		
+				
+			LOG_INFO("CMD_0x4B_SET_ARMYING_STA\n");	
+			
+			*res_len = Ariber_SetArmyingSta(tok,res_resp);	
+			
+			break;
+
+		case CMD_0x4B_SET_SYS_STA:			
+			
+			LOG_INFO("CMD_0x4B_SET_SYS_STA\n");	
+
+			*res_len = Ariber_SetSystemSta(tok,res_resp);	
+				
+			break;
+
+		case CMD_0x4B_SET_SWITCH_OUT:		
+			
+			LOG_INFO("CMD_0x4B_SET_SWITCH_OUT\n");	
+
+			*res_len = Ariber_SetSwitchOut(tok,res_resp);	
+				
+			break;
+
+			
+		case CMD_0x4B_SET_VOICE_MARK:		
+			
+			LOG_INFO("CMD_0x4B_SET_VOICE_MARK\n");	
+					
+			*res_len = Ariber_SetVoiceMark(tok,res_resp);
+			
+			break;		
+					
+		case CMD_0x4B_SET_IO_SWITCH:			
+				
+			LOG_INFO("CMD_0x4B_SET_IO_SWITCH\n");	
+
+			*res_len = Ariber_SetIOSwitchParam(tok,res_resp);	
+				
 			break;
 
 		default:
+			
+			*res_len = 0;
+			
+			*res_resp = 0;
 
-			break;
+			return RTN_UNKNOW_CMD;		
+				
+			break;	
 	}
+
+	
 	return RTN_NORMAL;
 }
 
@@ -391,7 +456,7 @@ static int post_protocmd_get_guard_param_proc(struct tls_protocmd_token_t *tok,
 
 			break;
 
-		case CMD_0x4C_ARMY_PARAM:			
+		case CMD_0x4C_GET_ARMY_PARAM:				
 
 			LOG_INFO("CMD_0x4C_ARMY_PARAM\n");
 
@@ -703,7 +768,7 @@ static void tls_protocol_add_head(tls_respon_head *resp_h,u8 *buff,u32 *res_len)
 	
 	//RTN和Length根据前面的收到的消息做具体的回复
 	u8 RTN = resp_h->RTN;					
-	u16 LEN = resp_h->RESPON_DATA;			
+	u16 LEN = resp_h->LENGTH;			
 	
 	u8 Len_H  = (u8)(LEN>>8);				
 	u8 Len_L  = (u8)(LEN);			
@@ -824,7 +889,7 @@ static void tls_token_reunion(tls_respon_head *respon_h,
 	respon_h->ADR 			= 	tok->ADDR;
 	respon_h->CID1 			=	tok->CID1;
 	respon_h->RTN			=	RTN;		
-	respon_h->RESPON_DATA	=	Length;		
+	respon_h->LENGTH		=	Length;			
 	respon_h->HEAD_LEN		=	PROTOCOL_HEAD_LEN;	//发送的ASCII数
 	respon_h->BODY_LEN		= 	(Length&0x0FFF);	//发送的ASCII数
 	respon_h->TAIL_LEN		=	PROTOCOL_TAIL_LEN;	//发送的ASCII数

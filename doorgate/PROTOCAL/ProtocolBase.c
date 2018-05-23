@@ -131,13 +131,9 @@ int Ariber_SetSysTime(struct tls_protocmd_token_t *tok,u8 *res_resp)
 }
 
 
-int Ariber_SetVoiceMark(void)
-{
-	return TRUE;
-}
 
-int Ariber_PlayVoice(void)
-{
+int Ariber_IO_Switch()
+{	
 	return TRUE;
 }
 
@@ -201,7 +197,7 @@ int Ariber_GetDeviceInfo(u8 *res_resp)
 
 
 	
-u8 Week_list1[4][4]={
+u8 Week_list1[6][4]={
 	{1,2,3,4},
 	{1,2,3,4},
 	{1,2,3,4},
@@ -210,7 +206,7 @@ u8 Week_list1[4][4]={
 	{1,2,3,4},
 };
 
-u8 Week_list2[4][4]={
+u8 Week_list2[6][4]={
 	{5,6,7,8},
 	{5,6,7,8},
 	{5,6,7,8},
@@ -219,7 +215,7 @@ u8 Week_list2[4][4]={
 	{5,6,7,8}
 };
 
-u8 Week_list3[4][4]={
+u8 Week_list3[6][4]={
 	{4,3,2,1},
 	{4,3,2,1},
 	{4,3,2,1},
@@ -228,7 +224,7 @@ u8 Week_list3[4][4]={
 	{4,3,2,1}
 };
 
-u8 Week_list4[4][4]={
+u8 Week_list4[6][4]={	
 	{8,7,6,5},
 	{8,7,6,5},
 	{8,7,6,5},
@@ -458,4 +454,220 @@ int Ariber_SetRestDayPermitList(struct tls_protocmd_token_t *tok,u8 *res_resp)
 {
 	
 }
+
+
+
+
+
+//4B命令下的子命令
+
+int Ariber_SetHandlePos(struct tls_protocmd_token_t *tok,u8 *res_resp)	
+{
+	u8 handle_pos[2];//获取方向
+
+	handle_pos[0] = tok->arg[2];//获取的第一个字节	
+	handle_pos[1] = tok->arg[3];//获取到把手的方向
+
+	if(handle_pos[1] == HANDLE_RIGHT)
+	{
+		LOG_INFO("HANDLE_RIGHT\n ");
+	}
+	else
+	{
+		LOG_INFO("HANDLE_LEFT\n ");	
+	}
+	
+	return SET_SUCCEED_RTN_LEN;
+}
+
+
+int Ariber_SetCardBit(struct tls_protocmd_token_t *tok,u8 *res_resp)	
+{
+	u8 Card_ValidBit = tok->arg[2]; //卡有效位
+	u8 Card_EndianSet = tok->arg[3];//字节序设置
+	
+	LOG_INFO("Card_ValidBit:&d\n",Card_ValidBit);		
+	LOG_INFO("Card_EndianSet:&d\n",Card_EndianSet);		
+	
+	return SET_SUCCEED_RTN_LEN;
+}
+
+int Ariber_SetArmyParam(struct tls_protocmd_token_t *tok,u8 *res_resp)	
+{
+	u8 Army_Style = tok->arg[2];//撤布防+布防类型	
+	u8 Army_Period = tok->arg[3];//布防时间(单位:分钟)
+
+	u8 Armying_Type = Army_Style & 0x01;//布防类型
+	u8 Army_Type = Army_Style & 0x02;//撤防和布防御
+
+	LOG_INFO("Army_Period:%d\n",Army_Period);				
+
+	if(Armying_Type == DEVICE_ARMING)	
+	{
+		LOG_INFO("Armying_Type: DEVICE_ARMING\n");	
+	}
+	else
+	{
+		LOG_INFO("Armying_Type: DEVICE_UN_ARMING\n");			
+	}
+
+	if(Army_Type == DEVICE_AUTO_ARMING)
+	{
+		LOG_INFO("Army_Type: DEVICE_AUTO_ARMING\n");	
+	}
+	else
+	{
+		LOG_INFO("Army_Type: DEVICE_MAN_ARMING\n");		
+	}	
+	
+	return SET_SUCCEED_RTN_LEN;
+}
+
+int Ariber_SetAlarmParam(struct tls_protocmd_token_t *tok,u8 *res_resp)	
+{
+	u16 Alarm_Arming_Time;
+	u8 Alarm_Mask,Alarm_RevokeByKey,Alarm_TimeTmp[2];	
+
+	Alarm_TimeTmp[0] = tok->arg[2];
+	Alarm_TimeTmp[1] = tok->arg[3];
+	Alarm_Mask = tok->arg[4];
+	Alarm_RevokeByKey = tok->arg[5];	
+	
+	Alarm_Arming_Time = TwoCharToInt(Alarm_TimeTmp[0],Alarm_TimeTmp[1]);	
+
+	LOG_INFO("Alarm_Arming_Time:%d\n",Alarm_Arming_Time);
+
+	if(Alarm_Mask == ALARM_MASK_ON)
+	{
+		LOG_INFO("ALARM_MASK_ON\n");
+	}
+	else
+	{
+		LOG_INFO("ALARM_MASK_OFF\n");	
+	}
+
+	
+	if(Alarm_RevokeByKey == ALARM_REVOKE_BY_KEY)	
+	{
+		LOG_INFO("ALARM_REVOKE_BY_KEY\n");
+	}	
+	else
+	{
+		LOG_INFO("ALARM_REVOKE_NO_KEY\n");	
+	}
+
+
+	return SET_SUCCEED_RTN_LEN;	
+}
+
+int Ariber_SetArmyingSta(struct tls_protocmd_token_t *tok,u8 *res_resp)	
+{
+	u8 i,pos = 2;
+	u8 Armying_Flag,Armying_Type,Armying_Tim_Num,Armying_Tim[6],Armying_N_Byte;
+	u8 Armying_Man,Armying_Condition;
+	u8 LianDong[8];
+
+	Armying_Flag = tok->arg[pos++];
+	Armying_Type = tok->arg[pos++];
+	Armying_Tim_Num = tok->arg[pos++];
+	Armying_N_Byte = tok->arg[pos++];	
+
+	for(i=0;i<6;i++)
+	{
+		Armying_Tim[i] = tok->arg[pos++];
+	}
+
+	Armying_Man = tok->arg[pos++];
+	Armying_Condition = tok->arg[pos++];
+
+	for(i=0;i<8;i++)
+	{			
+		LianDong[i] = tok->arg[pos++];
+	}
+	
+	LOG_INFO("Armying_Info\n");	
+	LOG_INFO("1.%d,2.%d,3.%d\n",Armying_Flag,Armying_Type,Armying_Tim_Num);	
+	LOG_INFO("4.%d,5.%d,6.%d\n",Armying_N_Byte,Armying_Man,Armying_Condition);
+
+	LOG_INFO("LianDong:"); 
+	for(i=0;i<7;i++)
+	{	
+#if DEBUG_ON	
+		printf("%x ",LianDong[i]);	
+#endif
+	}
+	
+#if DEBUG_ON
+	printf("\n");		
+#endif
+
+	return SET_SUCCEED_RTN_LEN;	
+}
+
+int Ariber_SetSystemSta(struct tls_protocmd_token_t *tok,u8 *res_resp)	
+{
+	u8 System_Sta,pos = 2;
+
+	System_Sta = tok->arg[pos++];
+
+	switch(System_Sta)
+	{
+		case 0:
+			LOG_INFO("Normal Condition\n"); 
+
+			break;
+
+		case 1:
+			LOG_INFO("Setting Condition\n"); 
+
+			break;
+
+		case 2:
+			LOG_INFO("Card reading Condition\n"); 	
+
+			break;
+
+		case 3:
+			LOG_INFO("Debug Condition\n"); 	
+
+			break;
+
+		default:		
+
+			break;
+	}
+	
+	return SET_SUCCEED_RTN_LEN;		
+}
+
+int Ariber_SetSwitchOut(struct tls_protocmd_token_t *tok,u8 *res_resp)	
+{
+	
+	
+	return SET_SUCCEED_RTN_LEN;		
+}
+
+int Ariber_SetVoiceMark(struct tls_protocmd_token_t *tok,u8 *res_resp)	
+{
+	u8 Door_Num,Mask_Bit[2],pos = 2;
+	u16 Voice_Mask;
+	
+	Door_Num = tok->arg[pos++];
+	Mask_Bit[0] = tok->arg[pos++];
+	Mask_Bit[1] = tok->arg[pos++];	
+	Voice_Mask = TwoCharToInt(Mask_Bit[0],Mask_Bit[1]);
+	
+	LOG_INFO("Voice_Mask = %d\n",Voice_Mask);	
+	
+	return SET_SUCCEED_RTN_LEN;		
+}
+	
+int Ariber_SetIOSwitchParam(struct tls_protocmd_token_t *tok,u8 *res_resp)	
+{
+	
+	
+	return SET_SUCCEED_RTN_LEN;	
+}
+
+
 

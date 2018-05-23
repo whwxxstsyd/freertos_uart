@@ -41,15 +41,28 @@ extern "C" {
 //0x4A命令的type	
 #define CMD_0x4A_GET_WORK_DAY_IN 		0xE3		
 #define CMD_0x4A_GET_REST_DAY_IN 		0xE4
+#define CMD_0x4A_GET_AUTH_USER_INFO 	0xE5	
+#define CMD_0x4A_GET_POINT_USER		0xE6	
+#define CMD_0x4A_GET_REST_OF_WEEK 	0xE9
+#define CMD_0x4A_GET_HOLIDAY 			0xEA
 #define CMD_0x4A_GET_WEEK_IN 			0xEB		
 
 
+	
 //0x4B命令的type
-#define CMD_0x4B_SET_VOICE		0xE7	
-#define CMD_0x4B_PLY_VOICE		0xEA
+#define CMD_0x4B_SET_HANDLE_POS		0xE0
+#define CMD_0x4B_SET_CARD_BIT			0xE1
+#define CMD_0x4B_SET_ARMY_PARAM		0xE2
+#define CMD_0x4B_SET_ALARM_PARAM		0xE3
+#define CMD_0x4B_SET_ARMYING_STA		0xE4	
+#define CMD_0x4B_SET_SYS_STA			0xE5	
+#define CMD_0x4B_SET_SWITCH_OUT		0xE6
+#define CMD_0x4B_SET_VOICE_MARK		0xE7
+#define CMD_0x4B_SET_IO_SWITCH			0xE8		
+
 
 	
-//0x4C命令的type		
+//0x4C命令的type	
 #define CMD_0x4C_GET_HANDLE_POS		 	0xE0//读取左右把手位置
 #define CMD_0x4C_GET_CARD_BIT		 		0xE1//读取卡有效位
 #define CMD_0x4C_GET_ARMY_OFF_STA	 		0xE2//读取门禁撤布防参数
@@ -58,7 +71,7 @@ extern "C" {
 #define CMD_0x4C_GET_DIY_PARAM		 		0xE5//获取自定义数据
 #define CMD_0x4C_GET_VOICE_STA		 		0xE7//读取屏蔽语音状态
 #define CMD_0x4C_GET_SWITCH_PARAM		 	0xE8//读取输入输出开关量配置
-#define CMD_0x4C_ARMY_PARAM		 		0xE9//读取门禁撤布防配置参数
+#define CMD_0x4C_GET_ARMY_PARAM		 	0xE9//读取门禁撤布防配置参数
 #define CMD_0x4C_GET_USER_PWD				0xEB//读取用户密码
 #define CMD_0x4C_GET_FLASH_ID 				0xED//读取flash id
 #define CMD_0x4C_GET_DOOR_LOG 				0xEF//读取门禁对应日志
@@ -129,7 +142,7 @@ typedef struct tls_respon_head_t {
 	u8 	 ADR;
 	u8 	 CID1;		
 	u8 	 RTN;		
-	u16  RESPON_DATA;
+	u16  LENGTH;
 	u8 	 HEAD_LEN;
 	u8 	 BODY_LEN;	
 	u8   TAIL_LEN;

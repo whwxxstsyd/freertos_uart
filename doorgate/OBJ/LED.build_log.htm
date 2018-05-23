@@ -22,124 +22,47 @@ Dialog DLL:        TARMSTM.DLL
  
 <h2>Project:</h2>
 E:\doorgate\USER\FreeRTOS.uvprojx
-Project File Date:  05/19/2018
+Project File Date:  05/22/2018
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 1 (build 61)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'FreeRTOS'
-compiling mp_uart_task.c...
-..\TASK\mp_uart_task.c(133): warning:  #177-D: variable "stk" was declared but never referenced
-      char *stk;
-..\TASK\mp_uart_task.c(425): warning:  #177-D: variable "Version" was declared but never referenced
-        u8 Version,CID1,CID2;
-..\TASK\mp_uart_task.c(425): warning:  #177-D: variable "CID1" was declared but never referenced
-        u8 Version,CID1,CID2;
-..\TASK\mp_uart_task.c(425): warning:  #177-D: variable "CID2" was declared but never referenced
-        u8 Version,CID1,CID2;
-..\TASK\mp_uart_task.c(426): warning:  #177-D: variable "Addr" was declared but never referenced
-        u16 Addr;       
-..\TASK\mp_uart_task.c(429): warning:  #177-D: variable "CNT" was declared but never referenced
-        u8 CNT;
-..\TASK\mp_uart_task.c(128): warning:  #177-D: variable "temp" was declared but never referenced
-  static xSemaphoreHandle temp; 
-..\TASK\mp_uart_task.c: 7 warnings, 0 errors
-compiling mp_idle_task.c...
-compiling mp_uart.c...
-..\USERLIB\mp_uart.c(117): warning:  #550-D: variable "tx_count" was set but never used
-      int tx_count;
-..\USERLIB\mp_uart.c(206): warning:  #177-D: variable "ret" was declared but never referenced
-        int ret;
-..\USERLIB\mp_uart.c: 2 warnings, 0 errors
-compiling mp_osal_rtos.c...
-..\USERLIB\mp_osal_rtos.c(465): warning:  #167-D: argument of type "const u8 *" is incompatible with parameter of type "const char *const"
-        *timer  = xTimerCreate(Name , 
-..\USERLIB\mp_osal_rtos.c: 1 warning, 0 errors
-compiling mp_protocol_hostif.c...
-..\USERLIB\mp_protocol_hostif.c(212): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "u8 *"
-        tls_protocol_rebuild(&protocmd_tok,start,&cmdrsp_size,(u8)err);         
-..\USERLIB\mp_protocol_hostif.c(161): warning:  #177-D: variable "i" was declared but never referenced
-      int i;                            
-..\USERLIB\mp_protocol_hostif.c(16): warning:  #177-D: function "tls_hostif_tx_timeout" was declared but never referenced
-  static void tls_hostif_tx_timeout(void *parg);
-..\USERLIB\mp_protocol_hostif.c: 3 warnings, 0 errors
-compiling param_base.c...
-compiling mp_mem.c...
-..\MEM\mp_mem.c(448): warning:  #181-D: argument is incompatible with corresponding format string conversion
-                  i, pos->header_pattern, pos->file, pos->line, pos->length);
-..\MEM\mp_mem.c(441): warning:  #177-D: variable "cpu_sr" was declared but never referenced
-      u32 cpu_sr;
-..\MEM\mp_mem.c(475): warning:  #181-D: argument is incompatible with corresponding format string conversion
-                      i, pos->header_pattern, pos->file, pos->line, pos->length);
-..\MEM\mp_mem.c: 3 warnings, 0 errors
-compiling Protocol.c...
-..\PROTOCAL\Protocol.c(31): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "u8 *"
-                        *res_len = Ariber_GetSysTime(res_resp); 
-..\PROTOCAL\Protocol.c(35): warning:  #111-D: statement is unreachable
-                        break;  
-..\PROTOCAL\Protocol.c(134): warning:  #223-D: function "Ariber_GetDeviceInfo" declared implicitly
-        *res_len = Ariber_GetDeviceInfo(res_resp);              
-..\PROTOCAL\Protocol.c(164): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "u8 *"
-                        Ariber_PasswordConfirm(tok,res_resp,res_len);
-..\PROTOCAL\Protocol.c(180): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "u8 *"
-                        Ariber_ModifyPassword(tok,res_resp,res_len);    
-..\PROTOCAL\Protocol.c(211): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "u8 *"
-                        *res_len = Ariber_SetSysTime(tok,res_resp);                     
-..\PROTOCAL\Protocol.c(219): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "u8 *"
-                        *res_len = Ariber_SetSysTime(tok,res_resp);                     
-..\PROTOCAL\Protocol.c(227): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "u8 *"
-                        *res_len = Ariber_SetSysTime(tok,res_resp);                     
-..\PROTOCAL\Protocol.c(258): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "u8 *"
-                        *res_len = Ariber_GetWorkDayPermitList(tok,res_resp);
-..\PROTOCAL\Protocol.c(266): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "u8 *"
-                        *res_len = Ariber_GetRestDayPermitList(tok,res_resp);
-..\PROTOCAL\Protocol.c(274): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "u8 *"
-                        *res_len = Ariber_GetWeekPermitList(tok,res_resp);      
-..\PROTOCAL\Protocol.c(414): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "u8 *"
-                        *res_len = Ariber_GetFlashID(res_resp);         
-..\PROTOCAL\Protocol.c(711): warning:  #177-D: variable "Host_Adr" was declared but never referenced
-        u16 Host_Adr = Adrr + (CID1&0x0F)*0x100;        
-..\PROTOCAL\Protocol.c(849): warning:  #940-D: missing return statement at end of non-void function "tls_protocol_rebuild"
-  }
-..\PROTOCAL\Protocol.c(730): warning:  #177-D: function "tls_protocol_add_body" was declared but never referenced
-  static void tls_protocol_add_body(void)
-..\PROTOCAL\Protocol.c: 15 warnings, 0 errors
 compiling ProtocolBase.c...
-..\PROTOCAL\ProtocolBase.c(109): warning:  #550-D: variable "year" was set but never used
-        u16 year;
-..\PROTOCAL\ProtocolBase.c(110): warning:  #550-D: variable "month" was set but never used
-        u8 month,day,week,hour,min,sec;
-..\PROTOCAL\ProtocolBase.c(110): warning:  #550-D: variable "day" was set but never used
-        u8 month,day,week,hour,min,sec;
-..\PROTOCAL\ProtocolBase.c(110): warning:  #550-D: variable "week" was set but never used
-        u8 month,day,week,hour,min,sec;
-..\PROTOCAL\ProtocolBase.c(110): warning:  #550-D: variable "hour" was set but never used
-        u8 month,day,week,hour,min,sec;
-..\PROTOCAL\ProtocolBase.c(110): warning:  #550-D: variable "min" was set but never used
-        u8 month,day,week,hour,min,sec;
-..\PROTOCAL\ProtocolBase.c(110): warning:  #550-D: variable "sec" was set but never used
-        u8 month,day,week,hour,min,sec;
-..\PROTOCAL\ProtocolBase.c(174): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "const char *"
+..\PROTOCAL\ProtocolBase.c(170): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "const char *"
         len_tmp[0] =  strlen(info->SoftWare_Ver);       
-..\PROTOCAL\ProtocolBase.c(190): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "const char *"
+..\PROTOCAL\ProtocolBase.c(186): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "const char *"
         len_tmp[2] =  strlen(info->Company_Name);               
-..\PROTOCAL\ProtocolBase.c(414): warning:  #940-D: missing return statement at end of non-void function "Ariber_SetWeekPermitList"
+..\PROTOCAL\ProtocolBase.c(446): warning:  #940-D: missing return statement at end of non-void function "Ariber_SetWeekPermitList"
   }
-..\PROTOCAL\ProtocolBase.c(419): warning:  #940-D: missing return statement at end of non-void function "Ariber_SetWorkDayPermitList"
+..\PROTOCAL\ProtocolBase.c(451): warning:  #940-D: missing return statement at end of non-void function "Ariber_SetWorkDayPermitList"
   }     
-..\PROTOCAL\ProtocolBase.c(424): warning:  #940-D: missing return statement at end of non-void function "Ariber_SetRestDayPermitList"
+..\PROTOCAL\ProtocolBase.c(456): warning:  #940-D: missing return statement at end of non-void function "Ariber_SetRestDayPermitList"
   }
-..\PROTOCAL\ProtocolBase.c: 12 warnings, 0 errors
+..\PROTOCAL\ProtocolBase.c(489): warning:  #225-D: the format string ends before this argument
+        
+OG_INFO("Card_ValidBit:&d\n",Card_ValidBit);            
+..\PROTOCAL\ProtocolBase.c(490): warning:  #225-D: the format string ends before this argument
+        
+OG_INFO("Card_EndianSet:&d\n",Card_EndianSet);          
+..\PROTOCAL\ProtocolBase.c(503): warning:  #225-D: the format string ends before this argument
+        
+OG_INFO("Army_Period:&d\n",Army_Period);                        
+..\PROTOCAL\ProtocolBase.c(566): warning:  #550-D: variable "Armying_Tim" was set but never used
+        u8 Armying_Flag,Armying_Type,Armying_Tim_Num,Armying_Tim[6],Armying_N_Byte;
+..\PROTOCAL\ProtocolBase.c(646): warning:  #550-D: variable "Door_Num" was set but never used
+        u8 Door_Num,Mask_Bit[2],pos = 2;
+..\PROTOCAL\ProtocolBase.c: 10 warnings, 0 errors
 linking...
-Program Size: Code=35076 RO-data=612 RW-data=860 ZI-data=30300  
+Program Size: Code=41552 RO-data=612 RW-data=1160 ZI-data=30304  
 FromELF: creating hex file...
-"..\OBJ\LED.axf" - 0 Error(s), 43 Warning(s).
+"..\OBJ\LED.axf" - 0 Error(s), 10 Warning(s).
 
 <h2>Collection of Component include folders:</h2>
   E:\doorgate\USER\RTE
   C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.0.0\Device\Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:18
+Build Time Elapsed:  00:00:03
 </pre>
 </body>
 </html>

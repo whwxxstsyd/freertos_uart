@@ -10,7 +10,7 @@ extern "C" {
 #endif
 
 #ifndef		DEBUG_ON
-#define		DEBUG_ON        (0)												
+#define		DEBUG_ON        (1)													
 #endif		
 
 #ifndef		TARGET_LEVEL
