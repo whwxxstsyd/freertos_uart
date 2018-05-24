@@ -65,13 +65,13 @@ extern "C" {
 //0x4C命令的type	
 #define CMD_0x4C_GET_HANDLE_POS		 	0xE0//读取左右把手位置
 #define CMD_0x4C_GET_CARD_BIT		 		0xE1//读取卡有效位
-#define CMD_0x4C_GET_ARMY_OFF_STA	 		0xE2//读取门禁撤布防参数
+#define CMD_0x4C_GET_ARMY_PARAM	 		0xE2//读取门禁撤布防参数
 #define CMD_0x4C_GET_ALARM_PARAM		 	0xE3//读取报警参数
 #define CMD_0x4C_GET_ARMY_ON_STA		 	0xE4//读取设布防的状态
 #define CMD_0x4C_GET_DIY_PARAM		 		0xE5//获取自定义数据
 #define CMD_0x4C_GET_VOICE_STA		 		0xE7//读取屏蔽语音状态
 #define CMD_0x4C_GET_SWITCH_PARAM		 	0xE8//读取输入输出开关量配置
-#define CMD_0x4C_GET_ARMY_PARAM		 	0xE9//读取门禁撤布防配置参数
+#define CMD_0x4C_GET_ARMY_CONFIG		 	0xE9//读取门禁撤布防配置参数
 #define CMD_0x4C_GET_USER_PWD				0xEB//读取用户密码
 #define CMD_0x4C_GET_FLASH_ID 				0xED//读取flash id
 #define CMD_0x4C_GET_DOOR_LOG 				0xEF//读取门禁对应日志

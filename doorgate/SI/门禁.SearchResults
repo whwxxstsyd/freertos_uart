@@ -1,10 +1,18 @@
----- Ariber_SetSystemSta Matches (9 in 4 files) ----
-LED.htm (e:\doorgate\obj):<P><STRONG><a name="[1e4]"></a>Ariber_SetSystemSta</STRONG> (Thumb, 222 bytes, Stack size 24 bytes, protocolbase.o(.text))
-LED.htm (e:\doorgate\obj):<LI>Call Chain = Ariber_SetSystemSta &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
-LED.htm (e:\doorgate\obj):<LI><a href="#[1e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Ariber_SetSystemSta
-LED.htm (e:\doorgate\obj):<LI><a href="#[1e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Ariber_SetSystemSta
-LED.htm (e:\doorgate\obj):<LI><a href="#[1e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Ariber_SetSystemSta
-LED.htm (e:\doorgate\obj):<LI><a href="#[1e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Ariber_SetSystemSta
-Protocol.c (e:\doorgate\protocal):			*res_len = Ariber_SetSystemSta(tok,res_resp);	
-ProtocolBase.c (e:\doorgate\protocal):int Ariber_SetSystemSta(struct tls_protocmd_token_t *tok,u8 *res_resp)	
-ProtocolBase.h (e:\doorgate\protocal):int Ariber_SetSystemSta(struct tls_protocmd_token_t *tok,u8 *res_resp);	
+---- tls_uart_init Matches (17 in 5 files) ----
+App.c (e:\doorgate\user):	tls_uart_init();				
+LED.htm (e:\doorgate\obj):<LI>Call Chain = __rt_entry_main &rArr; main &rArr; app_init &rArr; tls_uart_init &rArr; tls_uart_port_init &rArr; mem_alloc_debug &rArr; tls_os_sem_release &rArr; xQueueGenericSend &rArr; prvUnlockQueue &rArr; prvNotifyQueueSetContainer &rArr; prvCopyDataToQueue &rArr; xTaskPriorityDisinherit &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
+LED.htm (e:\doorgate\obj):<LI>Call Chain = main &rArr; app_init &rArr; tls_uart_init &rArr; tls_uart_port_init &rArr; mem_alloc_debug &rArr; tls_os_sem_release &rArr; xQueueGenericSend &rArr; prvUnlockQueue &rArr; prvNotifyQueueSetContainer &rArr; prvCopyDataToQueue &rArr; xTaskPriorityDisinherit &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
+LED.htm (e:\doorgate\obj):<LI>Call Chain = app_init &rArr; tls_uart_init &rArr; tls_uart_port_init &rArr; mem_alloc_debug &rArr; tls_os_sem_release &rArr; xQueueGenericSend &rArr; prvUnlockQueue &rArr; prvNotifyQueueSetContainer &rArr; prvCopyDataToQueue &rArr; xTaskPriorityDisinherit &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
+LED.htm (e:\doorgate\obj):<BR>[Calls]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_uart_init
+LED.htm (e:\doorgate\obj):<BR>[Called By]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_uart_init
+LED.htm (e:\doorgate\obj):<P><STRONG><a name="[94]"></a>tls_uart_init</STRONG> (Thumb, 96 bytes, Stack size 16 bytes, mp_uart_task.o(.text))
+LED.htm (e:\doorgate\obj):<LI>Call Chain = tls_uart_init &rArr; tls_uart_port_init &rArr; mem_alloc_debug &rArr; tls_os_sem_release &rArr; xQueueGenericSend &rArr; prvUnlockQueue &rArr; prvNotifyQueueSetContainer &rArr; prvCopyDataToQueue &rArr; xTaskPriorityDisinherit &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
+LED.htm (e:\doorgate\obj):<BR>[Called By]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_uart_init
+LED.htm (e:\doorgate\obj):<BR><BR>[Called By]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_uart_init
+LED.htm (e:\doorgate\obj):<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_uart_init
+LED.htm (e:\doorgate\obj):<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_uart_init
+LED.htm (e:\doorgate\obj):<BR>[Called By]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_uart_init
+LED.htm (e:\doorgate\obj):<BR>[Called By]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_uart_init
+Mp_uart_task.c (e:\doorgate\task):void tls_uart_init(void)
+Mp_uart_task.h (e:\doorgate\task):void tls_uart_init(void);
+Readme.txt (e:\doorgate):tls_uart_init

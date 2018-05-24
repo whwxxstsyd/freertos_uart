@@ -27,42 +27,72 @@ Project File Date:  05/22/2018
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 1 (build 61)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'FreeRTOS'
+compiling BasicFunc.c...
 compiling ProtocolBase.c...
-..\PROTOCAL\ProtocolBase.c(170): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "const char *"
+..\PROTOCAL\ProtocolBase.c(70): warning:  #177-D: variable "resp_len" was declared but never referenced
+        u8 resp_len;    
+..\PROTOCAL\ProtocolBase.c(105): warning:  #550-D: variable "year" was set but never used
+        u16 year;       
+..\PROTOCAL\ProtocolBase.c(106): warning:  #550-D: variable "month" was set but never used
+        u8 month,day,week,hour,min,sec;
+..\PROTOCAL\ProtocolBase.c(106): warning:  #550-D: variable "day" was set but never used
+        u8 month,day,week,hour,min,sec;
+..\PROTOCAL\ProtocolBase.c(106): warning:  #550-D: variable "week" was set but never used
+        u8 month,day,week,hour,min,sec;
+..\PROTOCAL\ProtocolBase.c(106): warning:  #550-D: variable "hour" was set but never used
+        u8 month,day,week,hour,min,sec;
+..\PROTOCAL\ProtocolBase.c(106): warning:  #550-D: variable "min" was set but never used
+        u8 month,day,week,hour,min,sec;
+..\PROTOCAL\ProtocolBase.c(106): warning:  #550-D: variable "sec" was set but never used
+        u8 month,day,week,hour,min,sec;
+..\PROTOCAL\ProtocolBase.c(142): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "const char *"
         len_tmp[0] =  strlen(info->SoftWare_Ver);       
-..\PROTOCAL\ProtocolBase.c(186): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "const char *"
+..\PROTOCAL\ProtocolBase.c(158): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "const char *"
         len_tmp[2] =  strlen(info->Company_Name);               
-..\PROTOCAL\ProtocolBase.c(446): warning:  #940-D: missing return statement at end of non-void function "Ariber_SetWeekPermitList"
-  }
-..\PROTOCAL\ProtocolBase.c(451): warning:  #940-D: missing return statement at end of non-void function "Ariber_SetWorkDayPermitList"
-  }     
-..\PROTOCAL\ProtocolBase.c(456): warning:  #940-D: missing return statement at end of non-void function "Ariber_SetRestDayPermitList"
-  }
-..\PROTOCAL\ProtocolBase.c(489): warning:  #225-D: the format string ends before this argument
-        
-OG_INFO("Card_ValidBit:&d\n",Card_ValidBit);            
-..\PROTOCAL\ProtocolBase.c(490): warning:  #225-D: the format string ends before this argument
-        
-OG_INFO("Card_EndianSet:&d\n",Card_EndianSet);          
-..\PROTOCAL\ProtocolBase.c(503): warning:  #225-D: the format string ends before this argument
-        
-OG_INFO("Army_Period:&d\n",Army_Period);                        
-..\PROTOCAL\ProtocolBase.c(566): warning:  #550-D: variable "Armying_Tim" was set but never used
+..\PROTOCAL\ProtocolBase.c(461): warning:  #177-D: variable "Card_ValidBit" was declared but never referenced
+        u8 Card_ValidBit = tok->arg[2]; //卡??效位
+..\PROTOCAL\ProtocolBase.c(462): warning:  #177-D: variable "Card_EndianSet" was declared but never referenced
+        u8 Card_EndianSet = tok->arg[3];//?纸???????
+..\PROTOCAL\ProtocolBase.c(474): warning:  #177-D: variable "Army_Period" was declared but never referenced
+        u8 Army_Period = tok->arg[3];//布??时??(单位:????)
+..\PROTOCAL\ProtocolBase.c(506): warning:  #550-D: variable "Alarm_Arming_Time" was set but never used
+        u16 Alarm_Arming_Time;
+..\PROTOCAL\ProtocolBase.c(546): warning:  #550-D: variable "Armying_Flag" was set but never used
         u8 Armying_Flag,Armying_Type,Armying_Tim_Num,Armying_Tim[6],Armying_N_Byte;
-..\PROTOCAL\ProtocolBase.c(646): warning:  #550-D: variable "Door_Num" was set but never used
+..\PROTOCAL\ProtocolBase.c(546): warning:  #550-D: variable "Armying_Type" was set but never used
+        u8 Armying_Flag,Armying_Type,Armying_Tim_Num,Armying_Tim[6],Armying_N_Byte;
+..\PROTOCAL\ProtocolBase.c(546): warning:  #550-D: variable "Armying_Tim_Num" was set but never used
+        u8 Armying_Flag,Armying_Type,Armying_Tim_Num,Armying_Tim[6],Armying_N_Byte;
+..\PROTOCAL\ProtocolBase.c(546): warning:  #550-D: variable "Armying_Tim" was set but never used
+        u8 Armying_Flag,Armying_Type,Armying_Tim_Num,Armying_Tim[6],Armying_N_Byte;
+..\PROTOCAL\ProtocolBase.c(546): warning:  #550-D: variable "Armying_N_Byte" was set but never used
+        u8 Armying_Flag,Armying_Type,Armying_Tim_Num,Armying_Tim[6],Armying_N_Byte;
+..\PROTOCAL\ProtocolBase.c(547): warning:  #550-D: variable "Armying_Man" was set but never used
+        u8 Armying_Man,Armying_Condition;
+..\PROTOCAL\ProtocolBase.c(547): warning:  #550-D: variable "Armying_Condition" was set but never used
+        u8 Armying_Man,Armying_Condition;
+..\PROTOCAL\ProtocolBase.c(548): warning:  #550-D: variable "LianDong" was set but never used
+        u8 LianDong[8];
+..\PROTOCAL\ProtocolBase.c(638): warning:  #550-D: variable "Door_Num" was set but never used
         u8 Door_Num,Mask_Bit[2],pos = 2;
-..\PROTOCAL\ProtocolBase.c: 10 warnings, 0 errors
+..\PROTOCAL\ProtocolBase.c(639): warning:  #550-D: variable "Voice_Mask" was set but never used
+        u16 Voice_Mask;
+..\PROTOCAL\ProtocolBase.c(816): warning:  #177-D: variable "expr_param_num" was declared but never referenced
+        u8 expr_param_num = 3;  
+..\PROTOCAL\ProtocolBase.c(1015): warning:  #550-D: variable "code_group" was set but never used
+        u8 code_group;
+..\PROTOCAL\ProtocolBase.c: 26 warnings, 0 errors
 linking...
-Program Size: Code=41552 RO-data=612 RW-data=1160 ZI-data=30304  
+Program Size: Code=36792 RO-data=612 RW-data=956 ZI-data=30300  
 FromELF: creating hex file...
-"..\OBJ\LED.axf" - 0 Error(s), 10 Warning(s).
+"..\OBJ\LED.axf" - 0 Error(s), 26 Warning(s).
 
 <h2>Collection of Component include folders:</h2>
   E:\doorgate\USER\RTE
   C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.0.0\Device\Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:03
+Build Time Elapsed:  00:00:05
 </pre>
 </body>
 </html>

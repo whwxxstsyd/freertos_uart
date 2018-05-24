@@ -1285,7 +1285,7 @@ I (..\FreeRTOS\include\semphr.h)(0x5AED5E6C)
 I (..\FreeRTOS\include\queue.h)(0x573F3A16)
 I (..\FreeRTOS\include\timers.h)(0x573F3A16)
 I (..\INCLUDE\temp.h)(0x5AF4FD38)
-I (..\INCLUDE\debug.h)(0x5B052A84)
+I (..\INCLUDE\debug.h)(0x5B068279)
 I (..\TASK\mp_uart_task.h)(0x5AFA8755)
 I (..\USERLIB\mp_protocol_hostif.h)(0x5AFA7434)
 F (..\TASK\mp_idle_task.c)(0x5AF8E7A0)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\USER -I ..\STM32F10x_FWLib\inc -I ..\CORE -I ..\MALLOC -I ..\FreeRTOS\include -I ..\FreeRTOS\portable\RVDS\ARM_CM3 -I ..\HARDWARE\LED -I ..\HARDWARE\LCD -I ..\HARDWARE\TIMER -I ..\HARDWARE\EXTI -I ..\HARDWARE\KEY -I ..\TASK -I ..\USERLIB -I ..\INCLUDE -I ..\HARDWARE\PLATFORM -I ..\MEM -I ..\PROTOCAL -I ..\HARDWARE\BEEP -I ..\HARDWARE\SD2068 -I ..\HARDWARE\CARD -I ..\CARD -I ..\HARDWARE\24CXXX -I ..\HARDWARE\FLASH -I ..\HARDWARE\SPI-I E:\doorgate\USER\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.0.0\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\mp_idle_task.o --omf_browse ..\obj\mp_idle_task.crf --depend ..\obj\mp_idle_task.d)
@@ -1341,7 +1341,7 @@ I (..\INCLUDE\temp.h)(0x5AF4FD38)
 I (..\USERLIB\mp_uart.h)(0x5AFFB530)
 I (..\USER\app.h)(0x5AFE70A8)
 I (..\SYSTEM\delay\delay.h)(0x583D2EFB)
-I (..\INCLUDE\debug.h)(0x5B052A84)
+I (..\INCLUDE\debug.h)(0x5B068279)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x569DEA3A)
 F (..\TASK\mp_memory_task.c)(0x5AEFA4D6)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\USER -I ..\STM32F10x_FWLib\inc -I ..\CORE -I ..\MALLOC -I ..\FreeRTOS\include -I ..\FreeRTOS\portable\RVDS\ARM_CM3 -I ..\HARDWARE\LED -I ..\HARDWARE\LCD -I ..\HARDWARE\TIMER -I ..\HARDWARE\EXTI -I ..\HARDWARE\KEY -I ..\TASK -I ..\USERLIB -I ..\INCLUDE -I ..\HARDWARE\PLATFORM -I ..\MEM -I ..\PROTOCAL -I ..\HARDWARE\BEEP -I ..\HARDWARE\SD2068 -I ..\HARDWARE\CARD -I ..\CARD -I ..\HARDWARE\24CXXX -I ..\HARDWARE\FLASH -I ..\HARDWARE\SPI-I E:\doorgate\USER\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.0.0\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\mp_memory_task.o --omf_browse ..\obj\mp_memory_task.crf --depend ..\obj\mp_memory_task.d)
 I (..\TASK\mp_memory_task.h)(0x5AEFA4DE)
@@ -1451,7 +1451,7 @@ I (..\STM32F10x_FWLib\inc\stm32f10x_tim.h)(0x4D783BB4)
 I (..\STM32F10x_FWLib\inc\stm32f10x_usart.h)(0x504F415E)
 I (..\STM32F10x_FWLib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
 I (..\STM32F10x_FWLib\inc\misc.h)(0x4D783BB4)
-F (..\USERLIB\BasicFunc.c)(0x5AFF7EDC)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\USER -I ..\STM32F10x_FWLib\inc -I ..\CORE -I ..\MALLOC -I ..\FreeRTOS\include -I ..\FreeRTOS\portable\RVDS\ARM_CM3 -I ..\HARDWARE\LED -I ..\HARDWARE\LCD -I ..\HARDWARE\TIMER -I ..\HARDWARE\EXTI -I ..\HARDWARE\KEY -I ..\TASK -I ..\USERLIB -I ..\INCLUDE -I ..\HARDWARE\PLATFORM -I ..\MEM -I ..\PROTOCAL -I ..\HARDWARE\BEEP -I ..\HARDWARE\SD2068 -I ..\HARDWARE\CARD -I ..\CARD -I ..\HARDWARE\24CXXX -I ..\HARDWARE\FLASH -I ..\HARDWARE\SPI-I E:\doorgate\USER\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.0.0\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\basicfunc.o --omf_browse ..\obj\basicfunc.crf --depend ..\obj\basicfunc.d)
+F (..\USERLIB\BasicFunc.c)(0x5B068503)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\USER -I ..\STM32F10x_FWLib\inc -I ..\CORE -I ..\MALLOC -I ..\FreeRTOS\include -I ..\FreeRTOS\portable\RVDS\ARM_CM3 -I ..\HARDWARE\LED -I ..\HARDWARE\LCD -I ..\HARDWARE\TIMER -I ..\HARDWARE\EXTI -I ..\HARDWARE\KEY -I ..\TASK -I ..\USERLIB -I ..\INCLUDE -I ..\HARDWARE\PLATFORM -I ..\MEM -I ..\PROTOCAL -I ..\HARDWARE\BEEP -I ..\HARDWARE\SD2068 -I ..\HARDWARE\CARD -I ..\CARD -I ..\HARDWARE\24CXXX -I ..\HARDWARE\FLASH -I ..\HARDWARE\SPI-I E:\doorgate\USER\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.0.0\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\basicfunc.o --omf_browse ..\obj\basicfunc.crf --depend ..\obj\basicfunc.d)
 I (..\USERLIB\basicfunc.h)(0x5AF65A6D)
 I (..\SYSTEM\sys\sys.h)(0x5AF657D7)
 I (..\USER\stm32f10x.h)(0x4D783CB4)
@@ -1554,7 +1554,7 @@ I (..\FreeRTOS\include\timers.h)(0x573F3A16)
 I (..\INCLUDE\temp.h)(0x5AF4FD38)
 I (..\MEM\mp_mem.h)(0x5AEBF073)
 I (..\INCLUDE\list_base.h)(0x5AEAD323)
-I (..\INCLUDE\debug.h)(0x5B052A84)
+I (..\INCLUDE\debug.h)(0x5B068279)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x569DEA3A)
 I (..\SYSTEM\delay\delay.h)(0x583D2EFB)
 I (..\INCLUDE\param.h)(0x5AFFDD63)
@@ -1607,7 +1607,7 @@ I (..\FreeRTOS\include\semphr.h)(0x5AED5E6C)
 I (..\FreeRTOS\include\queue.h)(0x573F3A16)
 I (..\FreeRTOS\include\timers.h)(0x573F3A16)
 I (..\INCLUDE\temp.h)(0x5AF4FD38)
-I (..\INCLUDE\debug.h)(0x5B052A84)
+I (..\INCLUDE\debug.h)(0x5B068279)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x569DEA3A)
 F (..\USERLIB\mp_protocol_hostif.c)(0x5B0259D7)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\USER -I ..\STM32F10x_FWLib\inc -I ..\CORE -I ..\MALLOC -I ..\FreeRTOS\include -I ..\FreeRTOS\portable\RVDS\ARM_CM3 -I ..\HARDWARE\LED -I ..\HARDWARE\LCD -I ..\HARDWARE\TIMER -I ..\HARDWARE\EXTI -I ..\HARDWARE\KEY -I ..\TASK -I ..\USERLIB -I ..\INCLUDE -I ..\HARDWARE\PLATFORM -I ..\MEM -I ..\PROTOCAL -I ..\HARDWARE\BEEP -I ..\HARDWARE\SD2068 -I ..\HARDWARE\CARD -I ..\CARD -I ..\HARDWARE\24CXXX -I ..\HARDWARE\FLASH -I ..\HARDWARE\SPI-I E:\doorgate\USER\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.0.0\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\mp_protocol_hostif.o --omf_browse ..\obj\mp_protocol_hostif.crf --depend ..\obj\mp_protocol_hostif.d)
 I (..\USERLIB\mp_protocol_hostif.h)(0x5AFA7434)
@@ -1662,10 +1662,10 @@ I (..\FreeRTOS\include\timers.h)(0x573F3A16)
 I (..\INCLUDE\temp.h)(0x5AF4FD38)
 I (..\TASK\mp_uart_task.h)(0x5AFA8755)
 I (..\MEM\mp_mem.h)(0x5AEBF073)
-I (..\INCLUDE\debug.h)(0x5B052A84)
+I (..\INCLUDE\debug.h)(0x5B068279)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x569DEA3A)
 I (..\INCLUDE\param.h)(0x5AFFDD63)
-I (..\PROTOCAL\protocol.h)(0x5B0528D7)
+I (..\PROTOCAL\protocol.h)(0x5B061F84)
 F (..\USERLIB\param_base.c)(0x5B03B7EC)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\USER -I ..\STM32F10x_FWLib\inc -I ..\CORE -I ..\MALLOC -I ..\FreeRTOS\include -I ..\FreeRTOS\portable\RVDS\ARM_CM3 -I ..\HARDWARE\LED -I ..\HARDWARE\LCD -I ..\HARDWARE\TIMER -I ..\HARDWARE\EXTI -I ..\HARDWARE\KEY -I ..\TASK -I ..\USERLIB -I ..\INCLUDE -I ..\HARDWARE\PLATFORM -I ..\MEM -I ..\PROTOCAL -I ..\HARDWARE\BEEP -I ..\HARDWARE\SD2068 -I ..\HARDWARE\CARD -I ..\CARD -I ..\HARDWARE\24CXXX -I ..\HARDWARE\FLASH -I ..\HARDWARE\SPI-I E:\doorgate\USER\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.0.0\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\param_base.o --omf_browse ..\obj\param_base.crf --depend ..\obj\param_base.d)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x569DEA3A)
 I (..\USERLIB\param_base.h)(0x5B03B72E)
@@ -1701,7 +1701,7 @@ I (..\STM32F10x_FWLib\inc\misc.h)(0x4D783BB4)
 I (..\INCLUDE\common.h)(0x5AF63D8F)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x569DEA3A)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x569DEA3A)
-I (..\INCLUDE\debug.h)(0x5B052A84)
+I (..\INCLUDE\debug.h)(0x5B068279)
 I (..\INCLUDE\param.h)(0x5AFFDD63)
 F (..\MEM\mp_mem.c)(0x5AF39D7F)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\USER -I ..\STM32F10x_FWLib\inc -I ..\CORE -I ..\MALLOC -I ..\FreeRTOS\include -I ..\FreeRTOS\portable\RVDS\ARM_CM3 -I ..\HARDWARE\LED -I ..\HARDWARE\LCD -I ..\HARDWARE\TIMER -I ..\HARDWARE\EXTI -I ..\HARDWARE\KEY -I ..\TASK -I ..\USERLIB -I ..\INCLUDE -I ..\HARDWARE\PLATFORM -I ..\MEM -I ..\PROTOCAL -I ..\HARDWARE\BEEP -I ..\HARDWARE\SD2068 -I ..\HARDWARE\CARD -I ..\CARD -I ..\HARDWARE\24CXXX -I ..\HARDWARE\FLASH -I ..\HARDWARE\SPI-I E:\doorgate\USER\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.0.0\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\mp_mem.o --omf_browse ..\obj\mp_mem.crf --depend ..\obj\mp_mem.d)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x569DEA3A)
@@ -1755,8 +1755,8 @@ I (..\FreeRTOS\include\timers.h)(0x573F3A16)
 I (..\INCLUDE\temp.h)(0x5AF4FD38)
 I (..\MEM\mp_mem.h)(0x5AEBF073)
 I (..\INCLUDE\list_base.h)(0x5AEAD323)
-I (..\INCLUDE\debug.h)(0x5B052A84)
-F (..\PROTOCAL\Protocol.c)(0x5B0528D7)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\USER -I ..\STM32F10x_FWLib\inc -I ..\CORE -I ..\MALLOC -I ..\FreeRTOS\include -I ..\FreeRTOS\portable\RVDS\ARM_CM3 -I ..\HARDWARE\LED -I ..\HARDWARE\LCD -I ..\HARDWARE\TIMER -I ..\HARDWARE\EXTI -I ..\HARDWARE\KEY -I ..\TASK -I ..\USERLIB -I ..\INCLUDE -I ..\HARDWARE\PLATFORM -I ..\MEM -I ..\PROTOCAL -I ..\HARDWARE\BEEP -I ..\HARDWARE\SD2068 -I ..\HARDWARE\CARD -I ..\CARD -I ..\HARDWARE\24CXXX -I ..\HARDWARE\FLASH -I ..\HARDWARE\SPI-I E:\doorgate\USER\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.0.0\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\protocol.o --omf_browse ..\obj\protocol.crf --depend ..\obj\protocol.d)
+I (..\INCLUDE\debug.h)(0x5B068279)
+F (..\PROTOCAL\Protocol.c)(0x5B067925)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\USER -I ..\STM32F10x_FWLib\inc -I ..\CORE -I ..\MALLOC -I ..\FreeRTOS\include -I ..\FreeRTOS\portable\RVDS\ARM_CM3 -I ..\HARDWARE\LED -I ..\HARDWARE\LCD -I ..\HARDWARE\TIMER -I ..\HARDWARE\EXTI -I ..\HARDWARE\KEY -I ..\TASK -I ..\USERLIB -I ..\INCLUDE -I ..\HARDWARE\PLATFORM -I ..\MEM -I ..\PROTOCAL -I ..\HARDWARE\BEEP -I ..\HARDWARE\SD2068 -I ..\HARDWARE\CARD -I ..\CARD -I ..\HARDWARE\24CXXX -I ..\HARDWARE\FLASH -I ..\HARDWARE\SPI-I E:\doorgate\USER\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.0.0\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\protocol.o --omf_browse ..\obj\protocol.crf --depend ..\obj\protocol.d)
 I (..\USERLIB\mp_protocol_hostif.h)(0x5AFA7434)
 I (..\SYSTEM\sys\sys.h)(0x5AF657D7)
 I (..\USER\stm32f10x.h)(0x4D783CB4)
@@ -1807,18 +1807,18 @@ I (..\FreeRTOS\include\semphr.h)(0x5AED5E6C)
 I (..\FreeRTOS\include\queue.h)(0x573F3A16)
 I (..\FreeRTOS\include\timers.h)(0x573F3A16)
 I (..\INCLUDE\temp.h)(0x5AF4FD38)
-I (..\PROTOCAL\ProtocolBase.h)(0x5B0518BA)
+I (..\PROTOCAL\ProtocolBase.h)(0x5B06796C)
 I (..\USERLIB\param_base.h)(0x5B03B72E)
 I (..\INCLUDE\common.h)(0x5AF63D8F)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x569DEA3A)
 I (..\MEM\mp_mem.h)(0x5AEBF073)
-I (..\PROTOCAL\protocol.h)(0x5B0528D7)
+I (..\PROTOCAL\protocol.h)(0x5B061F84)
 I (..\INCLUDE\param.h)(0x5AFFDD63)
 I (..\USERLIB\BasicFunc.h)(0x5AF65A6D)
 I (..\HARDWARE\SD2068\calendar.h)(0x5AF55936)
-I (..\INCLUDE\debug.h)(0x5B052A84)
-F (..\PROTOCAL\ProtocolBase.c)(0x5B052B17)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\USER -I ..\STM32F10x_FWLib\inc -I ..\CORE -I ..\MALLOC -I ..\FreeRTOS\include -I ..\FreeRTOS\portable\RVDS\ARM_CM3 -I ..\HARDWARE\LED -I ..\HARDWARE\LCD -I ..\HARDWARE\TIMER -I ..\HARDWARE\EXTI -I ..\HARDWARE\KEY -I ..\TASK -I ..\USERLIB -I ..\INCLUDE -I ..\HARDWARE\PLATFORM -I ..\MEM -I ..\PROTOCAL -I ..\HARDWARE\BEEP -I ..\HARDWARE\SD2068 -I ..\HARDWARE\CARD -I ..\CARD -I ..\HARDWARE\24CXXX -I ..\HARDWARE\FLASH -I ..\HARDWARE\SPI-I E:\doorgate\USER\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.0.0\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\protocolbase.o --omf_browse ..\obj\protocolbase.crf --depend ..\obj\protocolbase.d)
-I (..\PROTOCAL\ProtocolBase.h)(0x5B0518BA)
+I (..\INCLUDE\debug.h)(0x5B068279)
+F (..\PROTOCAL\ProtocolBase.c)(0x5B068511)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\USER -I ..\STM32F10x_FWLib\inc -I ..\CORE -I ..\MALLOC -I ..\FreeRTOS\include -I ..\FreeRTOS\portable\RVDS\ARM_CM3 -I ..\HARDWARE\LED -I ..\HARDWARE\LCD -I ..\HARDWARE\TIMER -I ..\HARDWARE\EXTI -I ..\HARDWARE\KEY -I ..\TASK -I ..\USERLIB -I ..\INCLUDE -I ..\HARDWARE\PLATFORM -I ..\MEM -I ..\PROTOCAL -I ..\HARDWARE\BEEP -I ..\HARDWARE\SD2068 -I ..\HARDWARE\CARD -I ..\CARD -I ..\HARDWARE\24CXXX -I ..\HARDWARE\FLASH -I ..\HARDWARE\SPI-I E:\doorgate\USER\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.0.0\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\protocolbase.o --omf_browse ..\obj\protocolbase.crf --depend ..\obj\protocolbase.d)
+I (..\PROTOCAL\ProtocolBase.h)(0x5B06796C)
 I (..\SYSTEM\sys\sys.h)(0x5AF657D7)
 I (..\USER\stm32f10x.h)(0x4D783CB4)
 I (..\CORE\core_cm3.h)(0x4D523B58)
@@ -1874,7 +1874,7 @@ I (..\USERLIB\param_base.h)(0x5B03B72E)
 I (..\INCLUDE\common.h)(0x5AF63D8F)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x569DEA3A)
 I (..\USERLIB\BasicFunc.h)(0x5AF65A6D)
-I (..\INCLUDE\debug.h)(0x5B052A84)
+I (..\INCLUDE\debug.h)(0x5B068279)
 I (..\HARDWARE\LED\led.h)(0x5B037872)
 F (..\CARD\CardLibrary.c)(0x5AFF701D)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\USER -I ..\STM32F10x_FWLib\inc -I ..\CORE -I ..\MALLOC -I ..\FreeRTOS\include -I ..\FreeRTOS\portable\RVDS\ARM_CM3 -I ..\HARDWARE\LED -I ..\HARDWARE\LCD -I ..\HARDWARE\TIMER -I ..\HARDWARE\EXTI -I ..\HARDWARE\KEY -I ..\TASK -I ..\USERLIB -I ..\INCLUDE -I ..\HARDWARE\PLATFORM -I ..\MEM -I ..\PROTOCAL -I ..\HARDWARE\BEEP -I ..\HARDWARE\SD2068 -I ..\HARDWARE\CARD -I ..\CARD -I ..\HARDWARE\24CXXX -I ..\HARDWARE\FLASH -I ..\HARDWARE\SPI-I E:\doorgate\USER\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.0.0\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\cardlibrary.o --omf_browse ..\obj\cardlibrary.crf --depend ..\obj\cardlibrary.d)
 I (..\CARD\cardlibrary.h)(0x5AF8DC5A)

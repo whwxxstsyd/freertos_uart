@@ -3,11 +3,25 @@
 #include "sys.h"	
 #include "mp_protocol_hostif.h"
 
+#define ASCII_LEN(len)	  (len*2)		
+
 //定义数据返回的长度(单位:字节)
 #define NO_RESP_DATA	0x00
 #define SET_SUCCEED_RTN_LEN   0	
 
-#define GET_FLASH_ID_RTN_LEN  1	
+#define GET_HANDLE_POS_RTN_LEN			2
+#define GET_CARD_BIT_RTN_LEN  			2	
+#define GET_ARMY_PARAM_RTN_LEN  		4		
+#define GET_ALARM_PARAM_RTN_LEN   		4	
+#define GET_ARMYING_STA_RTN_LEN		20
+#define	GET_USER_DEF_DATA_RTN_LEN		0
+#define	GET_VOICE_MASK_STA_RTN_LEN	3	
+#define	GET_SWITCH_CONFIG_RTN_LEN		0		
+#define	GET_ARMY_CONFIG_RTN_LEN		0
+#define GET_FLASH_ID_RTN_LEN  			0				
+#define GET_DOOR_LOG_RTN_LEN  			0					
+#define GET_USER_PASS_RTN_LEN  		8			
+	
 
 
 #define GET_SYS_TIME_RTN_LEN	8
@@ -45,6 +59,30 @@ typedef enum ALARM_TYPE
 }ALARM_TYPE_T; 	
 
 
+typedef struct SWITCH_IN_PARAM
+{
+	u8 state;
+	u16 sec;
+	u8 rele_sta;//关联状态
+}SWITCH_IN_PARAM_T;
+
+
+typedef struct EXPRESS_PARAM
+{	
+	u8 num;	
+	u8 param[17];
+	u8 sign[17];		
+}EXPRESS_PARAM_T;	
+
+
+typedef struct SWITCH_OUT_PARAM
+{	
+	u8 state;
+	EXPRESS_PARAM_T argv;				
+		
+}SWITCH_OUT_PARAM_T;	
+
+
 int Ariber_PasswordConfirm(struct tls_protocmd_token_t *tok,
         							u8 *res_resp, u32 *res_len);
 
@@ -58,12 +96,6 @@ int Ariber_GetSysTime(u8 *res_resp);
 int Ariber_SetSysTime(struct tls_protocmd_token_t *tok,u8 *res_resp);
 
 
-
-int Ariber_PlayVoice(void);
-
-int Ariber_GetVoiceMark(void);
-
-int Ariber_GetFlashID(u8 *res_resp);
 
 
 
@@ -87,6 +119,8 @@ int Ariber_SetRestDayPermitList(struct tls_protocmd_token_t *tok,u8 *res_resp);
 
 
 //4B命令下面的指令
+
+
 int Ariber_SetHandlePos(struct tls_protocmd_token_t *tok,u8 *res_resp);	
 
 int Ariber_SetCardBit(struct tls_protocmd_token_t *tok,u8 *res_resp);	
@@ -106,6 +140,46 @@ int Ariber_SetVoiceMark(struct tls_protocmd_token_t *tok,u8 *res_resp);
 int Ariber_SetIOSwitchParam(struct tls_protocmd_token_t *tok,u8 *res_resp);	
 
 
+
+/*4C命令下的子命令*/	
+
+//读取左右把手
+int Ariber_GetHandlePos(struct tls_protocmd_token_t *tok,u8 *res_resp);	
+
+//读取卡有效位
+int Ariber_GetCardBit(struct tls_protocmd_token_t *tok,u8 *res_resp);	
+
+//读取门禁撤布防参数
+int Ariber_GetArmyParam(struct tls_protocmd_token_t *tok,u8 *res_resp);	
+
+//读取报警参数
+int Ariber_GetAlarmParam(struct tls_protocmd_token_t *tok,u8 *res_resp);
+
+//读取设布防的状态
+int Ariber_GetArmyingSta(struct tls_protocmd_token_t *tok,u8 *res_resp);	
+
+//获取自定义数据
+int Ariber_GetUserDefinedData(struct tls_protocmd_token_t *tok,u8 *res_resp);	
+
+//读取屏蔽语音状态
+int Ariber_GetVoiceMaskSta(struct tls_protocmd_token_t *tok,u8 *res_resp);	
+
+//读取输入输出开关量配置
+int Ariber_GetSwitchConfig(struct tls_protocmd_token_t *tok,u8 *res_resp);	
+
+//读取门禁撤布防配置参数
+int Ariber_GetArmyConfigParam(struct tls_protocmd_token_t *tok,u8 *res_resp);	
+
+//读取flash id
+int Ariber_GetFlashID(struct tls_protocmd_token_t *tok,u8 *res_resp);	
+
+//读取门禁对应日志
+int Ariber_GetDoorLog(struct tls_protocmd_token_t *tok,u8 *res_resp);	
+
+//读取用户密码
+int Ariber_GetUserPassword(struct tls_protocmd_token_t *tok,u8 *res_resp);
+
+	
 
 #endif
 

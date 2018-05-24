@@ -288,10 +288,10 @@ static int post_protocmd_set_guard_param_proc(struct tls_protocmd_token_t *tok,
         char *res_resp, u32 *res_len)
 {
 	u8 cmd_group = tok->arg[0];
-	u8 cmd_type  = tok->arg[1];
+	u8 cmd_type  = tok->arg[1];			
 
-	if(cmd_group != 0xF3)
-	{
+	if(cmd_group != 0xF3)				
+	{						
 		return RTN_UNKNOW_CMD;
 	}
 
@@ -353,7 +353,6 @@ static int post_protocmd_set_guard_param_proc(struct tls_protocmd_token_t *tok,
 				
 			break;
 
-			
 		case CMD_0x4B_SET_VOICE_MARK:		
 			
 			LOG_INFO("CMD_0x4B_SET_VOICE_MARK\n");	
@@ -393,7 +392,7 @@ static int post_protocmd_get_guard_param_proc(struct tls_protocmd_token_t *tok,
 	u8 cmd_type  = tok->arg[1];
 
 	if(cmd_group != 0xF4)
-	{
+	{	
 		return RTN_UNKNOW_CMD;
 	}	
 
@@ -403,26 +402,31 @@ static int post_protocmd_get_guard_param_proc(struct tls_protocmd_token_t *tok,
 
 			LOG_INFO("CMD_0x4C_GET_HANDLE_POS\n");
 
+			*res_len = Ariber_GetHandlePos(tok,res_resp);	
+
 			break;
 
 		case CMD_0x4C_GET_CARD_BIT:			
 
 			LOG_INFO("CMD_0x4C_GET_CARD_BIT\n");
 
+			*res_len = Ariber_GetCardBit(tok,res_resp);	
 
 			break;
 
-		case CMD_0x4C_GET_ARMY_OFF_STA:			
+		case CMD_0x4C_GET_ARMY_PARAM:				
 
 			LOG_INFO("CMD_0x4C_GET_ARMY_OFF_STA\n");
 
-
+			*res_len = Ariber_GetArmyParam(tok,res_resp);
+	
 			break;
 
 		case CMD_0x4C_GET_ALARM_PARAM:			
 
 			LOG_INFO("CMD_0x4C_GET_ALARM_PARAM\n");
 
+			*res_len = Ariber_GetAlarmParam(tok,res_resp);	
 
 			break;
 
@@ -431,6 +435,7 @@ static int post_protocmd_get_guard_param_proc(struct tls_protocmd_token_t *tok,
 
 			LOG_INFO("CMD_0x4C_GET_ARMY_ON_STA\n");
 
+			*res_len = Ariber_GetArmyingSta(tok,res_resp);	
 
 			break;
 
@@ -438,6 +443,7 @@ static int post_protocmd_get_guard_param_proc(struct tls_protocmd_token_t *tok,
 
 			LOG_INFO("CMD_0x4C_GET_DIY_PARAM\n");
 
+			*res_len = Ariber_GetUserDefinedData(tok,res_resp);	
 
 			break;
 
@@ -445,7 +451,7 @@ static int post_protocmd_get_guard_param_proc(struct tls_protocmd_token_t *tok,
 
 			LOG_INFO("CMD_0x4C_GET_VOICE_STA\n");
 
-			Ariber_GetVoiceMark();
+			*res_len = Ariber_GetVoiceMaskSta(tok,res_resp);	
 
 			break;
 
@@ -453,13 +459,15 @@ static int post_protocmd_get_guard_param_proc(struct tls_protocmd_token_t *tok,
 
 			LOG_INFO("CMD_0x4C_GET_SWITCH_PARAM\n");
 
+			*res_len = Ariber_GetSwitchConfig(tok,res_resp);
 
 			break;
 
-		case CMD_0x4C_GET_ARMY_PARAM:				
+		case CMD_0x4C_GET_ARMY_CONFIG:					
 
 			LOG_INFO("CMD_0x4C_ARMY_PARAM\n");
 
+			*res_len = Ariber_GetArmyConfigParam(tok,res_resp);	
 
 			break;
 
@@ -468,7 +476,8 @@ static int post_protocmd_get_guard_param_proc(struct tls_protocmd_token_t *tok,
 		
 			LOG_INFO("CMD_0x4C_GET_USER_PWD\n");
 		
-		
+			*res_len = Ariber_GetDoorLog(tok,res_resp);	
+				
 			break;
 
 		
@@ -476,14 +485,15 @@ static int post_protocmd_get_guard_param_proc(struct tls_protocmd_token_t *tok,
 		
 			LOG_INFO("CMD_0x4C_GET_FLASH_ID\n");
 			
-			*res_len = Ariber_GetFlashID(res_resp);		
+			*res_len = Ariber_GetFlashID(tok,res_resp);			
 			
 			break;
 
 		case CMD_0x4C_GET_DOOR_LOG:			
 		
-			LOG_INFO("CMD_0x4C_GET_DOOR_LOG\n");
-		
+			LOG_INFO("CMD_0x4C_GET_DOOR_LOG\n");		
+				
+			*res_len = Ariber_GetDoorLog(tok,res_resp);			
 		
 			break;
 					
