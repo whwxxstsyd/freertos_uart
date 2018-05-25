@@ -556,7 +556,7 @@ int Ariber_SetArmyingSta(struct tls_protocmd_token_t *tok,u8 *res_resp)
 	{
 		Armying_Tim[i] = tok->arg[pos++];
 	}
-
+	
 	Armying_Man = tok->arg[pos++];
 	Armying_Condition = tok->arg[pos++];
 
@@ -591,22 +591,22 @@ int Ariber_SetSystemSta(struct tls_protocmd_token_t *tok,u8 *res_resp)
 	u8 System_Sta,pos = 2;
 
 	System_Sta = tok->arg[pos++];
-
+	
 	switch(System_Sta)
-	{
+	{	
 		case 0:
 			LOG_INFO("Normal Condition\n"); 
-
+			
 			break;
 
 		case 1:
 			LOG_INFO("Setting Condition\n"); 
-
+			
 			break;
 
 		case 2:
 			LOG_INFO("Card reading Condition\n"); 	
-
+			
 			break;
 
 		case 3:
@@ -951,7 +951,7 @@ int Ariber_GetDoorLog(struct tls_protocmd_token_t *tok,u8 *res_resp)
 
 		case 0x03:
 			switch(ViceCmd)
-			{
+			{	
 				case 1:
 
 				break;
@@ -1024,7 +1024,7 @@ int Ariber_GetUserPassword(struct tls_protocmd_token_t *tok,u8 *res_resp)
 	code_Rtn[1] = 1;	
 	CharToAsc(code_Rtn[1],res_resp); 
 	res_resp = res_resp +2;
-
+	
 	//√‹¬Î
 	code_Rtn[2] = 12;	
 	code_tmp[0] = HexToIntBCD(code_Rtn[2]);	
@@ -1052,7 +1052,7 @@ int Ariber_GetUserPassword(struct tls_protocmd_token_t *tok,u8 *res_resp)
 
 	code_Rtn[7] = 0;	
 	CharToAsc(code_Rtn[7],res_resp);	 	
-
+	
 	
 	return ASCII_LEN(GET_USER_PASS_RTN_LEN);	
 }

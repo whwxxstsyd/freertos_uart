@@ -332,7 +332,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F10X_HD,USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\SYSTEM\delay;..\SYSTEM\sys;..\SYSTEM\usart;..\USER;..\STM32F10x_FWLib\inc;..\CORE;..\MALLOC;..\FreeRTOS\include;..\FreeRTOS\portable\RVDS\ARM_CM3;..\HARDWARE\LED;..\HARDWARE\LCD;..\HARDWARE\TIMER;..\HARDWARE\EXTI;..\HARDWARE\KEY;..\TASK;..\USERLIB;..\INCLUDE;..\HARDWARE\PLATFORM;..\MEM;..\PROTOCAL;..\HARDWARE\BEEP;..\HARDWARE\SD2068;..\HARDWARE\CARD;..\CARD;..\HARDWARE\24CXXX;..\HARDWARE\FLASH;..\HARDWARE\SPI</IncludePath>
+              <IncludePath>..\SYSTEM\delay;..\SYSTEM\sys;..\SYSTEM\usart;..\USER;..\STM32F10x_FWLib\inc;..\CORE;..\MALLOC;..\FreeRTOS\include;..\FreeRTOS\portable\RVDS\ARM_CM3;..\HARDWARE\LED;..\HARDWARE\LCD;..\HARDWARE\TIMER;..\HARDWARE\EXTI;..\HARDWARE\KEY;..\TASK;..\USERLIB;..\INCLUDE;..\HARDWARE\PLATFORM;..\MEM;..\PROTOCAL;..\HARDWARE\BEEP;..\HARDWARE\SD2068;..\HARDWARE\CARD;..\CARD;..\HARDWARE\24CXXX;..\HARDWARE\FLASH;..\HARDWARE\SPI;..\HARDWARE\STMFLASH;..\APP</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -450,6 +450,11 @@
               <FileType>1</FileType>
               <FilePath>..\HARDWARE\FLASH\flash.c</FilePath>
             </File>
+            <File>
+              <FileName>stmflash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\STMFLASH\stmflash.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -524,6 +529,11 @@
               <FileName>stm32f10x_spi.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\STM32F10x_FWLib\src\stm32f10x_spi.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f10x_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STM32F10x_FWLib\src\stm32f10x_flash.c</FilePath>
             </File>
           </Files>
         </Group>

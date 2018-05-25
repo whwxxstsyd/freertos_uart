@@ -19,9 +19,9 @@ static int post_protocmd_get_time_proc(struct tls_protocmd_token_t *tok,
 	u8 cmd_type  = tok->arg[1];
 	
 	if(cmd_group != 0xF2)
-	{		
+	{			
 		LOG_INFO("cmd_group error\n");		
-		return RTN_UNVALID_DATA;		
+		return RTN_UNVALID_DATA;			
 	}
 	
 	switch(cmd_type)
@@ -31,7 +31,7 @@ static int post_protocmd_get_time_proc(struct tls_protocmd_token_t *tok,
 			*res_len = Ariber_GetSysTime(res_resp);	
 			
 			return RTN_NORMAL;
-
+				
 			break;	
 
 		default:
@@ -62,8 +62,6 @@ static int post_protocmd_set_time_proc(struct tls_protocmd_token_t *tok,
 		TwoAscTOHex(buff[i],buff[i+1]);
 	}
 		
-		
-		
 	if(check_time_format((TypedefDateTime *)buff))	
 	{
 		return FALSE;
@@ -77,8 +75,10 @@ static int post_protocmd_set_time_proc(struct tls_protocmd_token_t *tok,
 
 
 static int post_protocmd_get_addr_proc(struct tls_protocmd_token_t *tok,
-        char *res_resp, u32 *res_len)
+        										 char *res_resp, u32 *res_len)
 {
+	*res_len = 0;
+
 	return RTN_NORMAL;
 }	
 
@@ -86,6 +86,21 @@ static int post_protocmd_get_addr_proc(struct tls_protocmd_token_t *tok,
 static int post_protocmd_set_addr_proc(struct tls_protocmd_token_t *tok,
         										char *res_resp, u32 *res_len)
 {
+	u8 Device_Addr = tok->arg[0];
+	
+	if((Device_Addr & 0x00ff) == 0x0000 || (Device_Addr & 0x00ff) == 0x00ff )
+	{	
+		return RTN_UNVALID_DATA;  
+	}	
+
+	//±£´æµØÖ·
+	tok->ADDR = Device_Addr;	
+
+	//´æ´¢µ½EEPROM	
+
+
+	*res_len = 0;
+
 	return RTN_NORMAL;	
 }
 
@@ -140,6 +155,34 @@ static int post_protocmd_get_ariber_ver_proc(struct tls_protocmd_token_t *tok,
 static int post_protocmd_set_baudrate_proc(struct tls_protocmd_token_t *tok,
         char *res_resp, u32 *res_len)
 {
+	u8 baudrate_rev = tok->arg[0];
+	u16 baudrate;
+
+	switch(baudrate_rev)
+	{
+		case 3:
+			baudrate = UART_BAUDRATE_B4800;
+			break;		
+
+		case 4:
+			baudrate = UART_BAUDRATE_B9600;
+			break;
+
+		case 5:
+			baudrate = UART_BAUDRATE_B19200;	
+			break;	
+
+		case 7:		
+			baudrate = UART_BAUDRATE_B57600;	
+			break;	
+
+		default:
+			return RTN_UNKNOW_CMD;
+			break;
+	}
+
+	*res_len = 0;	
+
 	return RTN_NORMAL;
 }
 
@@ -203,29 +246,81 @@ static int post_protocmd_set_sys_param_proc(struct tls_protocmd_token_t *tok,
 	}
 	
 	switch(cmd_type)
-	{
-		case CMD_0x49_SET_WORK_DAY_IN:
-	
-			LOG_INFO("CMD_0x49_SET_WORK_DAY_IN\n");		
-			
-			*res_len = Ariber_SetSysTime(tok,res_resp);			
+	{	
+		case CMD_0x49_CORRECT_TIME:
 
+			LOG_INFO("CMD_0x49_SET_WORK_DAY_IN\n");	
+
+			*res_len = Ariber_SetSysTime(tok,res_resp);			
+			
+			break;
+
+		case CMD_0x49_SET_WORK_DAY_IN:
+		
+			LOG_INFO("CMD_0x49_SET_WORK_DAY_IN\n");					
+			
 			break;
 
 		case CMD_0x49_SET_REST_DAY_IN:
 	
 			LOG_INFO("CMD_0x49_SET_REST_DAY_IN\n");			
 			
-			*res_len = Ariber_SetSysTime(tok,res_resp);			
 
 			break;
 	
-		case CMD_0x49_SET_WEEK_IN:
+		case CMD_0x49_SET_WEEK_AUTH_IN:
 	
-			LOG_INFO("CMD_0x49_SET_WEEK_IN\n");		
+			LOG_INFO("CMD_0x49_SET_WEEK_AUTH_IN\n");		
 			
-			*res_len = Ariber_SetSysTime(tok,res_resp);			
 
+			break;
+
+		case CMD_0x49_USER_AUTHORIZE:
+	
+			LOG_INFO("CMD_0x49_USER_AUTHORIZE\n");		
+			
+			break;
+
+		case CMD_0x49_USER_UNAUTHORIZE:		
+	
+			LOG_INFO("CMD_0x49_USER_UNAUTHORIZE\n");		
+			
+			break;
+			
+		case CMD_0x49_REST_DAY_IN_WEEK:	
+			
+				LOG_INFO("CMD_0x49_REST_DAY_IN_WEEK\n");		
+				
+			break;
+
+		case CMD_0x49_ADD_HOLIDAY:	
+			
+				LOG_INFO("CMD_0x49_ADD_HOLIDAY\n");		
+				
+			break;
+
+		case CMD_0x49_DEL_HOLIDAY:	
+			
+				LOG_INFO("CMD_0x49_DEL_HOLIDAY\n");		
+				
+			break;
+
+		case CMD_0x49_OPEN_DOOR:	
+			
+				LOG_INFO("CMD_0x49_OPEN_DOOR\n");		
+				
+			break;
+
+		case CMD_0x49_RECORD_MEM_ADDR:		
+			
+				LOG_INFO("CMD_0x49_RECORD_MEM_ADDR\n");		
+				
+			break;
+
+		case CMD_0x49_SET_PARAM:		
+			
+				LOG_INFO("CMD_0x49_SET_PARAM\n");		
+				
 			break;
 
 
@@ -718,11 +813,8 @@ int tls_protocmd_exec(struct tls_protocmd_token_t *tok,char *res_rsp,u32 *res_le
 		err = match->proc_func(tok, res_rsp, res_len);
 	} 
 	else 
-	{	
-		/* at command not found */
-		*res_len = sprintf(res_rsp, "+ERR=-2");
-			
-		err = -CMD_ERR_UNSUPP;
+	{				
+		err = RTN_CID2_ERR;
 	}
 
 	return err;

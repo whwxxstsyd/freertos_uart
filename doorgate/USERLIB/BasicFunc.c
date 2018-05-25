@@ -46,11 +46,11 @@ u8 HexToBCD(u8 TC_char)
 // ¹¦ÄÜÃèÊö  : Hex×ªBCD
 u16 HexToIntBCD(u8 HexVar)
 {	
-  u16  BcdVar = 0;
+  	u16  BcdVar = 0;	
 	
 	BcdVar|=(HexVar/100)<<8;
 	HexVar=HexVar%100;
-
+	
 	BcdVar|=(HexVar/10)<<4;
 	BcdVar|=HexVar%10;
  	

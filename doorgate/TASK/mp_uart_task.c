@@ -100,7 +100,7 @@ void tls_uart_init(void)
     struct tls_hostif *hif = tls_get_hostif();	
 		
     memset(uart_st, 0, 2 * sizeof(struct tls_uart));
-	
+		
     /* setting uart */				
     if(WM_SUCCESS  != tls_uart_port_init(COM1, NULL))
 		return;	

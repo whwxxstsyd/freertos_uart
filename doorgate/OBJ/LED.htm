@@ -3,7 +3,7 @@
 <title>Static Call Graph - [..\OBJ\LED.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image ..\OBJ\LED.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060061: Last Updated: Thu May 24 17:25:43 2018
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060061: Last Updated: Fri May 25 16:13:43 2018
 <BR><P>
 <H3>Maximum Stack Usage =        520 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -684,12 +684,12 @@ Global Symbols
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f10x_hd.o(RESET)
 </UL>
 <P><STRONG><a name="[1b7]"></a>tls_get_usrt1_isr_count</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, usart.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[1bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_queue_receive
-<LI><a href="#[1ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_queue_send
-<LI><a href="#[1b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_mutex_release
-<LI><a href="#[1a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_sem_release
+<BR><BR>[Called By]<UL><LI><a href="#[1a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_sem_release
 <LI><a href="#[179]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_mailbox_send
 <LI><a href="#[184]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_mailbox_receive
+<LI><a href="#[1bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_queue_receive
+<LI><a href="#[1ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_queue_send
+<LI><a href="#[1b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_mutex_release
 </UL>
 
 <P><STRONG><a name="[47]"></a>USART2_IRQHandler</STRONG> (Thumb, 56 bytes, Stack size 8 bytes, usart.o(.text))
@@ -1088,8 +1088,8 @@ Global Symbols
 <P><STRONG><a name="[279]"></a>RCC_ClearITPendingBit</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32f10x_rcc.o(.text), UNUSED)
 
 <P><STRONG><a name="[ed]"></a>USART_DeInit</STRONG> (Thumb, 134 bytes, Stack size 8 bytes, stm32f10x_usart.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphResetCmd
-<LI><a href="#[ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB1PeriphResetCmd
+<BR><BR>[Calls]<UL><LI><a href="#[ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB1PeriphResetCmd
+<LI><a href="#[e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphResetCmd
 </UL>
 
 <P><STRONG><a name="[ef]"></a>USART_Init</STRONG> (Thumb, 210 bytes, Stack size 56 bytes, stm32f10x_usart.o(.text))
@@ -1287,12 +1287,12 @@ Global Symbols
 <LI><a href="#[f9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pvPortMalloc
 <LI><a href="#[f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[1b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_queue_create
-<LI><a href="#[18e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_mailbox_create
+<BR>[Called By]<UL><LI><a href="#[18e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_mailbox_create
 <LI><a href="#[15f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;prvCheckForValidListAndQueue
 <LI><a href="#[121]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueCreateSet
 <LI><a href="#[111]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueCreateCountingSemaphore
 <LI><a href="#[108]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueCreateMutex
+<LI><a href="#[1b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_queue_create
 </UL>
 
 <P><STRONG><a name="[101]"></a>xQueueGenericSend</STRONG> (Thumb, 456 bytes, Stack size 56 bytes, queue.o(.text))
@@ -1314,14 +1314,14 @@ Global Symbols
 <LI><a href="#[f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vPortEnterCritical
 <LI><a href="#[f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[1ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_queue_send
-<LI><a href="#[1b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_mutex_release
-<LI><a href="#[1a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_sem_release
+<BR>[Called By]<UL><LI><a href="#[1a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_sem_release
 <LI><a href="#[179]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_mailbox_send
 <LI><a href="#[16b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xTimerPendFunctionCall
 <LI><a href="#[157]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xTimerGenericCommand
 <LI><a href="#[109]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGiveMutexRecursive
 <LI><a href="#[107]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;prvInitialiseMutex
+<LI><a href="#[1ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_queue_send
+<LI><a href="#[1b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_mutex_release
 </UL>
 
 <P><STRONG><a name="[108]"></a>xQueueCreateMutex</STRONG> (Thumb, 34 bytes, Stack size 24 bytes, queue.o(.text), UNUSED)
@@ -1357,13 +1357,13 @@ Global Symbols
 <LI><a href="#[f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vPortEnterCritical
 <LI><a href="#[f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[1bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_queue_receive
-<LI><a href="#[1b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_mutex_acquire
-<LI><a href="#[1ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_sem_acquire
+<BR>[Called By]<UL><LI><a href="#[1ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_sem_acquire
 <LI><a href="#[184]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_mailbox_receive
 <LI><a href="#[15b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;prvProcessReceivedCommands
 <LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueSelectFromSet
 <LI><a href="#[110]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueTakeMutexRecursive
+<LI><a href="#[1bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_queue_receive
+<LI><a href="#[1b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_mutex_acquire
 </UL>
 
 <P><STRONG><a name="[110]"></a>xQueueTakeMutexRecursive</STRONG> (Thumb, 76 bytes, Stack size 24 bytes, queue.o(.text), UNUSED)
@@ -1392,9 +1392,9 @@ Global Symbols
 <LI><a href="#[fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;prvCopyDataToQueue
 <LI><a href="#[f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[1ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_queue_send
-<LI><a href="#[157]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xTimerGenericCommand
+<BR>[Called By]<UL><LI><a href="#[157]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xTimerGenericCommand
 <LI><a href="#[16a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xTimerPendFunctionCallFromISR
+<LI><a href="#[1ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_queue_send
 </UL>
 
 <P><STRONG><a name="[114]"></a>xQueueGiveFromISR</STRONG> (Thumb, 228 bytes, Stack size 32 bytes, queue.o(.text))
@@ -1406,9 +1406,9 @@ Global Symbols
 <LI><a href="#[fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;prvNotifyQueueSetContainer
 <LI><a href="#[f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[1b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_mutex_release
-<LI><a href="#[1a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_sem_release
+<BR>[Called By]<UL><LI><a href="#[1a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_sem_release
 <LI><a href="#[179]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_mailbox_send
+<LI><a href="#[1b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_mutex_release
 </UL>
 
 <P><STRONG><a name="[115]"></a>xQueueReceiveFromISR</STRONG> (Thumb, 190 bytes, Stack size 40 bytes, queue.o(.text))
@@ -1420,9 +1420,9 @@ Global Symbols
 <LI><a href="#[10c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;prvCopyDataFromQueue
 <LI><a href="#[f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[1bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_queue_receive
-<LI><a href="#[184]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_mailbox_receive
+<BR>[Called By]<UL><LI><a href="#[184]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_mailbox_receive
 <LI><a href="#[125]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueSelectFromSetFromISR
+<LI><a href="#[1bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_queue_receive
 </UL>
 
 <P><STRONG><a name="[116]"></a>xQueuePeekFromISR</STRONG> (Thumb, 158 bytes, Stack size 32 bytes, queue.o(.text), UNUSED)
@@ -1456,10 +1456,10 @@ Global Symbols
 <LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vPortFree
 <LI><a href="#[f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[1bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_mailbox_delete
+<BR>[Called By]<UL><LI><a href="#[1ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_sem_delete
+<LI><a href="#[1bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_mailbox_delete
 <LI><a href="#[1b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_queue_delete
 <LI><a href="#[1b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_mutex_delete
-<LI><a href="#[1ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_sem_delete
 </UL>
 
 <P><STRONG><a name="[295]"></a>uxQueueGetQueueNumber</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, queue.o(.text), UNUSED)
@@ -1637,9 +1637,9 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[1b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_mutex_release
-<LI><a href="#[1f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PendSV_Handler
+<BR>[Called By]<UL><LI><a href="#[1f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PendSV_Handler
 <LI><a href="#[13a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskSuspend
+<LI><a href="#[1b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_mutex_release
 </UL>
 
 <P><STRONG><a name="[13a]"></a>vTaskSuspend</STRONG> (Thumb, 190 bytes, Stack size 16 bytes, tasks.o(.text), UNUSED)
@@ -1906,10 +1906,10 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_timer_stop
 <LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_timer_start
 <LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_timer_change
-<LI><a href="#[1be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_timer_delete
 <LI><a href="#[15c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;prvProcessExpiredTimer
 <LI><a href="#[15b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;prvProcessReceivedCommands
 <LI><a href="#[158]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;prvSwitchTimerLists
+<LI><a href="#[1be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_timer_delete
 </UL>
 
 <P><STRONG><a name="[13f]"></a>xTimerCreateTimerTask</STRONG> (Thumb, 56 bytes, Stack size 16 bytes, timers.o(.text))
@@ -2213,9 +2213,9 @@ Global Symbols
 <P><STRONG><a name="[2a2]"></a>ByteEndian</STRONG> (Thumb, 34 bytes, Stack size 8 bytes, basicfunc.o(.text), UNUSED)
 
 <P><STRONG><a name="[1f6]"></a>TwoCharToInt</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, basicfunc.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[1c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_protocmd_parse
-<LI><a href="#[1e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Ariber_SetVoiceMark
+<BR><BR>[Called By]<UL><LI><a href="#[1e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Ariber_SetVoiceMark
 <LI><a href="#[1e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Ariber_SetAlarmParam
+<LI><a href="#[1c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_protocmd_parse
 </UL>
 
 <P><STRONG><a name="[190]"></a>Hi_HexToAsc</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, basicfunc.o(.text))
@@ -2276,9 +2276,9 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[195]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AscToHex
 </UL>
-<BR>[Called By]<UL><LI><a href="#[1c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_protocmd_parse
-<LI><a href="#[196]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BufAscToHex
+<BR>[Called By]<UL><LI><a href="#[196]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BufAscToHex
 <LI><a href="#[9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;post_protocmd_set_time_proc
+<LI><a href="#[1c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_protocmd_parse
 </UL>
 
 <P><STRONG><a name="[196]"></a>BufAscToHex</STRONG> (Thumb, 52 bytes, Stack size 24 bytes, basicfunc.o(.text), UNUSED)
@@ -2598,8 +2598,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vPortEnterCritical
 </UL>
-<BR>[Called By]<UL><LI><a href="#[1c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_hostif_get_tx_event_msg
-<LI><a href="#[189]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_uart_tx_chars_start
+<BR>[Called By]<UL><LI><a href="#[189]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_uart_tx_chars_start
 <LI><a href="#[181]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mem_free_debug
 <LI><a href="#[17f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mem_alloc_debug
 <LI><a href="#[185]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uart_tx
@@ -2607,6 +2606,7 @@ Global Symbols
 <LI><a href="#[1d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;is_safe_addr_debug
 <LI><a href="#[1d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mem_realloc_debug
 <LI><a href="#[1d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mem_calloc_debug
+<LI><a href="#[1c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_hostif_get_tx_event_msg
 </UL>
 
 <P><STRONG><a name="[178]"></a>tls_os_release_critical</STRONG> (Thumb, 10 bytes, Stack size 8 bytes, mp_osal_rtos.o(.text))
@@ -2615,8 +2615,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vPortExitCritical
 </UL>
-<BR>[Called By]<UL><LI><a href="#[1c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_hostif_get_tx_event_msg
-<LI><a href="#[189]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_uart_tx_chars_start
+<BR>[Called By]<UL><LI><a href="#[189]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_uart_tx_chars_start
 <LI><a href="#[181]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mem_free_debug
 <LI><a href="#[17f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mem_alloc_debug
 <LI><a href="#[185]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uart_tx
@@ -2624,6 +2623,7 @@ Global Symbols
 <LI><a href="#[1d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;is_safe_addr_debug
 <LI><a href="#[1d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mem_realloc_debug
 <LI><a href="#[1d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mem_calloc_debug
+<LI><a href="#[1c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_hostif_get_tx_event_msg
 </UL>
 
 <P><STRONG><a name="[9e]"></a>tls_os_timer_create</STRONG> (Thumb, 54 bytes, Stack size 32 bytes, mp_osal_rtos.o(.text), UNUSED)
@@ -2660,8 +2660,8 @@ Global Symbols
 
 <P><STRONG><a name="[186]"></a>tls_get_hostif</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, mp_protocol_hostif.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_uart_init
-<LI><a href="#[1c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_hostif_process_cmdrsp
 <LI><a href="#[185]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uart_tx
+<LI><a href="#[1c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_hostif_process_cmdrsp
 </UL>
 
 <P><STRONG><a name="[93]"></a>tls_hostif_init</STRONG> (Thumb, 66 bytes, Stack size 16 bytes, mp_protocol_hostif.o(.text))
@@ -2676,9 +2676,9 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 168 + Unknown Stack Size
 <LI>Call Chain = tls_hostif_get_tx_event_msg &rArr; tls_os_set_critical &rArr; vPortEnterCritical &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dl_list_empty
-<LI><a href="#[176]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_set_critical
+<BR>[Calls]<UL><LI><a href="#[176]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_set_critical
 <LI><a href="#[178]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_os_release_critical
+<LI><a href="#[1c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dl_list_empty
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_hostif_process_cmdrsp
 </UL>
@@ -2687,8 +2687,8 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 192 + Unknown Stack Size
 <LI>Call Chain = tls_hostif_process_cmdrsp &rArr; tls_hostif_get_tx_event_msg &rArr; tls_os_set_critical &rArr; vPortEnterCritical &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_hostif_get_tx_event_msg
-<LI><a href="#[186]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_get_hostif
+<BR>[Calls]<UL><LI><a href="#[186]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_get_hostif
+<LI><a href="#[1c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_hostif_get_tx_event_msg
 </UL>
 <BR>[Called By]<UL><LI><a href="#[180]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_hostif_cmd_handler
 </UL>
@@ -2697,13 +2697,13 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 472 + Unknown Stack Size
 <LI>Call Chain = tls_hostif_cmd_handler &rArr; mem_alloc_debug &rArr; tls_os_sem_release &rArr; xQueueGenericSend &rArr; prvUnlockQueue &rArr; prvNotifyQueueSetContainer &rArr; prvCopyDataToQueue &rArr; xTaskPriorityDisinherit &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_protocol_rebuild
+<BR>[Calls]<UL><LI><a href="#[181]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mem_free_debug
+<LI><a href="#[17f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mem_alloc_debug
+<LI><a href="#[18b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
+<LI><a href="#[1c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_protocol_rebuild
 <LI><a href="#[1c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_protocmd_parse
 <LI><a href="#[1c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_protocmd_exec
 <LI><a href="#[1c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_hostif_process_cmdrsp
-<LI><a href="#[181]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mem_free_debug
-<LI><a href="#[17f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mem_alloc_debug
-<LI><a href="#[18b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 </UL>
 <BR>[Called By]<UL><LI><a href="#[17e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;parse_protocol_line
 </UL>
@@ -3139,8 +3139,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[20f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__Heap_Full
 <LI><a href="#[20e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_heap_descriptor
 </UL>
-<BR>[Called By]<UL><LI><a href="#[1bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;debug_strdup
-<LI><a href="#[1b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;debug_strdup
+<BR>[Called By]<UL><LI><a href="#[1b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;debug_strdup
 <LI><a href="#[19b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;debug_strdup
 <LI><a href="#[17f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mem_alloc_debug
 <LI><a href="#[171]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;debug_strdup
@@ -3149,6 +3148,7 @@ Global Symbols
 <LI><a href="#[1d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mem_calloc_debug
 <LI><a href="#[1c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;debug_strdup
 <LI><a href="#[1c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;debug_strdup
+<LI><a href="#[1bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;debug_strdup
 </UL>
 
 <P><STRONG><a name="[1cf]"></a>free</STRONG> (Thumb, 78 bytes, Stack size 16 bytes, h1_free.o(.text))
@@ -3248,10 +3248,10 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sputc
 <LI><a href="#[211]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_char_common
 </UL>
-<BR>[Called By]<UL><LI><a href="#[1c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_protocmd_exec
-<LI><a href="#[14e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskList
+<BR>[Called By]<UL><LI><a href="#[14e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskList
 <LI><a href="#[1f4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;protocmd_ok_resp
 <LI><a href="#[1f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;protocmd_err_resp
+<LI><a href="#[1c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_protocmd_exec
 </UL>
 
 <P><STRONG><a name="[213]"></a>_printf_pre_padding</STRONG> (Thumb, 44 bytes, Stack size 16 bytes, _printf_pad.o(.text))
@@ -3328,8 +3328,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[14c]"></a>strcpy</STRONG> (Thumb, 72 bytes, Stack size 12 bytes, strcpy.o(.text), UNUSED)
-<BR><BR>[Called By]<UL><LI><a href="#[1bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;debug_strdup
-<LI><a href="#[1b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;debug_strdup
+<BR><BR>[Called By]<UL><LI><a href="#[1b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;debug_strdup
 <LI><a href="#[19b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;debug_strdup
 <LI><a href="#[171]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;debug_strdup
 <LI><a href="#[14b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;prvWriteNameToBuffer
@@ -3337,24 +3336,24 @@ Global Symbols
 <LI><a href="#[1d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;debug_strdup
 <LI><a href="#[1c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;debug_strdup
 <LI><a href="#[1c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;debug_strdup
+<LI><a href="#[1bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;debug_strdup
 </UL>
 
 <P><STRONG><a name="[175]"></a>strrchr</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, strrchr.o(.text), UNUSED)
-<BR><BR>[Called By]<UL><LI><a href="#[1c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_filename
-<LI><a href="#[1b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_filename
-<LI><a href="#[19c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_filename
+<BR><BR>[Called By]<UL><LI><a href="#[19c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_filename
 <LI><a href="#[174]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_filename
 <LI><a href="#[1fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_filename
 <LI><a href="#[1d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_filename
 <LI><a href="#[1ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_filename
 <LI><a href="#[1c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_filename
+<LI><a href="#[1c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_filename
+<LI><a href="#[1b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_filename
 </UL>
 
 <P><STRONG><a name="[14d]"></a>strlen</STRONG> (Thumb, 62 bytes, Stack size 8 bytes, strlen.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = strlen
 </UL>
-<BR>[Called By]<UL><LI><a href="#[1bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;debug_strdup
-<LI><a href="#[1b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;debug_strdup
+<BR>[Called By]<UL><LI><a href="#[1b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;debug_strdup
 <LI><a href="#[19b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;debug_strdup
 <LI><a href="#[171]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;debug_strdup
 <LI><a href="#[14e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskList
@@ -3364,6 +3363,7 @@ Global Symbols
 <LI><a href="#[1d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;debug_strdup
 <LI><a href="#[1c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;debug_strdup
 <LI><a href="#[1c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;debug_strdup
+<LI><a href="#[1bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;debug_strdup
 </UL>
 
 <P><STRONG><a name="[17b]"></a>memchr</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, memchr.o(.text))
@@ -3392,8 +3392,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[173]"></a>__aeabi_memclr</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, rt_memclr.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[1bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;debug_strdup
-<LI><a href="#[1b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;debug_strdup
+<BR><BR>[Called By]<UL><LI><a href="#[1b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;debug_strdup
 <LI><a href="#[1a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_uart_disable_user_mode
 <LI><a href="#[1a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_uart_cfg_user_mode
 <LI><a href="#[19b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;debug_strdup
@@ -3404,6 +3403,7 @@ Global Symbols
 <LI><a href="#[1d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;debug_strdup
 <LI><a href="#[1c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;debug_strdup
 <LI><a href="#[1c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;debug_strdup
+<LI><a href="#[1bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;debug_strdup
 </UL>
 
 <P><STRONG><a name="[21d]"></a>__rt_memclr</STRONG> (Thumb, 68 bytes, Stack size 0 bytes, rt_memclr.o(.text), UNUSED)
@@ -4398,8 +4398,8 @@ Local Symbols
 </UL>
 
 <P><STRONG><a name="[1c0]"></a>get_filename</STRONG> (Thumb, 32 bytes, Stack size 16 bytes, mp_protocol_hostif.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[1bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;debug_strdup
-<LI><a href="#[175]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strrchr
+<BR><BR>[Calls]<UL><LI><a href="#[175]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strrchr
+<LI><a href="#[1bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;debug_strdup
 </UL>
 
 <P><STRONG><a name="[1c2]"></a>dl_list_empty</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, mp_protocol_hostif.o(.text))
@@ -4523,7 +4523,7 @@ Local Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> protocol.o(.data)
 </UL>
-<P><STRONG><a name="[13]"></a>post_protocmd_set_sys_param_proc</STRONG> (Thumb, 90 bytes, Stack size 24 bytes, protocol.o(.text))
+<P><STRONG><a name="[13]"></a>post_protocmd_set_sys_param_proc</STRONG> (Thumb, 128 bytes, Stack size 24 bytes, protocol.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = post_protocmd_set_sys_param_proc &rArr; Ariber_SetSysTime
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Ariber_SetSysTime

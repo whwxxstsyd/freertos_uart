@@ -32,11 +32,24 @@ extern "C" {
 
 
 //0x49ÃüÁîµÄtype
-#define CMD_0x49_SET_WORK_DAY_IN 		0xE0
-#define CMD_0x49_SET_REST_DAY_IN 		0xE1
-#define CMD_0x49_SET_WEEK_IN 			0xE2
-	
+#define CMD_0x49_CORRECT_TIME 			0xE0	
 
+#define CMD_0x49_SET_WORK_DAY_IN 		0xE1	
+#define CMD_0x49_SET_REST_DAY_IN 		0xE2
+#define CMD_0x49_SET_WEEK_AUTH_IN 	0xF1
+
+#define CMD_0x49_USER_AUTHORIZE		0xE3		
+#define CMD_0x49_USER_UNAUTHORIZE 	0xE4	
+
+#define CMD_0x49_REST_DAY_IN_WEEK 	0xEA	
+#define CMD_0x49_ADD_HOLIDAY			0xEB
+#define CMD_0x49_DEL_HOLIDAY 			0xEC		
+#define CMD_0x49_OPEN_DOOR 			0xED
+
+#define CMD_0x49_RECORD_MEM_ADDR 		0xF0			
+#define CMD_0x49_SET_PARAM 			0xFC
+
+ 
 
 //0x4AÃüÁîµÄtype	
 #define CMD_0x4A_GET_WORK_DAY_IN 		0xE3		

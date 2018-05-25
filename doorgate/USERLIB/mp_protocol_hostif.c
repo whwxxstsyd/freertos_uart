@@ -23,7 +23,7 @@ struct tls_hostif *tls_get_hostif(void)
 
 
 int tls_hostif_init(void)
-{
+{	
 	struct tls_hostif *hif;		
 	struct tls_hostif_tx_msg *tx_msg;
 	int i;
@@ -35,7 +35,7 @@ int tls_hostif_init(void)
 	dl_list_init(&hif->tx_event_msg_list);
 	
     for (i = 0; i < HOSTIF_TX_EVENT_MSG_NUM; i++) 
-	{		
+	{			
         tx_msg = &g_hostif_tx_event_msg[i];	
         dl_list_add_tail(&hif->tx_event_msg_list, &tx_msg->list);
     }
@@ -86,7 +86,7 @@ struct tls_hostif_tx_msg *tls_hostif_get_tx_event_msg(struct tls_hostif *hif)
 
     cpu_sr = tls_os_set_critical();
     if (dl_list_empty(&hif->tx_event_msg_list)) {
-        tx_msg = NULL;
+        tx_msg = NULL;	
     } else {
         tx_msg = dl_list_first(&hif->tx_event_msg_list,
                 struct tls_hostif_tx_msg, list);
