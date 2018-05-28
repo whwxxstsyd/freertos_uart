@@ -53,8 +53,8 @@ void  SD2068A_Initial(void)
 static void  SD2068A_I2CWait(void)
 {
 	volatile u8 i;
-
-	for(i = 0;i<8;i++);
+	
+	for(i = 0;i<10;i++);	
 }
 
 

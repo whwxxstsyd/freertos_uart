@@ -1,5 +1,19 @@
----- post_protocmd_get_addr_proc Matches (4 in 2 files) ----
-LED.htm (e:\doorgate\obj): <LI><a href="#[a]">post_protocmd_get_addr_proc</a> from protocol.o(.text) referenced 2 times from protocol.o(.data)
-LED.htm (e:\doorgate\obj):<P><STRONG><a name="[a]"></a>post_protocmd_get_addr_proc</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, protocol.o(.text))
-Protocol.c (e:\doorgate\protocal):static int post_protocmd_get_addr_proc(struct tls_protocmd_token_t *tok,
-Protocol.c (e:\doorgate\protocal):	{ 0x50, 0, post_protocmd_get_addr_proc },				//ªÒ»°µÿ÷∑
+---- set_bit Matches (18 in 2 files) ----
+LED.htm (e:\doorgate\obj):<BR><BR>[Stack]<UL><LI>Max Depth = 52<LI>Call Chain = EXTI9_5_IRQHandler &rArr; wiegand_reader_d3 &rArr; wiegand_reader_data_pin_changed &rArr; set_bit
+LED.htm (e:\doorgate\obj):<BR><BR>[Stack]<UL><LI>Max Depth = 52<LI>Call Chain = EXTI15_10_IRQHandler &rArr; wiegand_reader_d2 &rArr; wiegand_reader_data_pin_changed &rArr; set_bit
+LED.htm (e:\doorgate\obj):<BR><BR>[Stack]<UL><LI>Max Depth = 52<LI>Call Chain = EXTI2_IRQHandler &rArr; wiegand_reader_d2 &rArr; wiegand_reader_data_pin_changed &rArr; set_bit
+LED.htm (e:\doorgate\obj):<BR><BR>[Stack]<UL><LI>Max Depth = 44<LI>Call Chain = wiegand_reader_d0 &rArr; wiegand_reader_data_pin_changed &rArr; set_bit
+LED.htm (e:\doorgate\obj):<BR><BR>[Stack]<UL><LI>Max Depth = 44<LI>Call Chain = wiegand_reader_d2 &rArr; wiegand_reader_data_pin_changed &rArr; set_bit
+LED.htm (e:\doorgate\obj):<BR><BR>[Stack]<UL><LI>Max Depth = 44<LI>Call Chain = wiegand_reader_d3 &rArr; wiegand_reader_data_pin_changed &rArr; set_bit
+LED.htm (e:\doorgate\obj):<P><STRONG><a name="[20b]"></a>set_bit</STRONG> (Thumb, 52 bytes, Stack size 12 bytes, wiegand.o(.text))
+LED.htm (e:\doorgate\obj):<BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = set_bit
+LED.htm (e:\doorgate\obj):<BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = wiegand_reader_data_pin_changed &rArr; set_bit
+LED.htm (e:\doorgate\obj):<BR>[Calls]<UL><LI><a href="#[20b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_bit
+Wiegand.c (e:\doorgate\card):static void set_bit(u8 *data, u8 idx, u8 val)
+Wiegand.c (e:\doorgate\card):	set_bit(&wr->data_pins, pin, state);
+Wiegand.c (e:\doorgate\card):				set_bit(wr->bits, wr->num_bits, 1);
+Wiegand.c (e:\doorgate\card):				set_bit(wr->bits, wr->num_bits, 0);
+Wiegand.c (e:\doorgate\card):	set_bit(&wr->data_pins, 0, WGReader_H1D0_Reader);
+Wiegand.c (e:\doorgate\card):	set_bit(&wr->data_pins, 1, WGReader_H1D1_Reader);
+Wiegand.c (e:\doorgate\card):	set_bit(&wr->data_pins, 0, WGReader_H2D0_Reader);	
+Wiegand.c (e:\doorgate\card):	set_bit(&wr->data_pins, 1, WGReader_H2D1_Reader);

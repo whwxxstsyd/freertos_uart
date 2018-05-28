@@ -22,8 +22,8 @@ unsigned char IIC_State;
 static void  IIC_Wait(void)	
 {	
 	volatile u8 i;	
-
-	for(i = 0;i<8;i++);		
+		
+	for(i = 0;i<10;i++);		
 }
 
 

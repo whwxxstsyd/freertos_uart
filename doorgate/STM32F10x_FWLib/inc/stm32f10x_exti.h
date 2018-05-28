@@ -64,7 +64,7 @@ typedef enum
   EXTI_Trigger_Rising = 0x08,
   EXTI_Trigger_Falling = 0x0C,  
   EXTI_Trigger_Rising_Falling = 0x10
-}EXTITrigger_TypeDef;
+}EXTITrigger_TypeDef;	
 
 #define IS_EXTI_TRIGGER(TRIGGER) (((TRIGGER) == EXTI_Trigger_Rising) || \
                                   ((TRIGGER) == EXTI_Trigger_Falling) || \

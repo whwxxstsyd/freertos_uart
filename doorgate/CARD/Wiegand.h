@@ -8,9 +8,12 @@ extern "C" {
 #include "sys.h"	
 
 
-#define WIEGAND_UNIT_LENGHT 8	
-#define WIEGAND_BIT_LENGHT  66	
-#define WIEGAND_BYTE_NUM	(WIEGAND_BIT_LENGHT/WIEGAND_UNIT_LENGHT + 1)	
+#if 0
+#define WIEGAND_BYTE_NUM 5
+#else
+#define WIEGAND_BYTE_NUM 9	
+#endif
+
 
 
 typedef enum Wiegand_Sequence_Type_t
@@ -23,13 +26,6 @@ typedef enum Wiegand_Sequence_Type_t
 
 
 	
-typedef enum ReadHead_State_t
-{
-	ReadHead_IDLE 		= 0, 	//空闲状态
-	ReadHead_RECEIVE	= 1,	//正在接收
-	ReadHead_FINISH	= 2,	//接收完毕	
-}ReadHead_State;
-
 typedef enum CardDevice_State_t
 {	
 	CardDev_IDLE 		= 0, 	//空闲状态	
@@ -38,30 +34,20 @@ typedef enum CardDevice_State_t
 }CardDevice_State;			
 
 
-
-typedef struct WIEGAND_PARAM_t		
-{	
-	CardDevice_State State;			//刷卡头状态
-	u8 KeyNumber;
-	u8 Pos;				//接收数存储wiegand的字节的位置   
-	
-	u8 bits[WIEGAND_BYTE_NUM];//真实数据		
+struct wiegand_reader {
+	u8 bits[WIEGAND_BYTE_NUM]; /* For up to 34 bits */
 	u8 num_bits;	
-	
-	u8 data_pins;	
-	
-}WIEGAND_PARAM;	
+	u8 data_pins;		
+
+}wiegand_reader_T;		
 
 	
-	
 
-void wiegand_reader_d0(u8 pin,u8 state);
-void wiegand_reader_d1(u8 pin,u8 state);
-void wiegand_reader_d2(u8 pin,u8 state);
-void wiegand_reader_d3(u8 pin,u8 state);
+void wiegand_reader_data_pin_changed(u8 head_no, u8 pin, u8 state);
 
+void wiegand_reader_init(void);
 
-void wiegand_reader_init(void);	
+static void wiegand_reader_on_word_timeout(void *context);
 
 
 		

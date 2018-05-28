@@ -95,7 +95,7 @@ static void uart_send_tx_msg(u8 hostif_mode, struct tls_hostif_tx_msg *tx_msg)
 
 	
 void tls_uart_init(void)
-{		
+{			
     struct tls_uart *uart;	
     struct tls_hostif *hif = tls_get_hostif();	
 		
