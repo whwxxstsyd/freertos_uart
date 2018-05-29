@@ -1,19 +1,7 @@
----- set_bit Matches (18 in 2 files) ----
-LED.htm (e:\doorgate\obj):<BR><BR>[Stack]<UL><LI>Max Depth = 52<LI>Call Chain = EXTI9_5_IRQHandler &rArr; wiegand_reader_d3 &rArr; wiegand_reader_data_pin_changed &rArr; set_bit
-LED.htm (e:\doorgate\obj):<BR><BR>[Stack]<UL><LI>Max Depth = 52<LI>Call Chain = EXTI15_10_IRQHandler &rArr; wiegand_reader_d2 &rArr; wiegand_reader_data_pin_changed &rArr; set_bit
-LED.htm (e:\doorgate\obj):<BR><BR>[Stack]<UL><LI>Max Depth = 52<LI>Call Chain = EXTI2_IRQHandler &rArr; wiegand_reader_d2 &rArr; wiegand_reader_data_pin_changed &rArr; set_bit
-LED.htm (e:\doorgate\obj):<BR><BR>[Stack]<UL><LI>Max Depth = 44<LI>Call Chain = wiegand_reader_d0 &rArr; wiegand_reader_data_pin_changed &rArr; set_bit
-LED.htm (e:\doorgate\obj):<BR><BR>[Stack]<UL><LI>Max Depth = 44<LI>Call Chain = wiegand_reader_d2 &rArr; wiegand_reader_data_pin_changed &rArr; set_bit
-LED.htm (e:\doorgate\obj):<BR><BR>[Stack]<UL><LI>Max Depth = 44<LI>Call Chain = wiegand_reader_d3 &rArr; wiegand_reader_data_pin_changed &rArr; set_bit
-LED.htm (e:\doorgate\obj):<P><STRONG><a name="[20b]"></a>set_bit</STRONG> (Thumb, 52 bytes, Stack size 12 bytes, wiegand.o(.text))
-LED.htm (e:\doorgate\obj):<BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = set_bit
-LED.htm (e:\doorgate\obj):<BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = wiegand_reader_data_pin_changed &rArr; set_bit
-LED.htm (e:\doorgate\obj):<BR>[Calls]<UL><LI><a href="#[20b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_bit
-Wiegand.c (e:\doorgate\card):static void set_bit(u8 *data, u8 idx, u8 val)
-Wiegand.c (e:\doorgate\card):	set_bit(&wr->data_pins, pin, state);
-Wiegand.c (e:\doorgate\card):				set_bit(wr->bits, wr->num_bits, 1);
-Wiegand.c (e:\doorgate\card):				set_bit(wr->bits, wr->num_bits, 0);
-Wiegand.c (e:\doorgate\card):	set_bit(&wr->data_pins, 0, WGReader_H1D0_Reader);
-Wiegand.c (e:\doorgate\card):	set_bit(&wr->data_pins, 1, WGReader_H1D1_Reader);
-Wiegand.c (e:\doorgate\card):	set_bit(&wr->data_pins, 0, WGReader_H2D0_Reader);	
-Wiegand.c (e:\doorgate\card):	set_bit(&wr->data_pins, 1, WGReader_H2D1_Reader);
+---- Ariber_SetSystemSta Matches (6 in 4 files) ----
+LED.htm (e:\doorgate\obj):<P><STRONG><a name="[1e4]"></a>Ariber_SetSystemSta</STRONG> (Thumb, 50 bytes, Stack size 12 bytes, protocolbase.o(.text))
+LED.htm (e:\doorgate\obj):<BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = Ariber_SetSystemSta
+LED.htm (e:\doorgate\obj):<LI><a href="#[1e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Ariber_SetSystemSta
+Protocol.c (e:\doorgate\protocal):			*res_len = Ariber_SetSystemSta(tok,res_resp,cmd);	
+ProtocolBase.c (e:\doorgate\protocal):int Ariber_SetSystemSta(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4B_HANDLE_T *cmd)	
+ProtocolBase.h (e:\doorgate\protocal):int Ariber_SetSystemSta(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4B_HANDLE_T *cmd);	

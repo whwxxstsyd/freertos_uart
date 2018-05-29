@@ -1,13 +1,18 @@
-#include "mp_protocol_hostif.h"
 #include "ProtocolBase.h"
-#include "param_base.h"
 #include "mp_mem.h"		
 #include "protocol.h"
 #include "BasicFunc.h"		
 #include "calendar.h"	
-#include "debug.h"	
-#include "param.h"	
-#include "common.h"
+#include "debug.h"			
+#include "common.h"	
+
+
+
+CMD_0x48_HANDLE_T CMD_0x48;
+CMD_0x49_HANDLE_T CMD_0x49;	
+CMD_0x4A_HANDLE_T CMD_0x4A;
+CMD_0x4B_HANDLE_T CMD_0x4B;
+CMD_0x4C_HANDLE_T CMD_0x4C;
 
 
 #if Post_Protocol_Open
@@ -104,6 +109,8 @@ static int post_protocmd_set_addr_proc(struct tls_protocmd_token_t *tok,
 	return RTN_NORMAL;	
 }
 
+
+
 const u8 SysCreatedDate[12] = __DATE__;	
 const u8 SysCreatedTime[8] = __TIME__;
 
@@ -119,6 +126,8 @@ static int post_protocmd_get_version_proc(struct tls_protocmd_token_t *tok,
 static int post_protocmd_set_configID_proc(struct tls_protocmd_token_t *tok,
         char *res_resp, u32 *res_len)
 {
+	//
+
 	return RTN_NORMAL;
 }
 
@@ -134,6 +143,8 @@ static int post_protocmd_remote_proc(struct tls_protocmd_token_t *tok,
         char *res_resp, u32 *res_len)
 {
 	return RTN_NORMAL;
+
+	
 }
 
 
@@ -156,7 +167,7 @@ static int post_protocmd_set_baudrate_proc(struct tls_protocmd_token_t *tok,
         char *res_resp, u32 *res_len)
 {
 	u8 baudrate_rev = tok->arg[0];
-	u16 baudrate;
+	u16 baudrate;	
 
 	switch(baudrate_rev)
 	{
@@ -187,9 +198,12 @@ static int post_protocmd_set_baudrate_proc(struct tls_protocmd_token_t *tok,
 }
 
 
+
+
 static int post_protocmd_authority_confirm_proc(struct tls_protocmd_token_t *tok,
         char *res_resp, u32 *res_len)
 {	
+	CMD_0x48_HANDLE_T *cmd = CMD_0x48;	
 	u8 cmd_group = tok->arg[0];
 	u8 cmd_type  = tok->arg[1];
 
@@ -203,8 +217,8 @@ static int post_protocmd_authority_confirm_proc(struct tls_protocmd_token_t *tok
 		case CMD_0x48_GET_AUTHOR:	
 
 			LOG_INFO(" CMD:0x48 Type:Set Date\n");	
-
-			Ariber_PasswordConfirm(tok,res_resp,res_len);
+			
+			Ariber_GetAuthority(tok,res_resp,res_len,cmd);
 			
 			break;	
 
@@ -212,7 +226,7 @@ static int post_protocmd_authority_confirm_proc(struct tls_protocmd_token_t *tok
 
 			LOG_INFO(" CMD:0x48 Type:Delete Author\n");
 
-			Ariber_CancelConfirm();		
+			Ariber_CancelConfirm(cmd);		
 		
 			break;
 
@@ -220,11 +234,11 @@ static int post_protocmd_authority_confirm_proc(struct tls_protocmd_token_t *tok
 
 			LOG_INFO(" CMD:0x48 Type:Change Password\n");
 
-			Ariber_ModifyPassword(tok,res_resp,res_len);	
+			Ariber_ModifyPassword(tok,res_resp,res_len,cmd);			
 		
 			break;
 
-		default:
+		default:	
 	
 			break;
 		
@@ -233,10 +247,13 @@ static int post_protocmd_authority_confirm_proc(struct tls_protocmd_token_t *tok
 }
 	
 
+
+
 static int post_protocmd_set_sys_param_proc(struct tls_protocmd_token_t *tok,
         												char *res_resp, 
         												u32 *res_len)
 {
+	CMD_0x49_HANDLE_T *cmd = &CMD_0x49;
 	u8 cmd_group = tok->arg[0];
 	u8 cmd_type  = tok->arg[1];
 
@@ -251,9 +268,9 @@ static int post_protocmd_set_sys_param_proc(struct tls_protocmd_token_t *tok,
 
 			LOG_INFO("CMD_0x49_SET_WORK_DAY_IN\n");	
 
-			*res_len = Ariber_SetSysTime(tok,res_resp);			
+			*res_len = Ariber_SetSysTime(tok,res_resp,cmd);			
 			
-			break;
+			break;	
 
 		case CMD_0x49_SET_WORK_DAY_IN:
 		
@@ -265,15 +282,13 @@ static int post_protocmd_set_sys_param_proc(struct tls_protocmd_token_t *tok,
 	
 			LOG_INFO("CMD_0x49_SET_REST_DAY_IN\n");			
 			
-
-			break;
+			break;	
 	
 		case CMD_0x49_SET_WEEK_AUTH_IN:
 	
 			LOG_INFO("CMD_0x49_SET_WEEK_AUTH_IN\n");		
 			
-
-			break;
+			break;	
 
 		case CMD_0x49_USER_AUTHORIZE:
 	
@@ -289,37 +304,37 @@ static int post_protocmd_set_sys_param_proc(struct tls_protocmd_token_t *tok,
 			
 		case CMD_0x49_REST_DAY_IN_WEEK:	
 			
-				LOG_INFO("CMD_0x49_REST_DAY_IN_WEEK\n");		
+			LOG_INFO("CMD_0x49_REST_DAY_IN_WEEK\n");		
 				
 			break;
 
 		case CMD_0x49_ADD_HOLIDAY:	
 			
-				LOG_INFO("CMD_0x49_ADD_HOLIDAY\n");		
+			LOG_INFO("CMD_0x49_ADD_HOLIDAY\n");		
 				
 			break;
 
 		case CMD_0x49_DEL_HOLIDAY:	
 			
-				LOG_INFO("CMD_0x49_DEL_HOLIDAY\n");		
+			LOG_INFO("CMD_0x49_DEL_HOLIDAY\n");		
 				
 			break;
 
 		case CMD_0x49_OPEN_DOOR:	
 			
-				LOG_INFO("CMD_0x49_OPEN_DOOR\n");		
+			LOG_INFO("CMD_0x49_OPEN_DOOR\n");		
 				
 			break;
 
 		case CMD_0x49_RECORD_MEM_ADDR:		
 			
-				LOG_INFO("CMD_0x49_RECORD_MEM_ADDR\n");		
+			LOG_INFO("CMD_0x49_RECORD_MEM_ADDR\n");		
 				
 			break;
 
 		case CMD_0x49_SET_PARAM:		
 			
-				LOG_INFO("CMD_0x49_SET_PARAM\n");		
+			LOG_INFO("CMD_0x49_SET_PARAM\n");		
 				
 			break;
 
@@ -331,10 +346,12 @@ static int post_protocmd_set_sys_param_proc(struct tls_protocmd_token_t *tok,
 	return RTN_NORMAL;
 }
 
-	
+
+
 static int post_protocmd_get_sys_param_proc(struct tls_protocmd_token_t *tok,
         char *res_resp, u32 *res_len)
 {
+	CMD_0x4A_HANDLE_T *cmd = &CMD_0x4A;
 	u8 cmd_group = tok->arg[0];
 	u8 cmd_type  = tok->arg[1];
 	
@@ -350,7 +367,7 @@ static int post_protocmd_get_sys_param_proc(struct tls_protocmd_token_t *tok,
 
 			LOG_INFO("CMD_0x4A_GET_WORK_DAY_IN\n");				
 			
-			*res_len = Ariber_GetWorkDayPermitList(tok,res_resp);
+			*res_len = Ariber_GetWorkDayPermitList(tok,res_resp,cmd);	
 			
 			break;
 
@@ -358,7 +375,7 @@ static int post_protocmd_get_sys_param_proc(struct tls_protocmd_token_t *tok,
 			
 			LOG_INFO("CMD_0x4A_GET_REST_DAY_IN\n");	
 			
-			*res_len = Ariber_GetRestDayPermitList(tok,res_resp);
+			*res_len = Ariber_GetRestDayPermitList(tok,res_resp,cmd);	
 			
 			break;
 
@@ -366,7 +383,7 @@ static int post_protocmd_get_sys_param_proc(struct tls_protocmd_token_t *tok,
 			
 			LOG_INFO("CMD_0x4A_GET_WEEK_IN\n");		
 			
-			*res_len = Ariber_GetWeekPermitList(tok,res_resp);	
+			*res_len = Ariber_GetWeekPermitList(tok,res_resp,cmd);		
 			
 			break;
 
@@ -379,9 +396,12 @@ static int post_protocmd_get_sys_param_proc(struct tls_protocmd_token_t *tok,
 }
 
 
+
+
 static int post_protocmd_set_guard_param_proc(struct tls_protocmd_token_t *tok,
         char *res_resp, u32 *res_len)
 {
+	CMD_0x4B_HANDLE_T *cmd = &CMD_0x4B;	
 	u8 cmd_group = tok->arg[0];
 	u8 cmd_type  = tok->arg[1];			
 
@@ -396,7 +416,7 @@ static int post_protocmd_set_guard_param_proc(struct tls_protocmd_token_t *tok,
 
 			LOG_INFO("CMD_0x4B_SET_VOICE_MARK\n");		
 
-			*res_len = Ariber_SetHandlePos(tok,res_resp);
+			*res_len = Ariber_SetHandlePos(tok,res_resp,cmd);
 
 			break;
 
@@ -404,7 +424,7 @@ static int post_protocmd_set_guard_param_proc(struct tls_protocmd_token_t *tok,
 
 			LOG_INFO("CMD_0x4B_SET_CARD_BIT\n");		
 
-			*res_len = Ariber_SetCardBit(tok,res_resp);	
+			*res_len = Ariber_SetCardBit(tok,res_resp,cmd);	
 				
 			break;
 
@@ -412,7 +432,7 @@ static int post_protocmd_set_guard_param_proc(struct tls_protocmd_token_t *tok,
 
 			LOG_INFO("CMD_0x4B_SET_ARMY_PARAM\n");	
 			
-			*res_len = Ariber_SetArmyParam(tok,res_resp);	
+			*res_len = Ariber_SetArmyParam(tok,res_resp,cmd);	
 		
 			break;
 			
@@ -420,7 +440,7 @@ static int post_protocmd_set_guard_param_proc(struct tls_protocmd_token_t *tok,
 			
 			LOG_INFO("CMD_0x4B_SET_ALARM_PARAM\n");	
 
-			*res_len = Ariber_SetAlarmParam(tok,res_resp);	
+			*res_len = Ariber_SetAlarmParam(tok,res_resp,cmd);	
 				
 			break;
 
@@ -428,7 +448,7 @@ static int post_protocmd_set_guard_param_proc(struct tls_protocmd_token_t *tok,
 				
 			LOG_INFO("CMD_0x4B_SET_ARMYING_STA\n");	
 			
-			*res_len = Ariber_SetArmyingSta(tok,res_resp);	
+			*res_len = Ariber_SetArmyingSta(tok,res_resp,cmd);	
 			
 			break;
 
@@ -436,7 +456,7 @@ static int post_protocmd_set_guard_param_proc(struct tls_protocmd_token_t *tok,
 			
 			LOG_INFO("CMD_0x4B_SET_SYS_STA\n");	
 
-			*res_len = Ariber_SetSystemSta(tok,res_resp);	
+			*res_len = Ariber_SetSystemSta(tok,res_resp,cmd);	
 				
 			break;
 
@@ -444,7 +464,7 @@ static int post_protocmd_set_guard_param_proc(struct tls_protocmd_token_t *tok,
 			
 			LOG_INFO("CMD_0x4B_SET_SWITCH_OUT\n");	
 
-			*res_len = Ariber_SetSwitchOut(tok,res_resp);	
+			*res_len = Ariber_SetSwitchOut(tok,res_resp,cmd);	
 				
 			break;
 
@@ -452,7 +472,7 @@ static int post_protocmd_set_guard_param_proc(struct tls_protocmd_token_t *tok,
 			
 			LOG_INFO("CMD_0x4B_SET_VOICE_MARK\n");	
 					
-			*res_len = Ariber_SetVoiceMark(tok,res_resp);
+			*res_len = Ariber_SetVoiceMark(tok,res_resp,cmd);
 			
 			break;		
 					
@@ -460,7 +480,7 @@ static int post_protocmd_set_guard_param_proc(struct tls_protocmd_token_t *tok,
 				
 			LOG_INFO("CMD_0x4B_SET_IO_SWITCH\n");	
 
-			*res_len = Ariber_SetIOSwitchParam(tok,res_resp);	
+			*res_len = Ariber_SetIOSwitchParam(tok,res_resp,cmd);	
 				
 			break;
 
@@ -480,12 +500,15 @@ static int post_protocmd_set_guard_param_proc(struct tls_protocmd_token_t *tok,
 }
 
 
+
+
 static int post_protocmd_get_guard_param_proc(struct tls_protocmd_token_t *tok,
         char *res_resp, u32 *res_len)
 {
+	CMD_0x4C_HANDLE_T *cmd = &CMD_0x4C;	
 	u8 cmd_group = tok->arg[0];
 	u8 cmd_type  = tok->arg[1];
-
+	
 	if(cmd_group != 0xF4)
 	{	
 		return RTN_UNKNOW_CMD;
@@ -497,7 +520,7 @@ static int post_protocmd_get_guard_param_proc(struct tls_protocmd_token_t *tok,
 
 			LOG_INFO("CMD_0x4C_GET_HANDLE_POS\n");
 
-			*res_len = Ariber_GetHandlePos(tok,res_resp);	
+			*res_len = Ariber_GetHandlePos(tok,res_resp,cmd);		
 
 			break;
 
@@ -505,7 +528,7 @@ static int post_protocmd_get_guard_param_proc(struct tls_protocmd_token_t *tok,
 
 			LOG_INFO("CMD_0x4C_GET_CARD_BIT\n");
 
-			*res_len = Ariber_GetCardBit(tok,res_resp);	
+			*res_len = Ariber_GetCardBit(tok,res_resp,cmd);	
 
 			break;
 
@@ -513,7 +536,7 @@ static int post_protocmd_get_guard_param_proc(struct tls_protocmd_token_t *tok,
 
 			LOG_INFO("CMD_0x4C_GET_ARMY_OFF_STA\n");
 
-			*res_len = Ariber_GetArmyParam(tok,res_resp);
+			*res_len = Ariber_GetArmyParam(tok,res_resp,cmd);
 	
 			break;
 
@@ -521,7 +544,7 @@ static int post_protocmd_get_guard_param_proc(struct tls_protocmd_token_t *tok,
 
 			LOG_INFO("CMD_0x4C_GET_ALARM_PARAM\n");
 
-			*res_len = Ariber_GetAlarmParam(tok,res_resp);	
+			*res_len = Ariber_GetAlarmParam(tok,res_resp,cmd);	
 
 			break;
 
@@ -530,7 +553,7 @@ static int post_protocmd_get_guard_param_proc(struct tls_protocmd_token_t *tok,
 
 			LOG_INFO("CMD_0x4C_GET_ARMY_ON_STA\n");
 
-			*res_len = Ariber_GetArmyingSta(tok,res_resp);	
+			*res_len = Ariber_GetArmyingSta(tok,res_resp,cmd);	
 
 			break;
 
@@ -538,7 +561,7 @@ static int post_protocmd_get_guard_param_proc(struct tls_protocmd_token_t *tok,
 
 			LOG_INFO("CMD_0x4C_GET_DIY_PARAM\n");
 
-			*res_len = Ariber_GetUserDefinedData(tok,res_resp);	
+			*res_len = Ariber_GetUserDefinedData(tok,res_resp,cmd);	
 
 			break;
 
@@ -546,7 +569,7 @@ static int post_protocmd_get_guard_param_proc(struct tls_protocmd_token_t *tok,
 
 			LOG_INFO("CMD_0x4C_GET_VOICE_STA\n");
 
-			*res_len = Ariber_GetVoiceMaskSta(tok,res_resp);	
+			*res_len = Ariber_GetVoiceMaskSta(tok,res_resp,cmd);	
 
 			break;
 
@@ -554,7 +577,7 @@ static int post_protocmd_get_guard_param_proc(struct tls_protocmd_token_t *tok,
 
 			LOG_INFO("CMD_0x4C_GET_SWITCH_PARAM\n");
 
-			*res_len = Ariber_GetSwitchConfig(tok,res_resp);
+			*res_len = Ariber_GetSwitchConfig(tok,res_resp,cmd);
 
 			break;
 
@@ -562,7 +585,7 @@ static int post_protocmd_get_guard_param_proc(struct tls_protocmd_token_t *tok,
 
 			LOG_INFO("CMD_0x4C_ARMY_PARAM\n");
 
-			*res_len = Ariber_GetArmyConfigParam(tok,res_resp);	
+			*res_len = Ariber_GetArmyConfigParam(tok,res_resp,cmd);	
 
 			break;
 
@@ -570,8 +593,8 @@ static int post_protocmd_get_guard_param_proc(struct tls_protocmd_token_t *tok,
 		case CMD_0x4C_GET_USER_PWD:			
 		
 			LOG_INFO("CMD_0x4C_GET_USER_PWD\n");
-		
-			*res_len = Ariber_GetDoorLog(tok,res_resp);	
+			
+			*res_len = Ariber_GetUserPassword(tok,res_resp,cmd);		
 				
 			break;
 
@@ -580,7 +603,7 @@ static int post_protocmd_get_guard_param_proc(struct tls_protocmd_token_t *tok,
 		
 			LOG_INFO("CMD_0x4C_GET_FLASH_ID\n");
 			
-			*res_len = Ariber_GetFlashID(tok,res_resp);			
+			*res_len = Ariber_GetFlashID(tok,res_resp,cmd);			
 			
 			break;
 
@@ -588,7 +611,7 @@ static int post_protocmd_get_guard_param_proc(struct tls_protocmd_token_t *tok,
 		
 			LOG_INFO("CMD_0x4C_GET_DOOR_LOG\n");		
 				
-			*res_len = Ariber_GetDoorLog(tok,res_resp);			
+			*res_len = Ariber_GetDoorLog(tok,res_resp,cmd);				
 		
 			break;
 					
@@ -1019,39 +1042,6 @@ int tls_protocol_rebuild(struct tls_protocmd_token_t *tok,
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-void tls_protocol_init(void)			
-{
-	
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //创立协议
 void makepower_protocol_deal(void)
 {
@@ -1059,42 +1049,20 @@ void makepower_protocol_deal(void)
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //邮电协议
 void post_protocol_deal(void)
 {
-		
+	
 }
 
 
-
+	
+void tls_protocol_init(void)	
+{
+	CMD_0x48.param_0xE0.Handle_Pos[0] = 0;
+	CMD_0x48.param_0xE0.Handle_Pos[1] = 0;
+		
+}
 
 
 

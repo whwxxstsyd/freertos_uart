@@ -510,10 +510,9 @@ void uart_tx(struct tls_uart *uart)
 
 	cpu_sr = tls_os_set_critical();
 	while (!dl_list_empty(&uart->tx_msg_pending_list)) 
-	{
-		tx_msg = dl_list_first(&uart->tx_msg_pending_list,
-				struct tls_hostif_tx_msg, list);
-		tls_os_release_critical(cpu_sr);
+	{	
+		tx_msg = dl_list_first(&uart->tx_msg_pending_list,struct tls_hostif_tx_msg, list);
+		tls_os_release_critical(cpu_sr);	
 
 		switch (tx_msg->type) 
 		{	

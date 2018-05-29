@@ -6,7 +6,7 @@
 #include "mp_osal_rtos.h"		
 
 
-#define card_read_period M2T(10)	
+#define card_read_period M2T(20)		
 
 static tls_os_timer_t card_read_timer;	
 

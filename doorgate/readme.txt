@@ -33,6 +33,14 @@ mp_uart.c	收发缓冲区的中间部分
 
 
 
+程序和协议对不上的地方
+ReadCard_CardNoReport()
+
+
+
+
+
+
 
 
 

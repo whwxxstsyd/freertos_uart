@@ -9,10 +9,10 @@
 u8 password_default[] = {1,2,3,4,5};
 
 //门禁艾贝尔协议
-int Ariber_PasswordConfirm(struct tls_protocmd_token_t *tok,
-        u8 *res_resp, u32 *res_len)
+int Ariber_GetAuthority(struct tls_protocmd_token_t *tok,
+        u8 *res_resp, u32 *res_len,CMD_0x48_HANDLE_T *cmd)
 {
-	u8 password[5];
+	u8 password[5];	
 	u8 i;
 
 	for(i=0;i<5;i++)
@@ -29,7 +29,7 @@ int Ariber_PasswordConfirm(struct tls_protocmd_token_t *tok,
 }
 
 
-int Ariber_CancelConfirm(void)
+int Ariber_CancelConfirm(CMD_0x48_HANDLE_T *cmd)
 {
 	LOG_INFO("Ariber_CancelConfirm\n");	
 	return TRUE;
@@ -37,7 +37,7 @@ int Ariber_CancelConfirm(void)
 
 
 int Ariber_ModifyPassword(struct tls_protocmd_token_t *tok,
-        u8 *res_resp, u32 *res_len)
+        u8 *res_resp, u32 *res_len,CMD_0x48_HANDLE_T *cmd)
 {
 	u8 password[6];
 	u8 i,sum;		
@@ -99,7 +99,7 @@ int Ariber_GetSysTime(u8 *res_resp)
 
 
 
-int Ariber_SetSysTime(struct tls_protocmd_token_t *tok,u8 *res_resp)	
+int Ariber_SetSysTime(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x49_HANDLE_T *cmd)	
 {
 	u8 year_tmp[2];		
 	u16 year;	
@@ -207,7 +207,7 @@ u8 Week_list4[6][4]={
 	{8,7,6,5}	
 };
 
-int Ariber_GetWeekPermitList(struct tls_protocmd_token_t *tok,u8 *res_resp)
+int Ariber_GetWeekPermitList(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4A_HANDLE_T *cmd)
 {
 	u8 i,j,tmp;
 	u8 list_num;
@@ -292,7 +292,7 @@ u8 time_list4[4][4]={
 };
 
 
-int Ariber_GetWorkDayPermitList(struct tls_protocmd_token_t *tok,u8 *res_resp)
+int Ariber_GetWorkDayPermitList(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4A_HANDLE_T *cmd)
 {
 	u8 i,j,tmp;
 	u8 list_num;
@@ -351,7 +351,7 @@ int Ariber_GetWorkDayPermitList(struct tls_protocmd_token_t *tok,u8 *res_resp)
 }
 
 
-int Ariber_GetRestDayPermitList(struct tls_protocmd_token_t *tok,u8 *res_resp)
+int Ariber_GetRestDayPermitList(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4A_HANDLE_T *cmd)
 {
 	u8 i,j,tmp;
 	u8 list_num;
@@ -436,12 +436,13 @@ int Ariber_SetRestDayPermitList(struct tls_protocmd_token_t *tok,u8 *res_resp)
 
 
 //设置左右把手
-int Ariber_SetHandlePos(struct tls_protocmd_token_t *tok,u8 *res_resp)	
+int Ariber_SetHandlePos(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4B_HANDLE_T *cmd)	
 {
 	u8 handle_pos[2];//获取方向
 
 	handle_pos[0] = tok->arg[2];//获取的第一个字节	
 	handle_pos[1] = tok->arg[3];//获取到把手的方向
+
 
 	if(handle_pos[1] == HANDLE_RIGHT)
 	{
@@ -455,20 +456,30 @@ int Ariber_SetHandlePos(struct tls_protocmd_token_t *tok,u8 *res_resp)
 	return ASCII_LEN(SET_SUCCEED_RTN_LEN);
 }
 
+
+
+tls_card_cmd_4b_t card_cmd[2];	
+
 //设置卡有效位
-int Ariber_SetCardBit(struct tls_protocmd_token_t *tok,u8 *res_resp)	
+int Ariber_SetCardBit(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4B_HANDLE_T *cmd)	
 {
 	u8 Card_ValidBit = tok->arg[2]; //卡有效位
 	u8 Card_EndianSet = tok->arg[3];//字节序设置
+
 	
 	LOG_INFO("Card_ValidBit:&d\n",Card_ValidBit);		
 	LOG_INFO("Card_EndianSet:&d\n",Card_EndianSet);		
+
+	cmd->Card_ValidBit = Card_ValidBit;
+	
+	card_cmd.Card_EndianSet = Card_EndianSet;
+
 	
 	return ASCII_LEN(SET_SUCCEED_RTN_LEN);
 }
 
 //设置门禁撤布防参数
-int Ariber_SetArmyParam(struct tls_protocmd_token_t *tok,u8 *res_resp)	
+int Ariber_SetArmyParam(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4B_HANDLE_T *cmd)	
 {
 	u8 Army_Style = tok->arg[2];//撤布防+布防类型	
 	u8 Army_Period = tok->arg[3];//布防时间(单位:分钟)
@@ -501,7 +512,7 @@ int Ariber_SetArmyParam(struct tls_protocmd_token_t *tok,u8 *res_resp)
 
 
 //设置报警参数
-int Ariber_SetAlarmParam(struct tls_protocmd_token_t *tok,u8 *res_resp)	
+int Ariber_SetAlarmParam(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4B_HANDLE_T *cmd)	
 {	
 	u16 Alarm_Arming_Time;
 	u8 Alarm_Mask,Alarm_RevokeByKey,Alarm_TimeTmp[2];	
@@ -540,7 +551,7 @@ int Ariber_SetAlarmParam(struct tls_protocmd_token_t *tok,u8 *res_resp)
 
 
 //设置设布防的状态
-int Ariber_SetArmyingSta(struct tls_protocmd_token_t *tok,u8 *res_resp)	
+int Ariber_SetArmyingSta(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4B_HANDLE_T *cmd)	
 {
 	u8 i,pos = 2;
 	u8 Armying_Flag,Armying_Type,Armying_Tim_Num,Armying_Tim[6],Armying_N_Byte;
@@ -586,11 +597,13 @@ int Ariber_SetArmyingSta(struct tls_protocmd_token_t *tok,u8 *res_resp)
 
 
 //设置系统状态
-int Ariber_SetSystemSta(struct tls_protocmd_token_t *tok,u8 *res_resp)	
+int Ariber_SetSystemSta(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4B_HANDLE_T *cmd)	
 {
 	u8 System_Sta,pos = 2;
 
 	System_Sta = tok->arg[pos++];
+
+	cmd->param_0xE5.System_Sta = System_Sta;
 	
 	switch(System_Sta)
 	{	
@@ -605,7 +618,9 @@ int Ariber_SetSystemSta(struct tls_protocmd_token_t *tok,u8 *res_resp)
 			break;
 
 		case 2:
-			LOG_INFO("Card reading Condition\n"); 	
+			LOG_INFO("Card reading Condition\n"); 		
+	
+			return 
 			
 			break;
 
@@ -624,7 +639,7 @@ int Ariber_SetSystemSta(struct tls_protocmd_token_t *tok,u8 *res_resp)
 
 
 //设置开关量输出控制
-int Ariber_SetSwitchOut(struct tls_protocmd_token_t *tok,u8 *res_resp)	
+int Ariber_SetSwitchOut(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4B_HANDLE_T *cmd)	
 {
 	
 	
@@ -633,7 +648,7 @@ int Ariber_SetSwitchOut(struct tls_protocmd_token_t *tok,u8 *res_resp)
 
 
 //设置屏蔽语音
-int Ariber_SetVoiceMark(struct tls_protocmd_token_t *tok,u8 *res_resp)	
+int Ariber_SetVoiceMark(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4B_HANDLE_T *cmd)	
 {
 	u8 Door_Num,Mask_Bit[2],pos = 2;
 	u16 Voice_Mask;
@@ -650,7 +665,7 @@ int Ariber_SetVoiceMark(struct tls_protocmd_token_t *tok,u8 *res_resp)
 
 
 //输入输出开关量配置	
-int Ariber_SetIOSwitchParam(struct tls_protocmd_token_t *tok,u8 *res_resp)	
+int Ariber_SetIOSwitchParam(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4B_HANDLE_T *cmd)	
 {
 		
 	
@@ -665,23 +680,22 @@ int Ariber_SetIOSwitchParam(struct tls_protocmd_token_t *tok,u8 *res_resp)
 /*4C命令下的子命令*/	
 
 //读取左右把手
-int Ariber_GetHandlePos(struct tls_protocmd_token_t *tok,u8 *res_resp)	
+int Ariber_GetHandlePos(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4C_HANDLE_T *cmd)	
 {
 	u8 pos = HANDLE_RIGHT;//读取把手的方向
-	u8 handle_pos[2];//获取方向
-
-	handle_pos[0] = 0;
-	CharToAsc(handle_pos[0],res_resp);
-	res_resp = res_resp + 2;	
 	
-	handle_pos[1] = pos;	
-	CharToAsc(handle_pos[1],res_resp);			
+	cmd->param_0xE0.Handle_Pos[0] = 0;
+	CharToAsc(cmd->param_0xE0.Handle_Pos[0],res_resp);	
+	res_resp = res_resp + 2;			
+	
+	cmd->param_0xE0.Handle_Pos[1] = pos;	
+	CharToAsc(cmd->param_0xE0.Handle_Pos[1],res_resp);			
 		
 	return ASCII_LEN(GET_HANDLE_POS_RTN_LEN);
 }
 
 //读取卡有效位
-int Ariber_GetCardBit(struct tls_protocmd_token_t *tok,u8 *res_resp)	
+int Ariber_GetCardBit(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4C_HANDLE_T *cmd)	
 {
 	u8 Card_ValidBit = 4; //卡有效位		
 	u8 Card_EndianSet = 0;//字节序设置
@@ -695,7 +709,7 @@ int Ariber_GetCardBit(struct tls_protocmd_token_t *tok,u8 *res_resp)
 }
 
 //读取门禁撤布防参数
-int Ariber_GetArmyParam(struct tls_protocmd_token_t *tok,u8 *res_resp)	
+int Ariber_GetArmyParam(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4C_HANDLE_T *cmd)	
 {	
 	u16 Army_Type = 2;	
 	u16 Arming_Time = 6;	
@@ -709,7 +723,7 @@ int Ariber_GetArmyParam(struct tls_protocmd_token_t *tok,u8 *res_resp)
 }
 
 //读取报警参数
-int Ariber_GetAlarmParam(struct tls_protocmd_token_t *tok,u8 *res_resp)
+int Ariber_GetAlarmParam(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4C_HANDLE_T *cmd)
 {
 	u16 Alarm_Arming_Time;
 	u8 Alarm_Mask,Alarm_RevokeByKey;		
@@ -717,6 +731,10 @@ int Ariber_GetAlarmParam(struct tls_protocmd_token_t *tok,u8 *res_resp)
 	Alarm_Arming_Time = 5;
 	Alarm_Mask = 1;
 	Alarm_RevokeByKey = 1;
+
+	cmd->param_0xE3.Alarm_Arming_Time = Alarm_Arming_Time;
+	cmd->param_0xE3.Alarm_Mask = Alarm_Mask;
+	cmd->param_0xE3.Alarm_Revoke = Alarm_RevokeByKey;		
 
 	u16ToAsc(Alarm_Arming_Time,res_resp);
 	res_resp = res_resp +4;
@@ -730,7 +748,7 @@ int Ariber_GetAlarmParam(struct tls_protocmd_token_t *tok,u8 *res_resp)
 }
 
 //读取设布防的状态
-int Ariber_GetArmyingSta(struct tls_protocmd_token_t *tok,u8 *res_resp)	
+int Ariber_GetArmyingSta(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4C_HANDLE_T *cmd)	
 {
 	u8 i;
 	u8 Armying_Flag = 1;
@@ -742,6 +760,14 @@ int Ariber_GetArmyingSta(struct tls_protocmd_token_t *tok,u8 *res_resp)
 	u8 Armying_Condition = 0;
 	u8 LianDong[8] = {0,0,3,5,0,0,0,0};	
 
+	cmd->param_0xE4.Armying_Flag = Armying_Flag;
+	cmd->param_0xE4.Armying_Type = Armying_Type;
+	cmd->param_0xE4.Armying_Tim_Num = Armying_Tim_Num;
+	cmd->param_0xE4.Armying_N_Byte = Armying_N_Byte;
+	memcpy(cmd->param_0xE4.Armying_Tim,Armying_Tim,sizeof(Armying_Tim));	
+	cmd->param_0xE4.Armying_Man = Armying_Man;
+	cmd->param_0xE4.Armying_Condition = Armying_Condition;
+	memcpy(cmd->param_0xE4.LianDong,LianDong,sizeof(LianDong));			
 
 	CharToAsc(Armying_Flag,res_resp); 	
 	res_resp = res_resp +2;	
@@ -778,7 +804,7 @@ int Ariber_GetArmyingSta(struct tls_protocmd_token_t *tok,u8 *res_resp)
 
 
 //获取自定义数据
-int Ariber_GetUserDefinedData(struct tls_protocmd_token_t *tok,u8 *res_resp)	
+int Ariber_GetUserDefinedData(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4C_HANDLE_T *cmd)	
 {
 	
 	
@@ -787,13 +813,16 @@ int Ariber_GetUserDefinedData(struct tls_protocmd_token_t *tok,u8 *res_resp)
 
 
 //读取屏蔽语音状态
-int Ariber_GetVoiceMaskSta(struct tls_protocmd_token_t *tok,u8 *res_resp)	
+int Ariber_GetVoiceMaskSta(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4C_HANDLE_T *cmd)	
 {
 	u8 Door_Num;
 	u16 Voice_Mask;
 
 	Door_Num = 0;
 	Voice_Mask = 0xFFFF;
+
+	cmd->param_0xE7.Door_Num = Door_Num;
+	cmd->param_0xE7.Voice_Mask = Voice_Mask;
 
 	CharToAsc(Door_Num,res_resp); 	
 	res_resp = res_resp +2;
@@ -805,7 +834,7 @@ int Ariber_GetVoiceMaskSta(struct tls_protocmd_token_t *tok,u8 *res_resp)
 
 
 //读取输入输出开关量配置
-int Ariber_GetSwitchConfig(struct tls_protocmd_token_t *tok,u8 *res_resp)	
+int Ariber_GetSwitchConfig(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4C_HANDLE_T *cmd)	
 {
 	u8 i,j,k;
 	u8 resp_len;
@@ -873,7 +902,7 @@ int Ariber_GetSwitchConfig(struct tls_protocmd_token_t *tok,u8 *res_resp)
 
 
 //读取门禁撤布防配置参数
-int Ariber_GetArmyConfigParam(struct tls_protocmd_token_t *tok,u8 *res_resp)	
+int Ariber_GetArmyConfigParam(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4C_HANDLE_T *cmd)	
 {
 	
 	
@@ -882,9 +911,11 @@ int Ariber_GetArmyConfigParam(struct tls_protocmd_token_t *tok,u8 *res_resp)
 
 
 //读取flash id
-int Ariber_GetFlashID(struct tls_protocmd_token_t *tok,u8 *res_resp)	
+int Ariber_GetFlashID(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4C_HANDLE_T *cmd)	
 {			
 	u8 Flash_ID = 0x4A;		
+
+	cmd->param_0xED.Flash_ID = Flash_ID;
 			
 	CharToAsc(Flash_ID,res_resp);								
 	
@@ -893,13 +924,15 @@ int Ariber_GetFlashID(struct tls_protocmd_token_t *tok,u8 *res_resp)
 	
 
 //读取门禁对应日志
-int Ariber_GetDoorLog(struct tls_protocmd_token_t *tok,u8 *res_resp)	
+int Ariber_GetDoorLog(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4C_HANDLE_T *cmd)	
 {
 	u8 MainCmd,ViceCmd;
 
 	//获取主命令和副命令
 	MainCmd = tok->arg[2];
 	ViceCmd = tok->arg[3];
+
+	
 
 	switch(MainCmd)
 	{
@@ -1008,50 +1041,63 @@ int Ariber_GetDoorLog(struct tls_protocmd_token_t *tok,u8 *res_resp)
 }
 
 
-//读取用户密码
-int Ariber_GetUserPassword(struct tls_protocmd_token_t *tok,u8 *res_resp)	
+//读取用户密码	
+int Ariber_GetUserPassword(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4C_HANDLE_T *cmd)	
 {
 	u8 code_group;
-	u8 code_Rtn[8];
+	u8 use_sta;	
+	u8 code[3];	
+	u8 code_bkp[3];	
 	u8 code_tmp[3];
+	
+	//密码组号	
+	code_group = tok->arg[2];
+	cmd->param_0xEB.code_group = code_group;
+	CharToAsc(code_group,res_resp);	
+	res_resp = res_resp +2;	
 
-	code_group = tok->arg[2];//获得组号
-	
-	code_Rtn[0] = 1;
-	CharToAsc(code_Rtn[0],res_resp); 
-	res_resp = res_resp +2;
-	
-	code_Rtn[1] = 1;	
-	CharToAsc(code_Rtn[1],res_resp); 
-	res_resp = res_resp +2;
-	
-	//密码
-	code_Rtn[2] = 12;	
-	code_tmp[0] = HexToIntBCD(code_Rtn[2]);	
+	//启用状态
+	use_sta = 0;	
+	cmd->param_0xEB.use_sta = use_sta;
+	CharToAsc(use_sta,res_resp);
+	res_resp = res_resp +2;	
+
+	//密码	
+	code[0] = 12;		
+	cmd->param_0xEB.code[0] = code[0];
+	code_tmp[0] = HexToIntBCD(code[0]);	
 	CharToAsc(code_tmp[0],res_resp); 	
 	res_resp = res_resp +2;
 
-	code_Rtn[3] = 34;
-	code_tmp[1] = HexToIntBCD(code_Rtn[3]);
+	code[1] = 34;
+	cmd->param_0xEB.code[1] = code[1];
+	code_tmp[1] = HexToIntBCD(code[1]);
 	CharToAsc(code_tmp[1],res_resp); 
 	res_resp = res_resp +2;
 
-	code_Rtn[4] = 56;	
-	code_tmp[2] = HexToIntBCD(code_Rtn[4]);
+	code[2] = 56;	
+	cmd->param_0xEB.code[2] = code[2];
+	code_tmp[2] = HexToIntBCD(code[2]);		
 	CharToAsc(code_tmp[2],res_resp); 	
 	res_resp = res_resp +2;	
 
 	//备用
-	code_Rtn[5] = 0;		
-	CharToAsc(code_Rtn[5],res_resp); 		
+	code_bkp[0] = 0;
+	cmd->param_0xEB.code_bkp[0] = code_bkp[0];
+	code_tmp[0] = HexToIntBCD(code_bkp[0]);				
+	CharToAsc(code_bkp[0],res_resp); 		
 	res_resp = res_resp +2; 
 
-	code_Rtn[6] = 0;	
-	CharToAsc(code_Rtn[6],res_resp); 	
-	res_resp = res_resp +2; 	
+	code_bkp[1] = 0;	
+	cmd->param_0xEB.code_bkp[1] = code_bkp[1];
+	code_tmp[1] = HexToIntBCD(code_bkp[1]);			
+	CharToAsc(code_bkp[1],res_resp); 	
+	res_resp = res_resp +2; 			
 
-	code_Rtn[7] = 0;	
-	CharToAsc(code_Rtn[7],res_resp);	 	
+	code_bkp[2] = 0;	
+	cmd->param_0xEB.code_bkp[2] = code_bkp[2];	
+	code_tmp[2] = HexToIntBCD(code_bkp[2]);		
+	CharToAsc(code_bkp[2],res_resp);		 	
 	
 	
 	return ASCII_LEN(GET_USER_PASS_RTN_LEN);	

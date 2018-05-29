@@ -18,10 +18,10 @@ void app_init(void)
 	tls_uart_init();				
 	
 	//数据存储任务
-	//tls_memory_init();					
+	//tls_memory_init();						
 
 	//门禁卡识别任务
-	//tls_card_init();	
+	//tls_card_dev_init();			
 
 	//门锁控制任务
 	//tls_door_init();		

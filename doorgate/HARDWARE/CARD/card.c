@@ -75,7 +75,6 @@ static void GPIO_Wiegand_INIT(void)
 		
   	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC|RCC_APB2Periph_GPIOD|RCC_APB2Periph_AFIO, ENABLE);
 
-
 	/****************¶Á¿¨Í·1***************************************/	
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2|GPIO_Pin_3;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
@@ -134,11 +133,11 @@ static void GPIO_Wiegand_INIT(void)
 
 
 void EXTI2_IRQHandler(void)      
-{
+{	
 	if(WGReader_H1D0_Reader==0)	
-	{			
+	{	
 		wiegand_reader_data_pin_changed(CARD_READ_DEV1,0,0);		
-	}
+	}	
 	else
 	{
 		wiegand_reader_data_pin_changed(CARD_READ_DEV1,0,1);	

@@ -83,27 +83,27 @@ typedef struct SWITCH_OUT_PARAM
 }SWITCH_OUT_PARAM_T;	
 
 
-int Ariber_PasswordConfirm(struct tls_protocmd_token_t *tok,
-        							u8 *res_resp, u32 *res_len);
+int Ariber_GetAuthority(struct tls_protocmd_token_t *tok,
+        							u8 *res_resp, u32 *res_len,CMD_0x48_HANDLE_T *cmd);
 
-int Ariber_CancelConfirm(void);	
+int Ariber_CancelConfirm(CMD_0x48_HANDLE_T *cmd);	
 
 int Ariber_ModifyPassword(struct tls_protocmd_token_t *tok,
-        							u8 *res_resp, u32 *res_len);	
+        							u8 *res_resp, u32 *res_len,CMD_0x48_HANDLE_T *cmd);	
 
 int Ariber_GetSysTime(u8 *res_resp);						
 
-int Ariber_SetSysTime(struct tls_protocmd_token_t *tok,u8 *res_resp);
+int Ariber_SetSysTime(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x49_HANDLE_T *cmd);
 
 
 
 
 
-int Ariber_GetWeekPermitList(struct tls_protocmd_token_t *tok,u8 *res_resp);
+int Ariber_GetWeekPermitList(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4A_HANDLE_T *cmd);
 
-int Ariber_GetWorkDayPermitList(struct tls_protocmd_token_t *tok,u8 *res_resp);
+int Ariber_GetWorkDayPermitList(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4A_HANDLE_T *cmd);
 
-int Ariber_GetRestDayPermitList(struct tls_protocmd_token_t *tok,u8 *res_resp);
+int Ariber_GetRestDayPermitList(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4A_HANDLE_T *cmd);
 
 
 
@@ -118,66 +118,65 @@ int Ariber_SetRestDayPermitList(struct tls_protocmd_token_t *tok,u8 *res_resp);
 
 
 
-//4B命令下面的指令
+//4B命令下面的指令	
 
+int Ariber_SetHandlePos(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4B_HANDLE_T *cmd);	
 
-int Ariber_SetHandlePos(struct tls_protocmd_token_t *tok,u8 *res_resp);	
+int Ariber_SetCardBit(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4B_HANDLE_T *cmd);	
 
-int Ariber_SetCardBit(struct tls_protocmd_token_t *tok,u8 *res_resp);	
+int Ariber_SetArmyParam(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4B_HANDLE_T *cmd);	
 
-int Ariber_SetArmyParam(struct tls_protocmd_token_t *tok,u8 *res_resp);	
+int Ariber_SetAlarmParam(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4B_HANDLE_T *cmd);	
 
-int Ariber_SetAlarmParam(struct tls_protocmd_token_t *tok,u8 *res_resp);	
+int Ariber_SetArmyingSta(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4B_HANDLE_T *cmd);	
 
-int Ariber_SetArmyingSta(struct tls_protocmd_token_t *tok,u8 *res_resp);	
+int Ariber_SetSystemSta(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4B_HANDLE_T *cmd);	
 
-int Ariber_SetSystemSta(struct tls_protocmd_token_t *tok,u8 *res_resp);	
+int Ariber_SetSwitchOut(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4B_HANDLE_T *cmd);	
 
-int Ariber_SetSwitchOut(struct tls_protocmd_token_t *tok,u8 *res_resp);	
+int Ariber_SetVoiceMark(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4B_HANDLE_T *cmd);	
 
-int Ariber_SetVoiceMark(struct tls_protocmd_token_t *tok,u8 *res_resp);	
-
-int Ariber_SetIOSwitchParam(struct tls_protocmd_token_t *tok,u8 *res_resp);	
+int Ariber_SetIOSwitchParam(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4B_HANDLE_T *cmd);	
 
 
 
 /*4C命令下的子命令*/	
 
 //读取左右把手
-int Ariber_GetHandlePos(struct tls_protocmd_token_t *tok,u8 *res_resp);	
+int Ariber_GetHandlePos(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4C_HANDLE_T *cmd);	
 
 //读取卡有效位
-int Ariber_GetCardBit(struct tls_protocmd_token_t *tok,u8 *res_resp);	
+int Ariber_GetCardBit(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4C_HANDLE_T *cmd);	
 
 //读取门禁撤布防参数
-int Ariber_GetArmyParam(struct tls_protocmd_token_t *tok,u8 *res_resp);	
+int Ariber_GetArmyParam(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4C_HANDLE_T *cmd);	
 
 //读取报警参数
-int Ariber_GetAlarmParam(struct tls_protocmd_token_t *tok,u8 *res_resp);
+int Ariber_GetAlarmParam(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4C_HANDLE_T *cmd);
 
 //读取设布防的状态
-int Ariber_GetArmyingSta(struct tls_protocmd_token_t *tok,u8 *res_resp);	
+int Ariber_GetArmyingSta(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4C_HANDLE_T *cmd);	
 
 //获取自定义数据
-int Ariber_GetUserDefinedData(struct tls_protocmd_token_t *tok,u8 *res_resp);	
+int Ariber_GetUserDefinedData(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4C_HANDLE_T *cmd);	
 
 //读取屏蔽语音状态
-int Ariber_GetVoiceMaskSta(struct tls_protocmd_token_t *tok,u8 *res_resp);	
+int Ariber_GetVoiceMaskSta(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4C_HANDLE_T *cmd);	
 
 //读取输入输出开关量配置
-int Ariber_GetSwitchConfig(struct tls_protocmd_token_t *tok,u8 *res_resp);	
+int Ariber_GetSwitchConfig(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4C_HANDLE_T *cmd);	
 
 //读取门禁撤布防配置参数
-int Ariber_GetArmyConfigParam(struct tls_protocmd_token_t *tok,u8 *res_resp);	
+int Ariber_GetArmyConfigParam(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4C_HANDLE_T *cmd);	
 
 //读取flash id
-int Ariber_GetFlashID(struct tls_protocmd_token_t *tok,u8 *res_resp);	
+int Ariber_GetFlashID(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4C_HANDLE_T *cmd);	
 
 //读取门禁对应日志
-int Ariber_GetDoorLog(struct tls_protocmd_token_t *tok,u8 *res_resp);	
+int Ariber_GetDoorLog(struct tls_protocmd_token_t *tok,u8 *res_resp,,CMD_0x4C_HANDLE_T *cmd);	
 
 //读取用户密码
-int Ariber_GetUserPassword(struct tls_protocmd_token_t *tok,u8 *res_resp);
+int Ariber_GetUserPassword(struct tls_protocmd_token_t *tok,u8 *res_resp,,CMD_0x4C_HANDLE_T *cmd);
 
 	
 
