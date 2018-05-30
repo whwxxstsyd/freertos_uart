@@ -265,6 +265,7 @@ void tls_uart_tx_enable(int uart_no)
  
 #if EN_USART1_RX   //如果使能了接收
 
+u8 data_tmp;
 
 void USART1_IRQHandler(void)               //串口1中断服务程序
 {			
@@ -286,7 +287,9 @@ void USART1_IRQHandler(void)               //串口1中断服务程序
 	{		
 		intr_counter= 1;	
 		
-		USART_ClearITPendingBit(USART1,USART_IT_RXNE);				
+		USART_ClearITPendingBit(USART1,USART_IT_RXNE);		
+		
+		data_tmp = USART_ReceiveData(USART1);			
 					
 		tls_uart_put_into_buffer(COM1,USART_ReceiveData(USART1));	
 	} 
@@ -295,7 +298,7 @@ void USART1_IRQHandler(void)               //串口1中断服务程序
 	{			
 		USART_ClearITPendingBit(USART1,USART_IT_IDLE);
 			
-		USART_ReceiveData(USART1);			
+		USART_ReceiveData(USART1);				
 
 		tls_uart_isr_rx_callback_x(COM1);			
 		

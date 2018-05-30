@@ -33,21 +33,18 @@ typedef enum CardDevice_State_t
 	CardDev_FINISH		= 2,	//½ÓÊÕÍê±Ï	
 }CardDevice_State;			
 
-
-struct wiegand_reader {
+	
+typedef struct wiegand_reader {
 	u8 bits[WIEGAND_BYTE_NUM]; /* For up to 34 bits */
 	u8 num_bits;	
-	u8 data_pins;		
-
-}wiegand_reader_T;		
+	u8 data_pins;			
+}wiegand_reader_T;
 
 	
 
 void wiegand_reader_data_pin_changed(u8 head_no, u8 pin, u8 state);
 
-void wiegand_reader_init(void);
-
-static void wiegand_reader_on_word_timeout(void *context);
+void wiegand_reader_init(void);			
 
 
 		

@@ -23,6 +23,8 @@ int Platform_Init(void)
 
 #if	LED_OPEN	
 	Led_Init();			
+	//My_Led_Init();  
+
 #endif	
 
 #if BEEP_OPEN 
@@ -42,7 +44,7 @@ int Platform_Init(void)
 #endif
 
 #if OUTSWITCH_OPEN 
-		
+	
 #endif
 	 
 #if DateManager_OPEN 
@@ -55,9 +57,6 @@ int Platform_Init(void)
 #endif		
 
 #endif
-
-  My_Led_Init();	
-
 
   return 1;	
 }

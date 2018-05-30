@@ -11,7 +11,9 @@
 static tls_os_timer_t card_read_timer;	
 
 struct wiegand_reader Wiegand_Buf[CARD_DEV_NUM];//伟根缓冲区
-				
+
+static void wiegand_reader_on_word_timeout(tls_os_timer_t timer)	;		
+
 	
 static u8 get_bit(u8 *data, u8 idx)
 {
@@ -110,20 +112,32 @@ static s8 wiegand_reader_process_66bits_code(struct wiegand_reader *wr)
 
 
 
-void wiegand_reader_on_word_timeout(tls_os_timer_t timer)	
+static void wiegand_reader_on_word_timeout(tls_os_timer_t timer)	
 {	
 	struct wiegand_reader *wr;	
 
 	int err = FALSE;	
-	u8 i;
+	u8 i;	
 
 	for(i=0;i<CARD_DEV_NUM;i++)
 	{	
 		switch(wr->num_bits) 
 		{	
 			wr = &Wiegand_Buf[i];		
+
+			case 26:
+					
+				err = wiegand_reader_process_26bits_code(wr);			
+				
+				if(err == TRUE)
+				{
+						
+				}
+
+				break;
 		
 			case 66:	
+				
 				err = wiegand_reader_process_66bits_code(wr);		
 
 				if(err == TRUE)
@@ -150,7 +164,7 @@ void wiegand_reader_on_word_timeout(tls_os_timer_t timer)
 
 void wiegand_reader_data_pin_changed(u8 head_no, u8 pin, u8 state)
 {			
-	struct wiegand_reader *wr = Wiegand_Buf[head_no];				
+	struct wiegand_reader *wr = &Wiegand_Buf[head_no];				
 	
 	set_bit(&wr->data_pins, pin, state);
 	
@@ -158,7 +172,7 @@ void wiegand_reader_data_pin_changed(u8 head_no, u8 pin, u8 state)
 	{		
 		case 0: /* No reader */
 			wr->num_bits = 0;
-			
+				
 			//停止定时器	
 			tls_os_timer_stop(card_read_timer);	
 			

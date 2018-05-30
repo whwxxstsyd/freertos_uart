@@ -1,11 +1,16 @@
-#include "mp_card_task.h"	
+#include <string.h>		
+#include "mp_card_task.h"
+#include "param.h"	
+#include "debug.h"	
 #include "wiegand.h"
-#include "card.h"		
+#include "card.h"			
 #include "app.h"	
 
 #include "FreeRTOS.h"
 #include "task.h"	
 
+
+tls_card_dev_t card_st[2];	
 
 extern CMD_0x48_HANDLE_T CMD_0x48;	
 extern CMD_0x49_HANDLE_T CMD_0x49;	
@@ -13,11 +18,14 @@ extern CMD_0x4A_HANDLE_T CMD_0x4A;
 extern CMD_0x4B_HANDLE_T CMD_0x4B;
 extern CMD_0x4C_HANDLE_T CMD_0x4C;	
 
-tls_card_dev_t card_st[2];		
-
-
+	
+	
 static void tls_card_dev2_task(void *data);
 static void tls_card_dev1_task(void *data);
+static s16 tls_card_dev1_rev_cb(char *buf, u16 len);
+static s16 tls_card_dev2_rev_cb(char *buf, u16 len);	
+static void tls_card_dev_open(u32 card_dev);		
+static void tls_card_rev_register(u16 card_no, s16 (*card_rev_callback)(char *buf, u16 len));
 
 
 
@@ -31,15 +39,14 @@ void tls_card_dev_init(void)
 }
 
 
-void tls_card_dev_open(u32 card_dev)		
+static void tls_card_dev_open(u32 card_dev)		
 {	
 	tls_card_dev_t *card;
 
 	if(card_dev == CARD_READ_DEV1)
 	{		
 		card = &card_st[0];	
-		memset(card,0,sizeof(struct tls_card_dev_t));	
-		card->card_cmd = &card_cmd[0];
+		memset(card,0,sizeof(tls_card_dev_t));		
 		
 		tls_card_rev_register(card_dev,tls_card_dev1_rev_cb);
 			
@@ -53,8 +60,7 @@ void tls_card_dev_open(u32 card_dev)
 	else if(card_dev == CARD_READ_DEV2)
 	{
 		card = &card_st[1];	
-		memset(card,0,sizeof(struct tls_card_dev_t));	
-		card->card_cmd = &card_cmd[1];		
+		memset(card,0,sizeof(tls_card_dev_t));				
 	
 		tls_card_rev_register(card_dev,tls_card_dev2_rev_cb);
 			
@@ -71,7 +77,7 @@ void tls_card_dev_open(u32 card_dev)
 
 
 	
-void tls_card_rev_register(u16 card_no, s16 (*card_rev_callback)(char *buf, u16 len))
+static void tls_card_rev_register(u16 card_no, s16 (*card_rev_callback)(char *buf, u16 len))
 {		
 	if(CARD_READ_DEV1 == card_no)		
 		card_st[0].card_rev_callback = card_rev_callback;		
@@ -88,7 +94,7 @@ static s16 tls_card_dev1_rev_cb(char *buf, u16 len)
 		return WM_FAILED;		
 		
 	if(card->rev_mailbox)									
-		tls_os_mailbox_send(card->rev_mailbox, (void *));	
+		tls_os_mailbox_send(card->rev_mailbox, (void *)MBOX_MSG_CARD_DEV1);	
 		
 	return WM_SUCCESS;
 }
@@ -101,7 +107,7 @@ static s16 tls_card_dev2_rev_cb(char *buf, u16 len)
 		return WM_FAILED;		
 	
 	if(card->rev_mailbox)								
-		tls_os_mailbox_send(card->rev_mailbox, (void *));	
+		tls_os_mailbox_send(card->rev_mailbox, (void *)MBOX_MSG_CARD_DEV2);	
 		
 	return WM_SUCCESS;
 }
@@ -115,16 +121,15 @@ static s16 tls_card_dev2_rev_cb(char *buf, u16 len)
 void tls_card_rebuild(tls_card_dev_t *card)	
 {
 	//高低字节置换
-	if(card->Card_ValidBit == Wiegand_Sequence_Reversal)	
+	if(card->card_cmd->param_0xE1.Card_VaildBit == Wiegand_Sequence_Reversal)	
 	{
-		
-	}
+					
+	}		
 	//正常读取
 	else
 	{
 		
 	}
-
 }
 
 
@@ -183,7 +188,4 @@ static void tls_card_dev2_task(void *data)
 }
 
 
-
-
-static 
 

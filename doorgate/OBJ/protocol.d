@@ -1,5 +1,5 @@
 ..\obj\protocol.o: ..\PROTOCAL\Protocol.c
-..\obj\protocol.o: ..\USERLIB\mp_protocol_hostif.h
+..\obj\protocol.o: ..\MEM\mp_mem.h
 ..\obj\protocol.o: ..\SYSTEM\sys\sys.h
 ..\obj\protocol.o: ..\USER\stm32f10x.h
 ..\obj\protocol.o: ..\CORE\core_cm3.h
@@ -32,9 +32,10 @@
 ..\obj\protocol.o: ..\STM32F10x_FWLib\inc\misc.h
 ..\obj\protocol.o: ..\INCLUDE\list_base.h
 ..\obj\protocol.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+..\obj\protocol.o: ..\USERLIB\mp_uart.h
+..\obj\protocol.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 ..\obj\protocol.o: ..\USERLIB\mp_osal_rtos.h
 ..\obj\protocol.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
-..\obj\protocol.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 ..\obj\protocol.o: ..\FreeRTOS\include\FreeRTOS.h
 ..\obj\protocol.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 ..\obj\protocol.o: ..\FreeRTOS\include\FreeRTOSConfig.h
@@ -50,13 +51,12 @@
 ..\obj\protocol.o: ..\FreeRTOS\include\queue.h
 ..\obj\protocol.o: ..\FreeRTOS\include\timers.h
 ..\obj\protocol.o: ..\INCLUDE\temp.h
-..\obj\protocol.o: ..\PROTOCAL\ProtocolBase.h
-..\obj\protocol.o: ..\USERLIB\param_base.h
-..\obj\protocol.o: ..\INCLUDE\common.h
-..\obj\protocol.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
-..\obj\protocol.o: ..\MEM\mp_mem.h
 ..\obj\protocol.o: ..\PROTOCAL\protocol.h
-..\obj\protocol.o: ..\INCLUDE\param.h
+..\obj\protocol.o: ..\USERLIB\mp_protocol_hostif.h
+..\obj\protocol.o: ..\PROTOCAL\ProtocolBase.h
 ..\obj\protocol.o: ..\USERLIB\BasicFunc.h
 ..\obj\protocol.o: ..\HARDWARE\SD2068\calendar.h
 ..\obj\protocol.o: ..\INCLUDE\debug.h
+..\obj\protocol.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+..\obj\protocol.o: ..\INCLUDE\common.h
+..\obj\protocol.o: ..\INCLUDE\param.h

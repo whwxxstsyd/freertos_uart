@@ -31,8 +31,7 @@ void tls_uart_put_into_buffer(int uart_no,u8 ch)
 	{	
 		port->icount.buf_overrun++;
 		LOG_DEBUG("rx buf overrun\n");
-		
-	}		
+	}			
 	
 	/* insert the character into the buffer */
 	recv->buf[recv->head] = ch;
@@ -83,15 +82,14 @@ int tls_uart_write(struct tls_uart_port *port, char *buf, u32 count)
 
     if (!xmit->buf)		
         return WM_FAILED;
-
-    while (1) 
-	{			
-	
-	    //c = CIRC_SPACE_TO_END(xmit->head, xmit->tail, TLS_UART_TX_BUF_SIZE);		
+		
+    while (1) 		
+	{				
+	    c = CIRC_SPACE_TO_END(xmit->head, xmit->tail, TLS_UART_TX_BUF_SIZE);		
 	    if (count < c)
-	        c = count;
-	    if (c <= 0)
-	        break;		
+	        c = count;	
+	    if (c <= 0)	
+	        break;			
 	    MEMCPY((char *)(xmit->buf + xmit->head), buf, c);
 	    xmit->head = (xmit->head + c) & (TLS_UART_TX_BUF_SIZE - 1);
 	    buf += c;
@@ -117,8 +115,7 @@ void tls_uart_tx_chars_start(struct tls_uart_port *port)
     int tx_count;
     u32 cpu_sr;
     
-    /* send some chars */
-    tx_count = 32;
+    /* send some chars */	
     cpu_sr = tls_os_set_critical();
 
     while (!uart_circ_empty(xmit)) 	
@@ -146,35 +143,32 @@ void tls_uart_tx_chars_start(struct tls_uart_port *port)
 **********************************************************************************************************/
 static void tls_uart_tx_chars(struct tls_uart_port *port)
 {	
-    struct tls_uart_circ_buf *xmit = &port->xmit;
-    int tx_count = 64;
+    struct tls_uart_circ_buf *xmit = &port->xmit;	
     int len;
 	
     if (uart_circ_empty(xmit))
-	{	
-       // tls_uart_tx_disable(port);
-		
+	{		
 		if(port->tx_sem)	
 			tls_os_sem_release(port->tx_sem);	
 
-	        return;	
+		return;			
     }
 
-    while (!uart_circ_empty(xmit) && tx_count-- > 0) 
+    while (!uart_circ_empty(xmit)) 
 	{
         /*check if fifo is full*/
 			
 
-		/*send the data*/
-		Uart_SendByte(xmit->buf[xmit->tail]);			
+		/*send the data*/	
+		Uart_SendByte(xmit->buf[xmit->tail]);				
 		
         xmit->tail = (xmit->tail + 1) & (TLS_UART_TX_BUF_SIZE - 1);
         port->icount.tx++;
     }
-
+	
     len = uart_circ_chars_pending(xmit);
     if (len < WAKEUP_CHARS) 
-	{
+	{	
 		if(port->tx_callback)
 			port->tx_callback(port);
     }
@@ -248,17 +242,15 @@ int tls_uart_port_init(int uart_no, tls_uart_options_t *opts)
 	if (!bufrx)	
 	{	
 		return WM_FAILED;	
-	}	
-	
+	}		
 	memset(bufrx, 0, TLS_UART_RX_BUF_SIZE);
  	port->recv.buf = (u8 *)bufrx;
  	port->recv.head = 0;
  	port->recv.tail = 0;
 
-
 	//·¢ËÍ»º³åÇø	
  	buftx = tls_mem_alloc(TLS_UART_TX_BUF_SIZE);
-	if (!buftx)
+	if (!buftx)	
 	{
 		tls_mem_free(bufrx);
 		return WM_FAILED;
@@ -267,6 +259,7 @@ int tls_uart_port_init(int uart_no, tls_uart_options_t *opts)
 	port->xmit.buf = (u8 *)buftx;
 	port->xmit.head = 0;	
 	port->xmit.tail = 0;
+
 
 	port->tx_fifofull = 16;
 
@@ -489,11 +482,12 @@ static s16 tls_uart_tx_cb(struct tls_uart_port *port)
 	
 	if(NULL == port)
 		return WM_FAILED;
+	
 	if(port->buf_len > 0)		//uart1,put remained data to buffer after buffer transfer completed
 	{
-	    	ret_len = tls_uart_write(port, port->buf_ptr, port->buf_len);
+	    ret_len = tls_uart_write(port, port->buf_ptr, port->buf_len);
 		//TLS_DBGPRT_INFO("\ntx cb write len=%d",ret_len);
-
+	
 		if(ret_len >= 0)
 		{
 			if(port->buf_len >= ret_len)
@@ -533,14 +527,13 @@ int tls_uart_tx(char *buf, u16 len)
 	port->buf_len= len;
 	
 	ret_len = tls_uart_write(port, port->buf_ptr, port->buf_len);
-	//TLS_DBGPRT_INFO("\ntx write len=%d",ret_len);
+		
 	if(ret_len >= 0)
 	{
 		if(port->buf_len >= ret_len)
 		{	
 			port->buf_ptr += ret_len;
-			port->buf_len -= ret_len;
-			//TLS_DBGPRT_INFO("\start uart1 tx\n");
+			port->buf_len -= ret_len;	
 			tls_uart_tx_chars_start(port);
 		}
 	}

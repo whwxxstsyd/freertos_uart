@@ -17,7 +17,7 @@
 #define true				1
 #define false				0
 
-
+	
 /* error code */
 #define CMD_ETRUERR_OK          0
 #define CMD_ERR_INV_FMT         1
@@ -35,10 +35,6 @@
 #define CMD_ERR_SKT_CONN        13
 #define CMD_ERR_LEN_CMP         14
 #define CMD_ERR_UNDEFINE        64
-
-
-
-#define ONENET_AT_CMD_NOT_RESP    -0xfffff
 
 
 #endif

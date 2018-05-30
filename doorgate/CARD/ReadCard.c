@@ -17,15 +17,7 @@ void Card_Read(void)
 
 	for(i=0;i<ReadCardNum;i++)
 	{
-		
-		if()
-		{
-
-		}
-		else
-		{
-
-		}
+			
 	}
 }
 

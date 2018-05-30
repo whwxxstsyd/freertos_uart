@@ -1,5 +1,6 @@
 #include "mp_protocol_hostif.h"
 #include "mp_uart_task.h"
+#include "ProtocolBase.h"	
 #include "mp_mem.h"
 #include "list_base.h"
 #include "debug.h"	
@@ -149,7 +150,7 @@ int tls_hostif_process_cmdrsp(u8 hostif_type, char *cmdrsp, u32 cmdrsp_size)
 
 
 
-#define CMD_RSP_BUF_SIZE	128	
+#define CMD_RSP_BUF_SIZE	256	
 #define LENGTH_HEAD			13
 
 int tls_hostif_cmd_handler(u8 hostif_cmd_type, char *buf, u32 *len)

@@ -1,13 +1,14 @@
-#include "ProtocolBase.h"
 #include "mp_mem.h"		
+#include "mp_uart.h"	
 #include "protocol.h"
-#include "BasicFunc.h"		
+#include "ProtocolBase.h"	
+#include "BasicFunc.h"			
 #include "calendar.h"	
-#include "debug.h"			
+#include "debug.h"				
 #include "common.h"	
+#include "param.h"		
 
-
-
+	
 CMD_0x48_HANDLE_T CMD_0x48;
 CMD_0x49_HANDLE_T CMD_0x49;	
 CMD_0x4A_HANDLE_T CMD_0x4A;
@@ -203,7 +204,7 @@ static int post_protocmd_set_baudrate_proc(struct tls_protocmd_token_t *tok,
 static int post_protocmd_authority_confirm_proc(struct tls_protocmd_token_t *tok,
         char *res_resp, u32 *res_len)
 {	
-	CMD_0x48_HANDLE_T *cmd = CMD_0x48;	
+	CMD_0x48_HANDLE_T *cmd = &CMD_0x48;		
 	u8 cmd_group = tok->arg[0];
 	u8 cmd_type  = tok->arg[1];
 
@@ -546,8 +547,7 @@ static int post_protocmd_get_guard_param_proc(struct tls_protocmd_token_t *tok,
 
 			*res_len = Ariber_GetAlarmParam(tok,res_resp,cmd);	
 
-			break;
-
+			break;	
 
 		case CMD_0x4C_GET_ARMY_ON_STA:			
 
@@ -587,9 +587,8 @@ static int post_protocmd_get_guard_param_proc(struct tls_protocmd_token_t *tok,
 
 			*res_len = Ariber_GetArmyConfigParam(tok,res_resp,cmd);	
 
-			break;
-
-		
+			break;	
+	
 		case CMD_0x4C_GET_USER_PWD:			
 		
 			LOG_INFO("CMD_0x4C_GET_USER_PWD\n");
@@ -598,12 +597,11 @@ static int post_protocmd_get_guard_param_proc(struct tls_protocmd_token_t *tok,
 				
 			break;
 
+		case CMD_0x4C_GET_FLASH_ID:				
 		
-		case CMD_0x4C_GET_FLASH_ID:			
-		
-			LOG_INFO("CMD_0x4C_GET_FLASH_ID\n");
+			LOG_INFO("CMD_0x4C_GET_FLASH_ID\n");	
 			
-			*res_len = Ariber_GetFlashID(tok,res_resp,cmd);			
+			*res_len = Ariber_GetFlashID(tok,res_resp,cmd);						
 			
 			break;
 
@@ -1059,8 +1057,7 @@ void post_protocol_deal(void)
 	
 void tls_protocol_init(void)	
 {
-	CMD_0x48.param_0xE0.Handle_Pos[0] = 0;
-	CMD_0x48.param_0xE0.Handle_Pos[1] = 0;
+
 		
 }
 

@@ -1,5 +1,5 @@
 ..\obj\readcard.o: ..\CARD\ReadCard.c
-..\obj\readcard.o: ..\CARD\readcard.h
+..\obj\readcard.o: ..\CARD\ReadCard.h
 ..\obj\readcard.o: ..\SYSTEM\sys\sys.h
 ..\obj\readcard.o: ..\USER\stm32f10x.h
 ..\obj\readcard.o: ..\CORE\core_cm3.h
@@ -30,3 +30,4 @@
 ..\obj\readcard.o: ..\STM32F10x_FWLib\inc\stm32f10x_usart.h
 ..\obj\readcard.o: ..\STM32F10x_FWLib\inc\stm32f10x_wwdg.h
 ..\obj\readcard.o: ..\STM32F10x_FWLib\inc\misc.h
+..\obj\readcard.o: ..\HARDWARE\CARD\card.h

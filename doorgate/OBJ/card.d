@@ -31,4 +31,3 @@
 ..\obj\card.o: ..\STM32F10x_FWLib\inc\stm32f10x_wwdg.h
 ..\obj\card.o: ..\STM32F10x_FWLib\inc\misc.h
 ..\obj\card.o: ..\SYSTEM\delay\delay.h
-..\obj\card.o: ..\CARD\wiegand.h

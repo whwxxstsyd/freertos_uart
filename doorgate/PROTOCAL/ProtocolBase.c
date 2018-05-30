@@ -458,7 +458,6 @@ int Ariber_SetHandlePos(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4B_H
 
 
 
-tls_card_cmd_4b_t card_cmd[2];	
 
 //设置卡有效位
 int Ariber_SetCardBit(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4B_HANDLE_T *cmd)	
@@ -470,10 +469,8 @@ int Ariber_SetCardBit(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4B_HAN
 	LOG_INFO("Card_ValidBit:&d\n",Card_ValidBit);		
 	LOG_INFO("Card_EndianSet:&d\n",Card_EndianSet);		
 
-	cmd->Card_ValidBit = Card_ValidBit;
+	cmd->param_0xE1.Card_VaildBit = Card_ValidBit;	
 	
-	card_cmd.Card_EndianSet = Card_EndianSet;
-
 	
 	return ASCII_LEN(SET_SUCCEED_RTN_LEN);
 }
@@ -620,8 +617,8 @@ int Ariber_SetSystemSta(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4B_H
 		case 2:
 			LOG_INFO("Card reading Condition\n"); 		
 	
-			return 
-			
+			return;	
+
 			break;
 
 		case 3:
@@ -916,8 +913,8 @@ int Ariber_GetFlashID(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4C_HAN
 	u8 Flash_ID = 0x4A;		
 
 	cmd->param_0xED.Flash_ID = Flash_ID;
-			
-	CharToAsc(Flash_ID,res_resp);								
+	
+	CharToAsc(Flash_ID,res_resp);									
 	
 	return ASCII_LEN(GET_FLASH_ID_RTN_LEN);				
 }

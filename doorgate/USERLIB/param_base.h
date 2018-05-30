@@ -9,7 +9,6 @@
 #define COMPANY_NAME 			"创力电子股份有限公司"
 #define DEVICE_NAME 			"双门控制器"	
 
-
 #define DEVICE_NUM				4
 #define DEVICE_ADDR_DEFAULT 	1
 

@@ -55,4 +55,5 @@
 ..\obj\app.o: ..\TASK\mp_memory_task.h
 ..\obj\app.o: ..\TASK\mp_door_task.h
 ..\obj\app.o: ..\TASK\mp_card_task.h
+..\obj\app.o: ..\PROTOCAL\ProtocolBase.h
 ..\obj\app.o: app.h

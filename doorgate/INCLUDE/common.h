@@ -8,7 +8,7 @@
 
 
 typedef enum STR_LEN_T
-{
+{	
     STR_16_LEN = 16,
     STR_32_LEN = 32,
     STR_64_LEN = 64,
