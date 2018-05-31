@@ -1,4 +1,5 @@
 ..\obj\protocolbase.o: ..\PROTOCAL\ProtocolBase.c
+..\obj\protocolbase.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 ..\obj\protocolbase.o: ..\PROTOCAL\ProtocolBase.h
 ..\obj\protocolbase.o: ..\SYSTEM\sys\sys.h
 ..\obj\protocolbase.o: ..\USER\stm32f10x.h
@@ -54,7 +55,6 @@
 ..\obj\protocolbase.o: ..\INCLUDE\param.h
 ..\obj\protocolbase.o: ..\USERLIB\param_base.h
 ..\obj\protocolbase.o: ..\INCLUDE\common.h
-..\obj\protocolbase.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 ..\obj\protocolbase.o: ..\USERLIB\BasicFunc.h
 ..\obj\protocolbase.o: ..\INCLUDE\debug.h
 ..\obj\protocolbase.o: ..\HARDWARE\LED\led.h

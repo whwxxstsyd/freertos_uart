@@ -6,10 +6,10 @@
 #define ASCII_LEN(len)	  (len*2)			
 
 //定义数据返回的长度(单位:字节)
-#define NO_RESP_DATA	0x00
+#define GET_FAILED_RTN_LEN		0xFFFF			
 #define SET_SUCCEED_RTN_LEN   0	
 
-#define GET_HANDLE_POS_RTN_LEN			2
+#define GET_HANDLE_POS_RTN_LEN			2	
 #define GET_CARD_BIT_RTN_LEN  			2	
 #define GET_ARMY_PARAM_RTN_LEN  		4		
 #define GET_ALARM_PARAM_RTN_LEN   		4	
@@ -20,14 +20,15 @@
 #define	GET_ARMY_CONFIG_RTN_LEN		0
 #define GET_FLASH_ID_RTN_LEN  			1				
 #define GET_DOOR_LOG_RTN_LEN  			0					
-#define GET_USER_PASS_RTN_LEN  		8			
-	
+#define GET_USER_PASS_RTN_LEN  		8
 
-
-#define GET_SYS_TIME_RTN_LEN	8
-#define SET_SYS_TIME_RTN_LEN	0	
-
-#define GET_LIST_RTN_LEN		16	
+/*49命令返回长度*/
+#define GET_SYS_TIME_RTN_LEN			8
+#define GET_WORK_LIST_RTN_LEN			16
+#define GET_REST_LIST_RTN_LEN			16
+#define GET_WEEK_LIST_RTN_LEN			24		
+#define GET_USER_NUM_RTN_LEN			2			
+#define GET_USER_INFO_RTN_LEN			16	
 
 
 
@@ -146,15 +147,23 @@ typedef struct CMD_0x48_HANDLE{
 #define CMD_0x49_SET_PARAM 			0xFC
 
 typedef struct CMD_0x49_0xE0_PARAM{	
-	u8 i;
+	u16 year;	
+	u8 month;
+	u8 day;
+	u8 week;
+	u8 hour;
+	u8 min;	
+	u8 sec;	
 }CMD_0x49_0xE0_PARAM_T;
 
 typedef struct CMD_0x49_0xE1_PARAM{
-	u8 i;
+	u8 list_num;
+	u8 (*list)[4];	
 }CMD_0x49_0xE1_PARAM_T;
 
 typedef struct CMD_0x49_0xE2_PARAM{	
-	u8 i;
+	u8 list_num;
+	u8 (*list)[4];	
 }CMD_0x49_0xE2_PARAM_T;	
 
 typedef struct CMD_0x49_0xE3_PARAM{	
@@ -186,7 +195,9 @@ typedef struct CMD_0x49_0xF0_PARAM{
 }CMD_0x49_0xF0_PARAM_T;
 
 typedef struct CMD_0x49_0xF1_PARAM{	
-	u8 i;	
+	u8 list_num;
+	u8 week_num;
+	u8 (*list)[4];		
 }CMD_0x49_0xF1_PARAM_T;
 
 typedef struct CMD_0x49_0xFC_PARAM{	
@@ -211,6 +222,7 @@ typedef struct CMD_0x49_HANDLE{
 
 
 //0x4A命令的type	
+#define CMD_0x4A_GET_MODULE_DATE 		0xE0		
 #define CMD_0x4A_GET_WORK_DAY_IN 		0xE3		
 #define CMD_0x4A_GET_REST_DAY_IN 		0xE4
 #define CMD_0x4A_GET_AUTH_USER_INFO 	0xE5	
@@ -220,13 +232,24 @@ typedef struct CMD_0x49_HANDLE{
 #define CMD_0x4A_GET_WEEK_IN 			0xEB		
 
 
-	
+typedef struct CMD_0x4A_0xE0_PARAM{
+	u16 year;	
+	u8 month;
+	u8 day;
+	u8 week;
+	u8 hour;
+	u8 min;	
+	u8 sec;	
+}CMD_0x4A_0xE0_PARAM_T;
+
 typedef struct CMD_0x4A_0xE3_PARAM{
-	u8 i;
+	u8 list_num;
+	u8 (*list)[4];	
 }CMD_0x4A_0xE3_PARAM_T;
 
 typedef struct CMD_0x4A_0xE4_PARAM{
-	u8 i;
+	u8 list_num;
+	u8 (*list)[4];		
 }CMD_0x4A_0xE4_PARAM_T;
 
 typedef struct CMD_0x4A_0xE5_PARAM{
@@ -246,11 +269,14 @@ typedef struct CMD_0x4A_0xEA_PARAM{
 }CMD_0x4A_0xEA_PARAM_T;
 
 typedef struct CMD_0x4A_0xEB_PARAM{
-	u8 i;	
+	u8 list_num;
+	u8 week_num;
+	u8 (*list)[4];		
 }CMD_0x4A_0xEB_PARAM_T;	
 
 
 typedef struct CMD_0x4A_HANDLE{
+	CMD_0x4A_0xE0_PARAM_T param_0xE0;
 	CMD_0x4A_0xE3_PARAM_T param_0xE3;
 	CMD_0x4A_0xE4_PARAM_T param_0xE4;	
 	CMD_0x4A_0xE5_PARAM_T param_0xE5;
@@ -493,21 +519,21 @@ enum
 
 
 
-int Ariber_GetAuthority(struct tls_protocmd_token_t *tok,
-        							u8 *res_resp, u32 *res_len,CMD_0x48_HANDLE_T *cmd);
+/*48命令下的子命令*/		
+
+int Ariber_GetAuthority(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x48_HANDLE_T *cmd);	
 
 int Ariber_CancelConfirm(CMD_0x48_HANDLE_T *cmd);	
 
-int Ariber_ModifyPassword(struct tls_protocmd_token_t *tok,
-        							u8 *res_resp, u32 *res_len,CMD_0x48_HANDLE_T *cmd);	
-
-int Ariber_GetSysTime(u8 *res_resp);						
-
-int Ariber_SetSysTime(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x49_HANDLE_T *cmd);
+int Ariber_ModifyPassword(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x48_HANDLE_T *cmd);	
 
 
 
 
+
+/*4A命令下的子命令*/		
+
+int Ariber_GetModuleDate(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4A_HANDLE_T *cmd);
 
 int Ariber_GetWeekPermitList(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4A_HANDLE_T *cmd);
 
@@ -515,20 +541,33 @@ int Ariber_GetWorkDayPermitList(struct tls_protocmd_token_t *tok,u8 *res_resp,CM
 
 int Ariber_GetRestDayPermitList(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4A_HANDLE_T *cmd);
 
+int Ariber_GetAuthUserNum(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4A_HANDLE_T *cmd);
+
+int Ariber_GetAuthUserInfo(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4A_HANDLE_T *cmd);
+
+
+
+
 
 
 	
+/*49命令下的子命令*/		
+int Ariber_SetModuleDate(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x49_HANDLE_T *cmd);
 
-int Ariber_SetWeekPermitList(struct tls_protocmd_token_t *tok,u8 *res_resp);
+int Ariber_SetWorkDayPermitList(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x49_HANDLE_T *cmd);
+	
+int Ariber_SetRestDayPermitList(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x49_HANDLE_T *cmd);
 
-int Ariber_SetWorkDayPermitList(struct tls_protocmd_token_t *tok,u8 *res_resp);
- 
-int Ariber_SetRestDayPermitList(struct tls_protocmd_token_t *tok,u8 *res_resp);
- 
+int Ariber_SetWeekPermitList(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x49_HANDLE_T *cmd);
+
+int Ariber_UserAuthorize(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x49_HANDLE_T *cmd);
+
+int Ariber_UserUnAuthorize(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x49_HANDLE_T *cmd);
 
 
 
-//4B命令下面的指令	
+
+/*4B命令下的子命令*/	
 
 int Ariber_SetHandlePos(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4B_HANDLE_T *cmd);	
 

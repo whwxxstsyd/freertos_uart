@@ -1,13 +1,9 @@
----- tls_uart_write Matches (12 in 4 files) ----
-LED.htm (e:\doorgate\obj):<BR>[Calls]<UL><LI><a href="#[19d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_uart_write
-LED.htm (e:\doorgate\obj):<P><STRONG><a name="[19d]"></a>tls_uart_write</STRONG> (Thumb, 80 bytes, Stack size 32 bytes, mp_uart.o(.text))
-LED.htm (e:\doorgate\obj):<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = tls_uart_write
-LED.htm (e:\doorgate\obj):<BR><BR>[Calls]<UL><LI><a href="#[19d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_uart_write
-LED.htm (e:\doorgate\obj):<BR><BR>[Called By]<UL><LI><a href="#[19d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_uart_write
-LED.htm (e:\doorgate\obj):<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = tls_uart_tx_cb &rArr; tls_uart_write
-LED.htm (e:\doorgate\obj):<BR>[Calls]<UL><LI><a href="#[19d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tls_uart_write
-Mp_uart.c (e:\doorgate\userlib):int tls_uart_write(struct tls_uart_port *port, char *buf, u32 count)
-Mp_uart.c (e:\doorgate\userlib):	    ret_len = tls_uart_write(port, port->buf_ptr, port->buf_len);
-Mp_uart.c (e:\doorgate\userlib):	ret_len = tls_uart_write(port, port->buf_ptr, port->buf_len);
-Mp_uart.h (e:\doorgate\userlib):int tls_uart_write(struct tls_uart_port *port, char *buf, u32 count);
-Mp_uart_task.c (e:\doorgate\task):				write_cnt = tls_uart_write(uart->uart_port, 
+---- Ariber_GetAuthUserInfo Matches (8 in 4 files) ----
+LED.htm (e:\doorgate\obj):<LI><a href="#[1f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Ariber_GetAuthUserInfo
+LED.htm (e:\doorgate\obj):<LI><a href="#[1f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Ariber_GetAuthUserInfo
+LED.htm (e:\doorgate\obj):<P><STRONG><a name="[1f8]"></a>Ariber_GetAuthUserInfo</STRONG> (Thumb, 176 bytes, Stack size 48 bytes, protocolbase.o(.text))
+LED.htm (e:\doorgate\obj):<BR><BR>[Stack]<UL><LI>Max Depth = 60<LI>Call Chain = Ariber_GetAuthUserInfo &rArr; CharToAsc
+LED.htm (e:\doorgate\obj):<LI><a href="#[1f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Ariber_GetAuthUserInfo
+Protocol.c (e:\doorgate\protocal):			*res_len = Ariber_GetAuthUserInfo(tok,res_resp,cmd);	
+ProtocolBase.c (e:\doorgate\protocal):int Ariber_GetAuthUserInfo(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4A_HANDLE_T *cmd)
+ProtocolBase.h (e:\doorgate\protocal):int Ariber_GetAuthUserInfo(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4A_HANDLE_T *cmd);

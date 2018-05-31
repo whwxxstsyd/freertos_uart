@@ -7,20 +7,18 @@ extern "C" {
 
 #include "sys.h"	
 	
-#if ReadCard_Open
-  
-//时段表 数据初始化
-extern void Init_TimeListSeg(u8 DoorNumber);
-//星期时段-准进时段列表
-extern void Init_SetWeekListSeg1(u32 EepAddr);
 
-extern void Card_PostProtocol(void);
-  
-#endif
-  
-#ifdef __cplusplus
-}
-#endif
+typedef struct UserCardInfo
+{
+	u8 card_ID[5];					
+	u8 user_ID[4];		
+	u8 user_pw[2];			
+	u8 user_life[4];					
+	u8 user_auth;		
+} UserCardInfo_T;	
+
+
+
 
 #endif
 

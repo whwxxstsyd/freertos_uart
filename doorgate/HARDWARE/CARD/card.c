@@ -6,7 +6,7 @@ static void GPIO_Wiegand_INIT(void);
 
 
 void Card_Init(void)	
-{	
+{		
 	GPIO_WiegandPower_INIT();
 	
 	GPIO_Wiegand_INIT();

@@ -51,7 +51,7 @@ struct tls_hostif_tx_msg {
 #define HOSTIF_TX_MSG_NUM       40
 #define HOSTIF_TX_EVENT_MSG_NUM  10
 
-#define PROTOCMD_MAX_ARG     64	
+#define PROTOCMD_MAX_ARG     128		
 
 //协议解析出来的接口
 struct tls_protocmd_token_t {

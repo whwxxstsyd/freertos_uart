@@ -127,13 +127,13 @@ void CharToAsc(u8 c1,u8 *buf)
 //将两个字节的数据转化为两个ASCII 码
 void u16ToAsc(u16 c1,u8 *buf)
 {
-	u8 t1,t2;
+	u8 t1,t2;	
 
 	t1 = c1&0x0f;
 	t2 = (c1>>8)&0x0f;
 	
-	CharToAsc(t2,buf);	
-	CharToAsc(t1,buf+2);
+	CharToAsc(t1,buf);		
+	CharToAsc(t2,buf+2);
 }
 
 //将四个字节的数据转化为两个ASCII 码

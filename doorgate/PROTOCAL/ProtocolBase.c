@@ -1,3 +1,4 @@
+#include <string.h>	
 #include "ProtocolBase.h"
 #include "param.h"		
 #include "param_base.h"	
@@ -9,8 +10,7 @@
 u8 password_default[] = {1,2,3,4,5};
 
 //门禁艾贝尔协议
-int Ariber_GetAuthority(struct tls_protocmd_token_t *tok,
-        u8 *res_resp, u32 *res_len,CMD_0x48_HANDLE_T *cmd)
+int Ariber_GetAuthority(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x48_HANDLE_T *cmd)	
 {
 	u8 password[5];	
 	u8 i;
@@ -22,7 +22,7 @@ int Ariber_GetAuthority(struct tls_protocmd_token_t *tok,
 
 	if(memcmp(password,password_default,sizeof(password)) == 0)	
 	{	
-		return TRUE;
+		return ASCII_LEN(SET_SUCCEED_RTN_LEN);	
 	}
 
 	return FALSE;		
@@ -32,12 +32,12 @@ int Ariber_GetAuthority(struct tls_protocmd_token_t *tok,
 int Ariber_CancelConfirm(CMD_0x48_HANDLE_T *cmd)
 {
 	LOG_INFO("Ariber_CancelConfirm\n");	
-	return TRUE;
+	
+	return ASCII_LEN(SET_SUCCEED_RTN_LEN);;
 }
 
 
-int Ariber_ModifyPassword(struct tls_protocmd_token_t *tok,
-        u8 *res_resp, u32 *res_len,CMD_0x48_HANDLE_T *cmd)
+int Ariber_ModifyPassword(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x48_HANDLE_T *cmd)	
 {
 	u8 password[6];
 	u8 i,sum;		
@@ -58,74 +58,9 @@ int Ariber_ModifyPassword(struct tls_protocmd_token_t *tok,
 		return FALSE;
 	}
 
-	return TRUE;
+	return ASCII_LEN(SET_SUCCEED_RTN_LEN);;
 }
 
-
-int Ariber_GetSysTime(u8 *res_resp)
-{	
-	u8 param[8];
-
-	//计算的时候字节数要变为ASCII码数
-	u8 resp_len;	
-		
-	//硬件获取时间	
-	u16 year = 2015;	
-	u8 month=4,day=30,week=4,hour=14,min=51,sec=46;	
-
-	param[0] = HexToIntBCD(year/100);				
-	CharToAsc(param[0],res_resp);			
-	param[1] = HexToIntBCD(year%100);		
-	CharToAsc(param[1],res_resp+2);	
-	
-	param[2] = HexToIntBCD(month);				
-	CharToAsc(param[2],res_resp+4);	
-	param[3] = HexToIntBCD(day);
-	CharToAsc(param[3],res_resp+6);	
-	param[4] = HexToIntBCD(week);			
-	CharToAsc(param[4],res_resp+8);	
-	param[5] = HexToIntBCD(hour);
-	CharToAsc(param[5],res_resp+10);	
-	param[6] = HexToIntBCD(min);	
-	CharToAsc(param[6],res_resp+12);	
-	param[7] = HexToIntBCD(sec);			
-	CharToAsc(param[7],res_resp+14);							
-
-	LED3 = !LED3;
-	LED4 = !LED4;	
-	
-	return ASCII_LEN(GET_SYS_TIME_RTN_LEN);	
-}
-
-
-
-int Ariber_SetSysTime(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x49_HANDLE_T *cmd)	
-{
-	u8 year_tmp[2];		
-	u16 year;	
-	u8 month,day,week,hour,min,sec;
-	
-	year_tmp[0] = BCDToHex(tok->arg[2]);	
-	year_tmp[1] = BCDToHex(tok->arg[3]);	
-
-	year = year_tmp[0]*100+year_tmp[1];	
-	month = BCDToHex(tok->arg[4]);							
-	day   = BCDToHex(tok->arg[5]);
-	week  = BCDToHex(tok->arg[6]);
-	hour  = BCDToHex(tok->arg[7]);
-	min   = BCDToHex(tok->arg[8]);
-	sec   = BCDToHex(tok->arg[9]);
-
-	LOG_INFO("Date:%d-%d-%d-%d-%d:%d:%d\n",year,month,day,week,hour,min,sec);	
-
-	//回复消息为空
-
-	//消息长度为0		
-	
-	return ASCII_LEN(SET_SYS_TIME_RTN_LEN);		
-}
-
-	
 
 	
 int Ariber_GetDeviceInfo(u8 *res_resp)
@@ -148,27 +83,106 @@ int Ariber_GetDeviceInfo(u8 *res_resp)
 		res_resp = res_resp + 2;
 	}
 
-	len_tmp[1] =  12;
-	for(i=len_tmp[0];i<len_tmp[1];i++)					
-	{	
+	len_tmp[1] = 6;			
+	for(i=0;i<len_tmp[1];i++)					
+	{				
 		CharToAsc(0x20,res_resp);
 		res_resp = res_resp + 2;
-	}  	
-	
+	}	  	
+			
 	len_tmp[2] =  strlen(info->Company_Name);		
-	str2 = info->Company_Name;
+	str2 = info->Company_Name;	
 	for(i=0;i<len_tmp[2];i++)		
-	{	
+	{		
 		CharToAsc(*(str2),res_resp);		
 		str2++;			
 		res_resp = res_resp + 2;		
 	}  	
-
-	resp_len = (len_tmp[0]+len_tmp[1]+len_tmp[2]);
-
+			
+	resp_len = (len_tmp[0]+len_tmp[1]+len_tmp[2]);	
+	
 	return ASCII_LEN(resp_len);					
 }
 
+
+
+
+
+int Ariber_SetModuleDate(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x49_HANDLE_T *cmd)	
+{
+	u8 year_tmp[2];		
+	u16 year;	
+	u8 month,day,week,hour,min,sec;
+	
+	year_tmp[0] = BCDToHex(tok->arg[2]);	
+	year_tmp[1] = BCDToHex(tok->arg[3]);	
+
+	year = year_tmp[0]*100+year_tmp[1];	
+	month = BCDToHex(tok->arg[4]);							
+	day   = BCDToHex(tok->arg[5]);
+	week  = BCDToHex(tok->arg[6]);
+	hour  = BCDToHex(tok->arg[7]);
+	min   = BCDToHex(tok->arg[8]);
+	sec   = BCDToHex(tok->arg[9]);	
+
+	cmd->param_0xE0.year = year;
+	cmd->param_0xE0.month = month;
+	cmd->param_0xE0.day = day;
+	cmd->param_0xE0.week = week;
+	cmd->param_0xE0.hour = hour;
+	cmd->param_0xE0.min = min;	
+	cmd->param_0xE0.sec = sec;	
+
+	LOG_INFO("Date:%d-%d-%d-%d-%d:%d:%d\n",year,month,day,week,hour,min,sec);
+		
+	return ASCII_LEN(SET_SUCCEED_RTN_LEN);			
+}
+
+
+
+
+
+
+int Ariber_GetModuleDate(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4A_HANDLE_T *cmd)
+{	
+	u8 param[8];
+
+	//计算的时候字节数要变为ASCII码数
+	u8 resp_len;	
+	
+	//硬件获取时间	
+	u16 year = 2015;	
+	u8 month=4,day=30,week=4,hour=14,min=51,sec=46;	
+
+	year  = cmd->param_0xE0.year;		
+	month = cmd->param_0xE0.month;	
+	day   = cmd->param_0xE0.day;	
+	week  = cmd->param_0xE0.week;	
+	hour  = cmd->param_0xE0.hour;	
+	min   = cmd->param_0xE0.min;
+	sec   = cmd->param_0xE0.sec;
+
+	param[0] = HexToIntBCD(year/100);				
+	CharToAsc(param[0],res_resp);			
+	param[1] = HexToIntBCD(year%100);		
+	CharToAsc(param[1],res_resp+2);	
+
+	param[2] = HexToIntBCD(month);				
+	CharToAsc(param[2],res_resp+4);	
+	param[3] = HexToIntBCD(day);
+	CharToAsc(param[3],res_resp+6);	
+	param[4] = HexToIntBCD(week);			
+	CharToAsc(param[4],res_resp+8);	
+	param[5] = HexToIntBCD(hour);
+	CharToAsc(param[5],res_resp+10);	
+	param[6] = HexToIntBCD(min);	
+	CharToAsc(param[6],res_resp+12);	
+	param[7] = HexToIntBCD(sec);			
+	CharToAsc(param[7],res_resp+14);								
+
+	return ASCII_LEN(GET_SYS_TIME_RTN_LEN);	
+}
+	
 
 	
 u8 Week_list1[6][4]={
@@ -177,67 +191,84 @@ u8 Week_list1[6][4]={
 	{1,2,3,4},
 	{1,2,3,4},
 	{1,2,3,4},
-	{1,2,3,4},
+	{1,2,3,4}	
 };
-
+ 
 u8 Week_list2[6][4]={
-	{5,6,7,8},
-	{5,6,7,8},
-	{5,6,7,8},
-	{5,6,7,8},
-	{5,6,7,8},
-	{5,6,7,8}
+	{1,2,3,4},
+	{1,2,3,4},
+	{1,2,3,4},
+	{1,2,3,4},
+	{1,2,3,4},
+	{1,2,3,4}
 };
 
 u8 Week_list3[6][4]={
-	{4,3,2,1},
-	{4,3,2,1},
-	{4,3,2,1},
-	{4,3,2,1},
-	{4,3,2,1},
-	{4,3,2,1}
+	{1,2,3,4},
+	{1,2,3,4},
+	{1,2,3,4},
+	{1,2,3,4},
+	{1,2,3,4},
+	{1,2,3,4}
 };
 
 u8 Week_list4[6][4]={	
-	{8,7,6,5},
-	{8,7,6,5},
-	{8,7,6,5},
-	{8,7,6,5},
-	{8,7,6,5},
-	{8,7,6,5}	
+	{1,2,3,4},
+	{1,2,3,4},
+	{1,2,3,4},
+	{1,2,3,4},
+	{1,2,3,4},
+	{1,2,3,4}	
 };
 
 int Ariber_GetWeekPermitList(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4A_HANDLE_T *cmd)
 {
 	u8 i,j,tmp;
-	u8 list_num;
+	u8 list_num,week_num;
 	u8 (*list)[4];			
-
+	
 	list_num = tok->arg[2];//获得第几张表	
+	week_num = tok->arg[3];
 
 	//选取第几张表格
-	switch(list_num)
-	{		
-		case 1:	
-			list = Week_list1;
-		break;
 
+	switch(week_num)	
+	{	
+		case 1:
 		case 2:
-			list = Week_list2;
-		break;
-		
 		case 3:
-			list = Week_list3;
-		break;
-
 		case 4:
-			list = Week_list4;				
+		case 5:
+		case 6:
+		case 7:	
+			switch(list_num)
+			{			
+				case 1: 
+					list = Week_list1;
+				break;
+			
+				case 2:
+					list = Week_list2;	
+				break;
+				
+				case 3:
+					list = Week_list3;
+				break;
+			
+				case 4:
+					list = Week_list4;				
+				break;
+			
+				default:	
+			
+				break;
+			}	
 		break;
 
-		default:	
+		default:
 
 		break;
-	}	
+	}
 
 	LOG_INFO("GetWeek data dump:\n");		
 	
@@ -257,38 +288,38 @@ int Ariber_GetWeekPermitList(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0
 #endif
 	}
 	
-	return ASCII_LEN(GET_LIST_RTN_LEN);	
+	return ASCII_LEN(GET_WEEK_LIST_RTN_LEN);					
 	
 }
 
 
 
-u8 time_list1[4][4]={
+u8 work_list1[4][4]={
 	{1,2,3,4},
 	{1,2,3,4},
 	{1,2,3,4},
 	{1,2,3,4}	
 };
 
-u8 time_list2[4][4]={
-	{11,12,13,14},
-	{11,12,13,14},
-	{11,12,13,14},
-	{11,12,13,14}		
+u8 work_list2[4][4]={
+	{1,2,3,4},
+	{1,2,3,4},
+	{1,2,3,4},
+	{1,2,3,4}		
 };
 
-u8 time_list3[4][4]={
-	{5,6,7,8},
-	{5,6,7,8},	
-	{5,6,7,8},
-	{5,6,7,8}	
+u8 work_list3[4][4]={
+	{1,2,3,4},
+	{1,2,3,4},
+	{1,2,3,4},
+	{1,2,3,4}	
 };
 
-u8 time_list4[4][4]={
-	{15,16,17,18},	
-	{15,16,17,18},		
-	{15,16,17,18},	
-	{15,16,17,18}	
+u8 work_list4[4][4]={
+	{1,2,3,4},
+	{1,2,3,4},
+	{1,2,3,4},
+	{1,2,3,4}	
 };
 
 
@@ -296,31 +327,29 @@ int Ariber_GetWorkDayPermitList(struct tls_protocmd_token_t *tok,u8 *res_resp,CM
 {
 	u8 i,j,tmp;
 	u8 list_num;
-	u8 (*list)[4];		
+	u8 (*list)[4];			
 
 	list_num = tok->arg[2];//获得第几张表	
 	
 	LOG_INFO("list_num: %d\n",list_num);			
 
-	LOG_INFO("WorkDay raw data dump:\n");
-
 	//选取第几张表格
 	switch(list_num)
 	{		
 		case 1: 	
-			list = time_list1;
+			list = work_list1;
 		break;
 
 		case 2:
-			list = time_list2;	
+			list = work_list2;	
 		break;
 		
 		case 3:
-			list = time_list3;
+			list = work_list3;
 		break;
 
 		case 4:
-			list = time_list4;			
+			list = work_list4;		
 		break;
 
 		default:
@@ -347,8 +376,37 @@ int Ariber_GetWorkDayPermitList(struct tls_protocmd_token_t *tok,u8 *res_resp,CM
 #endif
 	}	
 	
-	return ASCII_LEN(GET_LIST_RTN_LEN);		
+	return ASCII_LEN(GET_WORK_LIST_RTN_LEN);		
 }
+
+
+u8 rest_list1[4][4]={
+	{1,2,3,4},
+	{1,2,3,4},
+	{1,2,3,4},
+	{1,2,3,4}	
+};
+
+u8 rest_list2[4][4]={
+	{1,2,3,4},
+	{1,2,3,4},
+	{1,2,3,4},
+	{1,2,3,4}			
+};
+
+u8 rest_list3[4][4]={
+	{1,2,3,4},
+	{1,2,3,4},
+	{1,2,3,4},
+	{1,2,3,4}	
+};
+
+u8 rest_list4[4][4]={
+	{1,2,3,4},
+	{1,2,3,4},
+	{1,2,3,4},
+	{1,2,3,4}	
+};
 
 
 int Ariber_GetRestDayPermitList(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4A_HANDLE_T *cmd)
@@ -356,7 +414,7 @@ int Ariber_GetRestDayPermitList(struct tls_protocmd_token_t *tok,u8 *res_resp,CM
 	u8 i,j,tmp;
 	u8 list_num;
 	u8 (*list)[4];			
-
+	
 	list_num = tok->arg[2];//获得第几张表	
 
 	LOG_INFO("RestDay data dump:\n");	
@@ -365,19 +423,19 @@ int Ariber_GetRestDayPermitList(struct tls_protocmd_token_t *tok,u8 *res_resp,CM
 	switch(list_num)
 	{	
 		case 1: 
-			list = time_list1;	
+			list = rest_list1;	
 		break;
 			
 		case 2:
-			list = time_list2;
+			list = rest_list2;
 		break;
 		
 		case 3:
-			list = time_list3;
+			list = rest_list3;
 		break;
 
 		case 4:
-			list = time_list4;			
+			list = rest_list4;			
 		break;
 
 		default:
@@ -388,52 +446,412 @@ int Ariber_GetRestDayPermitList(struct tls_protocmd_token_t *tok,u8 *res_resp,CM
 
 	for(i=0;i<4;i++)
 	{	
-		for(j=0;j<4;j++)	
+		for(j=0;j<4;j++)		
 		{				
 			tmp = HexToBCD(*(*(list+i)+j)); 	
-			CharToAsc(tmp,res_resp);	
-			
-#if DEBUG_ON
+			CharToAsc(tmp,res_resp);		
+#if DEBUG_ON	
 			printf("%x %x ",*res_resp,*(res_resp+1));	
-#endif
+#endif	
 			res_resp = res_resp + 2;	
-		}	
+		}
 #if DEBUG_ON
 		printf("\n");
 #endif
 	}	
+
 		
-	return ASCII_LEN(GET_LIST_RTN_LEN);	
+	return ASCII_LEN(GET_REST_LIST_RTN_LEN);
 	
+}	
+
+
+
+int Ariber_GetAuthUserNum(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4A_HANDLE_T *cmd)
+{	
+	u16 user_num = 5;					
+	
+	u16ToAsc(user_num,res_resp);					
+		
+	return ASCII_LEN(GET_USER_NUM_RTN_LEN);	
+}		
+
+
+//在FLASH中读取卡库内的用户信息
+int Ariber_GetAuthUserInfo(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4A_HANDLE_T *cmd)
+{
+	u8 i,tmp;	
+	u16 user_num = 5;
+	static u16 user_cnt = 0;				
+
+	u8 card_ID[5] = {0,11,11,11,11};					
+	u8 user_ID[4] = {11,22,33,44};		
+	u8 user_pw[2] = {12,34};			
+	u8 user_life[4] = {20,15,3,12};					
+	u8 user_auth = 2;				
+
+	if(user_cnt<=user_num)		
+	{		
+		user_cnt++;
+		for(i=0;i<sizeof(card_ID);i++)
+		{			
+			CharToAsc(card_ID[i],res_resp);	
+			res_resp = res_resp + 2;
+		}
+		
+		for(i=0;i<sizeof(user_ID);i++)	
+		{	
+			tmp = HexToBCD(user_ID[i]);	 		
+			CharToAsc(tmp,res_resp);	
+			res_resp = res_resp + 2;
+		}	
+
+		for(i=0;i<sizeof(user_pw);i++)
+		{
+			tmp = HexToBCD(user_pw[i]);	 
+			CharToAsc(tmp,res_resp);
+			res_resp = res_resp + 2;	
+		}	
+
+		for(i=0;i<sizeof(user_life);i++)
+		{
+			tmp = HexToBCD(user_life[i]);	
+			CharToAsc(tmp,res_resp);	
+			res_resp = res_resp + 2;	
+		}
+
+		CharToAsc(user_auth,res_resp);		
+	}
+	else
+	{		
+		LOG_INFO("Get User Info Finish\n");	
+		return 	GET_FAILED_RTN_LEN;	
+	}
+
+	return ASCII_LEN(GET_USER_INFO_RTN_LEN);	
 }
 
 
 
+/*49命令执行的任务*/
+int Ariber_SetWorkDayPermitList(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x49_HANDLE_T *cmd)
+{	
+	u8 i,j,tmp;	
+	u8 list_num;
+	u8 (*list)[4];	
+	u8 k=0;	
 
+	list_num = tok->arg[2];
+	cmd->param_0xE1.list_num = list_num;					
 
+	LOG_INFO("The list_num %d\n",list_num);					
 
+	switch(list_num)
+	{	
+		case 1:
+	
+			for(i=0;i<4;i++)
+			{
+				for(j=0;j<4;j++)
+				{	
+					work_list1[i][j] = tok->arg[3+k];
+					k++;	
+				}
+			}
 
-int Ariber_SetWeekPermitList(struct tls_protocmd_token_t *tok,u8 *res_resp)
-{
-	return ASCII_LEN(SET_SUCCEED_RTN_LEN);
-}
+			list = work_list1;
+			
+		break;
 
-int Ariber_SetWorkDayPermitList(struct tls_protocmd_token_t *tok,u8 *res_resp)
-{
+		case 2:	
+
+			for(i=0;i<4;i++)
+			{
+				for(j=0;j<4;j++)
+				{			
+					work_list2[i][j] = tok->arg[3+k];
+					k++;
+				}
+			}
+
+			list = work_list2;
+
+		break;
+
+		case 3:
+
+			for(i=0;i<4;i++)
+			{
+				for(j=0;j<4;j++)
+				{	
+					work_list3[i][j] = tok->arg[3+k];
+					k++;
+				}
+			}
+
+			list = work_list3;	
+
+		break;
+
+		case 4:
+
+			for(i=0;i<4;i++)
+			{
+				for(j=0;j<4;j++)
+				{		
+					work_list4[i][j] = tok->arg[3+k];
+					k++;
+				}
+			}
+			
+			list = work_list4;
+
+		break;
+		
+		default:
+
+		break;	
+	}
+
+	cmd->param_0xE1.list = list;
+
+	LOG_INFO("Start \n"); 		
+
+#if DEBUG_ON	
+	for(i=0;i<4;i++)	
+	{		
+		for(j=0;j<4;j++)		
+		{						
+			tmp = HexToBCD(*(*(list+i)+j));			
+			printf("%d ",tmp);				
+		}		
+		printf("\n");	
+
+	}
+#endif	
+		
 	return ASCII_LEN(SET_SUCCEED_RTN_LEN);	
 }	
 
-int Ariber_SetRestDayPermitList(struct tls_protocmd_token_t *tok,u8 *res_resp)
+int Ariber_SetRestDayPermitList(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x49_HANDLE_T *cmd)
 {
+	u8 i,j,tmp;
+	u8 list_num;
+	u8 (*list)[4];	
+	u8 k=0;	
+
+	list_num = tok->arg[2];		
+	cmd->param_0xE2.list_num = list_num;	
+
+	switch(list_num)
+	{	
+		case 1:
+				
+			for(i=0;i<4;i++)
+			{
+				for(j=0;j<4;j++)
+				{			
+					rest_list1[i][j] = tok->arg[3+k];
+					k++;
+				}
+			}	
+
+			list = rest_list1;		
+			
+		break;
+
+		case 2:
+			
+			for(i=0;i<4;i++)
+			{
+				for(j=0;j<4;j++)
+				{			
+					rest_list2[i][j] = tok->arg[3+k];
+					k++;
+				}
+			}
+
+			list = rest_list2;	
+
+		break;
+
+		case 3:
+			
+			for(i=0;i<4;i++)
+			{
+				for(j=0;j<4;j++)
+				{		
+					rest_list3[i][j] = tok->arg[3+k];
+					k++;
+				}
+			}	
+
+			list = rest_list3;	
+
+		break;
+
+		case 4:
+			
+			for(i=0;i<4;i++)
+			{
+				for(j=0;j<4;j++)
+				{			
+					rest_list4[i][j] = tok->arg[3+k];
+					k++;
+				}
+			}	
+
+			list = rest_list4;	
+
+		break;
+		
+		default:
+
+		break;	
+	}
+
+	cmd->param_0xE1.list = list;	
+
+#if DEBUG_ON	
+	for(i=0;i<4;i++)		
+	{		
+		for(j=0;j<4;j++)		
+		{						
+			tmp = HexToBCD(*(*(list+i)+j));			
+			printf("%d ",tmp);				
+		}		
+		printf("\n");	
+
+	}
+#endif			
+
 	return ASCII_LEN(SET_SUCCEED_RTN_LEN);			
 }
 
 
 
+int Ariber_SetWeekPermitList(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x49_HANDLE_T *cmd)
+{
+	u8 i,j,tmp;		
+	u8 list_num,week_num;
+	u8 (*list)[4];	
+	u8 k=0;		
+
+	list_num = tok->arg[2];
+	cmd->param_0xF1.list_num = list_num;
+
+	week_num = tok->arg[3];	
+	cmd->param_0xF1.week_num = week_num;		
+
+	switch(week_num)	
+	{		
+		case 1:
+		case 2:
+		case 3:
+		case 4:
+		case 5:
+		case 6:
+		case 7:	
+			switch(list_num)
+			{			
+				case 1: 
+					for(i=0;i<6;i++)
+					{	
+						for(j=0;j<4;j++)
+						{				
+							Week_list1[i][j] = tok->arg[4+k];		
+							k++;	
+						}
+					}	
+				break;
+			
+				case 2:
+					for(i=0;i<6;i++)
+					{	
+						for(j=0;j<4;j++)
+						{		
+							Week_list2[i][j] = tok->arg[4+k];	
+							k++;
+						}
+					}	
+
+				break;
+				
+				case 3:
+					for(i=0;i<6;i++)
+					{	
+						for(j=0;j<4;j++)
+						{		
+							Week_list3[i][j] = tok->arg[4+k];	
+							k++;
+						}
+					}	
+
+				break;
+			
+				case 4:
+					for(i=0;i<6;i++)
+					{	
+						for(j=0;j<4;j++)
+						{				
+							Week_list4[i][j] = tok->arg[4+k];	
+							k++;
+						}
+					}	
+
+				break;
+			
+				default:	
+			
+				break;
+			}	
+		break;	
+
+		default:
+
+		break;	
+	}
+
+	cmd->param_0xE1.list = list;	
+
+#if DEBUG_ON	
+	for(i=0;i<6;i++)	
+	{			
+		for(j=0;j<4;j++)		
+		{								
+			tmp = HexToBCD(*(*(list+i)+j)); 		
+			printf("%d ",tmp);				
+		}		
+		
+		printf("\n");	
+		
+	}
+#endif	
+
+
+	return ASCII_LEN(SET_SUCCEED_RTN_LEN);
+}
+
+
+//授权选中的用户可以进行开门关门
+int Ariber_UserAuthorize(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x49_HANDLE_T *cmd)
+{	
+	
+	
+	return ASCII_LEN(SET_SUCCEED_RTN_LEN);
+}
+
+
+//删除选中用户的权限
+int Ariber_UserUnAuthorize(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x49_HANDLE_T *cmd)
+{
+		
+	
+	return ASCII_LEN(SET_SUCCEED_RTN_LEN);
+}
 
 
 //4B命令下的子命令
-
 
 //设置左右把手
 int Ariber_SetHandlePos(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4B_HANDLE_T *cmd)	
@@ -443,6 +861,8 @@ int Ariber_SetHandlePos(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4B_H
 	handle_pos[0] = tok->arg[2];//获取的第一个字节	
 	handle_pos[1] = tok->arg[3];//获取到把手的方向
 
+	cmd->param_0xE0.Handle_Pos[0] = handle_pos[0];
+	cmd->param_0xE0.Handle_Pos[0] = handle_pos[0];
 
 	if(handle_pos[1] == HANDLE_RIGHT)
 	{
@@ -581,7 +1001,7 @@ int Ariber_SetArmyingSta(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4B_
 	for(i=0;i<7;i++)
 	{	
 #if DEBUG_ON	
-		printf("%x ",LianDong[i]);	
+		printf("%x ",LianDong[i]);		
 #endif
 	}
 	
@@ -712,9 +1132,9 @@ int Ariber_GetArmyParam(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4C_H
 	u16 Arming_Time = 6;	
 
 	u16ToAsc(Army_Type,res_resp);					
-	res_resp = res_resp + 4;	
+	res_resp = res_resp + 4;	  
 	
-	u16ToAsc(Arming_Time,res_resp);
+	u16ToAsc(Arming_Time,res_resp);	
 	
 	return ASCII_LEN(GET_ARMY_PARAM_RTN_LEN);			
 }
@@ -857,7 +1277,7 @@ int Ariber_GetSwitchConfig(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4
 		
 		Sw_In_Param[i].rele_sta	= 2;			
 		CharToAsc(Sw_In_Param[i].rele_sta,res_resp);	 	
-		res_resp = res_resp +2;		
+		res_resp = res_resp +2;								
 	}
 
 	resp_len = Sw_In_Num*3+1;
@@ -902,7 +1322,6 @@ int Ariber_GetSwitchConfig(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4
 int Ariber_GetArmyConfigParam(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4C_HANDLE_T *cmd)	
 {
 	
-	
 	return ASCII_LEN(GET_ARMY_CONFIG_RTN_LEN);		
 }
 
@@ -910,7 +1329,7 @@ int Ariber_GetArmyConfigParam(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_
 //读取flash id
 int Ariber_GetFlashID(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4C_HANDLE_T *cmd)	
 {			
-	u8 Flash_ID = 0x4A;		
+	u8 Flash_ID = 0x8E;							
 
 	cmd->param_0xED.Flash_ID = Flash_ID;
 	
@@ -922,14 +1341,12 @@ int Ariber_GetFlashID(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4C_HAN
 
 //读取门禁对应日志
 int Ariber_GetDoorLog(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4C_HANDLE_T *cmd)	
-{
+{	
 	u8 MainCmd,ViceCmd;
-
+	
 	//获取主命令和副命令
 	MainCmd = tok->arg[2];
 	ViceCmd = tok->arg[3];
-
-	
 
 	switch(MainCmd)
 	{
@@ -938,7 +1355,7 @@ int Ariber_GetDoorLog(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4C_HAN
 			switch(ViceCmd)
 			{			
 				case 1:
-
+					
 					LOG_INFO("Add_Card_OPT\n");
 					
 				break;

@@ -29,20 +29,16 @@ static int post_protocmd_get_time_proc(struct tls_protocmd_token_t *tok,
 		LOG_INFO("cmd_group error\n");		
 		return RTN_UNVALID_DATA;			
 	}
-	
+		
 	switch(cmd_type)
 	{		
-		case CMD_0x4D_GET_DATE:		
-								
-			*res_len = Ariber_GetSysTime(res_resp);	
-			
-			return RTN_NORMAL;
+		case CMD_0x4D_GET_DATE:					
 				
 			break;	
 
 		default:
 		
-			break;
+			break;	
 	}
 	
 	return RTN_UNVALID_DATA;
@@ -157,11 +153,10 @@ static int post_protocmd_remote_proc(struct tls_protocmd_token_t *tok,
 static int post_protocmd_get_ariber_ver_proc(struct tls_protocmd_token_t *tok,
         char *res_resp, u32 *res_len)
 {
-	
 	*res_len = Ariber_GetDeviceInfo(res_resp);		
 	
 	return RTN_NORMAL;
-}
+}	
 
 
 static int post_protocmd_set_baudrate_proc(struct tls_protocmd_token_t *tok,
@@ -219,7 +214,7 @@ static int post_protocmd_authority_confirm_proc(struct tls_protocmd_token_t *tok
 
 			LOG_INFO(" CMD:0x48 Type:Set Date\n");	
 			
-			Ariber_GetAuthority(tok,res_resp,res_len,cmd);
+			*res_len = Ariber_GetAuthority(tok,res_resp,cmd);
 			
 			break;	
 
@@ -227,7 +222,7 @@ static int post_protocmd_authority_confirm_proc(struct tls_protocmd_token_t *tok
 
 			LOG_INFO(" CMD:0x48 Type:Delete Author\n");
 
-			Ariber_CancelConfirm(cmd);		
+			*res_len = Ariber_CancelConfirm(cmd);		
 		
 			break;
 
@@ -235,7 +230,7 @@ static int post_protocmd_authority_confirm_proc(struct tls_protocmd_token_t *tok
 
 			LOG_INFO(" CMD:0x48 Type:Change Password\n");
 
-			Ariber_ModifyPassword(tok,res_resp,res_len,cmd);			
+			*res_len = Ariber_ModifyPassword(tok,res_resp,cmd);			
 		
 			break;
 
@@ -261,7 +256,7 @@ static int post_protocmd_set_sys_param_proc(struct tls_protocmd_token_t *tok,
 	if(cmd_group != 0xF1)
 	{	
 		return RTN_UNKNOW_CMD;
-	}
+	}	
 	
 	switch(cmd_type)
 	{	
@@ -269,37 +264,47 @@ static int post_protocmd_set_sys_param_proc(struct tls_protocmd_token_t *tok,
 
 			LOG_INFO("CMD_0x49_SET_WORK_DAY_IN\n");	
 
-			*res_len = Ariber_SetSysTime(tok,res_resp,cmd);			
+			*res_len = Ariber_SetModuleDate(tok,res_resp,cmd);			
 			
 			break;	
 
 		case CMD_0x49_SET_WORK_DAY_IN:
 		
-			LOG_INFO("CMD_0x49_SET_WORK_DAY_IN\n");					
+			LOG_INFO("CMD_0x49_SET_WORK_DAY_IN\n");		
+
+			*res_len = Ariber_SetWorkDayPermitList(tok,res_resp,cmd);	
 			
 			break;
 
 		case CMD_0x49_SET_REST_DAY_IN:
 	
 			LOG_INFO("CMD_0x49_SET_REST_DAY_IN\n");			
-			
+
+			*res_len = Ariber_SetRestDayPermitList(tok,res_resp,cmd);	
+					
 			break;	
 	
 		case CMD_0x49_SET_WEEK_AUTH_IN:
 	
-			LOG_INFO("CMD_0x49_SET_WEEK_AUTH_IN\n");		
+			LOG_INFO("CMD_0x49_SET_WEEK_AUTH_IN\n");	
+
+			*res_len = Ariber_SetWeekPermitList(tok,res_resp,cmd);
 			
 			break;	
 
 		case CMD_0x49_USER_AUTHORIZE:
 	
-			LOG_INFO("CMD_0x49_USER_AUTHORIZE\n");		
+			LOG_INFO("CMD_0x49_USER_AUTHORIZE\n");	
+
+			*res_len = Ariber_UserAuthorize(tok,res_resp,cmd);
 			
 			break;
 
 		case CMD_0x49_USER_UNAUTHORIZE:		
 	
-			LOG_INFO("CMD_0x49_USER_UNAUTHORIZE\n");		
+			LOG_INFO("CMD_0x49_USER_UNAUTHORIZE\n");	
+
+			*res_len = Ariber_UserUnAuthorize(tok,res_resp,cmd);		
 			
 			break;
 			
@@ -349,9 +354,8 @@ static int post_protocmd_set_sys_param_proc(struct tls_protocmd_token_t *tok,
 
 
 
-static int post_protocmd_get_sys_param_proc(struct tls_protocmd_token_t *tok,
-        char *res_resp, u32 *res_len)
-{
+static int post_protocmd_get_sys_param_proc(struct tls_protocmd_token_t *tok,char *res_resp, u32 *res_len)
+{	
 	CMD_0x4A_HANDLE_T *cmd = &CMD_0x4A;
 	u8 cmd_group = tok->arg[0];
 	u8 cmd_type  = tok->arg[1];
@@ -359,11 +363,27 @@ static int post_protocmd_get_sys_param_proc(struct tls_protocmd_token_t *tok,
 	if(cmd_group != 0xF2)
 	{	
 		LOG_INFO("cmd_group error\n");		
-		return RTN_UNKNOW_CMD;	
-	}
+		return RTN_UNKNOW_CMD;		
+	}		
 		
 	switch(cmd_type)
 	{	
+		case CMD_0x4A_GET_MODULE_DATE:	
+				
+			LOG_INFO("CMD_0x4A_GET_MODULE_DATE\n");	
+			
+			cmd->param_0xE0.year = CMD_0x49.param_0xE0.year;	
+			cmd->param_0xE0.month = CMD_0x49.param_0xE0.month;
+			cmd->param_0xE0.day = CMD_0x49.param_0xE0.day;
+			cmd->param_0xE0.week = CMD_0x49.param_0xE0.week;
+			cmd->param_0xE0.hour = CMD_0x49.param_0xE0.hour;
+			cmd->param_0xE0.min = CMD_0x49.param_0xE0.min;	
+			cmd->param_0xE0.sec = CMD_0x49.param_0xE0.sec;		
+				
+			*res_len = Ariber_GetModuleDate(tok,res_resp,cmd);				
+			
+			break;
+	
 		case CMD_0x4A_GET_WORK_DAY_IN:		
 
 			LOG_INFO("CMD_0x4A_GET_WORK_DAY_IN\n");				
@@ -374,15 +394,46 @@ static int post_protocmd_get_sys_param_proc(struct tls_protocmd_token_t *tok,
 
 		case CMD_0x4A_GET_REST_DAY_IN:			
 			
-			LOG_INFO("CMD_0x4A_GET_REST_DAY_IN\n");	
+			LOG_INFO("CMD_0x4A_GET_REST_DAY_IN\n");		
 			
 			*res_len = Ariber_GetRestDayPermitList(tok,res_resp,cmd);	
 			
 			break;
 
-		case CMD_0x4A_GET_WEEK_IN:				
+		case CMD_0x4A_GET_AUTH_USER_INFO:			
 			
-			LOG_INFO("CMD_0x4A_GET_WEEK_IN\n");		
+			LOG_INFO("CMD_0x4A_GET_AUTH_USER_INFO\n");		
+
+			*res_len = Ariber_GetAuthUserNum(tok,res_resp,cmd);	
+			
+			break;
+
+		case CMD_0x4A_GET_POINT_USER:			
+			
+			LOG_INFO("CMD_0x4A_GET_POINT_USER\n");	
+
+			*res_len = Ariber_GetAuthUserInfo(tok,res_resp,cmd);	
+			
+			break;
+
+		case CMD_0x4A_GET_REST_OF_WEEK:			
+			
+			LOG_INFO("CMD_0x4A_GET_REST_OF_WEEK\n");		
+			
+			
+			
+			break;
+
+		case CMD_0x4A_GET_HOLIDAY:				
+			
+			LOG_INFO("CMD_0x4A_GET_HOLIDAY\n");		
+			
+			
+			break;
+
+		case CMD_0x4A_GET_WEEK_IN:					
+			
+			LOG_INFO("CMD_0x4A_GET_WEEK_IN\n");			
 			
 			*res_len = Ariber_GetWeekPermitList(tok,res_resp,cmd);		
 			
@@ -418,7 +469,7 @@ static int post_protocmd_set_guard_param_proc(struct tls_protocmd_token_t *tok,
 			LOG_INFO("CMD_0x4B_SET_VOICE_MARK\n");		
 
 			*res_len = Ariber_SetHandlePos(tok,res_resp,cmd);
-
+			
 			break;
 
 		case CMD_0x4B_SET_CARD_BIT:			
@@ -586,7 +637,7 @@ static int post_protocmd_get_guard_param_proc(struct tls_protocmd_token_t *tok,
 			LOG_INFO("CMD_0x4C_ARMY_PARAM\n");
 
 			*res_len = Ariber_GetArmyConfigParam(tok,res_resp,cmd);	
-
+			
 			break;	
 	
 		case CMD_0x4C_GET_USER_PWD:			
@@ -1055,9 +1106,15 @@ void post_protocol_deal(void)
 
 
 	
-void tls_protocol_init(void)	
+void tls_protocol_init(void)		
 {
-
+	CMD_0x49.param_0xE0.year = 2015;	
+	CMD_0x49.param_0xE0.month = 1;
+	CMD_0x49.param_0xE0.day = 1;
+	CMD_0x49.param_0xE0.week = 1;
+	CMD_0x49.param_0xE0.hour = 1;
+	CMD_0x49.param_0xE0.min = 1;	
+	CMD_0x49.param_0xE0.sec = 1;		
 		
 }
 

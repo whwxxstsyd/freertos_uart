@@ -87,3 +87,16 @@ uart_send_tx_msg_callback在以下函数中被调用
 
 
 
+
+
+
+
+
+
+
+
+//这两个函数内部有大小端置换的嫌疑
+Ariber_GetArmyParam()
+Ariber_GetAlarmParam()
+
+

@@ -44,13 +44,13 @@ static void tls_card_dev_open(u32 card_dev)
 	tls_card_dev_t *card;
 
 	if(card_dev == CARD_READ_DEV1)
-	{		
-		card = &card_st[0];	
+	{			
+		card = &card_st[0];		
 		memset(card,0,sizeof(tls_card_dev_t));		
 		
 		tls_card_rev_register(card_dev,tls_card_dev1_rev_cb);
 			
-		xTaskCreate(tls_card_dev1_task, 	
+		xTaskCreate(tls_card_dev1_task, 		
 					CARD_DEV1_TASK_NAME, 			
 					CARD_DEV1_TASK_STACKSIZE, 
 					card,						

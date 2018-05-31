@@ -16,7 +16,7 @@ void Device_Info_Default(void)
 	{
 		Device_Info.Device_Addr[i] = DEVICE_ADDR_DEFAULT + i;	
 	}		
-		
+	
 	Device_Info.SoftWare_Ver = SOFTWARE_VERSION;
 	Device_Info.HardWare_Ver = HARDWARE_VERSION;
 	Device_Info.Company_Name = COMPANY_NAME;
