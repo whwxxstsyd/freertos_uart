@@ -1,9 +1,6 @@
----- Ariber_GetAuthUserInfo Matches (8 in 4 files) ----
-LED.htm (e:\doorgate\obj):<LI><a href="#[1f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Ariber_GetAuthUserInfo
-LED.htm (e:\doorgate\obj):<LI><a href="#[1f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Ariber_GetAuthUserInfo
-LED.htm (e:\doorgate\obj):<P><STRONG><a name="[1f8]"></a>Ariber_GetAuthUserInfo</STRONG> (Thumb, 176 bytes, Stack size 48 bytes, protocolbase.o(.text))
-LED.htm (e:\doorgate\obj):<BR><BR>[Stack]<UL><LI>Max Depth = 60<LI>Call Chain = Ariber_GetAuthUserInfo &rArr; CharToAsc
-LED.htm (e:\doorgate\obj):<LI><a href="#[1f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Ariber_GetAuthUserInfo
-Protocol.c (e:\doorgate\protocal):			*res_len = Ariber_GetAuthUserInfo(tok,res_resp,cmd);	
-ProtocolBase.c (e:\doorgate\protocal):int Ariber_GetAuthUserInfo(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4A_HANDLE_T *cmd)
-ProtocolBase.h (e:\doorgate\protocal):int Ariber_GetAuthUserInfo(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4A_HANDLE_T *cmd);
+---- card_ID Matches (5 in 3 files) ----
+CardLibrary.c (e:\doorgate\card):	user_info.card_ID[4] = {11,11,11,11};						
+CardLibrary.h (e:\doorgate\card):	u8 card_ID[4];						
+ProtocolBase.c (e:\doorgate\protocal):	u8 card_ID[4] = {11,11,11,11};					
+ProtocolBase.c (e:\doorgate\protocal):		for(i=0;i<sizeof(card_ID);i++)
+ProtocolBase.c (e:\doorgate\protocal):			CharToAsc(card_ID[i],res_resp);	

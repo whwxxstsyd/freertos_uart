@@ -196,7 +196,7 @@ void SPI_Flash_Write(u8* pBuffer,u32 WriteAddr,u16 NumByteToWrite)
 		SPI1_ReadWriteByte((u8)WriteAddr); 	 
 
 	    for(i=0;i<NumByteToWrite;i++)
-		{ 	
+		{ 		
 			SPI1_ReadWriteByte(pBuffer[i]);   //循环读数  
 	    }
 	}
@@ -248,7 +248,7 @@ void SPI_Flash_Erase_Sector(u32 Dst_Addr)
     SPI_FLASH_Write_Enable();                  //SET WEL 	 
     SPI_Flash_Wait_Busy();   	
   	SPI_FLASH_CS=0;                            //使能器件   
-    SPI1_ReadWriteByte(SE);      //发送扇区擦除指令 
+    SPI1_ReadWriteByte(SE);      				//发送扇区擦除指令 
     SPI1_ReadWriteByte((u8)((Dst_Addr)>>16));  //发送24bit地址    
     SPI1_ReadWriteByte((u8)((Dst_Addr)>>8));   	
     SPI1_ReadWriteByte((u8)Dst_Addr);  
@@ -278,7 +278,17 @@ void SPI_Flash_Global_Block_Unlock( void )
 
 
 
+/*
 
+	注意:
+	
+		Flash 的编程原理都是只能将 1 写为 0，
+	而不能将 0 写为 1。所以在 Flash 编程之前，
+	必须将对应的块擦除，
+	而擦除的过程就是把所有位都写为 1 的过程，
+	块内的所有字节变为 0xFF。
+	
+*/
 
 
 

@@ -1,9 +1,12 @@
 #include <string.h>	
+
 #include "ProtocolBase.h"
-#include "param.h"		
 #include "param_base.h"	
 #include "BasicFunc.h"
-#include "debug.h"	
+#include "param.h"		
+
+#include "CardLibrary.h"	
+#include "debug.h"		
 #include "led.h"	
 	
 
@@ -468,10 +471,10 @@ int Ariber_GetRestDayPermitList(struct tls_protocmd_token_t *tok,u8 *res_resp,CM
 
 
 int Ariber_GetAuthUserNum(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4A_HANDLE_T *cmd)
-{	
-	u16 user_num = 5;					
-	
-	u16ToAsc(user_num,res_resp);					
+{		
+	u16 user_num = CardLib_UserNum_Read();					
+		
+	u16ToAsc(user_num,res_resp);							
 		
 	return ASCII_LEN(GET_USER_NUM_RTN_LEN);	
 }		
@@ -481,17 +484,18 @@ int Ariber_GetAuthUserNum(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4A
 int Ariber_GetAuthUserInfo(struct tls_protocmd_token_t *tok,u8 *res_resp,CMD_0x4A_HANDLE_T *cmd)
 {
 	u8 i,tmp;	
-	u16 user_num = 5;
-	static u16 user_cnt = 0;				
-
-	u8 card_ID[5] = {0,11,11,11,11};					
+	static u16 user_cnt = 0;	
+	UserCardInfo_T user_info;
+	u16 user_num = CardLib_UserNum_Read();		
+			
+	u8 card_ID[4] = {11,11,11,11};					
 	u8 user_ID[4] = {11,22,33,44};		
-	u8 user_pw[2] = {12,34};			
+	u8 user_pw[2] = {12,34};
 	u8 user_life[4] = {20,15,3,12};					
-	u8 user_auth = 2;				
+	u8 user_auth = 2;					
 
 	if(user_cnt<=user_num)		
-	{		
+	{			
 		user_cnt++;
 		for(i=0;i<sizeof(card_ID);i++)
 		{			

@@ -400,17 +400,17 @@ static int post_protocmd_get_sys_param_proc(struct tls_protocmd_token_t *tok,cha
 			
 			break;
 
-		case CMD_0x4A_GET_AUTH_USER_INFO:			
+		case CMD_0x4A_GET_USER_NUM:			
 			
-			LOG_INFO("CMD_0x4A_GET_AUTH_USER_INFO\n");		
-
+			LOG_INFO("CMD_0x4A_GET_USER_NUM\n");		
+			
 			*res_len = Ariber_GetAuthUserNum(tok,res_resp,cmd);	
 			
 			break;
 
-		case CMD_0x4A_GET_POINT_USER:			
-			
-			LOG_INFO("CMD_0x4A_GET_POINT_USER\n");	
+		case CMD_0x4A_GET_USER_INFO:					
+				
+			LOG_INFO("CMD_0x4A_GET_USER_INFO\n");	
 
 			*res_len = Ariber_GetAuthUserInfo(tok,res_resp,cmd);	
 			
@@ -1108,13 +1108,45 @@ void post_protocol_deal(void)
 	
 void tls_protocol_init(void)		
 {
+	//48√¸¡Ó
+	CMD_0x48.param_0xE0.i = 0;
+	CMD_0x48.param_0xE1.i = 0;
+	CMD_0x48.param_0xE2.i = 0;	
+
+	//49√¸¡Ó
 	CMD_0x49.param_0xE0.year = 2015;	
 	CMD_0x49.param_0xE0.month = 1;
 	CMD_0x49.param_0xE0.day = 1;
 	CMD_0x49.param_0xE0.week = 1;
 	CMD_0x49.param_0xE0.hour = 1;
 	CMD_0x49.param_0xE0.min = 1;	
-	CMD_0x49.param_0xE0.sec = 1;		
+	CMD_0x49.param_0xE0.sec = 1;	
+
+	CMD_0x49.param_0xE1.list_num = 0;	
+	CMD_0x49.param_0xE1.list = {0,0,0,0};	
+
+	CMD_0x49.param_0xE2.list_num = 0;	
+	CMD_0x49.param_0xE2.list = {0,0,0,0};	
+
+	CMD_0x49.param_0xE3.i = 0;	
+	CMD_0x49.param_0xE4.i = 0;	
+	CMD_0x49.param_0xEA.i = 0;	
+	CMD_0x49.param_0xEB.i = 0;	
+	CMD_0x49.param_0xEC.i = 0;
+	CMD_0x49.param_0xED.i = 0;
+	CMD_0x49.param_0xF0.i = 0;
+
+	CMD_0x49.param_0xF1.list_num = 0;
+	CMD_0x49.param_0xF1.week_num = 0;
+	CMD_0x49.param_0xF1.list = {0,0,0,0};		
+	
+	CMD_0x49.param_0xFC.i = 0;
+
+	//4A√¸¡Ó
+
+	//4B√¸¡Ó		
+
+	//4C√¸¡Ó	
 		
 }
 

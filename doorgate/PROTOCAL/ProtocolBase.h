@@ -225,8 +225,8 @@ typedef struct CMD_0x49_HANDLE{
 #define CMD_0x4A_GET_MODULE_DATE 		0xE0		
 #define CMD_0x4A_GET_WORK_DAY_IN 		0xE3		
 #define CMD_0x4A_GET_REST_DAY_IN 		0xE4
-#define CMD_0x4A_GET_AUTH_USER_INFO 	0xE5	
-#define CMD_0x4A_GET_POINT_USER		0xE6	
+#define CMD_0x4A_GET_USER_NUM 			0xE5	
+#define CMD_0x4A_GET_USER_INFO			0xE6	
 #define CMD_0x4A_GET_REST_OF_WEEK 	0xE9
 #define CMD_0x4A_GET_HOLIDAY 			0xEA
 #define CMD_0x4A_GET_WEEK_IN 			0xEB		
@@ -253,7 +253,7 @@ typedef struct CMD_0x4A_0xE4_PARAM{
 }CMD_0x4A_0xE4_PARAM_T;
 
 typedef struct CMD_0x4A_0xE5_PARAM{
-	u8 i;
+	u16 user_num;
 }CMD_0x4A_0xE5_PARAM_T;
 
 typedef struct CMD_0x4A_0xE6_PARAM{
