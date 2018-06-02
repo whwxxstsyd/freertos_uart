@@ -100,3 +100,8 @@ Ariber_GetArmyParam()
 Ariber_GetAlarmParam()
 
 
+
+
+//flash´æ´¢£¬hash¹ØÏµ
+https://blog.csdn.net/u011855647/article/details/62215255
+

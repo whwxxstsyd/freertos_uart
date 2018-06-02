@@ -114,7 +114,7 @@ void add_card( card_t *card, int size )
 		printf("Card list is full.\n");
 		return;
 	}
-
+	
 	/*This loop finds the next empty card slot/s from the card array*/
 	int i;
 	for( i = 0; i < MAX_CARDLIST_SIZE; ++i )
@@ -194,7 +194,8 @@ inputs:
 outputs:
 - int ID
 *******************************************************************************/
-int get_ID(){
+int get_ID(void)		
+{	
 	static int ID;	
 	return ++ID;
 }
@@ -237,7 +238,7 @@ card_t make_card(long long int cardnumber,int month,int year,int ID)
 
 
 
-
+	
 
 void CardLib_Test(void)
 {
@@ -334,4 +335,7 @@ int scan_unsigned_int(u16* u)
 	return 1;
 }
 
-	
+
+
+
+
