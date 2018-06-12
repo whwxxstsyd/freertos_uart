@@ -1,8 +1,11 @@
-#include "hashtable.h"
+#include <stdio.h>
 #include <assert.h>
 #include <string.h>
-#include <hash.h>
-#include <stdio.h>
+
+#include "hash.h"
+#include "hashtable.h"
+
+
 
 int InitHashTable(hashdata*** HashTable,int size)
 {	
@@ -177,3 +180,13 @@ void PrintHashTable(hashdata* HashTable[],int size)
 		printf("\n");
 	}
 }
+
+
+
+
+
+
+
+
+
+

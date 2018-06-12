@@ -43,6 +43,41 @@ typedef struct{
 }card_t;
 
 
+
+
+
+
+
+
+
+// Ìí¼Ó×÷ÎªHASH´æ´¢²âÊÔ
+#define CSN_LEN							5
+#define TIME_LEN						8
+#define RD_CODE_LEN						(19+1)
+#define PWD_LEN							(12+1)
+	
+
+typedef struct _HASH_CDINFO
+{	
+	u8 CSN[CSN_LEN];
+	u8 CardType;
+	char RdNum[RD_CODE_LEN];
+	char UlkPwd[PWD_LEN];	
+	u8 CardStatus;	
+	WORD GateNumber;
+	u8 CardMode;
+	u8 UnlockTimeSliceID;
+	u8 ValidStartTime[TIME_LEN];
+	u8 ValidEndTime[TIME_LEN];
+	u8 bAdmin;	
+	u8 Reserved[19];
+}CDINFO;	
+
+
+
+
+
+
 void CardLib_Init();
 
 void CardLib_Clear();	
