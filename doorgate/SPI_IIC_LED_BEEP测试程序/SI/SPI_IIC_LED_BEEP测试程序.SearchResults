@@ -1,0 +1,4 @@
+---- UartVarInit Matches (3 in 1 files) ----
+Bsp_uart_fifo.c (e:\doorgate\spi_iic_led_beep测试程序\hardware\bsp):static void UartVarInit(void);
+Bsp_uart_fifo.c (e:\doorgate\spi_iic_led_beep测试程序\hardware\bsp):	UartVarInit();		/* 必须先初始化全局变量,再配置硬件 */
+Bsp_uart_fifo.c (e:\doorgate\spi_iic_led_beep测试程序\hardware\bsp):static void UartVarInit(void)

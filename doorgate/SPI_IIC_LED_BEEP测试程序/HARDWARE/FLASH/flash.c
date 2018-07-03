@@ -77,19 +77,19 @@ void SPI_FLASH_Write_Disable(void)
 	SPI_FLASH_CS=1;                            //取消片选     	      
 } 			    
 //读取芯片ID W25X16的ID:0XEF14
-u8 *SPI_Flash_ReadID(void)
-{		
+u8 SPI_Flash_ReadID(void)
+{			
 	u8 partialInfo[3];
 		  		
-	SPI_FLASH_CS=0;				    
+	SPI_FLASH_CS=0;				  	  
 	SPI1_ReadWriteByte(JEDECID);//发送读取ID命令	     	 			   
 	partialInfo[0] = SPI1_ReadWriteByte(0xFF);  	
 	partialInfo[1] = SPI1_ReadWriteByte(0xFF);	 
 	partialInfo[2] = SPI1_ReadWriteByte(0xFF);	 	
 	SPI_FLASH_CS=1;				
-	
-	return partialInfo;				
-}   		    
+			
+	return partialInfo[1];						
+}   		    	
 //读取SPI FLASH  
 //在指定地址开始读取指定长度的数据
 //pBuffer:数据存储区
@@ -156,7 +156,8 @@ void SPI_Flash_Write(u8* pBuffer,u32 WriteAddr,u16 NumByteToWrite)
 	SPI_FLASH_Write_Enable();
 
 	SPI_FLASH_CS=0; 
-	SPI1_ReadWriteByte(PP);	
+	
+	SPI1_ReadWriteByte(PP);		
 	
 	if( NumByteToWrite <= FLASH_PAGE_SIZE)	
 	{
@@ -236,7 +237,7 @@ void SPI_Flash_Global_Block_Unlock( void )
 {	
     SPI_FLASH_Write_Enable();
     SPI_FLASH_CS=0; 
-    SPI1_ReadWriteByte( ULBPR );	
+    SPI1_ReadWriteByte(ULBPR);		
     SPI_FLASH_CS=1; 			
 
     return;

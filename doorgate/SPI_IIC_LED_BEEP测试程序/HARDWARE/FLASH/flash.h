@@ -91,21 +91,18 @@
 #define START_PAGE_ADDRESS      0x010000
 #define END_PAGE_ADDRESS        0x7FFFFF
 #define FLASH_PAGE_SIZE         256
-
-
-
-
-
-
-
+	
+#define SST26_CE_CLR	GPIO_ResetBits(GPIOA,GPIO_Pin_4)			
+#define SST26_CE_SET	GPIO_SetBits(GPIOA,GPIO_Pin_4)	
+		
 
 #define FLASH_2_CS PAout(4)	
 #define	FLASH_2_WP PCout(4)
 	
 
-	
+		
 void SPI_Flash_Init(void);	
-u8  *SPI_Flash_ReadID(void);  	    //¶ÁÈ¡FLASH ID
+u8  SPI_Flash_ReadID(void);  	    //¶ÁÈ¡FLASH ID
 u8	SPI_Flash_ReadSR(void);        //¶ÁÈ¡×´Ì¬¼Ä´æÆ÷ 
 void SPI_FLASH_Write_SR(u8 sr);  	//Ð´×´Ì¬¼Ä´æÆ÷
 void SPI_FLASH_Write_Enable(void);  //Ð´Ê¹ÄÜ 

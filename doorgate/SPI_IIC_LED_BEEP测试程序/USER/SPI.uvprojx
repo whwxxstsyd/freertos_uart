@@ -332,7 +332,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F10X_HD,USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\HARDWARE\LED;..\SYSTEM\delay;..\SYSTEM\sys;..\USER;..\STM32F10x_FWLib\inc;..\CORE;..\HARDWARE\FLASH;..\HARDWARE\SPI;..\HARDWARE\KEY;..\SYSTEM\usart;..\HARDWARE\24CXX_New;..\HARDWARE\SD2068;..\HARDWARE\BEEP</IncludePath>
+              <IncludePath>..\HARDWARE\LED;..\SYSTEM\delay;..\SYSTEM\sys;..\USER;..\STM32F10x_FWLib\inc;..\CORE;..\HARDWARE\FLASH;..\HARDWARE\SPI;..\HARDWARE\KEY;..\SYSTEM\usart;..\HARDWARE\24CXX_New;..\HARDWARE\SD2068;..\HARDWARE\BEEP;..\HARDWARE\SST26</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -434,6 +434,11 @@
               <FileName>beep.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\HARDWARE\BEEP\beep.c</FilePath>
+            </File>
+            <File>
+              <FileName>sst26vf032b.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\SST26\sst26vf032b.c</FilePath>
             </File>
           </Files>
         </Group>

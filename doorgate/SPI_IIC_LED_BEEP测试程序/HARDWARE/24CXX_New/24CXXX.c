@@ -27,7 +27,7 @@ void _24CXXX_init(void)
 	_24CXXX_WR_DIS();  //wp引脚输出为高
 	HardAddr = 0x0000;
 }
-
+ 
 
 //地址处理函数，主要处理多芯片时，对于地址的处理
 #if DEV_24CXX_MODLE == _24C1024
