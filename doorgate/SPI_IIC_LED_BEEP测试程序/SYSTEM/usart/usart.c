@@ -58,6 +58,9 @@ int fputc(int ch, FILE *f)
 }
 #endif 
 
+
+static void RS485_InitTXE(void);
+	
  	
 void uart_init(u32 bound)
 {
@@ -66,48 +69,73 @@ void uart_init(u32 bound)
 	USART_InitTypeDef USART_InitStructure;
 	NVIC_InitTypeDef NVIC_InitStructure;
 
-	RCC_APB2PeriphClockCmd(RCC_APB1Periph_USART3|RCC_APB2Periph_GPIOD, ENABLE);	//使能USART1，GPIOA时钟
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_AFIO, ENABLE);
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);	
 
-	//USART1_TX   GPIOA.9
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8; //PA.9
+	/* 第2步：将USART Tx的GPIO配置为推挽复用模式 */
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;	//复用推挽输出
-	GPIO_Init(GPIOA, &GPIO_InitStructure);//初始化GPIOA.9
+	GPIO_Init(GPIOA, &GPIO_InitStructure);
+	
+	/* 第3步：将USART Rx的GPIO配置为浮空输入模式
+		由于CPU复位后，GPIO缺省都是浮空输入模式，因此下面这个步骤不是必须的
+		但是，我还是建议加上便于阅读，并且防止其它地方修改了这个口线的设置参数
+	*/
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+	GPIO_Init(GPIOA, &GPIO_InitStructure);	
 
-	//USART1_RX	  GPIOA.10初始化
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9;//PA10
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;//浮空输入
-	GPIO_Init(GPIOA, &GPIO_InitStructure);//初始化GPIOA.10  
-
-	//Usart1 NVIC 配置	
-	NVIC_InitStructure.NVIC_IRQChannel = USART3_IRQn;	
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority=3 ;//抢占优先级3
+	
+	//Usart1 NVIC 配置			
+	NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;	
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0 ;//抢占优先级3
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;		//子优先级3
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;			//IRQ通道使能
 	NVIC_Init(&NVIC_InitStructure);	//根据指定的参数初始化VIC寄存器
-
+	
 	//USART 初始化设置
-
 	USART_InitStructure.USART_BaudRate = bound;//串口波特率
 	USART_InitStructure.USART_WordLength = USART_WordLength_8b;//字长为8位数据格式
 	USART_InitStructure.USART_StopBits = USART_StopBits_1;//一个停止位
 	USART_InitStructure.USART_Parity = USART_Parity_No;//无奇偶校验位
 	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;//无硬件数据流控制
 	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;	//收发模式
+		
+	USART_Init(USART1, &USART_InitStructure); //初始化串口1
+	USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);//开启串口接受中断
+	USART_ITConfig(USART1, USART_IT_IDLE, ENABLE);   //使能串口接收完成中断
+	USART_Cmd(USART1, ENABLE);                    //使能串口1 
 
-	USART_Init(USART3, &USART_InitStructure); //初始化串口1
-	USART_ITConfig(USART3, USART_IT_RXNE, ENABLE);//开启串口接受中断
-	USART_ITConfig(USART3, USART_IT_IDLE, ENABLE);   //使能串口接收完成中断
-	USART_Cmd(USART3, ENABLE);                    //使能串口1 
+		
+	RS485_InitTXE();
 	
 }
+
+
+
+
+
+
+static void RS485_InitTXE(void)
+{	
+	GPIO_InitTypeDef GPIO_InitStructure;
+
+	RCC_APB2PeriphClockCmd(RCC_RS485_TXEN, ENABLE);	/* 打开GPIO时钟 */
+		
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;	/* 推挽输出模式 */
+	GPIO_InitStructure.GPIO_Pin = PIN_RS485_TXEN;	
+	GPIO_Init(PORT_RS485_TXEN, &GPIO_InitStructure);						
+}
+
 
 
 //接收缓冲,最大USART_REC_LEN个字节.
 UART_REC gUart3Rec;	
 
 void USART3_IRQHandler(void)                	//串口1中断服务程序
-{
+{	
 	if(USART_GetITStatus(USART3,USART_IT_RXNE) !=RESET)
 	{			
 		gUart3Rec.USART_RX_BUF[gUart3Rec.Len_Count++] = USART_ReceiveData(USART3);
@@ -125,6 +153,18 @@ void USART3_IRQHandler(void)                	//串口1中断服务程序
 UART_REC *Get_Usart(void)
 {
 	return &gUart3Rec;	
+}
+
+
+void USART_Send(uint8_t *Buffer, uint32_t Length)
+{
+	while(Length != 0)
+	{	
+		while(!((USART1->SR)&(1<<7)));
+		USART1->DR = *Buffer;		
+		Buffer++;
+		Length--;
+	}
 }
 
 

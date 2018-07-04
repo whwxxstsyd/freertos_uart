@@ -41,6 +41,10 @@
 ..\obj\main.o: ..\HARDWARE\SD2068\calendar.h
 ..\obj\main.o: ..\HARDWARE\BEEP\beep.h
 ..\obj\main.o: ..\HARDWARE\SST26\sst26vf032b.h
+..\obj\main.o: ..\FatFS\demo_spi_flash_fatfs.h
 ..\obj\main.o: ..\HARDWARE\BSP\bsp.h
 ..\obj\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 ..\obj\main.o: ..\HARDWARE\BSP\bsp_uart_fifo.h
+..\obj\main.o: ..\HARDWARE\BSP\bsp_timer.h
+..\obj\main.o: ..\HARDWARE\BSP\bsp_led.h
+..\obj\main.o: ..\HARDWARE\IWDG\iwdg.h

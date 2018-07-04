@@ -1,4 +1,31 @@
----- UartVarInit Matches (3 in 1 files) ----
-Bsp_uart_fifo.c (e:\doorgate\spi_iic_led_beep≤‚ ‘≥Ã–Ú\hardware\bsp):static void UartVarInit(void);
-Bsp_uart_fifo.c (e:\doorgate\spi_iic_led_beep≤‚ ‘≥Ã–Ú\hardware\bsp):	UartVarInit();		/* ±ÿ–Îœ»≥ı ºªØ»´æ÷±‰¡ø,‘Ÿ≈‰÷√”≤º˛ */
-Bsp_uart_fifo.c (e:\doorgate\spi_iic_led_beep≤‚ ‘≥Ã–Ú\hardware\bsp):static void UartVarInit(void)
+---- f_mount Matches (30 in 5 files) ----
+00readme.txt (e:\doorgate\spi_iic_led_beep≤‚ ‘≥Ã–Ú\fatfs\src):                       Added forced mount feature with changes of f_mount().
+00readme.txt (e:\doorgate\spi_iic_led_beep≤‚ ‘≥Ã–Ú\fatfs\src):                       Fixed f_mount() with forced mount fails when drive number is >= 1.
+Demo_spi_flash_fatfs.c (e:\doorgate\spi_iic_led_beep≤‚ ‘≥Ã–Ú\fatfs):	result = f_mount(&fs, "0:", 0);	
+Demo_spi_flash_fatfs.c (e:\doorgate\spi_iic_led_beep≤‚ ‘≥Ã–Ú\fatfs):	result  = f_mount(NULL, "0:", 0);
+Demo_spi_flash_fatfs.c (e:\doorgate\spi_iic_led_beep≤‚ ‘≥Ã–Ú\fatfs):	result = f_mount(&fs, "0:", 0);	
+Demo_spi_flash_fatfs.c (e:\doorgate\spi_iic_led_beep≤‚ ‘≥Ã–Ú\fatfs):	result  = f_mount(NULL, "0:", 0);
+Demo_spi_flash_fatfs.c (e:\doorgate\spi_iic_led_beep≤‚ ‘≥Ã–Ú\fatfs):	result = f_mount(&fs, "0:", 0);			/* Mount a logical drive */
+Demo_spi_flash_fatfs.c (e:\doorgate\spi_iic_led_beep≤‚ ‘≥Ã–Ú\fatfs):	result  = f_mount(NULL, "0:", 0);
+Demo_spi_flash_fatfs.c (e:\doorgate\spi_iic_led_beep≤‚ ‘≥Ã–Ú\fatfs):	result = f_mount(&fs, "0:", 0);			/* Mount a logical drive */
+Demo_spi_flash_fatfs.c (e:\doorgate\spi_iic_led_beep≤‚ ‘≥Ã–Ú\fatfs):	result  = f_mount(NULL, "0:", 0);
+Demo_spi_flash_fatfs.c (e:\doorgate\spi_iic_led_beep≤‚ ‘≥Ã–Ú\fatfs):	result = f_mount(&fs, "0:", 0);			/* Mount a logical drive */
+Demo_spi_flash_fatfs.c (e:\doorgate\spi_iic_led_beep≤‚ ‘≥Ã–Ú\fatfs):	result  = f_mount(NULL, "0:", 0);
+Demo_spi_flash_fatfs.c (e:\doorgate\spi_iic_led_beep≤‚ ‘≥Ã–Ú\fatfs):	result = f_mount(&fs, "0:", 0);			/* Mount a logical drive */
+Demo_spi_flash_fatfs.c (e:\doorgate\spi_iic_led_beep≤‚ ‘≥Ã–Ú\fatfs):	result  = f_mount(NULL, "0:", 0);
+Demo_spi_flash_fatfs.c (e:\doorgate\spi_iic_led_beep≤‚ ‘≥Ã–Ú\fatfs):	result = f_mount(&fs, "0:", 0);			/* Mount a logical drive */
+Demo_spi_flash_fatfs.c (e:\doorgate\spi_iic_led_beep≤‚ ‘≥Ã–Ú\fatfs):	result  = f_mount(NULL, "0:", 0);
+Ff.c (e:\doorgate\spi_iic_led_beep≤‚ ‘≥Ã–Ú\fatfs\src):FRESULT f_mount (
+Ff.h (e:\doorgate\spi_iic_led_beep≤‚ ‘≥Ã–Ú\fatfs\src):FRESULT f_mount (FATFS* fs, const TCHAR* path, BYTE opt);			/* Mount/Unmount a logical drive */
+SPI.htm (e:\doorgate\spi_iic_led_beep≤‚ ‘≥Ã–Ú\obj):<P><STRONG><a name="[fd]"></a>f_mount</STRONG> (Thumb, 86 bytes, Stack size 40 bytes, ff.o(.text))
+SPI.htm (e:\doorgate\spi_iic_led_beep≤‚ ‘≥Ã–Ú\obj):<BR><BR>[Stack]<UL><LI>Max Depth = 264<LI>Call Chain = f_mount &rArr; find_volume &rArr; check_fs &rArr; move_window &rArr; sync_window &rArr; disk_write &rArr; SST26_Write &rArr; SST26_BY &rArr; Read_StatusRegister &rArr; SST_ReadWriteByte &rArr; SPI1_ReadWriteByte
+SPI.htm (e:\doorgate\spi_iic_led_beep≤‚ ‘≥Ã–Ú\obj):<LI><a href="#[fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_mount
+SPI.htm (e:\doorgate\spi_iic_led_beep≤‚ ‘≥Ã–Ú\obj):<LI><a href="#[fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_mount
+SPI.htm (e:\doorgate\spi_iic_led_beep≤‚ ‘≥Ã–Ú\obj):<LI><a href="#[fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_mount
+SPI.htm (e:\doorgate\spi_iic_led_beep≤‚ ‘≥Ã–Ú\obj):<LI><a href="#[fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_mount
+SPI.htm (e:\doorgate\spi_iic_led_beep≤‚ ‘≥Ã–Ú\obj):<LI><a href="#[fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_mount
+SPI.htm (e:\doorgate\spi_iic_led_beep≤‚ ‘≥Ã–Ú\obj):<LI><a href="#[fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_mount
+SPI.htm (e:\doorgate\spi_iic_led_beep≤‚ ‘≥Ã–Ú\obj):<LI><a href="#[fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_mount
+SPI.htm (e:\doorgate\spi_iic_led_beep≤‚ ‘≥Ã–Ú\obj):<LI><a href="#[fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_mount
+SPI.htm (e:\doorgate\spi_iic_led_beep≤‚ ‘≥Ã–Ú\obj):<LI>Call Chain = FileFormat &rArr; f_mount &rArr; find_volume &rArr; check_fs &rArr; move_window &rArr; sync_window &rArr; disk_write &rArr; SST26_Write &rArr; SST26_BY &rArr; Read_StatusRegister &rArr; SST_ReadWriteByte &rArr; SPI1_ReadWriteByte
+SPI.htm (e:\doorgate\spi_iic_led_beep≤‚ ‘≥Ã–Ú\obj):<LI><a href="#[fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_mount

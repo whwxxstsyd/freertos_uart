@@ -12,7 +12,9 @@
 
 #include "sst26vf032b.h"
 
-#include "bsp.h"	
+#include "demo_spi_flash_fatfs.h"
+
+#include "bsp.h"		
 
 
 //ALIENTEK Mini STM32开发板范例代码20
@@ -49,22 +51,36 @@ static void  Wait(void)
 	u32 start;	
 	UART_REC *rec;	
 	u16 text_size,IIC_text_size;		
-
-	uint8_t read;
-
-
-		
-	bsp_Init();		
-				
-	delay_init();	    	 //延时函数初始化	  	
-	//uart_init(9600);	 	//串口初始化为9600	
-	LED_Init();		  		//初始化与LED连接的硬件接口		
 	
-	SST26_Init();  	//SPI FLASH 初始化 	 	
+	uint8_t read;
+	
+	//NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);
+					
+	bsp_Init();	
+
+	
+					
+	//delay_init();	    	 //延时函数初始化	  	
+	
+	//uart_init(9600);	 	//串口初始化为9600		
+			
+	//LED_Init();		  		//初始化与LED连接的硬件接口			
+	
+	SST26_Init();	//SPI FLASH 初始化		
+
+	SPI_Flash_Global_Block_Unlock();		
+
+	ID = SPI_Flash_ReadID();			
+
+	SPI_Flash_Erase_Sector(0);		
+
+	SST26_Test();			
+			
+#if 0	
 	
 	_24CXXX_init();												
 	Calendar_Init();	
-	Beep_Init();	
+	Beep_Init();			
 			
 	memset(datatemp,0,sizeof(datatemp));		
 	memset(IIC_datatemp,0,sizeof(IIC_datatemp));	
@@ -73,39 +89,39 @@ static void  Wait(void)
 	IIC_text_size = strlen(IIC_Buffer);
 			
 	start = 0;	//FLASH 大小为4M字节		
+	
+				
 
-	SPI_Flash_Global_Block_Unlock();			
-
-	SPI_Flash_Erase_Sector(0);					
+				
 		
-	ID = SPI_Flash_ReadID();					
+					
 						
-	SST26_Test();		
+				
 		
 	GetDateTime(&DateTime);			
 
+#endif		
 	
-	LED1 = 0;	
-	LED0 = 0;
-	
-	while(1)	
-	{								
-		if (comGetChar(COM1, &read))
-		{
-			switch (read)
-			{
-				case '1':
-					LED1 = !LED1;
-					break;
+	DemoFatFS();						
 
-				case '2':	
-					LED0 = !LED0;
-					break;	
-			}
 
-		}
+	bsp_StartAutoTimer(1, 500); 	
+
+	while(1)
+	{	
+		bsp_Idle(); 	/* 这个函数在bsp.c文件。用户可以修改这个函数实现CPU休眠和喂狗 */
+				
+		if(bsp_CheckTimer(1))
+		{	
+			bsp_LedToggle(1);
+			bsp_LedToggle(2);	
+		}			
+	}	
 
 		
-	}
 }
+
+
+
+
 

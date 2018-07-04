@@ -38,9 +38,12 @@ void bsp_Init(void)
 
 	/* 优先级分组设置为4 */
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);
-		
+
 	bsp_InitUart(); 	/* 初始化串口 */
-		
+	bsp_InitLed(); 		/* 初始LED指示灯端口 */	
+	bsp_InitTimer();	/* 初始化系统滴答定时器 (此函数会开中断) */
+
+	IWDG_Init(4,625);    //与分频数为64,重载值为625,溢出时间为1s	   	
 }
 
 /*
@@ -54,6 +57,7 @@ void bsp_Init(void)
 */
 void bsp_RunPer10ms(void)
 {
+	
 }
 
 /*
@@ -83,11 +87,11 @@ extern void SaveScreenToBmp(uint16_t _index);
 void bsp_Idle(void)
 {
 	/* --- 喂狗 */
+	IWDG_Feed();
 
 	/* --- 让CPU进入休眠，由Systick定时中断唤醒或者其他中断唤醒 */
-
+	
 	/* 例如 emWin 图形库，可以插入图形库需要的轮询函数 */
-	//GUI_Exec();	
 	
 	/* 例如 uIP 协议，可以插入uip轮询函数 */
 

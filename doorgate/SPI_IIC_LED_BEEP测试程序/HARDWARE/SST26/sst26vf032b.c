@@ -508,25 +508,40 @@ void SST26_Init(void)
 
 uint8_t bufd[30];
 
-void SST26_Test(void)
+int SST26_Test(void)
 {	
-    uint16_t i;
-    uint8_t buf[30];
-	
-    for(i=0; i<30; i++)
-    {	
-        buf[i] = i+1;
-        bufd[i] = 0;
-    }
-    
-    buf[0] = 'a';	
-    SST26_4KByteSectorErase(0);
-    //SST26_ChipErase();	
-    if (0==SST26_Write(0,buf,25))
-    {
-        
-    }
-    SST26_LRead(0,bufd,25);		
+	u16 i;
+	u32 start = 0;	
+	u16 len;				
+				
+	u8 *TEXT_Buffer = "Hetianqi";	  	
+	u8 datatemp[15];		
+	//u8 bufd[30];						
+		
+	len = strlen(TEXT_Buffer);		
+
+	SST26_4KByteSectorErase(start); 
+
+	SST26_Write(start,TEXT_Buffer,len);
+
+	SST26_LRead(start,bufd,len);					
+
+	for(i=0;i<len;i++)	
+	{	
+		if(TEXT_Buffer[i] != bufd[i])	
+		{	
+			break;
+		}
+	}
+	if(len != i) //校验未通过
+	{
+		return 1;
+	}
+	else //校验通过
+	{	
+		return 0;
+	}
    
 	
 }
+

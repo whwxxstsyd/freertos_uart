@@ -29,8 +29,8 @@ void SST26_HRead(uint32_t addr,uint8_t* p_data,uint32_t no);//高速读 对于后续带5
 void SST26_LRead(uint32_t addr,uint8_t* p_data,uint32_t no);//低速读
 uint8_t SST26_LReadByte(uint32_t addr);//低速读一个字节
 void SST26_Init(void);
-void SST26_Deinit(void);
-void SST26_Test(void);
+void SST26_Deinit(void);	
+int SST26_Test(void);			
 #ifdef	__cplusplus
 extern "C" {
 #endif

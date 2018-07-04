@@ -33,3 +33,7 @@
 ..\obj\bsp.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 ..\obj\bsp.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 ..\obj\bsp.o: ..\HARDWARE\BSP\bsp_uart_fifo.h
+..\obj\bsp.o: ..\HARDWARE\BSP\bsp_timer.h
+..\obj\bsp.o: ..\HARDWARE\BSP\bsp_led.h
+..\obj\bsp.o: ..\HARDWARE\IWDG\iwdg.h
+..\obj\bsp.o: ..\SYSTEM\sys\sys.h

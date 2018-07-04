@@ -23,19 +23,31 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_it.h" 
+#include <stdio.h>
 
+#define ERR_INFO "\r\nEnter HardFault_Handler, System Halt.\r\n"
 
- 
 void NMI_Handler(void)
 {
 }
  
-void HardFault_Handler(void)
+void HardFault_Handler(void)	
 {
-  /* Go to infinite loop when Hard Fault exception occurs */
-  while (1)
-  {
-  }
+	const char *pError = ERR_INFO;
+	uint8_t i;
+
+	for (i = 0; i < sizeof(ERR_INFO); i++)
+	{		
+		USART1->DR = pError[i];	
+		/* µÈ´ý·¢ËÍ½áÊø */
+		while ((USART1->SR & USART_FLAG_TC) == (uint16_t)RESET);
+	}
+
+
+	/* Go to infinite loop when Hard Fault exception occurs */
+	while (1)
+	{
+	}
 }
  
 void MemManage_Handler(void)
@@ -65,19 +77,19 @@ void UsageFault_Handler(void)
  
 void SVC_Handler(void)
 {
+
 }
  
 void DebugMon_Handler(void)
 {
+
 }
  
 void PendSV_Handler(void)
 {
+		
 }
- 
-void SysTick_Handler(void)
-{
-}
+ 	
 
 /******************************************************************************/
 /*                 STM32F10x Peripherals Interrupt Handlers                   */

@@ -1,23 +1,44 @@
+#if 1
+
 #ifndef __LED_H
-#define __LED_H	 
-#include "sys.h"
-//////////////////////////////////////////////////////////////////////////////////	 
-//本程序只供学习使用，未经作者许可，不得用于其它任何用途
-//ALIENTEK战舰STM32开发板
-//LED驱动代码	   
-//正点原子@ALIENTEK
-//技术论坛:www.openedv.com
-//修改日期:2012/9/2
-//版本：V1.0
-//版权所有，盗版必究。
-//Copyright(C) 广州市星翼电子科技有限公司 2009-2019
-//All rights reserved									  
-////////////////////////////////////////////////////////////////////////////////// 
-#define LED0 PBout(8)	// PA8
-#define LED1 PEout(0)	// PD2	
+#define __LED_H
+#include "sys.h"		
 
+void LED_Init(void);	
+
+#define LED0   PBout(8)	
+#define LED1   PEout(0)		
 	
-void LED_Init(void);//初始化
-
-		 				    
 #endif
+
+
+/*
+*********************************************************************************************************
+*
+*	模块名称 : LED指示灯驱动模块
+*	文件名称 : bsp_led.h
+*	版    本 : V1.0
+*	说    明 : 头文件
+*
+*	Copyright (C), 2013-2014, 安富莱电子 www.armfly.com
+*
+*********************************************************************************************************
+*/
+#else
+
+#ifndef __BSP_LED_H
+#define __BSP_LED_H
+
+/* 供外部调用的函数声明 */
+void bsp_InitLed(void);
+void bsp_LedOn(uint8_t _no);
+void bsp_LedOff(uint8_t _no);
+void bsp_LedToggle(uint8_t _no);
+uint8_t bsp_IsLedOn(uint8_t _no);
+
+#endif
+
+#endif
+
+/***************************** 安富莱电子 www.armfly.com (END OF FILE) *********************************/
+

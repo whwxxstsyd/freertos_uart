@@ -51,9 +51,12 @@
 #endif	
 
 #include "bsp_uart_fifo.h"
+#include "bsp_timer.h"
+#include "bsp_led.h"	
+#include "iwdg.h"	
 
 /* 提供给其他C文件调用的函数 */
-void bsp_Init(void);
+void bsp_Init(void);	
 void bsp_Idle(void);
 
 #endif

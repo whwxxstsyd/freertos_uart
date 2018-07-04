@@ -332,7 +332,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F10X_HD,USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\HARDWARE\LED;..\SYSTEM\delay;..\SYSTEM\sys;..\USER;..\STM32F10x_FWLib\inc;..\CORE;..\HARDWARE\FLASH;..\HARDWARE\SPI;..\HARDWARE\KEY;..\SYSTEM\usart;..\HARDWARE\24CXX_New;..\HARDWARE\SD2068;..\HARDWARE\BEEP;..\HARDWARE\SST26</IncludePath>
+              <IncludePath>..\HARDWARE\LED;..\SYSTEM\delay;..\SYSTEM\sys;..\USER;..\STM32F10x_FWLib\inc;..\CORE;..\HARDWARE\FLASH;..\HARDWARE\SPI;..\HARDWARE\KEY;..\SYSTEM\usart;..\HARDWARE\24CXX_New;..\HARDWARE\SD2068;..\HARDWARE\BEEP;..\HARDWARE\SST26;..\HARDWARE\BSP</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -440,6 +440,16 @@
               <FileType>1</FileType>
               <FilePath>..\HARDWARE\SST26\sst26vf032b.c</FilePath>
             </File>
+            <File>
+              <FileName>bsp_uart_fifo.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\BSP\bsp_uart_fifo.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\BSP\bsp.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -454,11 +464,6 @@
               <FileName>sys.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\SYSTEM\sys\sys.c</FilePath>
-            </File>
-            <File>
-              <FileName>usart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\usart\usart.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -69,14 +69,14 @@ void RS485_InitTXE(void);
 *********************************************************************************************************
 */
 void bsp_InitUart(void)
-{
+{		
 	UartVarInit();		/* 必须先初始化全局变量,再配置硬件 */
 
 	InitHardUart();		/* 配置串口的硬件参数(波特率等) */
 
 	RS485_InitTXE();	/* 配置RS485芯片的发送使能硬件，配置为推挽输出 */
 
-	ConfigUartNVIC();	/* 配置串口中断 */
+	ConfigUartNVIC();	/* 配置串口中断 */	
 }
 
 /*
@@ -209,7 +209,7 @@ uint8_t comGetChar(COM_PORT_E _ucPort, uint8_t *_pByte)
 *********************************************************************************************************
 */
 void comClearTxFifo(COM_PORT_E _ucPort)
-{
+{	
 	UART_T *pUart;
 
 	pUart = ComToUart(_ucPort);
@@ -310,7 +310,7 @@ void RS485_InitTXE(void)
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;	/* 推挽输出模式 */
 	GPIO_InitStructure.GPIO_Pin = PIN_RS485_TXEN;
-	GPIO_Init(PORT_RS485_TXEN, &GPIO_InitStructure);
+	GPIO_Init(PORT_RS485_TXEN, &GPIO_InitStructure);	
 }
 
 /*
@@ -348,7 +348,7 @@ void RS485_SendBefor(void)
 {
 	RS485_TX_EN();	/* 切换RS485收发芯片为发送模式 */
 }
-
+	
 /*
 *********************************************************************************************************
 *	函 数 名: RS485_SendOver
@@ -561,7 +561,7 @@ static void InitHardUart(void)
 	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
 	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
 	USART_Init(USART1, &USART_InitStructure);
-
+	
 	USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);	/* 使能接收中断 */
 	/*
 		USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
@@ -776,8 +776,9 @@ static void ConfigUartNVIC(void)
 	/*	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);  --- 在 bsp.c 中 bsp_Init() 中配置中断优先级组 */
 
 #if UART1_FIFO_EN == 1
-	/* 使能串口1中断 */
+	/* 使能串口1中断 */				
 	NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0 ;//抢占优先级3
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
@@ -786,7 +787,8 @@ static void ConfigUartNVIC(void)
 #if UART2_FIFO_EN == 1
 	/* 使能串口2中断 */
 	NVIC_InitStructure.NVIC_IRQChannel = USART2_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1 ;//抢占优先级3
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
 #endif
@@ -794,7 +796,8 @@ static void ConfigUartNVIC(void)
 #if UART3_FIFO_EN == 1
 	/* 使能串口3中断t */
 	NVIC_InitStructure.NVIC_IRQChannel = USART3_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 2;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 2;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
 #endif
@@ -802,7 +805,8 @@ static void ConfigUartNVIC(void)
 #if UART4_FIFO_EN == 1
 	/* 使能串口4中断t */
 	NVIC_InitStructure.NVIC_IRQChannel = UART4_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 3;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 3;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
 #endif
@@ -810,15 +814,17 @@ static void ConfigUartNVIC(void)
 #if UART5_FIFO_EN == 1
 	/* 使能串口5中断t */
 	NVIC_InitStructure.NVIC_IRQChannel = UART5_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 4;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 4;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
 #endif
 
 #if UART6_FIFO_EN == 1
-	/* 使能串口6中断t */
+	/* 使能串口6中断t */	
 	NVIC_InitStructure.NVIC_IRQChannel = USART6_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 5;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 5;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;	
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
 #endif
@@ -1085,22 +1091,39 @@ void USART6_IRQHandler(void)
 *	返 回 值: 无
 *********************************************************************************************************
 */
+
+#pragma import(__use_no_semihosting)             
+//标准库需要的支持函数                 
+struct __FILE 
+{ 	
+	int handle; 
+
+}; 			
+
+FILE __stdout;       
+//定义_sys_exit()以避免使用半主机模式    
+_sys_exit(int x) 
+{ 	
+	x = x; 
+} 
+//重定义fputc函数 
+
 int fputc(int ch, FILE *f)
-{
+{	
 #if 1	/* 将需要printf的字符通过串口中断FIFO发送出去，printf函数会立即返回 */
 	comSendChar(COM1, ch);
-
+				
 	return ch;
 #else	/* 采用阻塞方式发送每个字符,等待数据发送完毕 */
 	/* 写一个字节到USART1 */
 	USART_SendData(USART1, (uint8_t) ch);
-
+		
 	/* 等待发送结束 */
 	while (USART_GetFlagStatus(USART1, USART_FLAG_TC) == RESET)
 	{}
 
 	return ch;
-#endif
+#endif		
 }
 
 /*

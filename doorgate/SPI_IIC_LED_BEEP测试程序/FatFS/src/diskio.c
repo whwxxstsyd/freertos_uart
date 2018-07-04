@@ -8,6 +8,7 @@
 /*-----------------------------------------------------------------------*/
 
 #include "diskio.h"			/* FatFs lower layer API */
+#include "sst26vf032b.h"	
 
 
 /*-----------------------------------------------------------------------*/
@@ -21,7 +22,7 @@ DSTATUS disk_initialize (
 	switch (pdrv) {
 
 		case FS_SPI_FLASH :
-			bsp_InitSFlash();
+			SST26_Init();	
 			return RES_OK;
 	}
 	return STA_NOINIT;
@@ -58,9 +59,9 @@ DRESULT disk_read (
 {
 
 	switch (pdrv) {
-
+		
 		case FS_SPI_FLASH :
-			sf_ReadBuffer(buff, sector << 12, count<<12);
+			SST26_LRead( sector << 12, buff, count<<12);
 			return RES_OK;
 
 	}
@@ -79,6 +80,7 @@ DRESULT disk_write (
 	DWORD sector,		/* Sector address (LBA) */
 	BYTE count			/* Number of sectors to write (1..128) */
 )
+
 {
 
 	switch (pdrv) {
@@ -89,8 +91,9 @@ DRESULT disk_write (
 				
 				for(i = 0; i < count; i++)
 				{
-					sf_WriteBuffer((uint8_t *)buff, sector << 12, 4096);	
-				}
+					SST26_Write(sector << 12, (uint8_t *)buff, 4096);		
+				}	
+
 				
 				return RES_OK;
 			}
