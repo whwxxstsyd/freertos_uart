@@ -1,0 +1,14 @@
+---- OS_TICKS_PER_SEC Matches (14 in 9 files) ----
+Delay.c (e:\贩卖机\vending_machine\my_project\system\delay):#define delay_ostickspersec	OS_TICKS_PER_SEC	//OS时钟节拍,即每秒调度次数
+Os_cfg.h (e:\贩卖机\vending_machine\my_project\ucosii\config):#define OS_TICKS_PER_SEC       	200u   /* Set the number of ticks in one second                        */
+Os_core.c (e:\贩卖机\vending_machine\my_project\ucosii\core):    OSTimeDly(OS_TICKS_PER_SEC / 10u);           /* Determine MAX. idle counter value for 1/10 second  */
+Os_core.c (e:\贩卖机\vending_machine\my_project\ucosii\core):        OSTimeDly(2u * OS_TICKS_PER_SEC / 10u);  /* Wait until statistic task is ready                 */
+Os_core.c (e:\贩卖机\vending_machine\my_project\ucosii\core):            OSTimeDly(OS_TICKS_PER_SEC);
+Os_core.c (e:\贩卖机\vending_machine\my_project\ucosii\core):        OSTimeDly(OS_TICKS_PER_SEC / 10u);       /* Accumulate OSIdleCtr for the next 1/10 second      */
+Os_cpu_c.c (e:\贩卖机\vending_machine\my_project\ucosii\port):    if (OSTmrCtr >= (OS_TICKS_PER_SEC / OS_TMR_CFG_TICKS_PER_SEC)) {
+Os_dbg.c (e:\贩卖机\vending_machine\my_project\ucosii\port):OS_COMPILER_OPT  INT16U  const  OSTicksPerSec      = OS_TICKS_PER_SEC;
+Os_dbg_r.c (e:\贩卖机\vending_machine\my_project\ucosii\port):INT16U  const  OSTicksPerSec       = OS_TICKS_PER_SEC;
+Os_task.c (e:\贩卖机\vending_machine\my_project\ucosii\core):        OSTimeDly(OS_TICKS_PER_SEC);
+Os_time.c (e:\贩卖机\vending_machine\my_project\ucosii\core):    ticks = ((INT32U)hours * 3600uL + (INT32U)minutes * 60uL + (INT32U)seconds) * OS_TICKS_PER_SEC
+Os_time.c (e:\贩卖机\vending_machine\my_project\ucosii\core):          + OS_TICKS_PER_SEC * ((INT32U)ms + 500uL / OS_TICKS_PER_SEC) / 1000uL;
+Ucos_ii.h (e:\贩卖机\vending_machine\my_project\ucosii\core):#error  "OS_CFG.H, Missing OS_TICKS_PER_SEC: Sets the number of ticks in one second"

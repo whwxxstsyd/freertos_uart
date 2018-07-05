@@ -1,0 +1,273 @@
+---- UG_WINDOW Matches (272 in 3 files) ----
+My_ui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\app):UG_WINDOW g_calling_window;
+My_ui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\app):UG_WINDOW g_time_window;
+My_ui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\app):UG_WINDOW g_home_window;
+My_ui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\app):UG_WINDOW g_vibrator_window;
+My_ui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\app):UG_WINDOW *g_vibrator_window_prev;
+My_ui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\app):UG_WINDOW *g_led_matrix_window_prev;
+My_ui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\app):UG_WINDOW g_led_matrix_window;
+My_ui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\app):UG_WINDOW g_led_matrix_time_window;
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT _UG_WindowDrawTitle(UG_WINDOW* wnd);
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):void _UG_WindowUpdate(UG_WINDOW* wnd);
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT _UG_WindowClear(UG_WINDOW* wnd);
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):void _UG_TextboxUpdate(UG_WINDOW* wnd, UG_OBJECT* obj);
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):void _UG_ButtonUpdate(UG_WINDOW* wnd, UG_OBJECT* obj);
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):void _UG_CheckboxUpdate(UG_WINDOW* wnd, UG_OBJECT* obj);
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):void _UG_ImageUpdate(UG_WINDOW* wnd, UG_OBJECT* obj);
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_OBJECT* _UG_GetFreeObject(UG_WINDOW* wnd)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_OBJECT* _UG_SearchObject(UG_WINDOW* wnd, UG_U8 type, UG_U8 id)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT _UG_DeleteObject(UG_WINDOW* wnd, UG_U8 type, UG_U8 id)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):void _UG_ProcessTouchData(UG_WINDOW* wnd)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):void _UG_UpdateObjects(UG_WINDOW* wnd)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):void _UG_HandleEvents(UG_WINDOW* wnd)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):void _UG_SendObjectPrerenderEvent(UG_WINDOW *wnd, UG_OBJECT *obj)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):void _UG_SendObjectPostrenderEvent(UG_WINDOW *wnd, UG_OBJECT *obj)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):	UG_WINDOW* wnd;
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_WindowCreate(UG_WINDOW* wnd, UG_OBJECT* objlst, UG_U8 objcnt, void(*cb)(UG_MESSAGE*))
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_WindowDelete(UG_WINDOW* wnd)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_WindowShow(UG_WINDOW* wnd)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_WindowHide(UG_WINDOW* wnd)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_WindowResize(UG_WINDOW* wnd, UG_S16 xs, UG_S16 ys, UG_S16 xe, UG_S16 ye)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_WindowAlert(UG_WINDOW* wnd)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_WindowSetForeColor(UG_WINDOW* wnd, UG_COLOR fc)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_WindowSetBackColor(UG_WINDOW* wnd, UG_COLOR bc)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_WindowSetTitleTextColor(UG_WINDOW* wnd, UG_COLOR c)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_WindowSetTitleColor(UG_WINDOW* wnd, UG_COLOR c)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_WindowSetTitleInactiveTextColor(UG_WINDOW* wnd, UG_COLOR c)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_WindowSetTitleInactiveColor(UG_WINDOW* wnd, UG_COLOR c)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_WindowSetTitleText(UG_WINDOW* wnd, char* str)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_WindowSetTitleTextFont(UG_WINDOW* wnd, const UG_FONT* font)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_WindowSetTitleTextHSpace(UG_WINDOW* wnd, UG_S8 hs)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_WindowSetTitleTextVSpace(UG_WINDOW* wnd, UG_S8 vs)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_WindowSetTitleTextAlignment(UG_WINDOW* wnd, UG_U8 align)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_WindowSetTitleHeight(UG_WINDOW* wnd, UG_U8 height)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_WindowSetXStart(UG_WINDOW* wnd, UG_S16 xs)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_WindowSetYStart(UG_WINDOW* wnd, UG_S16 ys)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_WindowSetXEnd(UG_WINDOW* wnd, UG_S16 xe)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_WindowSetYEnd(UG_WINDOW* wnd, UG_S16 ye)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_WindowSetStyle(UG_WINDOW* wnd, UG_U8 style)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_COLOR UG_WindowGetForeColor(UG_WINDOW* wnd)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_COLOR UG_WindowGetBackColor(UG_WINDOW* wnd)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_COLOR UG_WindowGetTitleTextColor(UG_WINDOW* wnd)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_COLOR UG_WindowGetTitleColor(UG_WINDOW* wnd)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_COLOR UG_WindowGetTitleInactiveTextColor(UG_WINDOW* wnd)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_COLOR UG_WindowGetTitleInactiveColor(UG_WINDOW* wnd)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):char* UG_WindowGetTitleText(UG_WINDOW* wnd)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_FONT* UG_WindowGetTitleTextFont(UG_WINDOW* wnd)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_S8 UG_WindowGetTitleTextHSpace(UG_WINDOW* wnd)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_S8 UG_WindowGetTitleTextVSpace(UG_WINDOW* wnd)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_U8 UG_WindowGetTitleTextAlignment(UG_WINDOW* wnd)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_U8 UG_WindowGetTitleHeight(UG_WINDOW* wnd)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_S16 UG_WindowGetXStart(UG_WINDOW* wnd)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_S16 UG_WindowGetYStart(UG_WINDOW* wnd)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_S16 UG_WindowGetXEnd(UG_WINDOW* wnd)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_S16 UG_WindowGetYEnd(UG_WINDOW* wnd)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_U8 UG_WindowGetStyle(UG_WINDOW* wnd)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_WindowGetArea(UG_WINDOW* wnd, UG_AREA* a)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_S16 UG_WindowGetInnerWidth(UG_WINDOW* wnd)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_S16 UG_WindowGetOuterWidth(UG_WINDOW* wnd)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_S16 UG_WindowGetInnerHeight(UG_WINDOW* wnd)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_S16 UG_WindowGetOuterHeight(UG_WINDOW* wnd)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT _UG_WindowDrawTitle(UG_WINDOW* wnd)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):void _UG_WindowUpdate(UG_WINDOW* wnd)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT _UG_WindowClear(UG_WINDOW* wnd)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_ButtonCreate(UG_WINDOW* wnd, UG_BUTTON* btn, UG_U8 id, UG_S16 xs, UG_S16 ys, UG_S16 xe, UG_S16 ye)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_ButtonDelete(UG_WINDOW* wnd, UG_U8 id)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_ButtonShow(UG_WINDOW* wnd, UG_U8 id)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_ButtonHide(UG_WINDOW* wnd, UG_U8 id)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_ButtonSetForeColor(UG_WINDOW* wnd, UG_U8 id, UG_COLOR fc)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_ButtonSetBackColor(UG_WINDOW* wnd, UG_U8 id, UG_COLOR bc)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_ButtonSetAlternateForeColor(UG_WINDOW* wnd, UG_U8 id, UG_COLOR afc)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_ButtonSetAlternateBackColor(UG_WINDOW* wnd, UG_U8 id, UG_COLOR abc)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_ButtonSetText(UG_WINDOW* wnd, UG_U8 id, char* str)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_ButtonSetFont(UG_WINDOW* wnd, UG_U8 id, const UG_FONT* font)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_ButtonSetStyle(UG_WINDOW* wnd, UG_U8 id, UG_U8 style)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_ButtonSetHSpace(UG_WINDOW* wnd, UG_U8 id, UG_S8 hs)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_ButtonSetVSpace(UG_WINDOW* wnd, UG_U8 id, UG_S8 vs)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_ButtonSetAlignment(UG_WINDOW* wnd, UG_U8 id, UG_U8 align)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_COLOR UG_ButtonGetForeColor(UG_WINDOW* wnd, UG_U8 id)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_COLOR UG_ButtonGetBackColor(UG_WINDOW* wnd, UG_U8 id)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_COLOR UG_ButtonGetAlternateForeColor(UG_WINDOW* wnd, UG_U8 id)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_COLOR UG_ButtonGetAlternateBackColor(UG_WINDOW* wnd, UG_U8 id)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):char* UG_ButtonGetText(UG_WINDOW* wnd, UG_U8 id)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_FONT* UG_ButtonGetFont(UG_WINDOW* wnd, UG_U8 id)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_U8 UG_ButtonGetStyle(UG_WINDOW* wnd, UG_U8 id)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_S8 UG_ButtonGetHSpace(UG_WINDOW* wnd, UG_U8 id)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_S8 UG_ButtonGetVSpace(UG_WINDOW* wnd, UG_U8 id)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_U8 UG_ButtonGetAlignment(UG_WINDOW* wnd, UG_U8 id)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):void _UG_ButtonUpdate(UG_WINDOW* wnd, UG_OBJECT* obj)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_CheckboxCreate(UG_WINDOW* wnd, UG_CHECKBOX* chb, UG_U8 id, UG_S16 xs, UG_S16 ys, UG_S16 xe, UG_S16 ye)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_CheckboxDelete(UG_WINDOW* wnd, UG_U8 id)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_CheckboxShow(UG_WINDOW* wnd, UG_U8 id)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_CheckboxHide(UG_WINDOW* wnd, UG_U8 id)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_CheckboxSetCheched(UG_WINDOW* wnd, UG_U8 id, UG_U8 ch)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_CheckboxSetForeColor(UG_WINDOW* wnd, UG_U8 id, UG_COLOR fc)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_CheckboxSetBackColor(UG_WINDOW* wnd, UG_U8 id, UG_COLOR bc)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_CheckboxSetAlternateForeColor(UG_WINDOW* wnd, UG_U8 id, UG_COLOR afc)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_CheckboxSetAlternateBackColor(UG_WINDOW* wnd, UG_U8 id, UG_COLOR abc)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_CheckboxSetText(UG_WINDOW* wnd, UG_U8 id, char* str)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_CheckboxSetFont(UG_WINDOW* wnd, UG_U8 id, const UG_FONT* font)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_CheckboxSetStyle(UG_WINDOW* wnd, UG_U8 id, UG_U8 style)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_CheckboxSetHSpace(UG_WINDOW* wnd, UG_U8 id, UG_S8 hs)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_CheckboxSetVSpace(UG_WINDOW* wnd, UG_U8 id, UG_S8 vs)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_CheckboxSetAlignment(UG_WINDOW* wnd, UG_U8 id, UG_U8 align)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_U8 UG_CheckboxGetChecked(UG_WINDOW* wnd, UG_U8 id)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_COLOR UG_CheckboxGetForeColor(UG_WINDOW* wnd, UG_U8 id)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_COLOR UG_CheckboxGetBackColor(UG_WINDOW* wnd, UG_U8 id)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_COLOR UG_CheckboxGetAlternateForeColor(UG_WINDOW* wnd, UG_U8 id)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_COLOR UG_CheckboxGetAlternateBackColor(UG_WINDOW* wnd, UG_U8 id)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):char* UG_CheckboxGetText(UG_WINDOW* wnd, UG_U8 id)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_FONT* UG_CheckboxGetFont(UG_WINDOW* wnd, UG_U8 id)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_U8 UG_CheckboxGetStyle(UG_WINDOW* wnd, UG_U8 id)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_S8 UG_CheckboxGetHSpace(UG_WINDOW* wnd, UG_U8 id)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_S8 UG_CheckboxGetVSpace(UG_WINDOW* wnd, UG_U8 id)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_U8 UG_CheckboxGetAlignment(UG_WINDOW* wnd, UG_U8 id)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):void _UG_CheckboxUpdate(UG_WINDOW* wnd, UG_OBJECT* obj)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_TextboxCreate(UG_WINDOW* wnd, UG_TEXTBOX* txb, UG_U8 id, UG_S16 xs, UG_S16 ys, UG_S16 xe, UG_S16 ye)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_TextboxDelete(UG_WINDOW* wnd, UG_U8 id)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_TextboxShow(UG_WINDOW* wnd, UG_U8 id)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_TextboxHide(UG_WINDOW* wnd, UG_U8 id)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_TextboxSetForeColor(UG_WINDOW* wnd, UG_U8 id, UG_COLOR fc)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_TextboxSetBackColor(UG_WINDOW* wnd, UG_U8 id, UG_COLOR bc)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_TextboxSetText(UG_WINDOW* wnd, UG_U8 id, char* str)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_TextboxSetFont(UG_WINDOW* wnd, UG_U8 id, const UG_FONT* font)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_TextboxSetHSpace(UG_WINDOW* wnd, UG_U8 id, UG_S8 hs)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_TextboxSetVSpace(UG_WINDOW* wnd, UG_U8 id, UG_S8 vs)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_TextboxSetAlignment(UG_WINDOW* wnd, UG_U8 id, UG_U8 align)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_COLOR UG_TextboxGetForeColor(UG_WINDOW* wnd, UG_U8 id)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_COLOR UG_TextboxGetBackColor(UG_WINDOW* wnd, UG_U8 id)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):char* UG_TextboxGetText(UG_WINDOW* wnd, UG_U8 id)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_FONT* UG_TextboxGetFont(UG_WINDOW* wnd, UG_U8 id)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_S8 UG_TextboxGetHSpace(UG_WINDOW* wnd, UG_U8 id)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_S8 UG_TextboxGetVSpace(UG_WINDOW* wnd, UG_U8 id)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_U8 UG_TextboxGetAlignment(UG_WINDOW* wnd, UG_U8 id)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):void _UG_TextboxUpdate(UG_WINDOW* wnd, UG_OBJECT* obj)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_ImageCreate(UG_WINDOW* wnd, UG_IMAGE* img, UG_U8 id, UG_S16 xs, UG_S16 ys, UG_S16 xe, UG_S16 ye)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_ImageDelete(UG_WINDOW* wnd, UG_U8 id)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_ImageShow(UG_WINDOW* wnd, UG_U8 id)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_ImageHide(UG_WINDOW* wnd, UG_U8 id)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_ImageSetBMP(UG_WINDOW* wnd, UG_U8 id, const UG_BMP* bmp)
+Ugui.c (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):void _UG_ImageUpdate(UG_WINDOW* wnd, UG_OBJECT* obj)
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):typedef struct S_WINDOW                               UG_WINDOW;
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):   void (*update) (UG_WINDOW*,UG_OBJECT*);   /* pointer to object-specific update function */
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):   UG_WINDOW* next_window;
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):   UG_WINDOW* active_window;
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):   UG_WINDOW* last_window;
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_WindowCreate( UG_WINDOW* wnd, UG_OBJECT* objlst, UG_U8 objcnt, void (*cb)( UG_MESSAGE* ) );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_WindowDelete( UG_WINDOW* wnd );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_WindowShow( UG_WINDOW* wnd );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_WindowHide( UG_WINDOW* wnd );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_WindowResize( UG_WINDOW* wnd, UG_S16 xs, UG_S16 ys, UG_S16 xe, UG_S16 ye );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_WindowAlert( UG_WINDOW* wnd );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_WindowSetForeColor( UG_WINDOW* wnd, UG_COLOR fc );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_WindowSetBackColor( UG_WINDOW* wnd, UG_COLOR bc );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_WindowSetTitleTextColor( UG_WINDOW* wnd, UG_COLOR c );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_WindowSetTitleColor( UG_WINDOW* wnd, UG_COLOR c );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_WindowSetTitleInactiveTextColor( UG_WINDOW* wnd, UG_COLOR c );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_WindowSetTitleInactiveColor( UG_WINDOW* wnd, UG_COLOR c );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_WindowSetTitleText( UG_WINDOW* wnd, char* str );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_WindowSetTitleTextFont( UG_WINDOW* wnd, const UG_FONT* font );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_WindowSetTitleTextHSpace( UG_WINDOW* wnd, UG_S8 hs );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_WindowSetTitleTextVSpace( UG_WINDOW* wnd, UG_S8 vs );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_WindowSetTitleTextAlignment( UG_WINDOW* wnd, UG_U8 align );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_WindowSetTitleHeight( UG_WINDOW* wnd, UG_U8 height );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_WindowSetXStart( UG_WINDOW* wnd, UG_S16 xs );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_WindowSetYStart( UG_WINDOW* wnd, UG_S16 ys );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_WindowSetXEnd( UG_WINDOW* wnd, UG_S16 xe );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_WindowSetYEnd( UG_WINDOW* wnd, UG_S16 ye );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_WindowSetStyle( UG_WINDOW* wnd, UG_U8 style );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_COLOR UG_WindowGetForeColor( UG_WINDOW* wnd );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_COLOR UG_WindowGetBackColor( UG_WINDOW* wnd );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_COLOR UG_WindowGetTitleTextColor( UG_WINDOW* wnd );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_COLOR UG_WindowGetTitleColor( UG_WINDOW* wnd );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_COLOR UG_WindowGetTitleInactiveTextColor( UG_WINDOW* wnd );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_COLOR UG_WindowGetTitleInactiveColor( UG_WINDOW* wnd );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):char* UG_WindowGetTitleText( UG_WINDOW* wnd );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_FONT* UG_WindowGetTitleTextFont( UG_WINDOW* wnd );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_S8 UG_WindowGetTitleTextHSpace( UG_WINDOW* wnd );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_S8 UG_WindowGetTitleTextVSpace( UG_WINDOW* wnd );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_U8 UG_WindowGetTitleTextAlignment( UG_WINDOW* wnd );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_U8 UG_WindowGetTitleHeight( UG_WINDOW* wnd );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_S16 UG_WindowGetXStart( UG_WINDOW* wnd );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_S16 UG_WindowGetYStart( UG_WINDOW* wnd );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_S16 UG_WindowGetXEnd( UG_WINDOW* wnd );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_S16 UG_WindowGetYEnd( UG_WINDOW* wnd );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_U8 UG_WindowGetStyle( UG_WINDOW* wnd );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_WindowGetArea( UG_WINDOW* wnd, UG_AREA* a );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_S16 UG_WindowGetInnerWidth( UG_WINDOW* wnd );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_S16 UG_WindowGetOuterWidth( UG_WINDOW* wnd );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_S16 UG_WindowGetInnerHeight( UG_WINDOW* wnd );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_S16 UG_WindowGetOuterHeight( UG_WINDOW* wnd );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_ButtonCreate( UG_WINDOW* wnd, UG_BUTTON* btn, UG_U8 id, UG_S16 xs, UG_S16 ys, UG_S16 xe, UG_S16 ye );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_ButtonDelete( UG_WINDOW* wnd, UG_U8 id );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_ButtonShow( UG_WINDOW* wnd, UG_U8 id );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_ButtonHide( UG_WINDOW* wnd, UG_U8 id );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_ButtonSetForeColor( UG_WINDOW* wnd, UG_U8 id, UG_COLOR fc );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_ButtonSetBackColor( UG_WINDOW* wnd, UG_U8 id, UG_COLOR bc );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_ButtonSetAlternateForeColor( UG_WINDOW* wnd, UG_U8 id, UG_COLOR afc );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_ButtonSetAlternateBackColor( UG_WINDOW* wnd, UG_U8 id, UG_COLOR abc );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_ButtonSetText( UG_WINDOW* wnd, UG_U8 id, char* str );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_ButtonSetFont( UG_WINDOW* wnd, UG_U8 id, const UG_FONT* font );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_ButtonSetStyle( UG_WINDOW* wnd, UG_U8 id, UG_U8 style );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_ButtonSetHSpace( UG_WINDOW* wnd, UG_U8 id, UG_S8 hs );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_ButtonSetVSpace( UG_WINDOW* wnd, UG_U8 id, UG_S8 vs );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_ButtonSetAlignment( UG_WINDOW* wnd, UG_U8 id, UG_U8 align );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_COLOR UG_ButtonGetForeColor( UG_WINDOW* wnd, UG_U8 id );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_COLOR UG_ButtonGetBackColor( UG_WINDOW* wnd, UG_U8 id );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_COLOR UG_ButtonGetAlternateForeColor( UG_WINDOW* wnd, UG_U8 id );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_COLOR UG_ButtonGetAlternateBackColor( UG_WINDOW* wnd, UG_U8 id );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):char* UG_ButtonGetText( UG_WINDOW* wnd, UG_U8 id );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_FONT* UG_ButtonGetFont( UG_WINDOW* wnd, UG_U8 id );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_U8 UG_ButtonGetStyle( UG_WINDOW* wnd, UG_U8 id );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_S8 UG_ButtonGetHSpace( UG_WINDOW* wnd, UG_U8 id );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_S8 UG_ButtonGetVSpace( UG_WINDOW* wnd, UG_U8 id );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_U8 UG_ButtonGetAlignment( UG_WINDOW* wnd, UG_U8 id );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_CheckboxCreate( UG_WINDOW* wnd, UG_CHECKBOX* btn, UG_U8 id, UG_S16 xs, UG_S16 ys, UG_S16 xe, UG_S16 ye );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_CheckboxDelete( UG_WINDOW* wnd, UG_U8 id );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_CheckboxShow( UG_WINDOW* wnd, UG_U8 id );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_CheckboxHide( UG_WINDOW* wnd, UG_U8 id );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_CheckboxSetCheched( UG_WINDOW* wnd, UG_U8 id, UG_U8 ch );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_CheckboxSetForeColor( UG_WINDOW* wnd, UG_U8 id, UG_COLOR fc );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_CheckboxSetBackColor( UG_WINDOW* wnd, UG_U8 id, UG_COLOR bc );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_CheckboxSetAlternateForeColor( UG_WINDOW* wnd, UG_U8 id, UG_COLOR afc );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_CheckboxSetAlternateBackColor( UG_WINDOW* wnd, UG_U8 id, UG_COLOR abc );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_CheckboxSetText( UG_WINDOW* wnd, UG_U8 id, char* str );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_CheckboxSetFont( UG_WINDOW* wnd, UG_U8 id, const UG_FONT* font );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_CheckboxSetStyle( UG_WINDOW* wnd, UG_U8 id, UG_U8 style );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_CheckboxSetHSpace( UG_WINDOW* wnd, UG_U8 id, UG_S8 hs );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_CheckboxSetVSpace( UG_WINDOW* wnd, UG_U8 id, UG_S8 vs );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_CheckboxSetAlignment( UG_WINDOW* wnd, UG_U8 id, UG_U8 align );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_U8 UG_CheckboxGetChecked( UG_WINDOW* wnd, UG_U8 id );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_COLOR UG_CheckboxGetForeColor( UG_WINDOW* wnd, UG_U8 id );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_COLOR UG_CheckboxGetBackColor( UG_WINDOW* wnd, UG_U8 id );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_COLOR UG_CheckboxGetAlternateForeColor( UG_WINDOW* wnd, UG_U8 id );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_COLOR UG_CheckboxGetAlternateBackColor( UG_WINDOW* wnd, UG_U8 id );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):char* UG_CheckboxGetText( UG_WINDOW* wnd, UG_U8 id );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_FONT* UG_CheckboxGetFont( UG_WINDOW* wnd, UG_U8 id );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_U8 UG_CheckboxGetStyle( UG_WINDOW* wnd, UG_U8 id );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_S8 UG_CheckboxGetHSpace( UG_WINDOW* wnd, UG_U8 id );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_S8 UG_CheckboxGetVSpace( UG_WINDOW* wnd, UG_U8 id );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_U8 UG_CheckboxGetAlignment( UG_WINDOW* wnd, UG_U8 id );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_TextboxCreate( UG_WINDOW* wnd, UG_TEXTBOX* txb, UG_U8 id, UG_S16 xs, UG_S16 ys, UG_S16 xe, UG_S16 ye );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_TextboxDelete( UG_WINDOW* wnd, UG_U8 id );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_TextboxShow( UG_WINDOW* wnd, UG_U8 id );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_TextboxHide( UG_WINDOW* wnd, UG_U8 id );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_TextboxSetForeColor( UG_WINDOW* wnd, UG_U8 id, UG_COLOR fc );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_TextboxSetBackColor( UG_WINDOW* wnd, UG_U8 id, UG_COLOR bc );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_TextboxSetText( UG_WINDOW* wnd, UG_U8 id, char* str );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_TextboxSetFont( UG_WINDOW* wnd, UG_U8 id, const UG_FONT* font );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_TextboxSetHSpace( UG_WINDOW* wnd, UG_U8 id, UG_S8 hs );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_TextboxSetVSpace( UG_WINDOW* wnd, UG_U8 id, UG_S8 vs );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_TextboxSetAlignment( UG_WINDOW* wnd, UG_U8 id, UG_U8 align );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_COLOR UG_TextboxGetForeColor( UG_WINDOW* wnd, UG_U8 id );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_COLOR UG_TextboxGetBackColor( UG_WINDOW* wnd, UG_U8 id );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):char* UG_TextboxGetText( UG_WINDOW* wnd, UG_U8 id );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_FONT* UG_TextboxGetFont( UG_WINDOW* wnd, UG_U8 id );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_S8 UG_TextboxGetHSpace( UG_WINDOW* wnd, UG_U8 id );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_S8 UG_TextboxGetVSpace( UG_WINDOW* wnd, UG_U8 id );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_U8 UG_TextboxGetAlignment( UG_WINDOW* wnd, UG_U8 id );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_ImageCreate( UG_WINDOW* wnd, UG_IMAGE* img, UG_U8 id, UG_S16 xs, UG_S16 ys, UG_S16 xe, UG_S16 ye );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_ImageDelete( UG_WINDOW* wnd, UG_U8 id );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_ImageShow( UG_WINDOW* wnd, UG_U8 id );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_ImageHide( UG_WINDOW* wnd, UG_U8 id );
+Ugui.h (e:\贩卖机\vending_machine\我的ui\alientek ministm32 实验11 tft lcd液晶显示实验\ugui):UG_RESULT UG_ImageSetBMP( UG_WINDOW* wnd, UG_U8 id, const UG_BMP* bmp );
